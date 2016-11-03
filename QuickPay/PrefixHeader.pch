@@ -1,0 +1,19 @@
+//
+//  PrefixHeader.pch
+//  QuickPay
+//
+//  Created by Nie on 2016/10/20.
+//  Copyright © 2016年 Nie. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "GlobalHeader.h"
+
+#endif
+
+#endif /* PrefixHeader_pch */

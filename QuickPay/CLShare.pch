@@ -1,0 +1,33 @@
+//
+//  CLShare.pch
+//  QuickPay
+//
+//  Created by 高晓东 on 16/11/2.
+//  Copyright © 2016年 Nie. All rights reserved.
+//
+
+#ifndef CLShare_pch
+#define CLShare_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <UMSocial.h>
+#import "CLShareManager.h"
+
+// 测试 - AppKey
+// 友盟AppKey
+#define K_UM_AppKey      @"5816af6f7666130fdd0004cb"
+
+/*sina*/
+#define K_Sina_AppKey    @"3921700954"
+#define K_Sina_AppSecret @"04b48b094faeb16683c32669824ebdad"
+/*QQ*/
+#define K_QQ_AppId       @"1105718763"
+#define K_QQ_AppKey      @"2jxrGBbWwD2qXExG"
+/*微信*/
+#define K_WX_AppID       @"wxb8228ce2f800a6be"
+#define K_WX_AppSecret   @"6183378bbed903be26eadd399505926b"
+
+#define K_Share_Url      @"http://www.umeng.com/social"
+
+#endif /* CLShare_pch */
