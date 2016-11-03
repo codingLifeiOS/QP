@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
-#import "Consts.h"
-@interface QPNewsViewController : BaseTableViewController
+@interface QPNewsViewController : UIViewController
 
 @end

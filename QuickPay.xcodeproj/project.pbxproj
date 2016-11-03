@@ -22,7 +22,6 @@
 		197AFBC61DC1996E002DD1BD /* touxiang_bj.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AFBB61DC1996E002DD1BD /* touxiang_bj.png */; };
 		197AFBC71DC1996E002DD1BD /* tuichu_bj.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AFBB71DC1996E002DD1BD /* tuichu_bj.png */; };
 		197AFBC81DC1996E002DD1BD /* wodeyinhangk_bj.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AFBB81DC1996E002DD1BD /* wodeyinhangk_bj.png */; };
-		198C5D731DBDAA390060E518 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198C5D721DBDAA390060E518 /* BaseTableViewController.m */; };
 		19A63F8A1DBDF86B008797EB /* LGLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A63F891DBDF86B008797EB /* LGLAlertView.m */; };
 		19C9B9121DC1E03900DDFF02 /* guanyuwom_bj.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C9B9111DC1E03900DDFF02 /* guanyuwom_bj.png */; };
 		1C1F31871DC8378B00BC4A27 /* shoukuan_fanhui@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31751DC8378B00BC4A27 /* shoukuan_fanhui@2x.png */; };
@@ -247,8 +246,6 @@
 		197AFBB61DC1996E002DD1BD /* touxiang_bj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touxiang_bj.png; sourceTree = "<group>"; };
 		197AFBB71DC1996E002DD1BD /* tuichu_bj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tuichu_bj.png; sourceTree = "<group>"; };
 		197AFBB81DC1996E002DD1BD /* wodeyinhangk_bj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wodeyinhangk_bj.png; sourceTree = "<group>"; };
-		198C5D711DBDAA390060E518 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
-		198C5D721DBDAA390060E518 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		19A63F881DBDF86B008797EB /* LGLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGLAlertView.h; sourceTree = "<group>"; };
 		19A63F891DBDF86B008797EB /* LGLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGLAlertView.m; sourceTree = "<group>"; };
 		19C9B9111DC1E03900DDFF02 /* guanyuwom_bj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guanyuwom_bj.png; sourceTree = "<group>"; };
@@ -986,8 +983,6 @@
 				1C49B2CD1DBA22B400CF3DE1 /* TabBarController.m */,
 				1C49B2C91DBA22A000CF3DE1 /* NavigationController.h */,
 				1C49B2CA1DBA22A000CF3DE1 /* NavigationController.m */,
-				198C5D711DBDAA390060E518 /* BaseTableViewController.h */,
-				198C5D721DBDAA390060E518 /* BaseTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1892,7 +1887,6 @@
 				1C49B2871DBA1D4F00CF3DE1 /* UIButton+Extension.m in Sources */,
 				1C49B2AD1DBA1D4F00CF3DE1 /* UIImageView+AFNetworking.m in Sources */,
 				1C3E88521DC1DD26002EE960 /* XDSettingItem.m in Sources */,
-				198C5D731DBDAA390060E518 /* BaseTableViewController.m in Sources */,
 				1C3E88461DC1DAFB002EE960 /* NewsTableViewCell.m in Sources */,
 				1C49B28E1DBA1D4F00CF3DE1 /* UITableView+RightIndex.m in Sources */,
 				1C49B2B21DBA1D4F00CF3DE1 /* EAIntroView.m in Sources */,

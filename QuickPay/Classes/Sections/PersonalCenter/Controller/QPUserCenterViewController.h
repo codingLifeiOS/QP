@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
-@interface QPUserCenterViewController : BaseTableViewController
+@interface QPUserCenterViewController : UIViewController
 
 @end

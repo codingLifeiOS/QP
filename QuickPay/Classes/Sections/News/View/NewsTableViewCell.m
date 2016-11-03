@@ -2,7 +2,7 @@
 //  NewsTableViewCell.m
 //  QuickPay
 //
-//  Created by 高晓东 on 16/10/27.
+//  Created by Nie on 16/10/27.
 //  Copyright © 2016年 Nie. All rights reserved.
 //
 
@@ -13,13 +13,12 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        //背景图片
+        
         UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"guanyuwom_bj"]];
         imageView.image=[UIImage imageNamed:@"guanyuwom_bj"];
         [self setBackgroundView:imageView];
         _leftView = [[UIImageView alloc]initWithFrame:(CGRectMake(15, 15, 40, 40))];
         _leftView.layer.cornerRadius = 20;
-//        _leftView.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.leftView];
         
         _NewsNameLabel = [[UILabel alloc]initWithFrame:(CGRectMake(60, 10, SCREEN_WIDTH -80, 40))];

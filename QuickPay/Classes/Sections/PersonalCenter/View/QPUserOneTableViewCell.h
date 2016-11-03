@@ -2,7 +2,7 @@
 //  QPUserOneTableViewCell.h
 //  QuickPay
 //
-//  Created by 高晓东 on 16/10/27.
+//  Created by Nie on 16/10/27.
 //  Copyright © 2016年 Nie. All rights reserved.
 //
 
