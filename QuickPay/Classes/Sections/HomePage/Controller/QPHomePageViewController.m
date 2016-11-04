@@ -13,7 +13,7 @@
 #import "QPViewWaterViewController.h"
 #import "QPDigitalKeyboardView.h"
 #import "CLShareManager.h"
-
+#import "QPHttpManager.h"
 @interface QPHomePageViewController ()<UIAlertViewDelegate,BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
 {
     UIView *menuBgView;
@@ -33,7 +33,8 @@
     shareManager = [[CLShareManager alloc] init];
 
     self.view.backgroundColor = UIColorFromHex(0xeeeeee);
-    [self configureSubViews]; 
+    [self configureSubViews];
+    [self test];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -278,6 +279,21 @@
         contentView.frame = CGRectMake(contentView.bounds.origin.x, contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height - self.tabBarController.tabBar.frame.size.height);
         self.tabBarController.tabBar.hidden = NO;
     }
+}
+#pragma mark - 接口请求
+- (void)test{
+//   [QPHttpManager getOrderDetail:@"" Completion:^(id responseData) {
+//       
+//   } failure:^(NSError *error) {
+//       
+//   } ];
+    
+   [QPHttpManager getQRcodeString:@"" Completion:^(id responseData) {
+       
+   } failure:^(NSError *error) {
+       
+   }];
+
 }
 
 

@@ -69,6 +69,9 @@
 		1C1F31D11DC8379F00BC4A27 /* saoma2_sao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31C31DC8379F00BC4A27 /* saoma2_sao@2x.png */; };
 		1C1F31D21DC8379F00BC4A27 /* saoma2_sao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31C41DC8379F00BC4A27 /* saoma2_sao@3x.png */; };
 		1C1FAA611DCC57F400B54DBB /* QPHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAA601DCC57F400B54DBB /* QPHttpRequest.m */; };
+		1C1FAA641DCC59B100B54DBB /* QPFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAA631DCC59B100B54DBB /* QPFileManager.m */; };
+		1C1FAA671DCC5CFC00B54DBB /* QPRequestSerVice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAA661DCC5CFC00B54DBB /* QPRequestSerVice.m */; };
+		1C1FAA701DCC60F800B54DBB /* QPHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAA6F1DCC60F800B54DBB /* QPHttpManager.m */; };
 		1C28EC0F1DC04A3100EB1D57 /* tell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C28EC0D1DC04A3100EB1D57 /* tell@2x.png */; };
 		1C28EC101DC04A3100EB1D57 /* tell@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */; };
 		1C28EC1F1DC0AE2400EB1D57 /* QPScanCodePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C28EC1D1DC0AE2400EB1D57 /* QPScanCodePayViewController.m */; };
@@ -328,6 +331,15 @@
 		1C1F31C41DC8379F00BC4A27 /* saoma2_sao@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saoma2_sao@3x.png"; sourceTree = "<group>"; };
 		1C1FAA5F1DCC57F400B54DBB /* QPHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPHttpRequest.h; sourceTree = "<group>"; };
 		1C1FAA601DCC57F400B54DBB /* QPHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPHttpRequest.m; sourceTree = "<group>"; };
+		1C1FAA621DCC59B100B54DBB /* QPFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPFileManager.h; sourceTree = "<group>"; };
+		1C1FAA631DCC59B100B54DBB /* QPFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPFileManager.m; sourceTree = "<group>"; };
+		1C1FAA651DCC5CFC00B54DBB /* QPRequestSerVice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPRequestSerVice.h; sourceTree = "<group>"; };
+		1C1FAA661DCC5CFC00B54DBB /* QPRequestSerVice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPRequestSerVice.m; sourceTree = "<group>"; };
+		1C1FAA691DCC5F4000B54DBB /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
+		1C1FAA6A1DCC5F4000B54DBB /* GlobalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalHeader.h; sourceTree = "<group>"; };
+		1C1FAA6B1DCC5F4000B54DBB /* InterfaceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceConfig.h; sourceTree = "<group>"; };
+		1C1FAA6E1DCC60F800B54DBB /* QPHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPHttpManager.h; sourceTree = "<group>"; };
+		1C1FAA6F1DCC60F800B54DBB /* QPHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPHttpManager.m; sourceTree = "<group>"; };
 		1C28EC0D1DC04A3100EB1D57 /* tell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell@2x.png"; sourceTree = "<group>"; };
 		1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell@3x.png"; sourceTree = "<group>"; };
 		1C28EC1C1DC0AE2400EB1D57 /* QPScanCodePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPScanCodePayViewController.h; sourceTree = "<group>"; };
@@ -418,9 +430,6 @@
 		1C49B1FF1DBA1D4E00CF3DE1 /* QPAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPAlertView.m; sourceTree = "<group>"; };
 		1C49B2001DBA1D4E00CF3DE1 /* QPEmptyListTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPEmptyListTipView.h; sourceTree = "<group>"; };
 		1C49B2011DBA1D4E00CF3DE1 /* QPEmptyListTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPEmptyListTipView.m; sourceTree = "<group>"; };
-		1C49B2031DBA1D4E00CF3DE1 /* Consts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consts.h; sourceTree = "<group>"; };
-		1C49B2041DBA1D4E00CF3DE1 /* GlobalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalHeader.h; sourceTree = "<group>"; };
-		1C49B2051DBA1D4E00CF3DE1 /* InterfaceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceConfig.h; sourceTree = "<group>"; };
 		1C49B2241DBA1D4F00CF3DE1 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		1C49B2251DBA1D4F00CF3DE1 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		1C49B2261DBA1D4F00CF3DE1 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -805,8 +814,39 @@
 			children = (
 				1C1FAA5F1DCC57F400B54DBB /* QPHttpRequest.h */,
 				1C1FAA601DCC57F400B54DBB /* QPHttpRequest.m */,
+				1C1FAA621DCC59B100B54DBB /* QPFileManager.h */,
+				1C1FAA631DCC59B100B54DBB /* QPFileManager.m */,
+				1C1FAA651DCC5CFC00B54DBB /* QPRequestSerVice.h */,
+				1C1FAA661DCC5CFC00B54DBB /* QPRequestSerVice.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		1C1FAA681DCC5F4000B54DBB /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				1C1FAA691DCC5F4000B54DBB /* Consts.h */,
+				1C1FAA6A1DCC5F4000B54DBB /* GlobalHeader.h */,
+				1C1FAA6B1DCC5F4000B54DBB /* InterfaceConfig.h */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		1C1FAA6C1DCC60B900B54DBB /* DataHandle */ = {
+			isa = PBXGroup;
+			children = (
+				1C1FAA6D1DCC60B900B54DBB /* Net */,
+			);
+			path = DataHandle;
+			sourceTree = "<group>";
+		};
+		1C1FAA6D1DCC60B900B54DBB /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				1C1FAA6E1DCC60F800B54DBB /* QPHttpManager.h */,
+				1C1FAA6F1DCC60F800B54DBB /* QPHttpManager.m */,
+			);
+			path = Net;
 			sourceTree = "<group>";
 		};
 		1C3E88431DC1DAF0002EE960 /* View */ = {
@@ -891,36 +931,14 @@
 			children = (
 				1C49B1B21DBA1D4E00CF3DE1 /* AppDelegate.h */,
 				1C49B1B31DBA1D4E00CF3DE1 /* AppDelegate.m */,
-				1C49B1B41DBA1D4E00CF3DE1 /* DataHandle */,
+				1C1FAA6C1DCC60B900B54DBB /* DataHandle */,
+				1C1FAA681DCC5F4000B54DBB /* Header */,
 				1C49B1B71DBA1D4E00CF3DE1 /* General */,
 				1C49B2061DBA1D4E00CF3DE1 /* Resources */,
 				1C49B2071DBA1D4E00CF3DE1 /* Sections */,
 				1C49B2211DBA1D4E00CF3DE1 /* Vendors */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		1C49B1B41DBA1D4E00CF3DE1 /* DataHandle */ = {
-			isa = PBXGroup;
-			children = (
-				1C49B1B51DBA1D4E00CF3DE1 /* DB */,
-				1C49B1B61DBA1D4E00CF3DE1 /* Net */,
-			);
-			path = DataHandle;
-			sourceTree = "<group>";
-		};
-		1C49B1B51DBA1D4E00CF3DE1 /* DB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DB;
-			sourceTree = "<group>";
-		};
-		1C49B1B61DBA1D4E00CF3DE1 /* Net */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Net;
 			sourceTree = "<group>";
 		};
 		1C49B1B71DBA1D4E00CF3DE1 /* General */ = {
@@ -1082,7 +1100,6 @@
 		1C49B1F11DBA1D4E00CF3DE1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1C49B2021DBA1D4E00CF3DE1 /* Header */,
 				1C49B1F21DBA1D4E00CF3DE1 /* Persistent */,
 				1C49B1F31DBA1D4E00CF3DE1 /* PinYin */,
 				1C49B1F81DBA1D4E00CF3DE1 /* QPUtils.h */,
@@ -1121,17 +1138,6 @@
 				1C49B2011DBA1D4E00CF3DE1 /* QPEmptyListTipView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		1C49B2021DBA1D4E00CF3DE1 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				1C49B2031DBA1D4E00CF3DE1 /* Consts.h */,
-				1C49B2041DBA1D4E00CF3DE1 /* GlobalHeader.h */,
-				1C49B2051DBA1D4E00CF3DE1 /* InterfaceConfig.h */,
-			);
-			name = Header;
-			path = ../../Header;
 			sourceTree = "<group>";
 		};
 		1C49B2061DBA1D4E00CF3DE1 /* Resources */ = {
@@ -2025,6 +2031,7 @@
 				1C3E88521DC1DD26002EE960 /* XDSettingItem.m in Sources */,
 				1C3E88461DC1DAFB002EE960 /* NewsTableViewCell.m in Sources */,
 				1C49B28E1DBA1D4F00CF3DE1 /* UITableView+RightIndex.m in Sources */,
+				1C1FAA701DCC60F800B54DBB /* QPHttpManager.m in Sources */,
 				1C49B2B21DBA1D4F00CF3DE1 /* EAIntroView.m in Sources */,
 				1C49B2B81DBA1D4F00CF3DE1 /* MASConstraintMaker.m in Sources */,
 				1CCB8F351DC2F4980036584E /* QPViewWaterTableViewCell.m in Sources */,
@@ -2033,6 +2040,7 @@
 				1C49B2C21DBA1D4F00CF3DE1 /* MJRefreshConst.m in Sources */,
 				1C49B2C11DBA1D4F00CF3DE1 /* MJRefreshBaseView.m in Sources */,
 				1CF302161DBF61A900935113 /* QPFindViewController.m in Sources */,
+				1C1FAA671DCC5CFC00B54DBB /* QPRequestSerVice.m in Sources */,
 				1C91C3271DCC2C4200DC5BB9 /* QPBusinessCooperationTableViewCell.m in Sources */,
 				1C49B2B61DBA1D4F00CF3DE1 /* MASCompositeConstraint.m in Sources */,
 				1C49B2851DBA1D4F00CF3DE1 /* NSDate+Utilities.m in Sources */,
@@ -2051,6 +2059,7 @@
 				1C49B2BA1DBA1D4F00CF3DE1 /* MASViewAttribute.m in Sources */,
 				1CCB8F421DC33A800036584E /* QPAccountRecordDetailsViewController.m in Sources */,
 				1C49B2841DBA1D4F00CF3DE1 /* NSDate+Extension.m in Sources */,
+				1C1FAA641DCC59B100B54DBB /* QPFileManager.m in Sources */,
 				1C49B2961DBA1D4F00CF3DE1 /* UIViewController+MISTipsView.m in Sources */,
 				1C49B2A21DBA1D4F00CF3DE1 /* AFSecurityPolicy.m in Sources */,
 				1C49B2C61DBA1D4F00CF3DE1 /* UIScrollView+MJRefresh.m in Sources */,
