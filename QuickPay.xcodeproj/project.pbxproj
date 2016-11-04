@@ -68,6 +68,7 @@
 		1C1F31D01DC8379F00BC4A27 /* saoma2_qiehuan_pre@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31C21DC8379F00BC4A27 /* saoma2_qiehuan_pre@3x.png */; };
 		1C1F31D11DC8379F00BC4A27 /* saoma2_sao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31C31DC8379F00BC4A27 /* saoma2_sao@2x.png */; };
 		1C1F31D21DC8379F00BC4A27 /* saoma2_sao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31C41DC8379F00BC4A27 /* saoma2_sao@3x.png */; };
+		1C1FAA611DCC57F400B54DBB /* QPHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAA601DCC57F400B54DBB /* QPHttpRequest.m */; };
 		1C28EC0F1DC04A3100EB1D57 /* tell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C28EC0D1DC04A3100EB1D57 /* tell@2x.png */; };
 		1C28EC101DC04A3100EB1D57 /* tell@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */; };
 		1C28EC1F1DC0AE2400EB1D57 /* QPScanCodePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C28EC1D1DC0AE2400EB1D57 /* QPScanCodePayViewController.m */; };
@@ -293,6 +294,8 @@
 		1C1F31C21DC8379F00BC4A27 /* saoma2_qiehuan_pre@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saoma2_qiehuan_pre@3x.png"; sourceTree = "<group>"; };
 		1C1F31C31DC8379F00BC4A27 /* saoma2_sao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saoma2_sao@2x.png"; sourceTree = "<group>"; };
 		1C1F31C41DC8379F00BC4A27 /* saoma2_sao@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "saoma2_sao@3x.png"; sourceTree = "<group>"; };
+		1C1FAA5F1DCC57F400B54DBB /* QPHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPHttpRequest.h; sourceTree = "<group>"; };
+		1C1FAA601DCC57F400B54DBB /* QPHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPHttpRequest.m; sourceTree = "<group>"; };
 		1C28EC0D1DC04A3100EB1D57 /* tell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell@2x.png"; sourceTree = "<group>"; };
 		1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell@3x.png"; sourceTree = "<group>"; };
 		1C28EC1C1DC0AE2400EB1D57 /* QPScanCodePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPScanCodePayViewController.h; sourceTree = "<group>"; };
@@ -717,6 +720,15 @@
 			path = Collectioncode;
 			sourceTree = "<group>";
 		};
+		1C1FAA5E1DCC56F600B54DBB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1C1FAA5F1DCC57F400B54DBB /* QPHttpRequest.h */,
+				1C1FAA601DCC57F400B54DBB /* QPHttpRequest.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		1C3E88431DC1DAF0002EE960 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -834,10 +846,10 @@
 		1C49B1B71DBA1D4E00CF3DE1 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				1C1FAA5E1DCC56F600B54DBB /* Network */,
 				1C49B1B81DBA1D4E00CF3DE1 /* Categories */,
 				1C49B1EA1DBA1D4E00CF3DE1 /* Config */,
 				1C49B1EF1DBA1D4E00CF3DE1 /* Controller */,
-				1C49B1F01DBA1D4E00CF3DE1 /* Network */,
 				1C49B1F11DBA1D4E00CF3DE1 /* Utils */,
 				1C49B1FB1DBA1D4E00CF3DE1 /* View */,
 			);
@@ -985,13 +997,6 @@
 				1C49B2CA1DBA22A000CF3DE1 /* NavigationController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		1C49B1F01DBA1D4E00CF3DE1 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		1C49B1F11DBA1D4E00CF3DE1 /* Utils */ = {
@@ -1928,6 +1933,7 @@
 				1C49B2D41DBA231200CF3DE1 /* QPLoginViewController.m in Sources */,
 				1C49B2A51DBA1D4F00CF3DE1 /* AFURLResponseSerialization.m in Sources */,
 				1C49B2B91DBA1D4F00CF3DE1 /* MASLayoutConstraint.m in Sources */,
+				1C1FAA611DCC57F400B54DBB /* QPHttpRequest.m in Sources */,
 				1C49B29C1DBA1D4F00CF3DE1 /* QPAlertView.m in Sources */,
 				1C49B2891DBA1D4F00CF3DE1 /* UITextField+Extension.m in Sources */,
 				1C49B2AB1DBA1D4F00CF3DE1 /* UIAlertView+AFNetworking.m in Sources */,
