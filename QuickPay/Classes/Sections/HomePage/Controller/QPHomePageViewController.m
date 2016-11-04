@@ -61,7 +61,7 @@
 
 - (void)configureNavigaBar{
     UIImageView *imageView = [[UIImageView alloc]init];
-    imageView.image = [UIImage imageNamed:@"logo_homePageNav.png"];
+    imageView.image = [UIImage imageNamed:@"logo.png"];
     [self.view addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(116/2));
@@ -104,7 +104,7 @@
     line.backgroundColor = UIColorFromHex(0xdcdcdc);
     [menuBgView addSubview:line];
     
-    NSArray *menuImageArray = @[@[@"nav_1",@"nav_2",@"nav_3",@"nav_4"],@[@"nav_5",@"nav_6"]];
+    NSArray *menuImageArray = @[@[@"nav_1",@"nav_2",@"nav_3",@"nav_4"],@[@"nav_6",@"nav_5"]];
     NSArray *menuNameArray = @[@[@"扫客收款",@"店铺收款",@"到账记录",@"查看流水"],@[@"分享",@"更多"]];
     CGFloat width = 60;
     CGFloat height = 90;

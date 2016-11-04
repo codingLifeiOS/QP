@@ -66,12 +66,12 @@
     _totaldeductionsLab.font = [UIFont systemFontOfSize:16];
     [firstview addSubview:_totaldeductionsLab];
     
-    UILabel *explainlab = [[UILabel alloc]initWithFrame:CGRectMake(40, firstview.bottom, SCREEN_WIDTH-80, 60)];
-    explainlab.text = @"* 你的款项尚未划出，顺便付每日12：00~17：00划款请耐心等待";
-    explainlab.numberOfLines = 0;
-    explainlab.textColor = [UIColor blackColor];
+    UILabel *explainlab = [[UILabel alloc]initWithFrame:CGRectMake(20, firstview.bottom, SCREEN_WIDTH-20, 60)];
+    explainlab.text = @"你的款项尚未划出，顺便付每日12：00~17：00划款请耐心等待";
+    explainlab.numberOfLines = 2;
+    explainlab.textColor = [UIColor redColor];
     explainlab.textAlignment = NSTextAlignmentLeft;
-    explainlab.font = [UIFont systemFontOfSize:16];
+    explainlab.font = [UIFont systemFontOfSize:12];
     [self addSubview:explainlab];
     
     UIView *twoview = [[UIView alloc] initWithFrame:CGRectMake(20, explainlab.bottom, SCREEN_WIDTH-40, 60)];

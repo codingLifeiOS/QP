@@ -12,6 +12,7 @@
 #import "XDGroupItem.h"
 #import "XDSettingItem.h"
 #import "LGLAlertView.h"
+#import "QPBusinessCooperationViewController.h"
 
 static NSString *const cellIdentifier = @"QPUserCenterViewCell";
 static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
@@ -29,7 +30,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     [self loadDataSource];
     [self configureTableView];
     [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(setbtnclick)];
-
+    
 }
 
 #pragma mark - configureSubViews
@@ -43,7 +44,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     self.homeTableView.showsVerticalScrollIndicator = NO;
     [self.homeTableView registerClass:[QPUserCenterViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.homeTableView registerClass:[QPUserOneTableViewCell class] forCellReuseIdentifier:cellIdentifier1];
-
+    
     [self.view addSubview:self.homeTableView];
 }
 
@@ -66,31 +67,31 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-        if (indexPath.section == 0) {
-            QPUserCenterViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            XDGroupItem *group = self.groups[indexPath.section];
-            XDSettingItem *item = group.items[indexPath.row];
-            cell.textLabel.text = item.title;
-            UILabel *QRcode =[[UILabel new]init];
-            QRcode.font = [UIFont systemFontOfSize:12];
-            QRcode.frame = CGRectMake(100, 60, 150, 20);
-            QRcode.text = @"ID: 7758";
-            [cell.contentView addSubview:QRcode];
-            cell.imageView.image = [UIImage imageNamed:item.image];
-            return cell;
-        } else {
-            QPUserOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            XDGroupItem *group = self.groups[indexPath.section];
-            XDSettingItem *item = group.items[indexPath.row];
-            cell.textLabel.text = item.title;
-            cell.textLabel.font = [UIFont systemFontOfSize:14];
-            cell.imageView.layer.cornerRadius = 8;
-            cell.imageView.layer.masksToBounds = YES;
-            cell.imageView.image = [UIImage imageNamed:item.image];
-            return cell;
-        }
+    if (indexPath.section == 0) {
+        QPUserCenterViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        XDGroupItem *group = self.groups[indexPath.section];
+        XDSettingItem *item = group.items[indexPath.row];
+        cell.textLabel.text = item.title;
+        UILabel *QRcode =[[UILabel new]init];
+        QRcode.font = [UIFont systemFontOfSize:12];
+        QRcode.frame = CGRectMake(100, 60, 150, 20);
+        QRcode.text = @"ID: 7758";
+        [cell.contentView addSubview:QRcode];
+        cell.imageView.image = [UIImage imageNamed:item.image];
+        return cell;
+    } else {
+        QPUserOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        XDGroupItem *group = self.groups[indexPath.section];
+        XDSettingItem *item = group.items[indexPath.row];
+        cell.textLabel.text = item.title;
+        cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.imageView.layer.cornerRadius = 8;
+        cell.imageView.layer.masksToBounds = YES;
+        cell.imageView.image = [UIImage imageNamed:item.image];
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -139,13 +140,13 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
             if (indexPath.row == 0) {
                 NSLog(@"我的银行卡");
             } else if (indexPath.row == 1) {
-                NSLog(@"更换银行卡");
-            } else if (indexPath.row == 2) {
                 NSLog(@"店铺签的结算");
             }
             break;
         case 2:
             if (indexPath.row == 0) {
+                QPBusinessCooperationViewController *QPbuscooVC = [[QPBusinessCooperationViewController alloc]init];
+                [self.navigationController pushViewController:QPbuscooVC animated:YES];
                 NSLog(@"商务合作");
             } else if (indexPath.row == 1){
                 NSLog(@"用户协议");
@@ -173,7 +174,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 }
 
 - (void)setbtnclick{
-
+    
     NSLog(@"点击设置");
 }
 -(NSMutableArray *)groups {
@@ -202,9 +203,9 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     
     XDGroupItem *group = [[XDGroupItem alloc]init];
     XDSettingItem *item = [XDSettingItem itemWithtitle:@"我的银行卡" :@"pir_2"];
-    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"更换银行卡" :@"pir_3"];
+    //    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"更换银行卡" :@"pir_3"];
     XDSettingItem *itemTwo = [XDSettingItem itemWithtitle:@"店铺签的结算" :@"pir_4"];
-    group.items = @[item,itemOne,itemTwo];
+    group.items = @[item,itemTwo];
     [self.groups addObject:group];
 }
 - (void)setGroupsThree {

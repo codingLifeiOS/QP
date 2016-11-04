@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface QPBusinessCooperationTableViewCell : UITableViewCell
-
+@property (nonatomic,strong)UILabel *bussLab;
+@property (nonatomic,strong)UILabel *infoLab;
+@property (nonatomic,strong)UIImageView *bussimage;
 @end
