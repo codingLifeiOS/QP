@@ -31,7 +31,9 @@ static CGFloat const kTimeoutInterval = 30.0f;
         // 1.创建SessionManager
         self.sessionManager = [AFHTTPSessionManager manager];
         self.sessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        
         self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+
         self.sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
         self.sessionManager.requestSerializer.timeoutInterval = kTimeoutInterval;
         

@@ -812,10 +812,10 @@
 		1C1FAA5E1DCC56F600B54DBB /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				1C1FAA5F1DCC57F400B54DBB /* QPHttpRequest.h */,
-				1C1FAA601DCC57F400B54DBB /* QPHttpRequest.m */,
 				1C1FAA621DCC59B100B54DBB /* QPFileManager.h */,
 				1C1FAA631DCC59B100B54DBB /* QPFileManager.m */,
+				1C1FAA5F1DCC57F400B54DBB /* QPHttpRequest.h */,
+				1C1FAA601DCC57F400B54DBB /* QPHttpRequest.m */,
 				1C1FAA651DCC5CFC00B54DBB /* QPRequestSerVice.h */,
 				1C1FAA661DCC5CFC00B54DBB /* QPRequestSerVice.m */,
 			);

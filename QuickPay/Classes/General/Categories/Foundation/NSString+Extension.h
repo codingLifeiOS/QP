@@ -63,7 +63,8 @@ typedef NS_ENUM(NSUInteger,MISFileType) {
 
 // json 转数组
 + (NSDictionary *)jsonStringToDictionary:(NSString *)jsonStr;
-
+// 字典转json
++ (NSString*)convertToJSONData:(id)infoDict;
 #pragma mark 动态计算高度 参数字体大小 宽度  字符串
 
 -(CGFloat)autolableHeightWithFont:(UIFont *)font Width:(CGFloat)width;
