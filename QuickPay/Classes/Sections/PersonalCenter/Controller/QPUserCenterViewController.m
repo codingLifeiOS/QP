@@ -13,6 +13,8 @@
 #import "XDSettingItem.h"
 #import "LGLAlertView.h"
 #import "QPBusinessCooperationViewController.h"
+#import "QPAboutUsViewController.h"
+#import "QPMyBankCardViewController.h"
 
 static NSString *const cellIdentifier = @"QPUserCenterViewCell";
 static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
@@ -138,6 +140,8 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
             break;
         case 1:
             if (indexPath.row == 0) {
+                QPMyBankCardViewController *QPcardVC = [[QPMyBankCardViewController alloc]init];
+                [self.navigationController pushViewController:QPcardVC animated:YES];
                 NSLog(@"我的银行卡");
             } else if (indexPath.row == 1) {
                 NSLog(@"店铺签的结算");
@@ -153,7 +157,11 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
             }
             break;
         case 3:
+        {
+            QPAboutUsViewController *QPaboutusVC = [[QPAboutUsViewController alloc]init];
+            [self.navigationController pushViewController:QPaboutusVC animated:YES];
             NSLog(@"关于我们");
+        }
             break;
         case 4:
             NSLog(@"退出登录");
