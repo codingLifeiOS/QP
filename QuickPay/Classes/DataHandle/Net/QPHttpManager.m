@@ -13,6 +13,7 @@
 + (void)getQRcodeString:(NSString *)parentid
             Completion:(QPRequestSuccessHandler)handler
                failure:(QPRequestFailureHandler)failhandler{
+    
     NSDictionary *dic = @{@"amount":@"10",
                          @"merchno":@"WA16082911211",
                          @"payType":@"2",
@@ -23,13 +24,11 @@
                          };
     
 
-    [QPRequestSerVice POST:QP_OrderCP param:dic success:^(NSDictionary *responseData) {
+    [QPHttpRequest uploadPictureData:QP_OrderCP params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSString *success) {
         
-        handler ? handler(responseData) : nil;
-    } failure:^(NSError *error) {
-        failhandler ? failhandler(error) : nil;
+     } failure:^(NSString *failure) {
+        
     }];
-
 }
 
 + (void)getOrderDetail:(NSString *)parentid
@@ -40,13 +39,12 @@
                             @"traceno":@"EWA16081822481v16091321591",
                             @"signature":@"D378433564F8DA07A05304BB9A945CE2",
                             };
-    [QPRequestSerVice POST:QP_OrderQQ param:dic  success:^(NSDictionary *responseData) {
+
+    [QPHttpRequest uploadPictureData:QP_OrderQQ params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSString *success) {
         
-        handler ? handler(responseData) : nil;
-    } failure:^(NSError *error) {
-        failhandler ? failhandler(error) : nil;
+    } failure:^(NSString *failure) {
+        
     }];
-    
 
 
 }

@@ -127,5 +127,20 @@ cachePolicy:(HttpRequestCachePolicy)cachePolicy
      success:(HttpRequestSuccessBlock)successHandler
      failure:(HttpRequestFailureBlock)failureHandler;
 
+// AFN 参数加在AFMultipartFormData --用于表参数
++ (void)POSTWithFormData:(NSString *)url
+                  params:(NSDictionary *)params
+constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+             cachePolicy:(HttpRequestCachePolicy)cachePolicy
+                 success:(HttpRequestSuccessBlock)successHandler
+                 failure:(HttpRequestFailureBlock)failureHandler;
+
+// 用系统的网络请求 把参数加在dody里
++ (void)uploadPictureData:(NSString *)URLString
+                   params:(NSDictionary *)parameters
+                     body:(NSData *)data
+                  success:(void (^)(NSString *))success
+                  failure:(void (^)(NSString *))failure;
+
 
 @end
