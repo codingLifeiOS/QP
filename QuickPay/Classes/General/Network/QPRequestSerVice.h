@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "QPHttpRequest.h"
 /**
  *  请求成功Handler
  */
@@ -56,6 +56,11 @@ typedef void (^QPRequestFailureHandler) (NSError *error);
      success:(QPRequestSuccessHandler)successHandler
      failure:(QPRequestFailureHandler)failureHandler;
 
++ (void)POSTWithFormData:(NSString *)url
+                   param:(id)param
+                    dict:(NSDictionary *)dict
+                 success:(QPRequestSuccessHandler)successHandler
+                 failure:(QPRequestFailureHandler)failureHandler;
 
 
 @end

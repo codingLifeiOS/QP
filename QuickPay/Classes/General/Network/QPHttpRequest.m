@@ -27,20 +27,19 @@ static CGFloat const kTimeoutInterval = 30.0f;
 - (instancetype)init {
     
     if (self = [super init]) {
-        
         // 1.创建SessionManager
         self.sessionManager = [AFHTTPSessionManager manager];
         self.sessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
         
         self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-
+        
         self.sessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
         self.sessionManager.requestSerializer.timeoutInterval = kTimeoutInterval;
         
         self.sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/plain", nil];
         
-        [self.sessionManager.requestSerializer setValue:@"application/json"forHTTPHeaderField:@"Accept"];
-        [self.sessionManager.requestSerializer setValue:@"application/json;charset=utf-8"forHTTPHeaderField:@"Content-Type"];
+        //        [self.sessionManager.requestSerializer setValue:@"application/json"forHTTPHeaderField:@"Accept"];
+        //        [self.sessionManager.requestSerializer setValue:@"application/json;charset=utf-8"forHTTPHeaderField:@"Content-Type"];
     }
     return self;
 }
@@ -77,11 +76,11 @@ static QPHttpRequest *instance = nil;
     failure:(HttpRequestFailureBlock)failureHandler {
     
     [QPHttpRequest requestMethod:HttpRequestTypeGET
-                      cachePolicy:HttpRequestDefault
-                              url:url
-                           params:params
-                          success:successHandler
-                          failure:failureHandler];
+                     cachePolicy:HttpRequestDefault
+                             url:url
+                          params:params
+                         success:successHandler
+                         failure:failureHandler];
     
 }
 
@@ -91,11 +90,11 @@ static QPHttpRequest *instance = nil;
      failure:(HttpRequestFailureBlock)failureHandler {
     
     [QPHttpRequest requestMethod:HttpRequestTypePOST
-                      cachePolicy:HttpRequestDefault
-                              url:url
-                           params:params
-                          success:successHandler
-                          failure:failureHandler];
+                     cachePolicy:HttpRequestDefault
+                             url:url
+                          params:params
+                         success:successHandler
+                         failure:failureHandler];
     
 }
 
@@ -106,11 +105,11 @@ cachePolicy:(HttpRequestCachePolicy)cachePolicy
     failure:(HttpRequestFailureBlock)failureHandler {
     
     [QPHttpRequest requestMethod:HttpRequestTypeGET
-                      cachePolicy:cachePolicy
-                              url:url
-                           params:params
-                          success:successHandler
-                          failure:failureHandler];
+                     cachePolicy:cachePolicy
+                             url:url
+                          params:params
+                         success:successHandler
+                         failure:failureHandler];
     
 }
 
@@ -121,11 +120,11 @@ cachePolicy:(HttpRequestCachePolicy)cachePolicy
      failure:(HttpRequestFailureBlock)failureHandler {
     
     [QPHttpRequest requestMethod:HttpRequestTypePOST
-                      cachePolicy:cachePolicy
-                              url:url
-                           params:params
-                          success:successHandler
-                          failure:failureHandler];
+                     cachePolicy:cachePolicy
+                             url:url
+                          params:params
+                         success:successHandler
+                         failure:failureHandler];
     
 }
 
@@ -234,5 +233,39 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
     
 }
 
+
++ (void)uploadPictureData:(NSString *)URLString
+                   params:(NSDictionary *)parameters
+                     body:(NSData *)data
+                  success:(void (^)(NSString *))success
+                  failure:(void (^)(NSString *))failure;
+
+{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:URLString]];
+    [request setHTTPMethod:@"POST"];
+    //    设置请求头
+    //    [self setNetHeaderBy:request];
+    [request setHTTPBody:data];
+    // 2. 发送异步请求，上传文件
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSString *str=[[NSMutableString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (str.length > 0) {
+            NSLog(@"请求成功%@  \n结束报文",str);
+             success(str);
+        }else{
+            failure(@"请求失败");
+        }
+    }];
+}
+
++ (void)setNetHeaderBy:(NSMutableURLRequest*)mgr{
+//    //加请求头
+//    [mgr setValue:@"Post" forHTTPHeaderField:@"Method"];
+//    [mgr setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+//    [mgr setValue:@"/mis/pic/" forHTTPHeaderField:@"Pic-Path"];
+//    [mgr setValue:@"0" forHTTPHeaderField:@"Pic-Size"];
+//    [mgr setValue:@"base64" forHTTPHeaderField:@"Pic-Encoding"];
+}
 
 @end

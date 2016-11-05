@@ -282,11 +282,12 @@
 }
 #pragma mark - 接口请求
 - (void)test{
-//   [QPHttpManager getOrderDetail:@"" Completion:^(id responseData) {
-//       
-//   } failure:^(NSError *error) {
-//       
-//   } ];
+    
+   [QPHttpManager getOrderDetail:@"" Completion:^(id responseData) {
+       
+   } failure:^(NSError *error) {
+       
+   } ];
     
    [QPHttpManager getQRcodeString:@"" Completion:^(id responseData) {
        
