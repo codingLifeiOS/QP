@@ -20,7 +20,7 @@
     BMAdScrollView *adView;
     QPDigitalKeyboardView *keyboardView;
     CLShareManager *shareManager;
-
+    
 }
 
 @end
@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     shareManager = [[CLShareManager alloc] init];
-
+    
     self.view.backgroundColor = UIColorFromHex(0xeeeeee);
     [self configureSubViews];
     [self test];
@@ -203,7 +203,7 @@
     switch (tag) {
         case 200:
             [self showQPScanCodePayView];
-             break;
+            break;
         case 201:
         {
             [self hideTabBar];
@@ -211,7 +211,7 @@
             keyboardView = [[QPDigitalKeyboardView alloc]initWithFrame:self.view.bounds];
             keyboardView.delegate = self;
             [self.view addSubview:keyboardView];
-
+            
         }
             break;
         case 202:
@@ -283,18 +283,31 @@
 #pragma mark - 接口请求
 - (void)test{
     
-   [QPHttpManager getOrderDetail:@"" Completion:^(id responseData) {
-       
-   } failure:^(NSError *error) {
-       
-   } ];
+    [QPHttpManager getOrderDetail:@"" Completion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+    } ];
     
-   [QPHttpManager getQRcodeString:@"" Completion:^(id responseData) {
-       
-   } failure:^(NSError *error) {
-       
-   }];
-
+    [QPHttpManager getQRcodeString:@"" Completion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    [QPHttpManager getLogin:@"" Completion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    [QPHttpManager getMerinfo:@"" Completion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
+    
 }
 
 

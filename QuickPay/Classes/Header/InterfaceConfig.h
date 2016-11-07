@@ -17,4 +17,10 @@
 // 2.3.	交易查询接口
 #define QP_OrderQQ QP_HOST@"order/api/qq"
 
+// 2.4. 登录接口
+#define QP_Login QP_HOST@"apis/login"
+
+// 2.5. 获取商户基本信息
+#define QP_GetMerInfo QP_HOST@"apis/getMerinfo"
+
 #endif /* InterfaceConfig_h */
