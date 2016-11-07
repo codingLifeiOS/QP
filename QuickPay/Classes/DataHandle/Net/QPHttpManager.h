@@ -35,12 +35,13 @@
 
 /**
  *  登录接口
- *  @param parentid 父级部门id
- *
+ *  @param phoneStr 用户名：手机号
+ *  @param password 密码
  *  @param handler 完成后的回调
  */
 
-+ (void)getLogin:(NSString *)parentid
++ (void)loginWithUsename:(NSString *)phoneStr
+                Password:(NSString *)password
       Completion:(QPRequestSuccessHandler)handler
          failure:(QPRequestFailureHandler)failhandler;
 

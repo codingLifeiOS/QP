@@ -136,11 +136,11 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                  failure:(HttpRequestFailureBlock)failureHandler;
 
 // 用系统的网络请求 把参数加在dody里
-+ (void)uploadPictureData:(NSString *)URLString
++ (void)POSTWithData:(NSString *)URLString
                    params:(NSDictionary *)parameters
                      body:(NSData *)data
-                  success:(void (^)(NSString *))success
-                  failure:(void (^)(NSString *))failure;
+                  success:(void (^)(NSDictionary *))success
+                  failure:(void (^)(NSError *))failure;
 
 
 @end

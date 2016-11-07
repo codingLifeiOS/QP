@@ -32,9 +32,11 @@
 
     self.tabBarController = [[TabBarController alloc]init];
     self.window.rootViewController = self.tabBarController;
-    [CLShareManager setShareAppKey];
 //    self.loginViewController = [[QPLoginViewController alloc]init];
 //    self.window.rootViewController = self.loginViewController;
+    
+    [CLShareManager setShareAppKey];
+
 #if DEBUG
     [[FLEXManager sharedManager] showExplorer];
 #endif

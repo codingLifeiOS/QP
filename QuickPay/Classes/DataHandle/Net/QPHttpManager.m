@@ -24,9 +24,9 @@
                           };
     
     
-    [QPHttpRequest uploadPictureData:QP_OrderCP params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSString *success) {
+    [QPHttpRequest POSTWithData:QP_OrderCP params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
-    } failure:^(NSString *failure) {
+    } failure:^(NSError *error) {
         
     }];
 }
@@ -40,25 +40,30 @@
                           @"signature":@"D378433564F8DA07A05304BB9A945CE2",
                           };
     
-    [QPHttpRequest uploadPictureData:QP_OrderQQ params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSString *success) {
+    [QPHttpRequest POSTWithData:QP_OrderQQ params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
-    } failure:^(NSString *failure) {
+        
+    } failure:^(NSError *error) {
         
     }];
 }
 
-+ (void)getLogin:(NSString *)parentid
-      Completion:(QPRequestSuccessHandler)handler
-         failure:(QPRequestFailureHandler)failhandler{
++ (void)loginWithUsename:(NSString *)phoneStr
+                  Password:(NSString *)password
+                Completion:(QPRequestSuccessHandler)handler
+                   failure:(QPRequestFailureHandler)failhandler{
     
-    NSDictionary *dic = @{@"username":@"18583981869",
-                          @"password":@"WA16082322231",
-                          };
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:phoneStr forKey:@"username"];
+    [params setValue:password forKey:@"password"];
     
-    [QPHttpRequest uploadPictureData:QP_Login params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSString *success) {
+    [QPHttpRequest POSTWithData:QP_Login params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
-    } failure:^(NSString *failure) {
-        
+        handler ? handler(success) : nil;
+
+    } failure:^(NSError *error) {
+        handler ? handler(error) : nil;
+
     }];
 }
 
@@ -66,13 +71,13 @@
         Completion:(QPRequestSuccessHandler)handler
            failure:(QPRequestFailureHandler)failhandler{
     
-    NSDictionary *dic = @{@"mer_code":@"WA16082322231",
-                          @"token":@"693fde898b216024a7bd5f164c5178b9",
+    NSDictionary *dic = @{@"mer_code":@"WA16102016219529",
+                          @"token":@"f8a2eb521039921c5ed23d7ad479a668",
                           };
     
-    [QPHttpRequest uploadPictureData:QP_GetMerInfo params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSString *success) {
+    [QPHttpRequest POSTWithData:QP_GetMerInfo params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
-    } failure:^(NSString *failure) {
+    } failure:^(NSError *error) {
         
     }];
 }

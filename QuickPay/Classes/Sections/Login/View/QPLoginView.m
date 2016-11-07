@@ -1,13 +1,13 @@
 //
 //  QPLoginView.m
-//  
+//
 //
 //  Created by Nie on 2016/10/25.
 //
 //
 
 #import "QPLoginView.h"
-#import "TabBarController.h"
+#import "QPHttpManager.h"
 
 @interface QPLoginView ()<UITextFieldDelegate>
 {
@@ -17,7 +17,6 @@
     UIImageView *inputImage;
     NSArray *allTextFields;
 }
-@property (nonatomic, strong) TabBarController *tabBarController;
 
 @property (nonatomic, assign) CGRect defaultViewRect;
 
@@ -123,19 +122,10 @@
         return;
     }
     
-    [[QPHUDManager sharedInstance]showProgressWithText:@"登录中"];
-    if ([self.loginIdTextField.text isEqualToString:@"15701189832"] &&
-        [self.passwordTextField.text isEqualToString:@"123456"]) {
-        [[QPHUDManager sharedInstance]hiddenHUD];
-        [[QPHUDManager sharedInstance]showTextOnly:@"登录成功"];
-        self.tabBarController = [[TabBarController alloc]init];
-        self.window.rootViewController = self.tabBarController;
-    } else {
-        [[QPHUDManager sharedInstance]hiddenHUD];
-        [[QPHUDManager sharedInstance]showTextOnly:@"手机号号或者密码错误"];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loginBtnClickDelegateWithUsename:Password:)]) {
+        [self.delegate loginBtnClickDelegateWithUsename:self.loginIdTextField.text Password:self.passwordTextField.text];
     }
-    
- }
+}
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -149,18 +139,18 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-
+    
     UIWindow * window=[UIApplication sharedApplication].delegate.window;
     CGRect rc = [self convertRect:textField.frame toView:window];
     NSLog(@"%f  %f",rc.origin.y, rc.size.height );
     [self updateViewFrame:rc];
-
+    
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-  
+    
     [self recoverViewFrame];
-
+    
 }
 
 //忘记密码
@@ -177,7 +167,7 @@
     int yh = y - h;
     if (yh > 0) {
         [UIView animateWithDuration:0.3 animations:^{
-             self.y = self.y-yh;
+            self.y = self.y-yh;
         } completion:^(BOOL completion){
             
         }];
@@ -187,7 +177,7 @@
 - (void)recoverViewFrame
 {
     [UIView animateWithDuration:0.3 animations:^{
-         self.y = 64;
+        self.y = 64;
     } completion:^(BOOL completion){
         
     }];

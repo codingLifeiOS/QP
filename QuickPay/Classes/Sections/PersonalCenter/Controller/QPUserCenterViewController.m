@@ -15,6 +15,8 @@
 #import "QPBusinessCooperationViewController.h"
 #import "QPAboutUsViewController.h"
 #import "QPMyBankCardViewController.h"
+#import "QPLoginViewController.h"
+#import "AppDelegate.h"
 
 static NSString *const cellIdentifier = @"QPUserCenterViewCell";
 static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
@@ -174,9 +176,12 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 - (void)exitRegister {
     [LGLAlertView showAlertViewWith:self title:@"温馨提示" message:@"确定退出" CallBackBlock:^(NSInteger btnIndex) {
         if (btnIndex == 0) {
-            NSLog(@"取消退出");
-        }else {
-            NSLog(@"确定退出");
+
+        } else {
+            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+            QPLoginViewController *loginVC = [QPLoginViewController new];
+            delegate.window.rootViewController = loginVC;
         }
     } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil,nil];
 }

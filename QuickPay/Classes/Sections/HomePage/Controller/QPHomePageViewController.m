@@ -295,11 +295,6 @@
         
     }];
     
-    [QPHttpManager getLogin:@"" Completion:^(id responseData) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
     
     [QPHttpManager getMerinfo:@"" Completion:^(id responseData) {
         

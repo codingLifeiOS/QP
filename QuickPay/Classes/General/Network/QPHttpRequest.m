@@ -234,11 +234,11 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
 }
 
 
-+ (void)uploadPictureData:(NSString *)URLString
++ (void)POSTWithData:(NSString *)URLString
                    params:(NSDictionary *)parameters
                      body:(NSData *)data
-                  success:(void (^)(NSString *))success
-                  failure:(void (^)(NSString *))failure;
+                  success:(void (^)(NSDictionary *))success
+                  failure:(void (^)( NSError*))failure;
 
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -249,12 +249,13 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
     [request setHTTPBody:data];
     // 2. 发送异步请求，上传文件
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        NSString *str=[[NSMutableString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        if (str.length > 0) {
-            NSLog(@"请求成功%@  \n结束报文",str);
-             success(str);
+        NSString *jsonstr = [[NSMutableString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSDictionary * dic = [NSString jsonStringToDictionary:jsonstr];
+        if (jsonstr.length > 0) {
+            NSLog(@"请求成功%@  \n结束报文",dic);
+             success(dic);
         }else{
-            failure(@"请求失败");
+            failure(connectionError);
         }
     }];
 }
