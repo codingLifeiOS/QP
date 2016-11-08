@@ -26,7 +26,7 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:dic];
     
     // 本处对所有非空参数进行Md5 加密 
-    NSString *sign = [NSString MD5:[NSString stringFromDic:dic andBaseString:@"9AE81687250E171465F31F2533F3041D"]];
+    NSString *sign = [NSString MD5:[NSString stringFromDic:dic andBaseString:@"123456789ZXCVBNMasdfgh"]];
     [params setObject:sign forKey:@"signature"];
     
     [QPHttpRequest POSTWithData:QP_OrderCP params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {

@@ -384,8 +384,7 @@
 
 + (NSString *)stringFromDic: (NSDictionary *)dic andBaseString: (NSString *)baseString
 {
-//   NSMutableString *stringM = [NSMutableString stringWithString:[baseString lowercaseString]];
-    NSMutableString *stringM = [NSMutableString stringWithString:baseString ];
+    NSMutableString *stringM = [[NSMutableString alloc]initWithFormat:@""];
     NSArray *keys = dic.keyEnumerator.allObjects;
     keys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         return [obj1 compare:obj2 options:NSLiteralSearch];
@@ -404,6 +403,7 @@
         }
         
     }
+    [stringM appendString:baseString];
     return stringM;
 }
 
