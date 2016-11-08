@@ -50,7 +50,7 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    cell.leftView.image = [UIImage imageNamed:@"hxp"];
+    cell.leftView.image = [UIImage imageNamed:@"xiaoxi_logo"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return cell;

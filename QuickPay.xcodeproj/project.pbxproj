@@ -252,6 +252,9 @@
 		1CA728F71DCDCB0100BDFA65 /* yinhangka_pic2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA728EF1DCDCB0100BDFA65 /* yinhangka_pic2@3x.png */; };
 		1CA728FD1DCDCC1500BDFA65 /* QPMyBankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA728FC1DCDCC1500BDFA65 /* QPMyBankCardViewController.m */; };
 		1CBD95551DBFA24F0040950A /* QPLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD95541DBFA24F0040950A /* QPLoginView.m */; };
+		1CC00B9A1DD1B6AB004D00AA /* xiaoxi_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CC00B981DD1B6AB004D00AA /* xiaoxi_logo@2x.png */; };
+		1CC00B9B1DD1B6AB004D00AA /* xiaoxi_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CC00B991DD1B6AB004D00AA /* xiaoxi_logo@3x.png */; };
+		1CC00BA01DD1B775004D00AA /* QPUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC00B9F1DD1B775004D00AA /* QPUserModel.m */; };
 		1CCB8F321DC2F3FF0036584E /* QPViewWaterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCB8F311DC2F3FF0036584E /* QPViewWaterViewController.m */; };
 		1CCB8F351DC2F4980036584E /* QPViewWaterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCB8F341DC2F4980036584E /* QPViewWaterTableViewCell.m */; };
 		1CCB8F381DC315CF0036584E /* weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCB8F361DC315CF0036584E /* weixin@2x.png */; };
@@ -654,6 +657,10 @@
 		1CA728FC1DCDCC1500BDFA65 /* QPMyBankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPMyBankCardViewController.m; sourceTree = "<group>"; };
 		1CBD95531DBFA24F0040950A /* QPLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPLoginView.h; sourceTree = "<group>"; };
 		1CBD95541DBFA24F0040950A /* QPLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPLoginView.m; sourceTree = "<group>"; };
+		1CC00B981DD1B6AB004D00AA /* xiaoxi_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xiaoxi_logo@2x.png"; sourceTree = "<group>"; };
+		1CC00B991DD1B6AB004D00AA /* xiaoxi_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xiaoxi_logo@3x.png"; sourceTree = "<group>"; };
+		1CC00B9E1DD1B775004D00AA /* QPUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPUserModel.h; sourceTree = "<group>"; };
+		1CC00B9F1DD1B775004D00AA /* QPUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPUserModel.m; sourceTree = "<group>"; };
 		1CCB8F301DC2F3FF0036584E /* QPViewWaterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPViewWaterViewController.h; sourceTree = "<group>"; };
 		1CCB8F311DC2F3FF0036584E /* QPViewWaterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPViewWaterViewController.m; sourceTree = "<group>"; };
 		1CCB8F331DC2F4980036584E /* QPViewWaterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPViewWaterTableViewCell.h; sourceTree = "<group>"; };
@@ -866,6 +873,7 @@
 			isa = PBXGroup;
 			children = (
 				1C1FAA6D1DCC60B900B54DBB /* Net */,
+				1CC00B9D1DD1B775004D00AA /* Model */,
 			);
 			path = DataHandle;
 			sourceTree = "<group>";
@@ -1488,6 +1496,8 @@
 		1C7833EA1DBF17020053FA87 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				1CC00B981DD1B6AB004D00AA /* xiaoxi_logo@2x.png */,
+				1CC00B991DD1B6AB004D00AA /* xiaoxi_logo@3x.png */,
 				1C7833F51DBF17DA0053FA87 /* barbuttonicon_set.png */,
 				1C7833F61DBF17DA0053FA87 /* barbuttonicon_set@2x.png */,
 				1C7833F71DBF17DA0053FA87 /* barbuttonicon_set@3x.png */,
@@ -1588,6 +1598,15 @@
 				1CBD95541DBFA24F0040950A /* QPLoginView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		1CC00B9D1DD1B775004D00AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1CC00B9E1DD1B775004D00AA /* QPUserModel.h */,
+				1CC00B9F1DD1B775004D00AA /* QPUserModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		1CF301DC1DBF5E1B00935113 /* homepage */ = {
@@ -1847,7 +1866,9 @@
 				1C28EC101DC04A3100EB1D57 /* tell@3x.png in Resources */,
 				1C91C3371DCC3B3B00DC5BB9 /* geren_nor@3x.png in Resources */,
 				1C91C3741DCC3C5200DC5BB9 /* pic_2@2x.png in Resources */,
+				1CC00B9B1DD1B6AB004D00AA /* xiaoxi_logo@3x.png in Resources */,
 				1C1F31A81DC8379600BC4A27 /* saoma_bj@2x.png in Resources */,
+				1CC00B9A1DD1B6AB004D00AA /* xiaoxi_logo@2x.png in Resources */,
 				1C91C4191DCC4F7A00DC5BB9 /* shangwu_pic4@3x.png in Resources */,
 				1CEC79E61DC1819D00968E35 /* wb_xj_txldr_fanhui_selected@2x.png in Resources */,
 				1C28EC0F1DC04A3100EB1D57 /* tell@2x.png in Resources */,
@@ -2101,6 +2122,7 @@
 				1C49B2BC1DBA1D4F00CF3DE1 /* NSArray+MASAdditions.m in Sources */,
 				1C49B2BA1DBA1D4F00CF3DE1 /* MASViewAttribute.m in Sources */,
 				1CCB8F421DC33A800036584E /* QPAccountRecordDetailsViewController.m in Sources */,
+				1CC00BA01DD1B775004D00AA /* QPUserModel.m in Sources */,
 				1C49B2841DBA1D4F00CF3DE1 /* NSDate+Extension.m in Sources */,
 				1C1FAA641DCC59B100B54DBB /* QPFileManager.m in Sources */,
 				1C49B2961DBA1D4F00CF3DE1 /* UIViewController+MISTipsView.m in Sources */,
