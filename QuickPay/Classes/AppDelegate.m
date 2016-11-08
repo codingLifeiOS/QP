@@ -30,10 +30,13 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
 
-    self.tabBarController = [[TabBarController alloc]init];
-    self.window.rootViewController = self.tabBarController;
-//    self.loginViewController = [[QPLoginViewController alloc]init];
-//    self.window.rootViewController = self.loginViewController;
+    if ([NSString isNotBlank:[QPUtils getToken]]) {
+        self.tabBarController = [[TabBarController alloc]init];
+        self.window.rootViewController = self.tabBarController;
+    } else {
+        self.loginViewController = [[QPLoginViewController alloc]init];
+        self.window.rootViewController = self.loginViewController;
+    }
     
     [CLShareManager setShareAppKey];
 

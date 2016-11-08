@@ -197,4 +197,18 @@ static NSString * const kMacAddressUserDefaultsKey = @"58keychainMacAddress";
     return platform;
 }
 
+// 获取商户号
++ (NSString *)getMer_code{
+
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"mer_code"];
+    
+}
+
+// 获取token
++ (NSString *)getToken{
+
+   return  [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+
+}
+
 @end

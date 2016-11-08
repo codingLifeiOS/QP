@@ -28,4 +28,10 @@
 // 获取设备型号
 + (NSString *)getDeviceModel;
 
+// 获取商户号
++ (NSString *)getMer_code;
+
+// 获取token
++ (NSString *)getToken;
+
 @end

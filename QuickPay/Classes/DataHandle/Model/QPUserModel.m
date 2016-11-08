@@ -3,7 +3,7 @@
 @implementation QPUserModel
 
 - (void)dealloc {
-    self.id = nil;
+    self.userId = nil;
     self.file_06 = nil;
     self.bank_name = nil;
     self.signatureKey = nil;
@@ -39,9 +39,10 @@
     self.file_01 = nil;
 }
 
-- (id)initWithDictionary:(NSDictionary*)params {   self = [self init];
+- (id)initWithDictionary:(NSDictionary*)params {
+   self = [self init];
    if (self) {
-     self.id = [params valueForKey:MODEL_KEY_ID];
+     self.userId= [params valueForKey:MODEL_KEY_ID];
      self.file_06 = [params valueForKey:MODEL_KEY_FILE_06];
      self.bank_name = [params valueForKey:MODEL_KEY_BANK_NAME];
      self.signatureKey = [params valueForKey:MODEL_KEY_SIGNATUREKEY];
@@ -75,12 +76,13 @@
      self.settle_type = [params valueForKey:MODEL_KEY_SETTLE_TYPE];
      self.bank_type = [params valueForKey:MODEL_KEY_BANK_TYPE];
      self.file_01 = [params valueForKey:MODEL_KEY_FILE_01];
-   }   return self;
+   }
+   return self;
 }
 
 - (NSMutableDictionary *)toDictionary {
    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-   [dic setValue:self.id forKey:MODEL_KEY_ID];
+   [dic setValue:self.userId forKey:MODEL_KEY_ID];
    [dic setValue:self.file_06 forKey:MODEL_KEY_FILE_06];
    [dic setValue:self.bank_name forKey:MODEL_KEY_BANK_NAME];
    [dic setValue:self.signatureKey forKey:MODEL_KEY_SIGNATUREKEY];
@@ -115,6 +117,28 @@
    [dic setValue:self.bank_type forKey:MODEL_KEY_BANK_TYPE];
    [dic setValue:self.file_01 forKey:MODEL_KEY_FILE_01];
    return dic;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.userId forKey:@"id"];
+    [coder encodeObject:self.bank_account_name forKey:@"bank_account_name"];
+    [coder encodeObject:self.card_number forKey:@"card_number"];
+    [coder encodeObject:self.bank_account_certno forKey:@"bank_account_certno"];
+    [coder encodeObject:self.signatureKey forKey:@"signatureKey"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    if (self) {
+        self.userId = [coder decodeObjectForKey:@"id"];
+        self.bank_account_name = [coder decodeObjectForKey:@"bank_account_name"];
+        self.card_number = [coder decodeObjectForKey:@"card_number"];
+        self.bank_account_certno = [coder decodeObjectForKey:@"bank_account_certno"];
+        self.signatureKey = [coder decodeObjectForKey:@"signatureKey"];
+    }
+    return self;
 }
 
 @end

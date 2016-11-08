@@ -7,27 +7,28 @@
 //
 
 #import "QPHttpManager.h"
-
+#import "QPUserModel.h"
 @implementation QPHttpManager
 
 + (void)getQRcodeString:(NSString *)parentid
              Completion:(QPRequestSuccessHandler)handler
                 failure:(QPRequestFailureHandler)failhandler{
     
-    NSDictionary *dic = @{@"amount":@"10",
-                          @"merchno":@"WA16082911211",
-                          @"payType":@"2",
-                          @"certno":@"513029198703024837",
-                          @"account_name":@"叶精华",
-                          @"accountno":@"6225882005731226",
-//                         @"signature":@"C704F7D128812267F4675D5D016CA962",
-                          };
+    QPUserModel *userModel = [QPHttpManager getUserModel];
     
-    NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:dic];
-    
-    // 本处对所有非空参数进行Md5 加密 
-    NSString *sign = [NSString MD5:[NSString stringFromDic:dic andBaseString:@"123456789ZXCVBNMasdfgh"]];
-    [params setObject:sign forKey:@"signature"];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"10" forKey:@"amount"];
+    [params setValue:@"2" forKey:@"payType"];
+    [params setValue:[QPUtils getMer_code] forKey:@"merchno"];
+    [params setValue:userModel.bank_account_certno forKey:@"certno"];
+    [params setValue:userModel.bank_account_name forKey:@"account_name"];
+    [params setValue:userModel.card_number forKey:@"accountno"];
+     //  @"signature":@"C704F7D128812267F4675D5D016CA962",
+     // 本处对所有非空参数进行Md5 加密
+    if (userModel.signatureKey) {
+        NSString *sign = [NSString MD5:[NSString stringFromDic:params andBaseString:userModel.signatureKey]];
+        [params setObject:sign forKey:@"signature"];
+    }
     
     [QPHttpRequest POSTWithData:QP_OrderCP params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
@@ -72,21 +73,32 @@
     }];
 }
 
-+ (void)getMerinfo:(NSString *)parentid
-        Completion:(QPRequestSuccessHandler)handler
++ (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
            failure:(QPRequestFailureHandler)failhandler{
     
-    NSDictionary *dic = @{@"mer_code":@"WA16102016219529",
-                          @"token":@"f8a2eb521039921c5ed23d7ad479a668",
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
                           };
-    
     [QPHttpRequest POSTWithData:QP_GetMerInfo params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
+        handler ? handler(success) : nil;
+
     } failure:^(NSError *error) {
         
+        handler ? handler(error) : nil;
+
     }];
 }
 
++ (QPUserModel*)getUserModel{
+    
+    NSString *path = NSHomeDirectory();
+    NSString *userPath = [path stringByAppendingString:[QPUtils getMer_code]];
+    NSString *filePath = [userPath stringByAppendingPathComponent:@"merInfo.data"];
+    // 解档
+    NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    return merInfolist[0];
 
+}
 
 @end

@@ -37,7 +37,7 @@
 
 @interface QPUserModel : NSObject
 
-@property(nonatomic, retain)NSString *id;
+@property(nonatomic, retain)NSString *userId;
 @property(nonatomic, retain)NSString *file_06;
 @property(nonatomic, retain)NSString *bank_name;
 @property(nonatomic, retain)NSString *signatureKey;

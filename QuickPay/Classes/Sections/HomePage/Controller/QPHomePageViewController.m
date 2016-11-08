@@ -294,15 +294,6 @@
     } failure:^(NSError *error) {
         
     }];
-    
-    
-    [QPHttpManager getMerinfo:@"" Completion:^(id responseData) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
-    
 }
 
 

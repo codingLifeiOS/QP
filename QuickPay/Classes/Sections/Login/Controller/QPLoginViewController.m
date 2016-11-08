@@ -11,6 +11,7 @@
 #import "QPHttpManager.h"
 #import "TabBarController.h"
 #import "AppDelegate.h"
+#import "QPUserModel.h"
 @interface QPLoginViewController ()<QPLoginViewDelegate>
 @end
 
@@ -37,12 +38,12 @@
         if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
             [[QPHUDManager sharedInstance] showTextOnly:responseData[@"resp_msg"]];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                delegate.window.rootViewController = [[TabBarController alloc]init];
-            });
-            
+            [[NSUserDefaults standardUserDefaults] setObject:responseData[@"mer_code"] forKey:@"mer_code"];
+            [[NSUserDefaults standardUserDefaults] setObject:responseData[@"token"] forKey:@"token"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            // 登录成功 请求商户详情保存到本地
+            [self getMerInfo];
+
         } else {
             [[QPHUDManager sharedInstance] showTextOnly:responseData[@"resp_msg"]];
         }
@@ -55,4 +56,27 @@
     }];
 }
 
+- (void)getMerInfo{
+
+   [QPHttpManager getMerinfoCompletion:^(id responseData) {
+       
+      QPUserModel *userModel = [[QPUserModel alloc]initWithDictionary:responseData];
+       NSString *path = NSHomeDirectory();
+       NSString *userPath = [path stringByAppendingString:[QPUtils getMer_code]];
+       NSString *filePath = [userPath stringByAppendingPathComponent:@"merInfo.data"];
+       NSMutableArray *merInfoList = [[NSMutableArray alloc]init];
+       [merInfoList addObject:userModel];
+       // 归档
+       [NSKeyedArchiver archiveRootObject: merInfoList toFile:filePath];
+       
+       dispatch_async(dispatch_get_main_queue(), ^{
+           
+           AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+           delegate.window.rootViewController = [[TabBarController alloc]init];
+       });
+
+   } failure:^(NSError *error) {
+       
+   }];
+}
 @end

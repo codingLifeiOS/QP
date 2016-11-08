@@ -47,13 +47,11 @@
 
 /**
  *  获取商户基本信息接口
- *  @param parentid 父级部门id
  *
  *  @param handler 完成后的回调
  */
 
-+ (void)getMerinfo:(NSString *)parentid
-        Completion:(QPRequestSuccessHandler)handler
++ (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
            failure:(QPRequestFailureHandler)failhandler;
 
 
