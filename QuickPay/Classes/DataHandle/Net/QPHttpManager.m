@@ -12,9 +12,9 @@
 @implementation QPHttpManager
 
 + (void)getQRcodeString:(NSString *)amount
-                   PayTye:(NSString *)type
-               Completion:(QPRequestSuccessHandler)handler
-                  failure:(QPRequestFailureHandler)failhandler{
+                 PayTye:(NSString *)type
+             Completion:(QPRequestSuccessHandler)handler
+                failure:(QPRequestFailureHandler)failhandler{
     
     QPUserModel *userModel = [QPHttpManager getUserModel];
     
@@ -25,8 +25,8 @@
     [params setValue:userModel.bank_account_certno forKey:@"certno"];
     [params setValue:userModel.bank_account_name forKey:@"account_name"];
     [params setValue:userModel.card_number forKey:@"accountno"];
-     //  @"signature":@"C704F7D128812267F4675D5D016CA962",
-     // 本处对所有非空参数进行Md5 加密
+    //  @"signature":@"C704F7D128812267F4675D5D016CA962",
+    // 本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
         NSString *sign = [NSString MD5:[NSString stringFromDic:params andBaseString:userModel.signatureKey]];
         [params setObject:sign forKey:@"signature"];
@@ -68,9 +68,9 @@
 }
 
 + (void)loginWithUsename:(NSString *)phoneStr
-                  Password:(NSString *)password
-                Completion:(QPRequestSuccessHandler)handler
-                   failure:(QPRequestFailureHandler)failhandler{
+                Password:(NSString *)password
+              Completion:(QPRequestSuccessHandler)handler
+                 failure:(QPRequestFailureHandler)failhandler{
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:phoneStr forKey:@"username"];
@@ -79,15 +79,15 @@
     [QPHttpRequest POSTWithData:QP_Login params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
         handler ? handler(success) : nil;
-
+        
     } failure:^(NSError *error) {
         handler ? handler(error) : nil;
-
+        
     }];
 }
 
 + (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
-           failure:(QPRequestFailureHandler)failhandler{
+                     failure:(QPRequestFailureHandler)failhandler{
     
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
@@ -95,11 +95,11 @@
     [QPHttpRequest POSTWithData:QP_GetMerInfo params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
         handler ? handler(success) : nil;
-
+        
     } failure:^(NSError *error) {
         
         handler ? handler(error) : nil;
-
+        
     }];
 }
 
@@ -107,9 +107,9 @@
     
     NSString *path = [QPFileLocationManager getUserDirectory];
     NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
-     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return merInfolist[0];
-
+    
 }
 
 @end
