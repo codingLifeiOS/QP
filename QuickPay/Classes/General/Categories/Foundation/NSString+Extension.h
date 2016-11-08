@@ -103,9 +103,12 @@ typedef NS_ENUM(NSUInteger,MISFileType) {
 
 
 + (BOOL)validateMobile:(NSString *)mobile;
-
 - (MISFileType)fileType;
 
 + (NSString *)convertFileSize:(long long)size;
+
+// 本项目参数拼接 用于MD5加密
++ (NSString *)stringFromDic: (NSDictionary *)dic andBaseString: (NSString *)baseString;
+
 
 @end

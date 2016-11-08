@@ -20,11 +20,16 @@
                           @"certno":@"513029198703024837",
                           @"account_name":@"叶精华",
                           @"accountno":@"6225882005731226",
-                          @"signature":@"C704F7D128812267F4675D5D016CA962",
+//                         @"signature":@"C704F7D128812267F4675D5D016CA962",
                           };
     
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]initWithDictionary:dic];
     
-    [QPHttpRequest POSTWithData:QP_OrderCP params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+    // 本处对所有非空参数进行Md5 加密 
+    NSString *sign = [NSString MD5:[NSString stringFromDic:dic andBaseString:@"9AE81687250E171465F31F2533F3041D"]];
+    [params setObject:sign forKey:@"signature"];
+    
+    [QPHttpRequest POSTWithData:QP_OrderCP params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
     } failure:^(NSError *error) {
         

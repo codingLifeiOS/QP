@@ -382,4 +382,29 @@
     }
 }
 
++ (NSString *)stringFromDic: (NSDictionary *)dic andBaseString: (NSString *)baseString
+{
+//   NSMutableString *stringM = [NSMutableString stringWithString:[baseString lowercaseString]];
+    NSMutableString *stringM = [NSMutableString stringWithString:baseString ];
+    NSArray *keys = dic.keyEnumerator.allObjects;
+    keys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSLiteralSearch];
+    }];
+    for (int i = 0; i < keys.count; i++) {
+        NSString *key = keys[i];
+        NSString *myKey = [key lowercaseString];
+        NSString *myValue = [dic[key] lowercaseString];
+        
+        if (![myValue isEqualToString:@""]) {
+            if (i == 0) {
+                [stringM appendString:[NSString stringWithFormat:@"%@=%@", myKey, myValue]];
+            } else {
+                [stringM appendString:[NSString stringWithFormat:@"&%@=%@", myKey, myValue]];
+            }
+        }
+        
+    }
+    return stringM;
+}
+
 @end
