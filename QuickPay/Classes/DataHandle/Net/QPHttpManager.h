@@ -11,24 +11,23 @@
 @interface QPHttpManager : NSObject
 /**
  *  获取要生成订单的字符串
- *  @param parentid 父级部门id
- *
+ *  @param amount 金额 精确到分 最多到十万位
+ *  @param type   支付类型  微信 :2 ;
  *  @param handler 完成后的回调
  */
-+ (void)getQRcodeString:(NSString *)parentid
++ (void)getQRcodeString:(NSString *)amount
+                 PayTye:(NSString *)type
             Completion:(QPRequestSuccessHandler)handler
                failure:(QPRequestFailureHandler)failhandler;
 
-
-
 /**
  *  交易查询接口
- *  @param parentid 父级部门id
+ *  @param orderId 订单ID
  *
  *  @param handler 完成后的回调
  */
 
-+ (void)getOrderDetail:(NSString *)parentid
++ (void)getOrderDetail:(NSString *)orderId
              Completion:(QPRequestSuccessHandler)handler
                 failure:(QPRequestFailureHandler)failhandler;
 

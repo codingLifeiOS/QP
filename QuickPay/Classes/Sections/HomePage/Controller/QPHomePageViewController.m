@@ -283,17 +283,17 @@
 #pragma mark - 接口请求
 - (void)test{
     
-    [QPHttpManager getOrderDetail:@"" Completion:^(id responseData) {
-        
-    } failure:^(NSError *error) {
-        
-    } ];
-    
-    [QPHttpManager getQRcodeString:@"" Completion:^(id responseData) {
+    [QPHttpManager getQRcodeString:@"0.01" PayTye:@"2" Completion:^(id responseData) {
         
     } failure:^(NSError *error) {
         
     }];
+    
+    [QPHttpManager getOrderDetail:@"EWA16081822481v16091321591" Completion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+    } ];
 }
 
 
