@@ -12,6 +12,7 @@
 #import "TabBarController.h"
 #import "AppDelegate.h"
 #import "QPUserModel.h"
+#import "QPFileLocationManager.h"
 @interface QPLoginViewController ()<QPLoginViewDelegate>
 @end
 
@@ -61,14 +62,14 @@
    [QPHttpManager getMerinfoCompletion:^(id responseData) {
        
       QPUserModel *userModel = [[QPUserModel alloc]initWithDictionary:responseData];
-       NSString *path = NSHomeDirectory();
-       NSString *userPath = [path stringByAppendingString:[QPUtils getMer_code]];
-       NSString *filePath = [userPath stringByAppendingPathComponent:@"merInfo.data"];
+       NSString *path = [QPFileLocationManager getUserDirectory];
+       NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
        NSMutableArray *merInfoList = [[NSMutableArray alloc]init];
        [merInfoList addObject:userModel];
        // 归档
        [NSKeyedArchiver archiveRootObject: merInfoList toFile:filePath];
-       
+       BOOL flag =  [NSKeyedArchiver archiveRootObject: merInfoList toFile:filePath];
+       NSLog(@"是否归档成功  %@",flag? @"YES":@"NO");
        dispatch_async(dispatch_get_main_queue(), ^{
            
            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;

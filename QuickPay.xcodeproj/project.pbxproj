@@ -271,6 +271,7 @@
 		1CF302131DBF617A00935113 /* QPMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF302121DBF617A00935113 /* QPMemberViewController.m */; };
 		1CF302161DBF61A900935113 /* QPFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF302151DBF61A900935113 /* QPFindViewController.m */; };
 		1CF302191DBF61BB00935113 /* QPNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF302181DBF61BB00935113 /* QPNewsViewController.m */; };
+		1CFB9F1F1DD294FE001E54D7 /* QPFileLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFB9F1E1DD294FE001E54D7 /* QPFileLocationManager.m */; };
 		CCD303C6005C1B51FFD6362F /* libPods-QuickPay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ED1CF64FB6CEE64D25AB241 /* libPods-QuickPay.a */; };
 /* End PBXBuildFile section */
 
@@ -686,6 +687,8 @@
 		1CF302151DBF61A900935113 /* QPFindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPFindViewController.m; sourceTree = "<group>"; };
 		1CF302171DBF61BB00935113 /* QPNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPNewsViewController.h; sourceTree = "<group>"; };
 		1CF302181DBF61BB00935113 /* QPNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPNewsViewController.m; sourceTree = "<group>"; };
+		1CFB9F1D1DD294FE001E54D7 /* QPFileLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPFileLocationManager.h; sourceTree = "<group>"; };
+		1CFB9F1E1DD294FE001E54D7 /* QPFileLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPFileLocationManager.m; sourceTree = "<group>"; };
 		904759812F287301BA5DD837 /* Pods-QuickPay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPay.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuickPay/Pods-QuickPay.release.xcconfig"; sourceTree = "<group>"; };
 		EA81C2F9B900ABB32398270F /* Pods-QuickPay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickPay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuickPay/Pods-QuickPay.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1143,6 +1146,8 @@
 				1C49B1F81DBA1D4E00CF3DE1 /* QPUtils.h */,
 				1C49B1F91DBA1D4E00CF3DE1 /* QPUtils.m */,
 				1C49B1FA1DBA1D4E00CF3DE1 /* SynthesizeSingleton.h */,
+				1CFB9F1D1DD294FE001E54D7 /* QPFileLocationManager.h */,
+				1CFB9F1E1DD294FE001E54D7 /* QPFileLocationManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2061,6 +2066,7 @@
 				1C49B2A91DBA1D4F00CF3DE1 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				1C49B2921DBA1D4F00CF3DE1 /* UIView+LayoutMethods.m in Sources */,
 				1C49B2BE1DBA1D4F00CF3DE1 /* View+MASAdditions.m in Sources */,
+				1CFB9F1F1DD294FE001E54D7 /* QPFileLocationManager.m in Sources */,
 				1C49B2CE1DBA22B400CF3DE1 /* TabBarController.m in Sources */,
 				195D44C61DC9806700EA3CAD /* CLShareButton.m in Sources */,
 				1C49B29A1DBA1D4F00CF3DE1 /* QPUtils.m in Sources */,

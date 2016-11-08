@@ -1,3 +1,12 @@
+//
+//  QPUserModel.m
+//  QuickPay
+//
+//  Created by Nie on 16/9/22.
+//  Copyright © 2016年 58. All rights reserved.
+//
+
+
 #import "QPUserModel.h"
 
 @implementation QPUserModel
@@ -121,7 +130,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeObject:self.userId forKey:@"id"];
+    [coder encodeObject:self.userId forKey:@"userId"];
     [coder encodeObject:self.bank_account_name forKey:@"bank_account_name"];
     [coder encodeObject:self.card_number forKey:@"card_number"];
     [coder encodeObject:self.bank_account_certno forKey:@"bank_account_certno"];
@@ -132,7 +141,7 @@
 {
     self = [super init];
     if (self) {
-        self.userId = [coder decodeObjectForKey:@"id"];
+        self.userId = [coder decodeObjectForKey:@"userId"];
         self.bank_account_name = [coder decodeObjectForKey:@"bank_account_name"];
         self.card_number = [coder decodeObjectForKey:@"card_number"];
         self.bank_account_certno = [coder decodeObjectForKey:@"bank_account_certno"];

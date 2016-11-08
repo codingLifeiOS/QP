@@ -8,6 +8,7 @@
 
 #import "QPHttpManager.h"
 #import "QPUserModel.h"
+#import "QPFileLocationManager.h"
 @implementation QPHttpManager
 
 + (void)getQRcodeString:(NSString *)parentid
@@ -92,11 +93,9 @@
 
 + (QPUserModel*)getUserModel{
     
-    NSString *path = NSHomeDirectory();
-    NSString *userPath = [path stringByAppendingString:[QPUtils getMer_code]];
-    NSString *filePath = [userPath stringByAppendingPathComponent:@"merInfo.data"];
-    // 解档
-    NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    NSString *path = [QPFileLocationManager getUserDirectory];
+    NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
+     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return merInfolist[0];
 
 }

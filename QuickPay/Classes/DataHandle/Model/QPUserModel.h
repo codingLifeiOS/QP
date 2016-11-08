@@ -1,3 +1,11 @@
+//
+//  QPUserModel.h
+//  QuickPay
+//
+//  Created by Nie on 16/9/22.
+//  Copyright © 2016年 58. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 
 #define MODEL_KEY_ID  @"id"
@@ -37,42 +45,42 @@
 
 @interface QPUserModel : NSObject
 
-@property(nonatomic, retain)NSString *userId;
-@property(nonatomic, retain)NSString *file_06;
-@property(nonatomic, retain)NSString *bank_name;
-@property(nonatomic, retain)NSString *signatureKey;
-@property(nonatomic, retain)NSString *arena_address;
-@property(nonatomic, retain)NSString *arena_password;
-@property(nonatomic, retain)NSString *file_05;
-@property(nonatomic, retain)NSString *bank_account_certno;
-@property(nonatomic, retain)NSString *single_fee;
-@property(nonatomic, retain)NSString *bank_account_name;
-@property(nonatomic, retain)NSString *create_date;
-@property(nonatomic, retain)NSString *file_04;
-@property(nonatomic, retain)NSString *contacts;
-@property(nonatomic, retain)NSString *arena_name;
-@property(nonatomic, retain)NSString *bank_account;
-@property(nonatomic, retain)NSString *rate_t1;
-@property(nonatomic, retain)NSString *file_03;
-@property(nonatomic, retain)NSString *account_status;
-@property(nonatomic, retain)NSString *mobile;
-@property(nonatomic, retain)NSString *trading_time;
-@property(nonatomic, retain)NSString *arena_code;
-@property(nonatomic, retain)NSString *file_08;
-@property(nonatomic, retain)NSString *card_number;
-@property(nonatomic, retain)NSString *mid;
-@property(nonatomic, retain)NSString *modify_date;
-@property(nonatomic, retain)NSString *arena_phone;
-@property(nonatomic, retain)NSString *file_02;
-@property(nonatomic, retain)NSString *file_07;
-@property(nonatomic, retain)NSString *bankno;
-@property(nonatomic, retain)NSString *weixin_open_id;
-@property(nonatomic, retain)NSString *rate;
-@property(nonatomic, retain)NSString *settle_type;
-@property(nonatomic, retain)NSString *bank_type;
-@property(nonatomic, retain)NSString *file_01;
+@property(nonatomic, copy)NSString *userId;
+@property(nonatomic, copy)NSString *file_06;
+@property(nonatomic, copy)NSString *bank_name;
+@property(nonatomic, copy)NSString *signatureKey;
+@property(nonatomic, copy)NSString *arena_address;
+@property(nonatomic, copy)NSString *arena_password;
+@property(nonatomic, copy)NSString *file_05;
+@property(nonatomic, copy)NSString *bank_account_certno;
+@property(nonatomic, copy)NSString *single_fee;
+@property(nonatomic, copy)NSString *bank_account_name;
+@property(nonatomic, copy)NSString *create_date;
+@property(nonatomic, copy)NSString *file_04;
+@property(nonatomic, copy)NSString *contacts;
+@property(nonatomic, copy)NSString *arena_name;
+@property(nonatomic, copy)NSString *bank_account;
+@property(nonatomic, copy)NSString *rate_t1;
+@property(nonatomic, copy)NSString *file_03;
+@property(nonatomic, copy)NSString *account_status;
+@property(nonatomic, copy)NSString *mobile;
+@property(nonatomic, copy)NSString *trading_time;
+@property(nonatomic, copy)NSString *arena_code;
+@property(nonatomic, copy)NSString *file_08;
+@property(nonatomic, copy)NSString *card_number;
+@property(nonatomic, copy)NSString *mid;
+@property(nonatomic, copy)NSString *modify_date;
+@property(nonatomic, copy)NSString *arena_phone;
+@property(nonatomic, copy)NSString *file_02;
+@property(nonatomic, copy)NSString *file_07;
+@property(nonatomic, copy)NSString *bankno;
+@property(nonatomic, copy)NSString *weixin_open_id;
+@property(nonatomic, copy)NSString *rate;
+@property(nonatomic, copy)NSString *settle_type;
+@property(nonatomic, copy)NSString *bank_type;
+@property(nonatomic, copy)NSString *file_01;
 
-- (id)initWithDictionary:(NSDictionary*)params;
+- (instancetype)initWithDictionary:(NSDictionary*)params;
 - (NSMutableDictionary *)toDictionary;
 
 @end
