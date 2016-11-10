@@ -28,14 +28,19 @@
     //  @"signature":@"C704F7D128812267F4675D5D016CA962",
     // 本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
+        
         NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
         NSLog(@"签名加密前%@",signbefore);
+        
 //        NSString *UTF8str = [signbefore stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
 //        NSLog(@"签名加密前UTF8编码%@",UTF8str);
+//
+//        NSStringEncoding gbkEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+//        NSString *gbkstr = [[NSString alloc] initWithData:[NSString dataForHexString:UTF8str] encoding:gbkEncoding];
+//        NSLog(@"签名加密前gbk编码%@",gbkstr);
+        
 //        NSString *ISO88591str =  [NSString stringWithFormat:@"%s",[NSString UnicodeToISO88591:UTF8str]];
-//        
-//        NSLog(@"签名加密前ISO88591编码%@",ISO88591str);
+///        NSLog(@"签名加密前ISO88591编码%@",ISO88591str);
 
         NSString *sign = [NSString MD5:signbefore];
         NSLog(@"签名加密后%@",sign);

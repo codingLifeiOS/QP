@@ -113,4 +113,5 @@ typedef NS_ENUM(NSUInteger,MISFileType) {
 // 本项目参数编码 转码为中文ISO88591
 + (const char *)UnicodeToISO88591:(NSString *)src;
 
++ (NSData*)dataForHexString:(NSString*)hexString;
 @end
