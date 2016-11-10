@@ -30,9 +30,14 @@
     if (userModel.signatureKey) {
         NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
         NSLog(@"签名加密前%@",signbefore);
-        NSString *UTF8str = [signbefore stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"签名加密前UTF8编码%@",UTF8str);
-        NSString *sign = [NSString MD5:UTF8str];
+//        NSString *UTF8str = [signbefore stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+//        NSLog(@"签名加密前UTF8编码%@",UTF8str);
+//        NSString *ISO88591str =  [NSString stringWithFormat:@"%s",[NSString UnicodeToISO88591:UTF8str]];
+//        
+//        NSLog(@"签名加密前ISO88591编码%@",ISO88591str);
+
+        NSString *sign = [NSString MD5:signbefore];
         NSLog(@"签名加密后%@",sign);
         [params setObject:sign forKey:@"signature"];
     }

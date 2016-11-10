@@ -110,5 +110,7 @@ typedef NS_ENUM(NSUInteger,MISFileType) {
 // 本项目参数拼接 用于MD5加密
 + (NSString *)stringFromDic: (NSDictionary *)dic andBaseString: (NSString *)baseString;
 
+// 本项目参数编码 转码为中文ISO88591
++ (const char *)UnicodeToISO88591:(NSString *)src;
 
 @end
