@@ -403,7 +403,7 @@
         }
         
     }
-    [stringM appendString:baseString];
+    [stringM appendString:[NSString stringWithFormat:@"&%@",baseString]];
     return stringM;
 }
 
