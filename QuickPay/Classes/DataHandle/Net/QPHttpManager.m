@@ -28,8 +28,10 @@
     //  @"signature":@"C704F7D128812267F4675D5D016CA962",
     // 本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
-        NSString *sign = [NSString MD5:[NSString stringFromDic:params andBaseString:userModel.signatureKey]];
-        NSLog(@"经MD5排序后的签名 %@",sign);
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
+        NSLog(@"签名加密前%@",signbefore);
+        NSString *sign = [NSString MD5:signbefore];
+        NSLog(@"签名加密后%@",sign);
         [params setObject:sign forKey:@"signature"];
     }
     
@@ -55,7 +57,8 @@
     [params setValue:[QPUtils getMer_code] forKey:@"merchno"];
     // 本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
-        NSString *sign = [NSString MD5:[NSString stringFromDic:params andBaseString:userModel.signatureKey]];
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
+        NSString *sign = [NSString MD5:signbefore];
         [params setObject:sign forKey:@"signature"];
     }
     
@@ -105,6 +108,7 @@
 }
 
 + (QPUserModel*)getUserModel{
+    
     NSString *path = [QPFileLocationManager getUserDirectory];
     NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
