@@ -1202,12 +1202,12 @@
 		1C49B2071DBA1D4E00CF3DE1 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				1C49B2171DBA1D4E00CF3DE1 /* PersonalCenter */,
 				1CF302031DBF607500935113 /* Member */,
 				1CF301FE1DBF604100935113 /* Find */,
 				1CF301F91DBF5E9700935113 /* News */,
 				1C49B20D1DBA1D4E00CF3DE1 /* HomePage */,
 				1C49B2121DBA1D4E00CF3DE1 /* Login */,
-				1C49B2171DBA1D4E00CF3DE1 /* PersonalCenter */,
 			);
 			path = Sections;
 			sourceTree = "<group>";

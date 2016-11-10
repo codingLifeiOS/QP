@@ -3,7 +3,7 @@
 //  QuickPay
 //
 //  Created by Nie on 16/9/22.
-//  Copyright © 2016年 58. All rights reserved.
+//  Copyright © 2016年 Nie. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

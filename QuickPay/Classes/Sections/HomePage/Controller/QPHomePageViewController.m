@@ -61,9 +61,15 @@
 }
 
 - (void)configureNavigaBar{
+    
+    UIView *Naview = [[UIView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, 64)];
+    Naview.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:Naview];
+
+    
     UIImageView *imageView = [[UIImageView alloc]init];
     imageView.image = [UIImage imageNamed:@"logo.png"];
-    [self.view addSubview:imageView];
+    [Naview addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(116/2));
         make.centerX.equalTo(self.view.mas_centerX_mas);
@@ -74,7 +80,7 @@
     UIButton *callBtn = [[UIButton alloc]init];
     [callBtn setImage:[UIImage imageNamed:@"tell"] forState:UIControlStateNormal];
     [callBtn addTarget:self action:@selector(callTelephone) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:callBtn];
+    [Naview addSubview:callBtn];
     
     [callBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(38/2));
@@ -90,7 +96,7 @@
     adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:132 offsetY:0];
     adView.tag = 10010;
     adView.delegate = self;
-    adView.frame = CGRectMake(0, 64, SCREEN_WIDTH , 132);
+    adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 132);
     [self.view addSubview:adView];
     
 }

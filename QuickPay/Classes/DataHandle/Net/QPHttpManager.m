@@ -29,6 +29,7 @@
     // 本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
         NSString *sign = [NSString MD5:[NSString stringFromDic:params andBaseString:userModel.signatureKey]];
+        NSLog(@"经MD5排序后的签名 %@",sign);
         [params setObject:sign forKey:@"signature"];
     }
     
@@ -104,7 +105,6 @@
 }
 
 + (QPUserModel*)getUserModel{
-    
     NSString *path = [QPFileLocationManager getUserDirectory];
     NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];

@@ -19,8 +19,8 @@
 #define K_UM_AppKey      @"5816af6f7666130fdd0004cb"
 
 /*sina*/
-#define K_Sina_AppKey    @"3921700954"
-#define K_Sina_AppSecret @"04b48b094faeb16683c32669824ebdad"
+#define K_Sina_AppKey    @"3647300542"
+#define K_Sina_AppSecret @"609a2b524d481079b80ef2fa0be01330"
 /*QQ*/
 #define K_QQ_AppId       @"1105718763"
 #define K_QQ_AppKey      @"2jxrGBbWwD2qXExG"
