@@ -10,6 +10,8 @@
 #import "QPStoreContractInformationTableViewCell.h"
 #import "QPAgreementTermsTableViewCell.h"
 static NSString *const cellIdentifier = @"QPStoreContractInformationTableViewCell";
+static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
+
 
 @interface QPStoreContractInformationViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *homeTableView;
@@ -37,7 +39,8 @@ static NSString *const cellIdentifier = @"QPStoreContractInformationTableViewCel
     self.homeTableView.delegate = self;
     [self.homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.homeTableView.showsVerticalScrollIndicator = NO;
-    [ self.homeTableView registerClass:[QPStoreContractInformationTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    [self.homeTableView registerClass:[QPStoreContractInformationTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    [self.homeTableView registerClass:[QPAgreementTermsTableViewCell class] forCellReuseIdentifier:cellIdentifier1];
     [self.view addSubview:self.homeTableView];
     
     self.typelabArry = @[@"微信收款",@"支付宝收款",@"京东收款",@"QQ钱包"];
@@ -53,8 +56,7 @@ static NSString *const cellIdentifier = @"QPStoreContractInformationTableViewCel
 {
     if (section==0) {
         return 4;
-    }else
-    {
+    } else {
         
         return  1;
     }
@@ -76,8 +78,7 @@ static NSString *const cellIdentifier = @"QPStoreContractInformationTableViewCel
             
         case 1:
         {
-            QPAgreementTermsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-            cell.contentView.backgroundColor = [UIColor clearColor];
+            QPAgreementTermsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
             return cell;
         }
             break;
