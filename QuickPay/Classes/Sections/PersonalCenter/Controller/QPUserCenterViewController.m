@@ -17,10 +17,12 @@
 #import "QPMyBankCardViewController.h"
 #import "QPLoginViewController.h"
 #import "AppDelegate.h"
+#import "QPSetUpViewController.h"
+#import "QPStoreContractInformationViewController.h"
 
 static NSString *const cellIdentifier = @"QPUserCenterViewCell";
 static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
-@interface QPUserCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface QPUserCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 @property (nonatomic,strong) NSMutableArray * groups;
 @property (nonatomic,strong) UITableView *homeTableView;
 
@@ -33,7 +35,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     [super viewDidLoad];
     [self loadDataSource];
     [self configureTableView];
-    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(setbtnclick)];
+    //    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(setbtnclick)];
     
 }
 
@@ -44,7 +46,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     self.homeTableView.dataSource = self;
     self.homeTableView.backgroundColor = UIColorFromHex(0xf8f8f8);
     self.homeTableView.delegate = self;
-    [self.homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    //    [self.homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.homeTableView.showsVerticalScrollIndicator = NO;
     [self.homeTableView registerClass:[QPUserCenterViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.homeTableView registerClass:[QPUserOneTableViewCell class] forCellReuseIdentifier:cellIdentifier1];
@@ -74,6 +76,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     if (indexPath.section == 0) {
         QPUserCenterViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         XDGroupItem *group = self.groups[indexPath.section];
         XDSettingItem *item = group.items[indexPath.row];
         cell.textLabel.text = item.title;
@@ -87,6 +90,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     } else {
         QPUserOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         XDGroupItem *group = self.groups[indexPath.section];
         XDSettingItem *item = group.items[indexPath.row];
         cell.textLabel.text = item.title;
@@ -146,6 +150,8 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
                 [self.navigationController pushViewController:QPcardVC animated:YES];
                 NSLog(@"我的银行卡");
             } else if (indexPath.row == 1) {
+                QPStoreContractInformationViewController *QPstoreinfoVC = [[QPStoreContractInformationViewController alloc]init];
+                [self.navigationController pushViewController:QPstoreinfoVC animated:YES];
                 NSLog(@"店铺签的结算");
             }
             break;
@@ -155,16 +161,24 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
                 [self.navigationController pushViewController:QPbuscooVC animated:YES];
                 NSLog(@"商务合作");
             } else if (indexPath.row == 1){
-                NSLog(@"用户协议");
+                UIAlertView *phoneAlert = [[UIAlertView alloc]initWithTitle:@"15701189832" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
+                phoneAlert.tag = 80;
+                [phoneAlert show];
+                NSLog(@"客户中心");
             }
             break;
         case 3:
-        {
-            QPAboutUsViewController *QPaboutusVC = [[QPAboutUsViewController alloc]init];
-            [self.navigationController pushViewController:QPaboutusVC animated:YES];
-            NSLog(@"关于我们");
-        }
+            if (indexPath.row == 0) {
+                QPAboutUsViewController *QPaboutusVC = [[QPAboutUsViewController alloc]init];
+                [self.navigationController pushViewController:QPaboutusVC animated:YES];
+                NSLog(@"关于我们");
+            } else if (indexPath.row == 1) {
+                QPSetUpViewController *QPsetupVC = [[QPSetUpViewController alloc]init];
+                [self.navigationController pushViewController:QPsetupVC animated:YES];
+                NSLog(@"设置");
+            }
             break;
+            
         case 4:
             NSLog(@"退出登录");
             break;
@@ -173,23 +187,32 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     }
 }
 
+#pragma mark -UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 80){
+        if (buttonIndex == 1) {
+            if(![[UIApplication sharedApplication]openURL:[NSURL URLWithString:QP_TEL]] ){
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"设备不支持" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil] ;
+                [alert show] ;
+            }
+        }
+    }
+}
+
 - (void)exitRegister {
     [LGLAlertView showAlertViewWith:self title:@"温馨提示" message:@"确定退出" CallBackBlock:^(NSInteger btnIndex) {
         if (btnIndex == 0) {
-
+            
         } else {
             AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-
+            
             QPLoginViewController *loginVC = [QPLoginViewController new];
             delegate.window.rootViewController = loginVC;
         }
     } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil,nil];
 }
 
-- (void)setbtnclick{
-    
-    NSLog(@"点击设置");
-}
 -(NSMutableArray *)groups {
     if (!_groups) {
         _groups = [[NSMutableArray alloc]init];
@@ -208,32 +231,33 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 - (void)setGroupsOne {
     
     XDGroupItem *group = [[XDGroupItem alloc]init];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:@"凄清肆水丶" :@"hxp"];
+    XDSettingItem *item = [XDSettingItem itemWithtitle:@"凄清肆水丶" :@"geren_touxiang"];
     group.items = @[item];
     [self.groups addObject:group];
 }
 - (void)setGroupsTwo {
     
     XDGroupItem *group = [[XDGroupItem alloc]init];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:@"我的银行卡" :@"pir_2"];
+    XDSettingItem *item = [XDSettingItem itemWithtitle:@"我的银行卡" :@"Credit-Card"];
     //    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"更换银行卡" :@"pir_3"];
-    XDSettingItem *itemTwo = [XDSettingItem itemWithtitle:@"店铺签的结算" :@"pir_4"];
+    XDSettingItem *itemTwo = [XDSettingItem itemWithtitle:@"店铺签的结算" :@"Paper-Dollars-1"];
     group.items = @[item,itemTwo];
     [self.groups addObject:group];
 }
 - (void)setGroupsThree {
     
     XDGroupItem *group = [[XDGroupItem alloc]init];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:@"商务合作" :@"pir_5"];
-    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"用户协议" :@"pir_6"];
+    XDSettingItem *item = [XDSettingItem itemWithtitle:@"商务合作" :@"Users-2"];
+    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"客服中心" :@"kefu"];
     group.items = @[item,itemOne];
     [self.groups addObject:group];
 }
 - (void)setGroupsFour {
     
     XDGroupItem *group = [[XDGroupItem alloc]init];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:@"关于我们" :@"pir_7"];
-    group.items = @[item];
+    XDSettingItem *item = [XDSettingItem itemWithtitle:@"关于我们" :@"Info"];
+    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"设    置" :@"shezhi"];
+    group.items = @[item,itemOne];
     [self.groups addObject:group];
 }
 
