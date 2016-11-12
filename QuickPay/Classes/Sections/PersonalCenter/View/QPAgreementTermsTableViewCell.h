@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface QPAgreementTermsTableViewCell : UITableViewCell
-
+@property (nonatomic,strong)UILabel *agreementermslab;
 @end

@@ -9,6 +9,7 @@
 #import "QPStoreContractInformationViewController.h"
 #import "QPStoreContractInformationTableViewCell.h"
 #import "QPAgreementTermsTableViewCell.h"
+#import "QPAgreementAndTermsViewController.h"
 static NSString *const cellIdentifier = @"QPStoreContractInformationTableViewCell";
 static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 
@@ -18,7 +19,6 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 @property(nonatomic,strong)NSArray *typelabArry;
 @property(nonatomic,strong)NSArray *ratelabArry;
 @property(nonatomic,strong)NSArray *typeimageArry;
-
 @end
 
 @implementation QPStoreContractInformationViewController
@@ -68,6 +68,7 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
         case 0:
         {
             QPStoreContractInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.contentView.backgroundColor = [UIColor clearColor];
             cell.typeLab.text = self.typelabArry[indexPath.row];
             cell.rateLab.text = self.ratelabArry[indexPath.row];
@@ -87,24 +88,40 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     }
     
     return nil;
-
+    
+}
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section== 1) {
+        QPAgreementAndTermsViewController *QPagreetermVC = [[QPAgreementAndTermsViewController alloc]init];
+        [self.navigationController pushViewController:QPagreetermVC animated:YES];
+        NSLog(@"协议与条款");
+    }
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc]initWithFrame:(CGRectMake(0, 0, SCREEN_WIDTH, 30))];
-    view.backgroundColor = UIColorFromHex(0xf8f8f8);
-    UILabel *rateLab = [[UILabel alloc]initWithFrame:CGRectMake(25, 0, 120, 30)];
-    rateLab.text = @"费率";
-    rateLab.font=[UIFont systemFontOfSize:14];
-    rateLab.textColor = [UIColor blackColor];
-    [view addSubview:rateLab];
+    if (section == 0) {
+        UIView *view = [[UIView alloc]initWithFrame:(CGRectMake(0, 0, SCREEN_WIDTH, 30))];
+        view.backgroundColor = UIColorFromHex(0xf8f8f8);
+        UILabel *rateLab = [[UILabel alloc]initWithFrame:CGRectMake(25, 0, 120, 30)];
+        rateLab.text = @"费率";
+        rateLab.font=[UIFont systemFontOfSize:14];
+        rateLab.textColor = [UIColor blackColor];
+        [view addSubview:rateLab];
         return view;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    if (section == 0) {
+        return 30.0;
+    } else {
+        return 10.0;
+    }
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,7 +129,5 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     return 60;
     
 }
-
-
 
 @end

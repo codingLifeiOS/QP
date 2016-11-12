@@ -53,6 +53,33 @@
 + (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
            failure:(QPRequestFailureHandler)failhandler;
 
+/**
+ *  获取绑定银行卡信息接口
+ *
+ *  @param handler 完成后的回调
+ */
+
++ (void)getBindBankCcardCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler;
+
+/**
+ *  获取到账记录信息接口
+ *
+ *  @param handler 完成后的回调
+ */
+
++ (void)getSettlementRecordsCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler;
+
+/**
+ *  获取交易流水信息接口
+ *
+ *  @param handler 完成后的回调
+ */
+
++ (void)getOrderRecordsCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler;
+
 
 
 @end

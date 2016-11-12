@@ -9,6 +9,7 @@
 #import "QPViewWaterViewController.h"
 #import "QPViewWaterTableViewCell.h"
 #import "QPTransactionDetailsViewController.h"
+#import "QPHttpManager.h"
 
 static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 
@@ -27,6 +28,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [self addTitleToNavBar:@"查看流水"];
     [self createBackBarItem];
     [self configureTableView];
+    [self test];
 }
 #pragma mark - configureSubViews
 -(void)configureTableView
@@ -109,6 +111,13 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [view addSubview:_settlementmoneyLab];
     
     return view;
+}
+- (void)test{
+    
+    [QPHttpManager getSettlementRecordsCompletion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+    }];
 }
 
 @end

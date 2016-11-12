@@ -15,12 +15,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UILabel * agreementermslab = [[UILabel alloc]init];
-        agreementermslab.textColor = [UIColor blackColor];
-        agreementermslab.textAlignment = NSTextAlignmentLeft;
-        agreementermslab.text = @"协议与条款";
-        agreementermslab.font = [UIFont systemFontOfSize:16];
-        [self.contentView addSubview:agreementermslab];
+        _agreementermslab = [[UILabel alloc]init];
+        _agreementermslab.textColor = [UIColor blackColor];
+        _agreementermslab.textAlignment = NSTextAlignmentLeft;
+        _agreementermslab.text = @"协议与条款";
+        _agreementermslab.font = [UIFont systemFontOfSize:16];
+        [self.contentView addSubview:_agreementermslab];
         
         UIImageView *rightimage = [[UIImageView alloc]init];
         rightimage.image = [UIImage imageNamed:@"geren_Right-Arrow"];
@@ -30,10 +30,10 @@
         line1.backgroundColor = UIColorFromHex(0xdcdcdc);
         [self.contentView  addSubview:line1];
         
-        [agreementermslab mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_agreementermslab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(@20);
             make.left.equalTo(@25);
-            make.width.equalTo(@100);
+            make.width.equalTo(@200);
             make.height.lessThanOrEqualTo(@40);
         }];
         
@@ -45,7 +45,7 @@
         }];
         
         [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(agreementermslab.mas_bottom_mas).with.offset(20);
+            make.top.equalTo(_agreementermslab.mas_bottom_mas).with.offset(20);
             make.left.equalTo(@0);
             make.width.equalTo(self.contentView);
             make.height.equalTo(@0.5);

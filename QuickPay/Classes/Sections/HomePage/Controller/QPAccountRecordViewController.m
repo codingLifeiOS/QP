@@ -9,7 +9,7 @@
 #import "QPAccountRecordViewController.h"
 #import "QPAccountRecordTableViewCell.h"
 #import "QPAccountRecordDetailsViewController.h"
-
+#import "QPHttpManager.h"
 static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
 
 @interface QPAccountRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -27,6 +27,7 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     [self addTitleToNavBar:@"到账记录"];
     [self createBackBarItem];
     [self configureTableView];
+    [self test];
     
 }
 
@@ -96,5 +97,13 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     
 }
 
+- (void)test{
+    
+    [QPHttpManager getSettlementRecordsCompletion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 @end

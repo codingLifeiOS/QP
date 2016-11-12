@@ -24,6 +24,7 @@
 		197AFBC81DC1996E002DD1BD /* wodeyinhangk_bj.png in Resources */ = {isa = PBXBuildFile; fileRef = 197AFBB81DC1996E002DD1BD /* wodeyinhangk_bj.png */; };
 		19A63F8A1DBDF86B008797EB /* LGLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A63F891DBDF86B008797EB /* LGLAlertView.m */; };
 		19C9B9121DC1E03900DDFF02 /* guanyuwom_bj.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C9B9111DC1E03900DDFF02 /* guanyuwom_bj.png */; };
+		1C1085551DD6AC2C00262B46 /* QPAgreementAndTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1085541DD6AC2C00262B46 /* QPAgreementAndTermsViewController.m */; };
 		1C1F31871DC8378B00BC4A27 /* shoukuan_fanhui@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31751DC8378B00BC4A27 /* shoukuan_fanhui@2x.png */; };
 		1C1F31881DC8378B00BC4A27 /* shoukuan_fanhui@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31761DC8378B00BC4A27 /* shoukuan_fanhui@3x.png */; };
 		1C1F31891DC8378B00BC4A27 /* shoukuan_input@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F31771DC8378B00BC4A27 /* shoukuan_input@2x.png */; };
@@ -328,6 +329,8 @@
 		19A63F881DBDF86B008797EB /* LGLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGLAlertView.h; sourceTree = "<group>"; };
 		19A63F891DBDF86B008797EB /* LGLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGLAlertView.m; sourceTree = "<group>"; };
 		19C9B9111DC1E03900DDFF02 /* guanyuwom_bj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guanyuwom_bj.png; sourceTree = "<group>"; };
+		1C1085531DD6AC2C00262B46 /* QPAgreementAndTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPAgreementAndTermsViewController.h; sourceTree = "<group>"; };
+		1C1085541DD6AC2C00262B46 /* QPAgreementAndTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPAgreementAndTermsViewController.m; sourceTree = "<group>"; };
 		1C1F31751DC8378B00BC4A27 /* shoukuan_fanhui@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoukuan_fanhui@2x.png"; sourceTree = "<group>"; };
 		1C1F31761DC8378B00BC4A27 /* shoukuan_fanhui@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoukuan_fanhui@3x.png"; sourceTree = "<group>"; };
 		1C1F31771DC8378B00BC4A27 /* shoukuan_input@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoukuan_input@2x.png"; sourceTree = "<group>"; };
@@ -1378,6 +1381,8 @@
 				1CE605E01DD5950B005A8648 /* QPModifyPasswordViewController.m */,
 				1CE605EE1DD5B842005A8648 /* QPStoreContractInformationViewController.h */,
 				1CE605EF1DD5B842005A8648 /* QPStoreContractInformationViewController.m */,
+				1C1085531DD6AC2C00262B46 /* QPAgreementAndTermsViewController.h */,
+				1C1085541DD6AC2C00262B46 /* QPAgreementAndTermsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2278,6 +2283,7 @@
 				1C49B2891DBA1D4F00CF3DE1 /* UITextField+Extension.m in Sources */,
 				1C49B2AB1DBA1D4F00CF3DE1 /* UIAlertView+AFNetworking.m in Sources */,
 				1C49B2BD1DBA1D4F00CF3DE1 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				1C1085551DD6AC2C00262B46 /* QPAgreementAndTermsViewController.m in Sources */,
 				1C49B2CB1DBA22A000CF3DE1 /* NavigationController.m in Sources */,
 				1C49B2A01DBA1D4F00CF3DE1 /* AFHTTPSessionManager.m in Sources */,
 				1CE605E11DD5950B005A8648 /* QPModifyPasswordViewController.m in Sources */,

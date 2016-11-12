@@ -7,6 +7,7 @@
 //
 
 #import "QPMyBankCardViewController.h"
+#import "QPHttpManager.h"
 
 @interface QPMyBankCardViewController ()
 
@@ -19,6 +20,7 @@
     [self addTitleToNavBar:@"我的银行卡"];
     [self createBackBarItem];
     [self configureView];
+    [self test];
 }
 -(void)configureView
 {
@@ -45,6 +47,14 @@
     cardLab.textAlignment = NSTextAlignmentCenter;
     cardLab.font = [UIFont systemFontOfSize:16];
     [imageView addSubview:cardLab];
-    
 }
+
+- (void)test{
+    
+    [QPHttpManager getBindBankCcardCompletion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+    }];
+}
+
 @end

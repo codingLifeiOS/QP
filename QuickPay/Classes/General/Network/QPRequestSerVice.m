@@ -103,7 +103,7 @@
         NSData * data = error.userInfo[@"com.alamofire.serialization.response.error.data"];
         NSString * str = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"服务器的错误原因:%@",str);
-        //        NSLog(@"POST:%@ -->请求失败，错误:%@", url, error);
+                NSLog(@"POST:%@ -->请求失败，错误:%@", url, error);
         
         failureHandler ? failureHandler(error) : nil;
         

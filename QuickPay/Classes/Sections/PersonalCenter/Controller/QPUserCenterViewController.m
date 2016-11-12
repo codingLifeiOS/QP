@@ -22,7 +22,7 @@
 
 static NSString *const cellIdentifier = @"QPUserCenterViewCell";
 static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
-@interface QPUserCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+@interface QPUserCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong) NSMutableArray * groups;
 @property (nonatomic,strong) UITableView *homeTableView;
 
@@ -141,6 +141,9 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     switch (indexPath.section) {
         case 0:
             if (indexPath.row == 0) {
+                UIActionSheet *action = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册", nil];
+                [action showInView:self.view];
+                
                 NSLog(@"个人信息");
             }
             break;
@@ -185,6 +188,72 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
         default:
             break;
     }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            UIImagePickerController *camera = [[UIImagePickerController alloc]init];
+            
+            //调用相机
+            camera.sourceType = UIImagePickerControllerSourceTypeCamera;
+            camera.allowsEditing = YES;
+            //            camera.delegate = self;
+            [self presentViewController:camera animated:YES completion:nil];
+        }
+    }else if (buttonIndex == 1){
+        UIImagePickerController *photoLibrary = [[UIImagePickerController alloc]init];
+        //设置图片来源于相册
+        photoLibrary.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        photoLibrary.allowsEditing = YES;
+        //        photoLibrary.delegate = self;
+        [self presentViewController:photoLibrary animated:YES completion:nil];
+    }
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //判断选中的媒体是否为图片
+    
+    UIImage *imageNew = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    //设置image的尺寸
+    CGSize imagesize = imageNew.size;
+    imagesize.height = 200;
+    imagesize.width = 200;
+    //对图片大小进行压缩--
+    imageNew = [self imageWithImage:imageNew scaledToSize:imagesize];
+    
+    //        NSData *imageData = UIImageJPEGRepresentation(info[UIImagePickerControllerEditedImage], 0.00001);
+    //        NSData *imageData = UIImageJPEGRepresentation(imageNew, 0.00001);
+    //        NSData *imageData = UIImagePNGRepresentation(imageNew);
+    //        NSString *photoData = [imageData base64EncodedStringWithOptions:0];
+    
+    //        NSData *data = [[NSData alloc]initWithBase64EncodedString:photoData options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    //        UIImage *ima = [[UIImage alloc]initWithData:data];
+    //#warning test
+    //        self.userPhoto(ima);
+    
+    //        NSLog(@"%@", _head_thumb);
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+//对图片尺寸进行压缩--
+-(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
 }
 
 #pragma mark -UIAlertViewDelegate

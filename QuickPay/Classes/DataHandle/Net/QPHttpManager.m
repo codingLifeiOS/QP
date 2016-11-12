@@ -119,6 +119,56 @@
     }];
 }
 
++ (void)getBindBankCcardCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler{
+    
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          };
+    [QPHttpRequest POSTWithData:QP_GetBind_bank_Card params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        handler ? handler(success) : nil;
+
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+        
+    }];
+}
+
++ (void)getSettlementRecordsCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler{
+    
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          };
+    [QPHttpRequest POSTWithData:QP_GetSettlement_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+        
+    }];
+}
+
+
++ (void)getOrderRecordsCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler{
+    
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          };
+    [QPHttpRequest POSTWithData:QP_GetOrder_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+        
+    }];
+}
+
 + (QPUserModel*)getUserModel{
     
     NSString *path = [QPFileLocationManager getUserDirectory];

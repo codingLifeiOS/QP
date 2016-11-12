@@ -23,4 +23,17 @@
 // 2.5. 获取商户基本信息
 #define QP_GetMerInfo QP_HOST@"apis/getMerinfo"
 
+// 2.6. 修改密码
+#define QP_Modify_Password QP_HOST@"apis/ modify_password"
+
+// 2.7. 获取绑定银行卡
+#define QP_GetBind_bank_Card QP_HOST@"apis/getBind_bank_card"
+
+// 2.8. 获取到账记录
+#define QP_GetSettlement_Records QP_HOST@"apis/getSettlement_records"
+
+// 2.9. 获取交易流水
+#define QP_GetOrder_Records QP_HOST@"apis/getOrder_records"
+
+
 #endif /* InterfaceConfig_h */
