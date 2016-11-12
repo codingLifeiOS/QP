@@ -24,7 +24,7 @@
 #define QP_GetMerInfo QP_HOST@"apis/getMerinfo"
 
 // 2.6. 修改密码
-#define QP_Modify_Password QP_HOST@"apis/ modify_password"
+#define QP_Modify_Password QP_HOST@"apis/modify_password"
 
 // 2.7. 获取绑定银行卡
 #define QP_GetBind_bank_Card QP_HOST@"apis/getBind_bank_card"

@@ -11,6 +11,63 @@
 #import "QPFileLocationManager.h"
 @implementation QPHttpManager
 
++ (void)loginWithUsename:(NSString *)phoneStr
+                Password:(NSString *)password
+              Completion:(QPRequestSuccessHandler)handler
+                 failure:(QPRequestFailureHandler)failhandler{
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:phoneStr forKey:@"username"];
+    [params setValue:password forKey:@"password"];
+    
+    [QPHttpRequest POSTWithData:QP_Login params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        handler ? handler(error) : nil;
+        
+    }];
+}
+
++ (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler{
+    
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          };
+    [QPHttpRequest POSTWithData:QP_GetMerInfo params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+        
+    }];
+}
+
++ (void)changePassWordWitholdpassword:(NSString *)oldpassword
+                          newpassword:(NSString *)newpassword
+                           Completion:(QPRequestSuccessHandler)handler
+                              failure:(QPRequestFailureHandler)failhandler{
+
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          @"password_old":oldpassword,
+                          @"password_new":newpassword,
+                          };
+    [QPHttpRequest POSTWithData:QP_Modify_Password params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+        
+    }];
+
+
+}
 + (void)getQRcodeString:(NSString *)amount
                  PayTye:(NSString *)type
              Completion:(QPRequestSuccessHandler)handler
@@ -80,42 +137,6 @@
         
     } failure:^(NSError *error) {
         handler ? handler(error) : nil;
-    }];
-}
-
-+ (void)loginWithUsename:(NSString *)phoneStr
-                Password:(NSString *)password
-              Completion:(QPRequestSuccessHandler)handler
-                 failure:(QPRequestFailureHandler)failhandler{
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:phoneStr forKey:@"username"];
-    [params setValue:password forKey:@"password"];
-    
-    [QPHttpRequest POSTWithData:QP_Login params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
-        
-        handler ? handler(success) : nil;
-        
-    } failure:^(NSError *error) {
-        handler ? handler(error) : nil;
-        
-    }];
-}
-
-+ (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
-                     failure:(QPRequestFailureHandler)failhandler{
-    
-    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
-                          @"token":[QPUtils getToken],
-                          };
-    [QPHttpRequest POSTWithData:QP_GetMerInfo params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
-        
-        handler ? handler(success) : nil;
-        
-    } failure:^(NSError *error) {
-        
-        handler ? handler(error) : nil;
-        
     }];
 }
 

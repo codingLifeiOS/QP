@@ -9,6 +9,34 @@
 #import <Foundation/Foundation.h>
 #import "QPRequestService.h"
 @interface QPHttpManager : NSObject
+
+/**
+ *  登录接口
+ *  @param phoneStr 用户名：手机号
+ *  @param password 密码
+ *  @param handler 完成后的回调
+ */
+
++ (void)loginWithUsename:(NSString *)phoneStr
+                Password:(NSString *)password
+              Completion:(QPRequestSuccessHandler)handler
+                 failure:(QPRequestFailureHandler)failhandler;
+
++ (void)changePassWordWitholdpassword:(NSString *)oldpassword
+                          newpassword:(NSString *)newpassword
+                           Completion:(QPRequestSuccessHandler)handler
+                              failure:(QPRequestFailureHandler)failhandler;
+
+
+/**
+ *  获取商户基本信息接口
+ *
+ *  @param handler 完成后的回调
+ */
+
++ (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler;
+
 /**
  *  获取要生成订单的字符串
  *  @param amount 金额 精确到分 最多到十万位
@@ -31,27 +59,6 @@
              Completion:(QPRequestSuccessHandler)handler
                 failure:(QPRequestFailureHandler)failhandler;
 
-
-/**
- *  登录接口
- *  @param phoneStr 用户名：手机号
- *  @param password 密码
- *  @param handler 完成后的回调
- */
-
-+ (void)loginWithUsename:(NSString *)phoneStr
-                Password:(NSString *)password
-      Completion:(QPRequestSuccessHandler)handler
-         failure:(QPRequestFailureHandler)failhandler;
-
-/**
- *  获取商户基本信息接口
- *
- *  @param handler 完成后的回调
- */
-
-+ (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
-           failure:(QPRequestFailureHandler)failhandler;
 
 /**
  *  获取绑定银行卡信息接口

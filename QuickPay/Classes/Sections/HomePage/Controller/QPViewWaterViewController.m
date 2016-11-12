@@ -114,7 +114,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 }
 - (void)test{
     
-    [QPHttpManager getSettlementRecordsCompletion:^(id responseData) {
+    [QPHttpManager getOrderRecordsCompletion:^(id responseData) {
         
     } failure:^(NSError *error) {
     }];

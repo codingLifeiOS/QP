@@ -9,7 +9,7 @@
 #import "QPModifyPasswordViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "QPLoginViewController.h"
-
+#import "QPHttpManager.h"
 @interface QPModifyPasswordViewController ()<UITextFieldDelegate>
 @property (strong,nonatomic) UITextField *oldpasswordTextField;
 @property (strong,nonatomic) UITextField *onepasswordTextField;
@@ -39,7 +39,7 @@
     self.oldpasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.oldpasswordTextField.returnKeyType = UIReturnKeyDone;
     self.oldpasswordTextField.backgroundColor = [UIColor whiteColor];
-    self.oldpasswordTextField.layer.borderWidth=2.0f;
+    self.oldpasswordTextField.layer.borderWidth = 2.0f;
     self.oldpasswordTextField.layer.cornerRadius = 8.0f;
     self.oldpasswordTextField.layer.borderColor=[[UIColor orangeColor]CGColor];
     self.oldpasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -101,7 +101,6 @@
         [[QPHUDManager sharedInstance]showTextOnly:@"请输入旧密码"];
         return;
     }
-    
     if ( self.onepasswordTextField.text.length == 0) {
         [[QPHUDManager sharedInstance]showTextOnly:@"请输入新密码"];
         return;
@@ -112,11 +111,23 @@
         return;
     }
     
-    if (self.oldpasswordTextField.text.length > 0 && self.onepasswordTextField.text.length > 0 && self.twopasswordTextField.text.length > 0) {
-        QPLoginViewController *QPloginVC = [[QPLoginViewController alloc]init];
-        [self.navigationController pushViewController:QPloginVC animated:YES];
+    if ([self.onepasswordTextField.text isEqualToString: self.twopasswordTextField.text]) {
+        WEAKSELF();
+        [[QPHUDManager sharedInstance]showProgressWithText:@"提交中"];
+        [QPHttpManager changePassWordWitholdpassword:self.oldpasswordTextField.text newpassword:self.onepasswordTextField.text Completion:^(id responseData) {
+            [[QPHUDManager sharedInstance]hiddenHUD];
+            STRONGSELF();
+             [[QPHUDManager sharedInstance]showTextOnly:responseData[@"resp_msg"]];
+            if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf.navigationController popViewControllerAnimated:YES];
+                });
+             }
+        } failure:^(NSError *error) {
+            [[QPHUDManager sharedInstance]hiddenHUD];
+            [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        }];
     } else {
-        [[QPHUDManager sharedInstance]hiddenHUD];
         [[QPHUDManager sharedInstance]showTextOnly:@"两次密码不一致"];
     }
 
