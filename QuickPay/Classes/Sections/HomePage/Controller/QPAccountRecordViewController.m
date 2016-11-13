@@ -10,11 +10,17 @@
 #import "QPAccountRecordTableViewCell.h"
 #import "QPAccountRecordDetailsViewController.h"
 #import "QPHttpManager.h"
+#import "QPAccountRecordModel.h"
+
 static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
 
 @interface QPAccountRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
+{
 
-@property(nonatomic,strong) UITableView *homeTableView;
+   UITableView *homeTableView;
+}
+
+@property(nonatomic,strong) NSMutableArray *accountRecordArry;
 
 @end
 
@@ -26,41 +32,45 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     self.view.backgroundColor = [UIColor whiteColor];
     [self addTitleToNavBar:@"到账记录"];
     [self createBackBarItem];
+    
+    self.accountRecordArry = [[NSMutableArray alloc]init];
     [self configureTableView];
-    [self test];
+    
+    [self getSettlementRecordsNetworkRequest];
     
 }
 
 #pragma mark - configureSubViews
 -(void)configureTableView
 {
-    self.homeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
-    self.homeTableView.dataSource = self;
-    self.homeTableView.backgroundColor=[UIColor clearColor];
-    self.homeTableView.delegate = self;
-    [self.homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    self.homeTableView.showsVerticalScrollIndicator = NO;
-    [ self.homeTableView registerClass:[QPAccountRecordTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    homeTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    homeTableView.dataSource = self;
+    homeTableView.delegate = self;
+    [homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    homeTableView.showsVerticalScrollIndicator = NO;
+    [homeTableView registerClass:[QPAccountRecordTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     
-    [self.view addSubview:self.homeTableView];
+    [self.view addSubview:homeTableView];
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return  4;
+    return self.accountRecordArry.count;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QPAccountRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    cell.contentView.backgroundColor = [UIColor clearColor];
+    QPAccountRecordTableViewCell *cell = [homeTableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    [cell updatecellWithModel:self.accountRecordArry[indexPath.row]];
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    QPAccountRecordDetailsViewController *accounredetail = [[QPAccountRecordDetailsViewController alloc]init];
-    [self.navigationController pushViewController:accounredetail animated:YES];
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -69,7 +79,7 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     view.backgroundColor = UIColorFromHex(0xf8f8f8);
     UILabel *ExpArrivalLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 120, 30)];
     ExpArrivalLab.text = @"预计到账";
-    ExpArrivalLab.font=[UIFont systemFontOfSize:14];
+    ExpArrivalLab.font = [UIFont systemFontOfSize:14];
     ExpArrivalLab.textColor = [UIColor blackColor];
     [view addSubview:ExpArrivalLab];
     
@@ -91,18 +101,41 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     return 30;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return CGFLOAT_MIN;
 }
 
-- (void)test{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    QPAccountRecordDetailsViewController *accounredetail = [[QPAccountRecordDetailsViewController alloc]init];
+    [self.navigationController pushViewController:accounredetail animated:YES];
+}
+
+
+- (void)getSettlementRecordsNetworkRequest{
     
+    WEAKSELF();
+    [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
     [QPHttpManager getSettlementRecordsCompletion:^(id responseData) {
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+            STRONGSELF();
+            for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
+                QPAccountRecordModel *model = [[QPAccountRecordModel alloc]initWithDictionary:dic];
+                [strongSelf.accountRecordArry addObject:model];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [homeTableView reloadData];
+            });
+        } else {
+            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+        }
+     } failure:^(NSError *error) {
         
-    } failure:^(NSError *error) {
-        
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+         
     }];
 }
 

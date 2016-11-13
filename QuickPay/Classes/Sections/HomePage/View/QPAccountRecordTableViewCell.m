@@ -54,4 +54,27 @@
     return self;
 }
 
+- (void)updatecellWithModel:(QPAccountRecordModel*)model{
+
+    self.dateLab.text = model.create_date;
+    self.moneyLab.text = [NSString stringWithFormat:@"¥ %@",model.total_amount];
+    
+    switch ([model.balance_status integerValue]) {
+        case 1:
+            self.stateLab.text = @"未结算";
+            break;
+        case 2:
+            self.stateLab.text = @"处理中";
+            break;
+        case 3:
+            self.stateLab.text = @"已结算";
+            break;
+        case 4:
+            self.stateLab.text = @"失败";
+            break;
+        default:
+            break;
+    }
+}
+
 @end

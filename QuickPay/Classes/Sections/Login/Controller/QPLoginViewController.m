@@ -61,7 +61,7 @@
 
    [QPHttpManager getMerinfoCompletion:^(id responseData) {
        
-      QPUserModel *userModel = [[QPUserModel alloc]initWithDictionary:responseData];
+      QPUserModel *userModel = [[QPUserModel alloc]initWithDictionary:[responseData objectForKey:@"data"]];
        NSString *path = [QPFileLocationManager getUserDirectory];
        NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
        NSMutableArray *merInfoList = [[NSMutableArray alloc]init];

@@ -160,6 +160,7 @@
 		1C49B2D11DBA22FD00CF3DE1 /* QPHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C49B2D01DBA22FD00CF3DE1 /* QPHomePageViewController.m */; };
 		1C49B2D41DBA231200CF3DE1 /* QPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C49B2D31DBA231200CF3DE1 /* QPLoginViewController.m */; };
 		1C49B2D71DBA234700CF3DE1 /* QPUserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C49B2D61DBA234700CF3DE1 /* QPUserCenterViewController.m */; };
+		1C5EF57E1DD898D0003BD331 /* QPAccountRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5EF57C1DD898D0003BD331 /* QPAccountRecordModel.m */; };
 		1C5F54AA1DC99A6600190036 /* shoukuanweixin_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5F54A81DC99A6600190036 /* shoukuanweixin_nor@2x.png */; };
 		1C5F54AB1DC99A6600190036 /* shoukuanweixin_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C5F54A91DC99A6600190036 /* shoukuanweixin_nor@3x.png */; };
 		1C7533631DC830EC0026B5E5 /* QPDigitalKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7533621DC830EC0026B5E5 /* QPDigitalKeyboardView.m */; };
@@ -569,6 +570,8 @@
 		1C49B2D51DBA234700CF3DE1 /* QPUserCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPUserCenterViewController.h; sourceTree = "<group>"; };
 		1C49B2D61DBA234700CF3DE1 /* QPUserCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPUserCenterViewController.m; sourceTree = "<group>"; };
 		1C5EBC9D1DB90FA20096A769 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		1C5EF57B1DD898D0003BD331 /* QPAccountRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPAccountRecordModel.h; sourceTree = "<group>"; };
+		1C5EF57C1DD898D0003BD331 /* QPAccountRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPAccountRecordModel.m; sourceTree = "<group>"; };
 		1C5F54A81DC99A6600190036 /* shoukuanweixin_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoukuanweixin_nor@2x.png"; sourceTree = "<group>"; };
 		1C5F54A91DC99A6600190036 /* shoukuanweixin_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoukuanweixin_nor@3x.png"; sourceTree = "<group>"; };
 		1C7533611DC830EC0026B5E5 /* QPDigitalKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPDigitalKeyboardView.h; sourceTree = "<group>"; };
@@ -1714,6 +1717,8 @@
 			children = (
 				1CC00B9E1DD1B775004D00AA /* QPUserModel.h */,
 				1CC00B9F1DD1B775004D00AA /* QPUserModel.m */,
+				1C5EF57B1DD898D0003BD331 /* QPAccountRecordModel.h */,
+				1C5EF57C1DD898D0003BD331 /* QPAccountRecordModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2257,6 +2262,7 @@
 				1C49B28F1DBA1D4F00CF3DE1 /* UITableViewCell+CreatLine.m in Sources */,
 				1C49B2BC1DBA1D4F00CF3DE1 /* NSArray+MASAdditions.m in Sources */,
 				1C49B2BA1DBA1D4F00CF3DE1 /* MASViewAttribute.m in Sources */,
+				1C5EF57E1DD898D0003BD331 /* QPAccountRecordModel.m in Sources */,
 				1CCB8F421DC33A800036584E /* QPAccountRecordDetailsViewController.m in Sources */,
 				1CC00BA01DD1B775004D00AA /* QPUserModel.m in Sources */,
 				1C49B2841DBA1D4F00CF3DE1 /* NSDate+Extension.m in Sources */,

@@ -40,18 +40,18 @@
     [imageView addSubview:bankLab];
     
     UILabel *nameLab = [[UILabel alloc]initWithFrame:CGRectMake(10, bankLab.bottom, 150, 30)];
-//    nameLab.text = @"李明";
     nameLab.text = userModel.bank_account_name;
     nameLab.font = [UIFont systemFontOfSize:15];
     nameLab.textColor = [UIColor whiteColor];
     [imageView addSubview:nameLab];
     
     UILabel *cardLab = [[UILabel alloc]initWithFrame:CGRectMake(50, nameLab.bottom, imageView.width-50,30)];
-//    cardLab.text = @"****  **** ****  0405";
-    NSString *str1 = [userModel.card_number substringFromIndex:userModel.card_number.length- 4];
+    NSString *str1;
+    if (userModel.card_number.length >= 4) {
+    str1 = [userModel.card_number substringFromIndex:userModel.card_number.length- 4];
+    }
     NSString *str2 = @"****  ****  ****  ";
-    NSString *str = [str2 stringByAppendingString:str1];
-    cardLab.text = str;
+    cardLab.text = [NSString stringWithFormat:@"%@%@",str2,str1];
     cardLab.textColor = [UIColor yellowColor];
     cardLab.textAlignment = NSTextAlignmentCenter;
     cardLab.font = [UIFont systemFontOfSize:16];
