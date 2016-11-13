@@ -161,6 +161,8 @@
     
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
+                          @"start_date":@"2016-11-05",
+                          @"end_date":@"2016-11-13",
                           };
     [QPHttpRequest POSTWithData:QP_GetSettlement_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
@@ -179,6 +181,8 @@
     
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
+                          @"start_date":@"2016-11-05",
+                          @"end_date":@"2016-11-13",
                           };
     [QPHttpRequest POSTWithData:QP_GetOrder_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         handler ? handler(success) : nil;

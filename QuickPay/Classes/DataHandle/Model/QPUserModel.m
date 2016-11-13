@@ -135,6 +135,9 @@
     [coder encodeObject:self.card_number forKey:@"card_number"];
     [coder encodeObject:self.bank_account_certno forKey:@"bank_account_certno"];
     [coder encodeObject:self.signatureKey forKey:@"signatureKey"];
+    [coder encodeObject:self.bank_name forKey:@"bank_name"];
+    [coder encodeObject:self.arena_name forKey:@"arena_name"];
+    [coder encodeObject:self.arena_phone forKey:@"arena_phone"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -146,6 +149,9 @@
         self.card_number = [coder decodeObjectForKey:@"card_number"];
         self.bank_account_certno = [coder decodeObjectForKey:@"bank_account_certno"];
         self.signatureKey = [coder decodeObjectForKey:@"signatureKey"];
+        self.bank_name = [coder decodeObjectForKey:@"bank_name"];
+        self.arena_name = [coder decodeObjectForKey:@"arena_name"];
+        self.arena_phone = [coder decodeObjectForKey:@"arena_phone"];
     }
     return self;
 }

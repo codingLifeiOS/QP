@@ -100,13 +100,13 @@
     
     [self addSubview:footBtn];
     
-    UIButton *forgetBtn =[UIButton buttonWithType:UIButtonTypeCustom];
-    forgetBtn.frame=CGRectMake(100, footBtn.bottom+75, SCREEN_WIDTH-200, 30);
-    [forgetBtn setTitle:@"忘记密码？" forState:UIControlStateNormal];
-    forgetBtn.titleLabel.font=[UIFont systemFontOfSize:14];
-    [forgetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [forgetBtn  addTarget:self action:@selector(performForgotPasswordAction) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:forgetBtn];
+//    UIButton *forgetBtn =[UIButton buttonWithType:UIButtonTypeCustom];
+//    forgetBtn.frame=CGRectMake(100, footBtn.bottom+75, SCREEN_WIDTH-200, 30);
+//    [forgetBtn setTitle:@"忘记密码？" forState:UIControlStateNormal];
+//    forgetBtn.titleLabel.font=[UIFont systemFontOfSize:14];
+//    [forgetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [forgetBtn  addTarget:self action:@selector(performForgotPasswordAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:forgetBtn];
 }
 
 #pragma mark - ButtonAction

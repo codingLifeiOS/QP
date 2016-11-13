@@ -19,6 +19,9 @@
 #import "AppDelegate.h"
 #import "QPSetUpViewController.h"
 #import "QPStoreContractInformationViewController.h"
+#import "QPUserModel.h"
+#import "QPFileLocationManager.h"
+#import "QPHttpManager.h"
 
 static NSString *const cellIdentifier = @"QPUserCenterViewCell";
 static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
@@ -36,9 +39,15 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     [self loadDataSource];
     [self configureTableView];
     //    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(setbtnclick)];
-    
+    [self test];
 }
-
+- (void)test{
+    
+    [QPHttpManager getMerinfoCompletion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+    }];
+}
 #pragma mark - configureSubViews
 -(void)configureTableView
 {
@@ -72,7 +81,6 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.section == 0) {
         QPUserCenterViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -83,7 +91,8 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
         UILabel *QRcode =[[UILabel new]init];
         QRcode.font = [UIFont systemFontOfSize:12];
         QRcode.frame = CGRectMake(100, 60, 150, 20);
-        QRcode.text = @"ID: 7758";
+        QPUserModel *userModel = [QPUserCenterViewController getUserModel];
+        QRcode.text = userModel.arena_phone;
         [cell.contentView addSubview:QRcode];
         cell.imageView.image = [UIImage imageNamed:item.image];
         return cell;
@@ -300,7 +309,8 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 - (void)setGroupsOne {
     
     XDGroupItem *group = [[XDGroupItem alloc]init];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:@"凄清肆水丶" :@"geren_touxiang"];
+    QPUserModel *userModel = [QPUserCenterViewController getUserModel];
+    XDSettingItem *item = [XDSettingItem itemWithtitle:userModel.arena_name :@"geren_touxiang"];
     group.items = @[item];
     [self.groups addObject:group];
 }
@@ -330,4 +340,12 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     [self.groups addObject:group];
 }
 
++ (QPUserModel*)getUserModel{
+    
+    NSString *path = [QPFileLocationManager getUserDirectory];
+    NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
+    NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    return merInfolist[0];
+    
+}
 @end

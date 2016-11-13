@@ -12,8 +12,8 @@
 #import "QPHttpManager.h"
 @interface QPModifyPasswordViewController ()<UITextFieldDelegate>
 @property (strong,nonatomic) UITextField *oldpasswordTextField;
-@property (strong,nonatomic) UITextField *onepasswordTextField;
-@property (strong,nonatomic) UITextField *twopasswordTextField;
+@property (strong,nonatomic) UITextField *newpasswordTextField;
+@property (strong,nonatomic) UITextField *confirmpasswordTextField;
 @end
 
 @implementation QPModifyPasswordViewController
@@ -52,42 +52,42 @@
     onepasswordlab.text = @"请输入新密码";
     [self.view addSubview:onepasswordlab];
     
-    self.onepasswordTextField = [[UITextField alloc] init];
-    self.onepasswordTextField.frame=CGRectMake(self.oldpasswordTextField.x,onepasswordlab.bottom, self.oldpasswordTextField.width,self.oldpasswordTextField.height);
-    self.onepasswordTextField.returnKeyType = UIReturnKeyDone;
-    self.onepasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.onepasswordTextField.backgroundColor = [UIColor whiteColor];
-    self.onepasswordTextField.layer.borderWidth=2.0f;
-    self.onepasswordTextField.layer.cornerRadius = 8.0f;
-    self.onepasswordTextField.layer.borderColor=[[UIColor orangeColor]CGColor];
-    self.onepasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.onepasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    [self.onepasswordTextField  setSecureTextEntry:YES];
-    self.onepasswordTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.onepasswordTextField.delegate = self;
-    [self.view addSubview:self.onepasswordTextField];
+    self.newpasswordTextField = [[UITextField alloc] init];
+    self.newpasswordTextField.frame=CGRectMake(self.oldpasswordTextField.x,onepasswordlab.bottom, self.oldpasswordTextField.width,self.oldpasswordTextField.height);
+    self.newpasswordTextField.returnKeyType = UIReturnKeyDone;
+    self.newpasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.newpasswordTextField.backgroundColor = [UIColor whiteColor];
+    self.newpasswordTextField.layer.borderWidth=2.0f;
+    self.newpasswordTextField.layer.cornerRadius = 8.0f;
+    self.newpasswordTextField.layer.borderColor=[[UIColor orangeColor]CGColor];
+    self.newpasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.newpasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [self.newpasswordTextField  setSecureTextEntry:YES];
+    self.newpasswordTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.newpasswordTextField.delegate = self;
+    [self.view addSubview:self.newpasswordTextField];
 
-    UILabel *twopasswordlab =  [[UILabel alloc]initWithFrame:CGRectMake(self.onepasswordTextField.x, self.onepasswordTextField.bottom, self.onepasswordTextField.width, 30)];
+    UILabel *twopasswordlab =  [[UILabel alloc]initWithFrame:CGRectMake(self.newpasswordTextField.x, self.newpasswordTextField.bottom, self.newpasswordTextField.width, 30)];
     twopasswordlab.text = @"确认新密码";
     [self.view addSubview:twopasswordlab];
     
-    self.twopasswordTextField = [[UITextField alloc] init];
-    self.twopasswordTextField.frame=CGRectMake(self.onepasswordTextField.x,twopasswordlab.bottom, self.onepasswordTextField.width,self.onepasswordTextField.height);
-    self.twopasswordTextField.returnKeyType = UIReturnKeyDone;
-    self.twopasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.twopasswordTextField.backgroundColor = [UIColor whiteColor];
-    self.twopasswordTextField.layer.borderWidth=2.0f;
-    self.twopasswordTextField.layer.cornerRadius = 8.0f;
-    self.twopasswordTextField.layer.borderColor=[[UIColor orangeColor]CGColor];
-    self.twopasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    self.twopasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    [self.twopasswordTextField  setSecureTextEntry:YES];
-    self.twopasswordTextField.leftViewMode = UITextFieldViewModeAlways;
-    self.twopasswordTextField.delegate = self;
-    [self.view addSubview:self.twopasswordTextField];
+    self.confirmpasswordTextField = [[UITextField alloc] init];
+    self.confirmpasswordTextField.frame=CGRectMake(self.newpasswordTextField.x,twopasswordlab.bottom, self.newpasswordTextField.width,self.newpasswordTextField.height);
+    self.confirmpasswordTextField.returnKeyType = UIReturnKeyDone;
+    self.confirmpasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.confirmpasswordTextField.backgroundColor = [UIColor whiteColor];
+    self.confirmpasswordTextField.layer.borderWidth=2.0f;
+    self.confirmpasswordTextField.layer.cornerRadius = 8.0f;
+    self.confirmpasswordTextField.layer.borderColor=[[UIColor orangeColor]CGColor];
+    self.confirmpasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.confirmpasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    [self.confirmpasswordTextField  setSecureTextEntry:YES];
+    self.confirmpasswordTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.confirmpasswordTextField.delegate = self;
+    [self.view addSubview:self.confirmpasswordTextField];
     
     UIButton *footBtn =[UIButton buttonWithType:UIButtonTypeCustom];
-    footBtn.frame=CGRectMake(self.twopasswordTextField.x, self.twopasswordTextField.bottom+30, self.twopasswordTextField.width, 40);
+    footBtn.frame=CGRectMake(self.confirmpasswordTextField.x, self.confirmpasswordTextField.bottom+30, self.confirmpasswordTextField.width, 40);
     [footBtn setBackgroundImage:[UIImage imageNamed:@"mima_tijiao"] forState:UIControlStateNormal];
     [footBtn setBackgroundImage:[UIImage imageNamed:@"mima_tijiao"] forState:UIControlStateHighlighted];
     [footBtn  addTarget:self action:@selector(performSubmitAction) forControlEvents:UIControlEventTouchUpInside];
@@ -101,20 +101,25 @@
         [[QPHUDManager sharedInstance]showTextOnly:@"请输入旧密码"];
         return;
     }
-    if ( self.onepasswordTextField.text.length == 0) {
+    if ( self.newpasswordTextField.text.length == 0) {
         [[QPHUDManager sharedInstance]showTextOnly:@"请输入新密码"];
         return;
     }
     
-    if ( self.twopasswordTextField.text.length == 0) {
+    if ( self.confirmpasswordTextField.text.length == 0) {
         [[QPHUDManager sharedInstance]showTextOnly:@"请确认新密码"];
         return;
     }
     
-    if ([self.onepasswordTextField.text isEqualToString: self.twopasswordTextField.text]) {
+    if ( self.confirmpasswordTextField.text.length < 4) {
+        [[QPHUDManager sharedInstance]showTextOnly:@"密码长度至少四位以上"];
+        return;
+    }
+
+    if ([self.newpasswordTextField.text isEqualToString: self.confirmpasswordTextField.text]) {
         WEAKSELF();
         [[QPHUDManager sharedInstance]showProgressWithText:@"提交中"];
-        [QPHttpManager changePassWordWitholdpassword:self.oldpasswordTextField.text newpassword:self.onepasswordTextField.text Completion:^(id responseData) {
+        [QPHttpManager changePassWordWitholdpassword:self.oldpasswordTextField.text newpassword:self.newpasswordTextField.text Completion:^(id responseData) {
             [[QPHUDManager sharedInstance]hiddenHUD];
             STRONGSELF();
              [[QPHUDManager sharedInstance]showTextOnly:responseData[@"resp_msg"]];
