@@ -35,5 +35,13 @@
 // 2.9. 获取交易流水
 #define QP_GetOrder_Records QP_HOST@"apis/getOrder_records"
 
+// 3.0. 获取商户固定二维码
+#define QP_GetFixedQR QP_HOST@"apis/getFixedQR/WA16082322231"
+
+// 3.1. 动态二维码支付下单接口(正扫)
+#define QP_Create_Order QP_HOST@"apis/create_order"
+
+// 3.2. 支付结果查询接口
+#define QP_Qrder_Query QP_HOST@"apis/order_query"
 
 #endif /* InterfaceConfig_h */
