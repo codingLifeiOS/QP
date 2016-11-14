@@ -17,11 +17,10 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 @interface QPViewWaterViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong) UITableView *homeTableView;
-@property (nonatomic,strong)UILabel *dateLab;
-@property (nonatomic,strong)UILabel *numberLab;
-@property (nonatomic,strong)UILabel *settlementmoneyLab;
+@property(nonatomic,strong) UILabel *dateLab;
+@property(nonatomic,strong) UILabel *numberLab;
+@property(nonatomic,strong) UILabel *settlementmoneyLab;
 @property(nonatomic,strong) NSMutableArray *viewaterArry;
-
 @end
 
 @implementation QPViewWaterViewController
@@ -31,13 +30,13 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [self addTitleToNavBar:@"查看流水"];
     [self createBackBarItem];
     [self configureTableView];
-    [self getOrderRecordsNetworkRequest];
+//    [self getOrderRecordsNetworkRequest];
     self.viewaterArry = [[NSMutableArray alloc]init];
 }
 #pragma mark - configureSubViews
 -(void)configureTableView
 {
-    self.homeTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.homeTableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.homeTableView.dataSource = self;
     self.homeTableView.backgroundColor = UIColorFromHex(0xf8f8f8);
     self.homeTableView.delegate = self;
@@ -45,26 +44,31 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     self.homeTableView.showsVerticalScrollIndicator = NO;
     [ self.homeTableView registerClass:[QPViewWaterTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:self.homeTableView];
+    [self.homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section==3) {
-        return 3;
-    }else
-    {
-        return  1;
-    }
-
+//    if (section==3) {
+//        return 3;
+//    } else {
+//        return  1;
+//    }
+//
+    return 1;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.viewaterArry.count;
+    
+    return 10;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QPViewWaterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    [cell updatecellWithModel:self.viewaterArry[indexPath.row]];
+//    [cell updatecellWithModel:self.viewaterArry[indexPath.row]];
     cell.contentView.backgroundColor = [UIColor clearColor];
     return cell;
 }

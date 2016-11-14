@@ -74,6 +74,14 @@
         default:
             break;
     }
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    NSDate *date = [formatter dateFromString:model.create_date];
+    self.weekLab.text = [date getWeekday];
+
 }
 
 @end

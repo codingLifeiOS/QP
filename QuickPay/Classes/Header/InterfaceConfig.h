@@ -11,12 +11,6 @@
 // 接口服务器
 #define QP_HOST @"http://mobile.rrgpay.com/"
 
-// 2.1.支付下单接口 生成二维码字符串
-#define QP_CreateOrder QP_HOST@"order/api/cp"
-
-// 2.3.	交易查询接口
-#define QP_OrderDetail QP_HOST@"order/api/qq"
-
 // 2.4. 登录接口
 #define QP_Login QP_HOST@"apis/login"
 
@@ -36,7 +30,7 @@
 #define QP_GetOrder_Records QP_HOST@"apis/getOrder_records"
 
 // 3.0. 获取商户固定二维码
-#define QP_GetFixedQR QP_HOST@"apis/getFixedQR/WA16082322231"
+#define QP_GetFixedQR QP_HOST@"apis/getFixedQR"
 
 // 3.1. 动态二维码支付下单接口(正扫)
 #define QP_Create_Order QP_HOST@"apis/create_order"

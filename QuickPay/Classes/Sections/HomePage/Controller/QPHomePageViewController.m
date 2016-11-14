@@ -289,17 +289,25 @@
 #pragma mark - 接口请求
 - (void)test{
     
-    [QPHttpManager getQRcodeString:@"0.01" PayTye:@"2" Completion:^(id responseData) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
+//    [QPHttpManager getQRcodeString:@"10" PayTye:@"2" Completion:^(id responseData) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+//    
+//    [QPHttpManager orderquery:@"appx1611141529381" Completion:^(id responseData) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    } ];
+//    
     
-    [QPHttpManager getOrderDetail:@"EWA16081822481v16091321591" Completion:^(id responseData) {
-        
-    } failure:^(NSError *error) {
-        
-    } ];
+//    [QPHttpManager getMerchantCode:^(id responseData) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    } ];
+
 }
 
 

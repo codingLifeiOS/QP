@@ -37,8 +37,18 @@
 + (void)getMerinfoCompletion:(QPRequestSuccessHandler)handler
                      failure:(QPRequestFailureHandler)failhandler;
 
+///**
+// *  获取商户固定二维码
+// *
+// *  @param handler 完成后的回调
+// */
+//
+//+ (void)getMerchantCode:(QPRequestSuccessHandler)handler
+//                     failure:(QPRequestFailureHandler)failhandler;
+
+
 /**
- *  获取要生成订单的字符串
+ *  获取要生成订单的字符串(正扫)
  *  @param amount 金额 精确到分 最多到十万位
  *  @param type   支付类型  微信 :2 ;
  *  @param handler 完成后的回调
@@ -49,13 +59,13 @@
                failure:(QPRequestFailureHandler)failhandler;
 
 /**
- *  交易查询接口
- *  @param orderId 订单ID
+ *  支付结果查询接口
+ *  @param orderSn 订单ID
  *
  *  @param handler 完成后的回调
  */
 
-+ (void)getOrderDetail:(NSString *)orderId
++ (void)orderquery:(NSString *)orderSn
              Completion:(QPRequestSuccessHandler)handler
                 failure:(QPRequestFailureHandler)failhandler;
 

@@ -68,6 +68,21 @@
 
 
 }
+//+ (void)getMerchantCode:(QPRequestSuccessHandler)handler
+//                failure:(QPRequestFailureHandler)failhandler;
+//{
+//    NSString * url = [NSString stringWithFormat:@"%@/%@",QP_GetFixedQR,[QPUtils getMer_code]];
+//    [QPHttpRequest POSTWithData:url params:nil body:nil success:^(NSDictionary *success) {
+//        handler ? handler(success) : nil;
+//        
+//    } failure:^(NSError *error) {
+//        
+//        handler ? handler(error) : nil;
+//        
+//    }];
+//}
+
+
 + (void)getQRcodeString:(NSString *)amount
                  PayTye:(NSString *)type
              Completion:(QPRequestSuccessHandler)handler
@@ -79,9 +94,10 @@
     [params setValue:amount forKey:@"amount"];
     [params setValue:type forKey:@"payType"];
     [params setValue:[QPUtils getMer_code] forKey:@"merchno"];
-    [params setValue:userModel.bank_account_certno forKey:@"certno"];
-    [params setValue:userModel.bank_account_name forKey:@"account_name"];
-    [params setValue:userModel.card_number forKey:@"accountno"];
+//    [params setValue:userModel.bank_account_certno forKey:@"certno"];
+    [params setValue:@"QRCODE" forKey:@"payment_method"];
+    [params setValue:[QPUtils getToken] forKey:@"token"];
+
     //  @"signature":@"C704F7D128812267F4675D5D016CA962",
     // 本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
@@ -104,7 +120,7 @@
         [params setObject:sign forKey:@"signature"];
     }
     
-    [QPHttpRequest POSTWithData:QP_CreateOrder params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+    [QPHttpRequest POSTWithData:QP_Create_Order params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
         handler ? handler(success) : nil;
         
@@ -114,7 +130,7 @@
     }];
 }
 
-+ (void)getOrderDetail:(NSString *)orderId
++ (void)orderquery:(NSString *)orderSn
             Completion:(QPRequestSuccessHandler)handler
                failure:(QPRequestFailureHandler)failhandler{
     
@@ -122,8 +138,10 @@
     QPUserModel *userModel = [QPHttpManager getUserModel];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:orderId forKey:@"traceno"];
+    [params setValue:orderSn forKey:@"order_sn"];
     [params setValue:[QPUtils getMer_code] forKey:@"merchno"];
+    [params setValue:[QPUtils getToken] forKey:@"token"];
+
     // 本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
         NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
@@ -131,7 +149,7 @@
         [params setObject:sign forKey:@"signature"];
     }
     
-    [QPHttpRequest POSTWithData:QP_OrderDetail params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+    [QPHttpRequest POSTWithData:QP_Qrder_Query params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
         handler ? handler(success) : nil;
         
@@ -161,7 +179,7 @@
     
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
-                          @"start_date":@"2016-11-05",
+                          @"start_date":@"2016-11-13",
                           @"end_date":@"2016-11-13",
                           };
     [QPHttpRequest POSTWithData:QP_GetSettlement_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
@@ -181,7 +199,7 @@
     
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
-                          @"start_date":@"2016-11-05",
+                          @"start_date":@"2016-11-10",
                           @"end_date":@"2016-11-13",
                           };
     [QPHttpRequest POSTWithData:QP_GetOrder_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {

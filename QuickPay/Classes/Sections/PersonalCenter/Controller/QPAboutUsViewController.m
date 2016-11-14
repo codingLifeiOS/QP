@@ -26,7 +26,9 @@
 -(void)configureWebView
 {
     UIWebView * view = [[UIWebView alloc]initWithFrame:self.view.frame];
-    [view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.rrgpay.com/a/guanyuwomen/"]]];
+    [view setScalesPageToFit:YES];
+    NSString * url = [NSString stringWithFormat:@"%@/%@",QP_GetFixedQR,[QPUtils getMer_code]];
+    [view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     [self.view addSubview:view];
 }
 
