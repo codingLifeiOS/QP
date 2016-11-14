@@ -3,7 +3,7 @@
 @implementation QPViewWaterModel
 
 - (void)dealloc {
-    self.id = nil;
+    self.viewWaterid = nil;
     self.arena_code = nil;
     self.create_date = nil;
     self.modify_date = nil;
@@ -17,9 +17,10 @@
     self.accountno = nil;
 }
 
-- (id)initWithDictionary:(NSDictionary*)params {   self = [self init];
+- (id)initWithDictionary:(NSDictionary*)params {
+   self = [self init];
    if (self) {
-     self.id = [params valueForKey:MODEL_KEY_ID];
+     self.viewWaterid = [params valueForKey:MODEL_KEY_ID];
      self.arena_code = [params valueForKey:MODEL_KEY_ARENA_CODE];
      self.create_date = [params valueForKey:MODEL_KEY_CREATE_DATE];
      self.modify_date = [params valueForKey:MODEL_KEY_MODIFY_DATE];
@@ -31,12 +32,13 @@
      self.payment_status = [params valueForKey:MODEL_KEY_PAYMENT_STATUS];
      self.account_name = [params valueForKey:MODEL_KEY_ACCOUNT_NAME];
      self.accountno = [params valueForKey:MODEL_KEY_ACCOUNTNO];
-   }   return self;
+   }
+   return self;
 }
 
 - (NSMutableDictionary *)toDictionary {
    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-   [dic setValue:self.id forKey:MODEL_KEY_ID];
+   [dic setValue:self.viewWaterid forKey:MODEL_KEY_ID];
    [dic setValue:self.arena_code forKey:MODEL_KEY_ARENA_CODE];
    [dic setValue:self.create_date forKey:MODEL_KEY_CREATE_DATE];
    [dic setValue:self.modify_date forKey:MODEL_KEY_MODIFY_DATE];

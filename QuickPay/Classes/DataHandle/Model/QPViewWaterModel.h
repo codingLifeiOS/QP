@@ -1,3 +1,11 @@
+//
+//  QPAccountRecordModel.h
+//  QuickPay
+//
+//  Created by Nie on 16/9/22.
+//  Copyright © 2016年 Nie. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 
 #define MODEL_KEY_ID  @"id"
@@ -15,18 +23,18 @@
 
 @interface QPViewWaterModel : NSObject
 
-@property(nonatomic, retain)NSString *id;
-@property(nonatomic, retain)NSString *arena_code;
-@property(nonatomic, retain)NSString *create_date;
-@property(nonatomic, retain)NSString *modify_date;
-@property(nonatomic, retain)NSString *total_amount;
-@property(nonatomic, retain)NSString *order_sn;
-@property(nonatomic, retain)NSString *product_name;
-@property(nonatomic, retain)NSString *source;
-@property(nonatomic, retain)NSString *certno;
-@property(nonatomic, retain)NSString *payment_status;
-@property(nonatomic, retain)NSString *account_name;
-@property(nonatomic, retain)NSString *accountno;
+@property(nonatomic, copy)NSString *viewWaterid;
+@property(nonatomic, copy)NSString *arena_code;
+@property(nonatomic, copy)NSString *create_date;
+@property(nonatomic, copy)NSString *modify_date;
+@property(nonatomic, copy)NSString *total_amount;
+@property(nonatomic, copy)NSString *order_sn;
+@property(nonatomic, copy)NSString *product_name;
+@property(nonatomic, copy)NSString *source;
+@property(nonatomic, copy)NSString *certno;
+@property(nonatomic, copy)NSString *payment_status;
+@property(nonatomic, copy)NSString *account_name;
+@property(nonatomic, copy)NSString *accountno;
 
 - (id)initWithDictionary:(NSDictionary*)params;
 - (NSMutableDictionary *)toDictionary;

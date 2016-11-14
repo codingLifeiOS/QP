@@ -76,6 +76,7 @@
 		1C28EC0F1DC04A3100EB1D57 /* tell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C28EC0D1DC04A3100EB1D57 /* tell@2x.png */; };
 		1C28EC101DC04A3100EB1D57 /* tell@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */; };
 		1C28EC1F1DC0AE2400EB1D57 /* QPScanCodePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C28EC1D1DC0AE2400EB1D57 /* QPScanCodePayViewController.m */; };
+		1C34846F1DD94B9E00720119 /* QPViewWaterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C34846D1DD94B9E00720119 /* QPViewWaterModel.m */; };
 		1C3E88321DC1D3DC002EE960 /* QPAccountRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3E88311DC1D3DC002EE960 /* QPAccountRecordViewController.m */; };
 		1C3E88421DC1DA62002EE960 /* pir_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C3E883A1DC1DA62002EE960 /* pir_9@2x.png */; };
 		1C3E88461DC1DAFB002EE960 /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3E88451DC1DAFB002EE960 /* NewsTableViewCell.m */; };
@@ -391,6 +392,8 @@
 		1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell@3x.png"; sourceTree = "<group>"; };
 		1C28EC1C1DC0AE2400EB1D57 /* QPScanCodePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPScanCodePayViewController.h; sourceTree = "<group>"; };
 		1C28EC1D1DC0AE2400EB1D57 /* QPScanCodePayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPScanCodePayViewController.m; sourceTree = "<group>"; };
+		1C34846C1DD94B9E00720119 /* QPViewWaterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPViewWaterModel.h; sourceTree = "<group>"; };
+		1C34846D1DD94B9E00720119 /* QPViewWaterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPViewWaterModel.m; sourceTree = "<group>"; };
 		1C3E88301DC1D3DC002EE960 /* QPAccountRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPAccountRecordViewController.h; sourceTree = "<group>"; };
 		1C3E88311DC1D3DC002EE960 /* QPAccountRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPAccountRecordViewController.m; sourceTree = "<group>"; };
 		1C3E883A1DC1DA62002EE960 /* pir_9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pir_9@2x.png"; sourceTree = "<group>"; };
@@ -1719,6 +1722,8 @@
 				1CC00B9F1DD1B775004D00AA /* QPUserModel.m */,
 				1C5EF57B1DD898D0003BD331 /* QPAccountRecordModel.h */,
 				1C5EF57C1DD898D0003BD331 /* QPAccountRecordModel.m */,
+				1C34846C1DD94B9E00720119 /* QPViewWaterModel.h */,
+				1C34846D1DD94B9E00720119 /* QPViewWaterModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2210,6 +2215,7 @@
 				1C3E88591DC1E940002EE960 /* QPAccountRecordTableViewCell.m in Sources */,
 				195D44C71DC9806700EA3CAD /* CLShareManager+ShareView.m in Sources */,
 				19A63F8A1DBDF86B008797EB /* LGLAlertView.m in Sources */,
+				1C34846F1DD94B9E00720119 /* QPViewWaterModel.m in Sources */,
 				1C49B2AA1DBA1D4F00CF3DE1 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				1C49B2951DBA1D4F00CF3DE1 /* UIViewController+BarItem.m in Sources */,
 				1C49B2881DBA1D4F00CF3DE1 /* UILabel+Extension.m in Sources */,

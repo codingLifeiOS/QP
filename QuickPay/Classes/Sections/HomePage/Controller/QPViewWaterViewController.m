@@ -10,6 +10,7 @@
 #import "QPViewWaterTableViewCell.h"
 #import "QPTransactionDetailsViewController.h"
 #import "QPHttpManager.h"
+#import "QPViewWaterModel.h"
 
 static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 
@@ -19,6 +20,8 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 @property (nonatomic,strong)UILabel *dateLab;
 @property (nonatomic,strong)UILabel *numberLab;
 @property (nonatomic,strong)UILabel *settlementmoneyLab;
+@property(nonatomic,strong) NSMutableArray *viewaterArry;
+
 @end
 
 @implementation QPViewWaterViewController
@@ -28,7 +31,8 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [self addTitleToNavBar:@"查看流水"];
     [self createBackBarItem];
     [self configureTableView];
-    [self test];
+    [self getOrderRecordsNetworkRequest];
+    self.viewaterArry = [[NSMutableArray alloc]init];
 }
 #pragma mark - configureSubViews
 -(void)configureTableView
@@ -54,12 +58,13 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return self.viewaterArry.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QPViewWaterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    [cell updatecellWithModel:self.viewaterArry[indexPath.row]];
     cell.contentView.backgroundColor = [UIColor clearColor];
     return cell;
 }
@@ -112,12 +117,30 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     
     return view;
 }
-- (void)test{
-    
+- (void)getOrderRecordsNetworkRequest{
+    WEAKSELF();
+    [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
     [QPHttpManager getOrderRecordsCompletion:^(id responseData) {
-        
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+            STRONGSELF();
+            for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
+                QPViewWaterModel *model = [[QPViewWaterModel alloc]initWithDictionary:dic];
+                [strongSelf.viewaterArry addObject:model];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.homeTableView reloadData];
+            });
+        } else {
+            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+        }
     } failure:^(NSError *error) {
+        
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        
     }];
+
 }
 
 @end

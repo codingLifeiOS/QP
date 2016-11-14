@@ -55,7 +55,6 @@
 }
 
 - (void)updatecellWithModel:(QPAccountRecordModel*)model{
-
     self.dateLab.text = model.create_date;
     self.moneyLab.text = [NSString stringWithFormat:@"¥ %@",model.total_amount];
     

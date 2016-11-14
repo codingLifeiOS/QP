@@ -85,7 +85,7 @@
         [self.typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.typeimage);
             make.left.equalTo(self.typeimage.mas_right_mas).with.offset(10);
-            make.width.equalTo(@100);
+            make.width.equalTo(@180);
             make.height.lessThanOrEqualTo(@20);
         }];
         
@@ -111,6 +111,13 @@
         }];
     }
     return self;
+}
+
+- (void)updatecellWithModel:(QPViewWaterModel *)model{
+    
+    self.timeLab.text = model.create_date;
+    self.moneyLab.text = [NSString stringWithFormat:@"¥ %@",model.total_amount];
+    
 }
 
 @end
