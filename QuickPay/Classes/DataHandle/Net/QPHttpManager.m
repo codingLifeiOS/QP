@@ -93,34 +93,64 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:amount forKey:@"amount"];
     [params setValue:type forKey:@"payType"];
-    [params setValue:[QPUtils getMer_code] forKey:@"merchno"];
-//    [params setValue:userModel.bank_account_certno forKey:@"certno"];
+    [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
     [params setValue:@"QRCODE" forKey:@"payment_method"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
+//    [params setValue:@"4A8A00C5E40D6C8B5C34D9600F7535A9" forKey:@"signature"];
 
-    //  @"signature":@"C704F7D128812267F4675D5D016CA962",
-    // 本处对所有非空参数进行Md5 加密
+//     本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
-        
-        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
+        NSString *str1 = @"key=";
+        NSString *str2 = userModel.signatureKey;
+        NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:str];
         NSLog(@"签名加密前%@",signbefore);
-        
-//        NSString *UTF8str = [signbefore stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        NSLog(@"签名加密前UTF8编码%@",UTF8str);
-//
-//        NSStringEncoding gbkEncoding = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-//        NSString *gbkstr = [[NSString alloc] initWithData:[NSString dataForHexString:UTF8str] encoding:gbkEncoding];
-//        NSLog(@"签名加密前gbk编码%@",gbkstr);
-        
-//        NSString *ISO88591str =  [NSString stringWithFormat:@"%s",[NSString UnicodeToISO88591:UTF8str]];
-///        NSLog(@"签名加密前ISO88591编码%@",ISO88591str);
-
         NSString *sign = [NSString MD5:signbefore];
         NSLog(@"签名加密后%@",sign);
-        [params setObject:sign forKey:@"signature"];
+        [params setValue:sign forKey:@"signature"];
+
     }
     
     [QPHttpRequest POSTWithData:QP_Create_Order params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+    }];
+}
+
++ (void)getQRcodeReverseScanString:(NSString *)amount
+                 PayTye:(NSString *)type
+             Completion:(QPRequestSuccessHandler)handler
+                failure:(QPRequestFailureHandler)failhandler{
+    
+    QPUserModel *userModel = [QPHttpManager getUserModel];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:amount forKey:@"amount"];
+    [params setValue:type forKey:@"payType"];
+    [params setValue:@"289450956686441058" forKey:@"authno"];
+    [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
+    [params setValue:@"SK" forKey:@"payment_method"];
+    [params setValue:[QPUtils getToken] forKey:@"token"];
+    //    [params setValue:@"4A8A00C5E40D6C8B5C34D9600F7535A9" forKey:@"signature"];
+    
+    //     本处对所有非空参数进行Md5 加密
+    if (userModel.signatureKey) {
+        NSString *str1 = @"key=";
+        NSString *str2 = userModel.signatureKey;
+        NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:str];
+        NSLog(@"签名加密前%@",signbefore);
+        NSString *sign = [NSString MD5:signbefore];
+        NSLog(@"签名加密后%@",sign);
+        [params setValue:sign forKey:@"signature"];
+        
+    }
+    
+    [QPHttpRequest POSTWithData:QP_Create_Order_ReverseScan params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
         handler ? handler(success) : nil;
         
@@ -139,12 +169,15 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:orderSn forKey:@"order_sn"];
-    [params setValue:[QPUtils getMer_code] forKey:@"merchno"];
+    [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
 
     // 本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
-        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
+        NSString *str1 = @"key=";
+        NSString *str2 = userModel.signatureKey;
+        NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:str];
         NSString *sign = [NSString MD5:signbefore];
         [params setObject:sign forKey:@"signature"];
     }
@@ -177,10 +210,16 @@
 + (void)getSettlementRecordsCompletion:(QPRequestSuccessHandler)handler
                      failure:(QPRequestFailureHandler)failhandler{
     
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    
+    NSLog(@"locationString:%@",locationString);
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
-                          @"start_date":@"2016-11-13",
-                          @"end_date":@"2016-11-13",
+                          @"start_date":locationString,
+                          @"end_date":locationString,
                           };
     [QPHttpRequest POSTWithData:QP_GetSettlement_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         
@@ -197,10 +236,14 @@
 + (void)getOrderRecordsCompletion:(QPRequestSuccessHandler)handler
                      failure:(QPRequestFailureHandler)failhandler{
     
+    NSDate *  senddate=[NSDate date];
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *  locationString=[dateformatter stringFromDate:senddate];
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
-                          @"start_date":@"2016-11-10",
-                          @"end_date":@"2016-11-13",
+                          @"start_date":locationString,
+                          @"end_date":locationString,
                           };
     [QPHttpRequest POSTWithData:QP_GetOrder_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         handler ? handler(success) : nil;

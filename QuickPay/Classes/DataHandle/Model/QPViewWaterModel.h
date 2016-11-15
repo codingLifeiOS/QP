@@ -20,6 +20,7 @@
 #define MODEL_KEY_PAYMENT_STATUS  @"payment_status"
 #define MODEL_KEY_ACCOUNT_NAME  @"account_name"
 #define MODEL_KEY_ACCOUNTNO  @"accountno"
+#define MODEL_KEY_PAY_TYPE  @"pay_type"
 
 @interface QPViewWaterModel : NSObject
 
@@ -35,6 +36,7 @@
 @property(nonatomic, copy)NSString *payment_status;
 @property(nonatomic, copy)NSString *account_name;
 @property(nonatomic, copy)NSString *accountno;
+@property(nonatomic, copy)NSString *pay_type;
 
 - (id)initWithDictionary:(NSDictionary*)params;
 - (NSMutableDictionary *)toDictionary;

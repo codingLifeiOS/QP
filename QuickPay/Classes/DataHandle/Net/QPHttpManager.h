@@ -59,6 +59,18 @@
                failure:(QPRequestFailureHandler)failhandler;
 
 /**
+ *  刷卡支付接口(反扫)
+ *  @param amount 金额 精确到分 最多到十万位
+ *  @param type   支付类型  微信 :2 ;
+ *  @param handler 完成后的回调
+ */
++ (void)getQRcodeReverseScanString:(NSString *)amount
+                 PayTye:(NSString *)type
+             Completion:(QPRequestSuccessHandler)handler
+                failure:(QPRequestFailureHandler)failhandler;
+
+
+/**
  *  支付结果查询接口
  *  @param orderSn 订单ID
  *

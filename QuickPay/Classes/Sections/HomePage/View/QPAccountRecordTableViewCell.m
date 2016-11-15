@@ -55,7 +55,11 @@
 }
 
 - (void)updatecellWithModel:(QPAccountRecordModel*)model{
-    self.dateLab.text = model.create_date;
+    NSString *str;
+    if (model.create_date.length >= 10) {
+        str = [model.create_date substringToIndex:10];
+    }
+    self.dateLab.text = str;
     self.moneyLab.text = [NSString stringWithFormat:@"¥ %@",model.total_amount];
     
     switch ([model.balance_status integerValue]) {

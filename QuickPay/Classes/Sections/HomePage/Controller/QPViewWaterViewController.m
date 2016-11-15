@@ -30,7 +30,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [self addTitleToNavBar:@"查看流水"];
     [self createBackBarItem];
     [self configureTableView];
-//    [self getOrderRecordsNetworkRequest];
+    [self getOrderRecordsNetworkRequest];
     self.viewaterArry = [[NSMutableArray alloc]init];
 }
 #pragma mark - configureSubViews
@@ -62,13 +62,13 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 10;
+    return self.viewaterArry.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QPViewWaterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    [cell updatecellWithModel:self.viewaterArry[indexPath.row]];
+    [cell updatecellWithModel:self.viewaterArry[indexPath.row]];
     cell.contentView.backgroundColor = [UIColor clearColor];
     return cell;
 }

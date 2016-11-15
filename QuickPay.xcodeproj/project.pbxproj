@@ -88,6 +88,7 @@
 		1C4517031DB90AE900659B4E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C4517021DB90AE900659B4E /* main.m */; };
 		1C45170E1DB90AE900659B4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C45170D1DB90AE900659B4E /* Assets.xcassets */; };
 		1C4517111DB90AE900659B4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C45170F1DB90AE900659B4E /* LaunchScreen.storyboard */; };
+		1C46C99E1DDA9A2E0036E30C /* QPFixedQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C46C99D1DDA9A2E0036E30C /* QPFixedQRViewController.m */; };
 		1C49B2821DBA1D4F00CF3DE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C49B1B31DBA1D4E00CF3DE1 /* AppDelegate.m */; };
 		1C49B2831DBA1D4F00CF3DE1 /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C49B1BB1DBA1D4E00CF3DE1 /* NSArray+Log.m */; };
 		1C49B2841DBA1D4F00CF3DE1 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C49B1BD1DBA1D4E00CF3DE1 /* NSDate+Extension.m */; };
@@ -414,6 +415,8 @@
 		1C45170D1DB90AE900659B4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1C4517101DB90AE900659B4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1C4517121DB90AE900659B4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C46C99C1DDA9A2E0036E30C /* QPFixedQRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPFixedQRViewController.h; sourceTree = "<group>"; };
+		1C46C99D1DDA9A2E0036E30C /* QPFixedQRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPFixedQRViewController.m; sourceTree = "<group>"; };
 		1C49B1B21DBA1D4E00CF3DE1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1C49B1B31DBA1D4E00CF3DE1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1C49B1BA1DBA1D4E00CF3DE1 /* NSArray+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Log.h"; sourceTree = "<group>"; };
@@ -1335,6 +1338,8 @@
 				1CCB8F311DC2F3FF0036584E /* QPViewWaterViewController.m */,
 				1CCB8F3A1DC32B2E0036584E /* QPTransactionDetailsViewController.h */,
 				1CCB8F3B1DC32B2E0036584E /* QPTransactionDetailsViewController.m */,
+				1C46C99C1DDA9A2E0036E30C /* QPFixedQRViewController.h */,
+				1C46C99D1DDA9A2E0036E30C /* QPFixedQRViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2211,6 +2216,7 @@
 				1C49B2911DBA1D4F00CF3DE1 /* UIView+layerAdditions.m in Sources */,
 				1C49B2901DBA1D4F00CF3DE1 /* UIView+Additions.m in Sources */,
 				1C49B2D71DBA234700CF3DE1 /* QPUserCenterViewController.m in Sources */,
+				1C46C99E1DDA9A2E0036E30C /* QPFixedQRViewController.m in Sources */,
 				1C49B2A31DBA1D4F00CF3DE1 /* AFURLConnectionOperation.m in Sources */,
 				1C3E88591DC1E940002EE960 /* QPAccountRecordTableViewCell.m in Sources */,
 				195D44C71DC9806700EA3CAD /* CLShareManager+ShareView.m in Sources */,

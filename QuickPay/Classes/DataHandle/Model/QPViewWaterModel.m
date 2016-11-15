@@ -15,6 +15,7 @@
     self.payment_status = nil;
     self.account_name = nil;
     self.accountno = nil;
+    self.pay_type = nil;
 }
 
 - (id)initWithDictionary:(NSDictionary*)params {
@@ -32,6 +33,7 @@
      self.payment_status = [params valueForKey:MODEL_KEY_PAYMENT_STATUS];
      self.account_name = [params valueForKey:MODEL_KEY_ACCOUNT_NAME];
      self.accountno = [params valueForKey:MODEL_KEY_ACCOUNTNO];
+     self.pay_type = [params valueForKey:MODEL_KEY_PAY_TYPE];
    }
    return self;
 }
@@ -50,6 +52,8 @@
    [dic setValue:self.payment_status forKey:MODEL_KEY_PAYMENT_STATUS];
    [dic setValue:self.account_name forKey:MODEL_KEY_ACCOUNT_NAME];
    [dic setValue:self.accountno forKey:MODEL_KEY_ACCOUNTNO];
+   [dic setValue:self.pay_type forKey:MODEL_KEY_PAY_TYPE];
+
    return dic;
 }
 

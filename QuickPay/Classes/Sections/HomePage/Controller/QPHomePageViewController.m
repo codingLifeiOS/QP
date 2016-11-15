@@ -14,6 +14,8 @@
 #import "QPDigitalKeyboardView.h"
 #import "CLShareManager.h"
 #import "QPHttpManager.h"
+#import "QPFixedQRViewController.h"
+
 @interface QPHomePageViewController ()<UIAlertViewDelegate,BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
 {
     UIView *menuBgView;
@@ -208,16 +210,17 @@
     NSInteger tag = view.tag;
     switch (tag) {
         case 200:
-            [self showQPScanCodePayView];
-            break;
-        case 201:
-        {
             [self hideTabBar];
             // 键盘
             keyboardView = [[QPDigitalKeyboardView alloc]initWithFrame:self.view.bounds];
             keyboardView.delegate = self;
             [self.view addSubview:keyboardView];
-            
+//            [self showQPScanCodePayView];
+            break;
+        case 201:
+        {
+            QPFixedQRViewController *QPFixedQRVC = [[QPFixedQRViewController alloc]init];
+            [self.navigationController pushViewController:QPFixedQRVC animated:YES];
         }
             break;
         case 202:
@@ -236,7 +239,7 @@
             [self shareButtonClick];
             break;
         case 211:
-            [[QPHUDManager sharedInstance]showTextOnly:@"更多"];
+            [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
             break;
             
         default:
@@ -294,19 +297,26 @@
 //    } failure:^(NSError *error) {
 //        
 //    }];
-//    
-//    [QPHttpManager orderquery:@"appx1611141529381" Completion:^(id responseData) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    } ];
-//    
     
-//    [QPHttpManager getMerchantCode:^(id responseData) {
+//    [QPHttpManager getQRcodeReverseScanString:@"10" PayTye:@"0" Completion:^(id responseData) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    }];
+
+//
+//    [QPHttpManager orderquery:@"H5x6111310532091" Completion:^(id responseData) {
 //        
 //    } failure:^(NSError *error) {
 //        
 //    } ];
+
+    
+    [QPHttpManager getOrderRecordsCompletion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+    } ];
 
 }
 
