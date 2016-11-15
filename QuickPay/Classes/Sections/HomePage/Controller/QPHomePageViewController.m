@@ -292,11 +292,11 @@
 #pragma mark - 接口请求
 - (void)test{
     
-//    [QPHttpManager getQRcodeString:@"10" PayTye:@"2" Completion:^(id responseData) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
+    [QPHttpManager getQRcodeString:@"10" PayTye:@"2" Completion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
     
 //    [QPHttpManager getQRcodeReverseScanString:@"10" PayTye:@"0" Completion:^(id responseData) {
 //        
@@ -312,11 +312,11 @@
 //    } ];
 
     
-    [QPHttpManager getOrderRecordsCompletion:^(id responseData) {
-        
-    } failure:^(NSError *error) {
-        
-    } ];
+//    [QPHttpManager getOrderRecordsCompletion:^(id responseData) {
+//        
+//    } failure:^(NSError *error) {
+//        
+//    } ];
 
 }
 
