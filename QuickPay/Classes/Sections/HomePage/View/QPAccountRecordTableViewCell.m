@@ -7,7 +7,6 @@
 //
 
 #import "QPAccountRecordTableViewCell.h"
-
 @implementation QPAccountRecordTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

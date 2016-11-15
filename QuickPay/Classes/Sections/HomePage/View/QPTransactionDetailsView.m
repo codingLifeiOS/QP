@@ -7,6 +7,7 @@
 //
 
 #import "QPTransactionDetailsView.h"
+#import "QPViewWaterModel.h"
 
 @implementation QPTransactionDetailsView
 
@@ -142,6 +143,30 @@
         make.width.equalTo(self.receivableLab);
         make.height.equalTo(self.receivableLab);;
     }];
+}
+- (void)updatecellWithModel:(QPViewWaterModel *)model{
+    self.tradingnumberLab.text = [NSString stringWithFormat:@"交易单号：%@",model.order_sn];
+    self.tradingtimeLab.text = [NSString stringWithFormat:@"交易时间：%@",model.create_date];
+    self.netreceiptsLab.text = [NSString stringWithFormat:@"实收 ¥ %@",model.total_amount];
+    self.receivableLab.text = [NSString stringWithFormat:@"应收金额 ：¥ %@",model.total_amount];
+    switch ([model.payment_status integerValue]) {
+        case 1:
+            self.tradingstatusLab.text = @"交易状态: 未付款";
+            break;
+        case 2:
+            self.tradingstatusLab.text = @"交易状态: 已付款";
+            break;
+            default:
+            break;
+    }
+
+    if ([model.pay_type isEqualToString:@"2"]) {
+        _typeLab.text = @"支付宝收款";
+        _typeimage.image = [UIImage imageNamed:@"jiesuan_zhifubao"];
+    } else {
+        _typeLab.text = @"微信收款";
+        _typeimage.image = [UIImage imageNamed:@"jiesuan_weixin"];
+    }
 }
 
 @end

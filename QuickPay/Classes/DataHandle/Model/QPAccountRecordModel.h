@@ -28,6 +28,7 @@
 @property(nonatomic, copy)NSString *balance_sn;
 @property(nonatomic, copy)NSString *arena_name;
 
+
 - (instancetype)initWithDictionary:(NSDictionary*)params;
 - (NSMutableDictionary *)toDictionary;
 
