@@ -9,11 +9,14 @@
 #import "QPScanCodePayViewController.h"
 #import "QPQRView.h"
 #import "ZBarSDK.h"
-
+#import "QPHttpManager.h"
 @interface QPScanCodePayViewController ()<ZBarReaderViewDelegate>
 {
     ZBarReaderView *_readview;          // 扫描二维码ZBarReaderView
     QPQRView *_qrRectView;             // 自定义的扫描视图
+    
+    UIView *backView ;
+    UIImageView *codeImage;// 生成的二维码
 }
 
 @end
@@ -26,6 +29,7 @@
     [self addTitleToNavBar:@"扫一扫"];
     [self createBackBarItem];
     [self configuredZBarReader];
+    [self configureCodeView];
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
@@ -82,6 +86,47 @@
         make.right.equalTo(_readview).with.offset(0);
         make.bottom.equalTo(_readview).with.offset(0);
     }];
+    
+    UILabel *amoutLable = [[UILabel alloc]init];
+    amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
+    amoutLable.textColor = [UIColor orangeColor];
+    amoutLable.textAlignment = NSTextAlignmentCenter;
+    amoutLable.frame = CGRectMake(0, 220+40+20, SCREEN_WIDTH, 20);
+    [_readview addSubview:amoutLable];
+    
+    UIButton * changeBtn = [[UIButton alloc]init];
+    changeBtn.frame = CGRectMake(0, amoutLable.bottom+40, SCREEN_WIDTH, 30);
+    [changeBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
+    changeBtn.backgroundColor = [UIColor blueColor];
+    [_readview addSubview:changeBtn];
+    [changeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
+ }
+
+- (void)configureCodeView{
+    
+    backView = [[UIView alloc]initWithFrame:self.view.bounds];
+    [self.view addSubview:backView];
+    
+    codeImage = [[UIImageView alloc]init];
+    codeImage.frame = CGRectMake(100, 40, 220, 220);
+    codeImage.backgroundColor = [UIColor orangeColor];
+    [backView addSubview:codeImage];
+    
+    UILabel *amoutLable = [[UILabel alloc]init];
+    amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
+    amoutLable.textColor = [UIColor orangeColor];
+    amoutLable.textAlignment = NSTextAlignmentCenter;
+    amoutLable.frame = CGRectMake(0, 220+40+20, SCREEN_WIDTH, 20);
+    [backView addSubview:amoutLable];
+    
+    UIButton * changeBtn1 = [[UIButton alloc]init];
+    changeBtn1.frame = CGRectMake(0, amoutLable.bottom+40, SCREEN_WIDTH, 30);
+    [changeBtn1 setTitle:@"切换支付方式" forState:UIControlStateNormal];
+    changeBtn1.backgroundColor = [UIColor orangeColor];
+    [backView addSubview:changeBtn1];
+    [changeBtn1 addTarget:self action:@selector(changePayType1) forControlEvents:UIControlEventTouchUpInside];
+    backView.hidden = YES;
+
 }
 
 #pragma mark - ZBarReaderViewDelegate
@@ -137,6 +182,7 @@
     
     [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"扫描结果：11111%@",url]];
     NSLog(@"扫描成功！%@", url);
+    [self scansuccessToPayWithAuthno:url];
      if (![url containsString:@"meetingserver/scanning"]) {
          [[QPHUDManager sharedInstance] showTextOnly:@"不是微信支付的二维码"];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -145,8 +191,43 @@
         return;
     }
     // 扫描正常处理
-    
 }
 
+- (void)changePayType{
+
+    _readview.hidden = YES ;
+    backView.hidden = NO;
+    [self getQRCodetoPay];
+}
+
+- (void)changePayType1{
+
+    _readview.hidden = NO;
+    backView.hidden = YES;
+}
+// 刷卡支付
+- (void)scansuccessToPayWithAuthno:(NSString*)authno{
+  
+  [QPHttpManager creditCardPaymentByScanString:self.payModel.amount PayTye:self.payModel.payType Authno:authno Completion:^(id responseData) {
+      
+  } failure:^(NSError *error) {
+      
+  }];
+
+}
+
+// 生成二维码支付
+- (void)getQRCodetoPay{
+    
+    [QPHttpManager getQRcodeString:self.payModel.amount PayTye:self.payModel.payType Completion:^(id responseData) {
+//        codeImage.image = [QRCodeGeneratorqr ImageForString:@"" imageSize:imgView.bounds.size.width];
+//      codeImage.image
+    } failure:^(NSError *error) {
+        
+    }];
+    
+
+    
+}
 
 @end

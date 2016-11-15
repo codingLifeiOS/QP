@@ -64,8 +64,9 @@
  *  @param type   支付类型  微信 :2 ;
  *  @param handler 完成后的回调
  */
-+ (void)getQRcodeReverseScanString:(NSString *)amount
++ (void)creditCardPaymentByScanString:(NSString *)amount
                  PayTye:(NSString *)type
+                Authno:(NSString*)authno
              Completion:(QPRequestSuccessHandler)handler
                 failure:(QPRequestFailureHandler)failhandler;
 

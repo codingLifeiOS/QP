@@ -42,7 +42,8 @@
     __weak __typeof(self) weakSelf = self;
     [_line mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf);
-        make.centerY.equalTo(weakSelf).with.offset(-40-110+6);
+//        make.centerY.equalTo(weakSelf).with.offset(-40-110+6);
+        make.top.equalTo(@40);
         make.size.mas_equalTo(CGSizeMake(self.transparentArea.width, 12));
     }];
 }
@@ -87,9 +88,7 @@
     CGRect screenDrawRect =CGRectMake(0, 0, viewSize.width,viewSize.height);
     
     //中间清空的矩形框
-    CGRect clearDrawRect = CGRectMake(screenDrawRect.size.width / 2 - self.transparentArea.width / 2,
-                                      screenDrawRect.size.height / 2 - self.transparentArea.height / 2 -40,
-                                      self.transparentArea.width,self.transparentArea.height);
+    CGRect clearDrawRect = CGRectMake(screenDrawRect.size.width / 2 - self.transparentArea.width / 2, 40,self.transparentArea.width,self.transparentArea.height);
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     [self addScreenFillRect:ctx rect:screenDrawRect];

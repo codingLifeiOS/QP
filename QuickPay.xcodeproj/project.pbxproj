@@ -73,6 +73,7 @@
 		1C1FAA641DCC59B100B54DBB /* QPFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAA631DCC59B100B54DBB /* QPFileManager.m */; };
 		1C1FAA671DCC5CFC00B54DBB /* QPRequestSerVice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAA661DCC5CFC00B54DBB /* QPRequestSerVice.m */; };
 		1C1FAA701DCC60F800B54DBB /* QPHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAA6F1DCC60F800B54DBB /* QPHttpManager.m */; };
+		1C21C64F1DDB408100F2BD9C /* QPPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C21C64E1DDB408100F2BD9C /* QPPayModel.m */; };
 		1C28EC0F1DC04A3100EB1D57 /* tell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C28EC0D1DC04A3100EB1D57 /* tell@2x.png */; };
 		1C28EC101DC04A3100EB1D57 /* tell@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */; };
 		1C28EC1F1DC0AE2400EB1D57 /* QPScanCodePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C28EC1D1DC0AE2400EB1D57 /* QPScanCodePayViewController.m */; };
@@ -389,6 +390,8 @@
 		1C1FAA6B1DCC5F4000B54DBB /* InterfaceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceConfig.h; sourceTree = "<group>"; };
 		1C1FAA6E1DCC60F800B54DBB /* QPHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPHttpManager.h; sourceTree = "<group>"; };
 		1C1FAA6F1DCC60F800B54DBB /* QPHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPHttpManager.m; sourceTree = "<group>"; };
+		1C21C64D1DDB408100F2BD9C /* QPPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPPayModel.h; sourceTree = "<group>"; };
+		1C21C64E1DDB408100F2BD9C /* QPPayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPPayModel.m; sourceTree = "<group>"; };
 		1C28EC0D1DC04A3100EB1D57 /* tell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell@2x.png"; sourceTree = "<group>"; };
 		1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell@3x.png"; sourceTree = "<group>"; };
 		1C28EC1C1DC0AE2400EB1D57 /* QPScanCodePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPScanCodePayViewController.h; sourceTree = "<group>"; };
@@ -1729,6 +1732,8 @@
 				1C5EF57C1DD898D0003BD331 /* QPAccountRecordModel.m */,
 				1C34846C1DD94B9E00720119 /* QPViewWaterModel.h */,
 				1C34846D1DD94B9E00720119 /* QPViewWaterModel.m */,
+				1C21C64D1DDB408100F2BD9C /* QPPayModel.h */,
+				1C21C64E1DDB408100F2BD9C /* QPPayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2237,6 +2242,7 @@
 				1C91C3241DCC2B3100DC5BB9 /* QPBusinessCooperationViewController.m in Sources */,
 				1CF302131DBF617A00935113 /* QPMemberViewController.m in Sources */,
 				1C49B2C51DBA1D4F00CF3DE1 /* UIScrollView+MJExtension.m in Sources */,
+				1C21C64F1DDB408100F2BD9C /* QPPayModel.m in Sources */,
 				1C7533631DC830EC0026B5E5 /* QPDigitalKeyboardView.m in Sources */,
 				1C49B2D11DBA22FD00CF3DE1 /* QPHomePageViewController.m in Sources */,
 				1C49B28B1DBA1D4F00CF3DE1 /* UIFont+Extension.m in Sources */,

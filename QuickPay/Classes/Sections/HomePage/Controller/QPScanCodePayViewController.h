@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QPPayModel.h"
 @interface QPScanCodePayViewController : UIViewController
-
+@property (nonatomic,strong) QPPayModel *payModel;
 @end

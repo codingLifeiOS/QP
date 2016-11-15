@@ -15,6 +15,7 @@
 #import "CLShareManager.h"
 #import "QPHttpManager.h"
 #import "QPFixedQRViewController.h"
+#import "QPPayModel.h"
 
 @interface QPHomePageViewController ()<UIAlertViewDelegate,BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
 {
@@ -177,12 +178,21 @@
 
 - (void)payBtnClickDelegate:(PayType)type amoumt:(NSString*)amount{
     
+    QPPayModel *payModel;
     if (type == AlipayType) {
         [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"支付宝付款%@元",amount]];
+        payModel = [[QPPayModel alloc]init];
+        payModel.payType = @"1";
+        payModel.amount = amount;
+       
     } else {
         [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"微信付款%@元",amount]];
+        payModel = [[QPPayModel alloc]init];
+        payModel.payType = @"2";
+        payModel.amount = amount;
+
     }
-    [self showQPScanCodePayView];
+    [self showQPScanCodePayViewWithPayModel:payModel];
 }
 #pragma mark -UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -198,9 +208,10 @@
 }
 
 #pragma mark - 跳转到扫一扫界面
-- (void)showQPScanCodePayView
+- (void)showQPScanCodePayViewWithPayModel:(QPPayModel*)model
 {
     QPScanCodePayViewController *QPScanCodePayVC =[[QPScanCodePayViewController alloc]init];
+    QPScanCodePayVC.payModel = model;
     [self.navigationController pushViewController:QPScanCodePayVC animated:YES];
 }
 #pragma mark - private methods
@@ -215,7 +226,6 @@
             keyboardView = [[QPDigitalKeyboardView alloc]initWithFrame:self.view.bounds];
             keyboardView.delegate = self;
             [self.view addSubview:keyboardView];
-//            [self showQPScanCodePayView];
             break;
         case 201:
         {
@@ -292,17 +302,12 @@
 #pragma mark - 接口请求
 - (void)test{
     
-    [QPHttpManager getQRcodeString:@"10" PayTye:@"1" Completion:^(id responseData) {
-        
-    } failure:^(NSError *error) {
-        
-    }];
-    
-//    [QPHttpManager getQRcodeReverseScanString:@"10" PayTye:@"0" Completion:^(id responseData) {
+//    [QPHttpManager getQRcodeString:@"10" PayTye:@"1" Completion:^(id responseData) {
 //        
 //    } failure:^(NSError *error) {
 //        
 //    }];
+    
 
 //
 //    [QPHttpManager orderquery:@"H5x6111310532091" Completion:^(id responseData) {

@@ -112,16 +112,17 @@
     }];
 }
 
-+ (void)getQRcodeReverseScanString:(NSString *)amount
-                 PayTye:(NSString *)type
-             Completion:(QPRequestSuccessHandler)handler
-                failure:(QPRequestFailureHandler)failhandler{
++ (void)creditCardPaymentByScanString:(NSString *)amount
+                                 PayTye:(NSString *)type
+                                 Authno:(NSString*)authno
+                             Completion:(QPRequestSuccessHandler)handler
+                                failure:(QPRequestFailureHandler)failhandler{
     
     QPUserModel *userModel = [QPHttpManager getUserModel];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:amount forKey:@"amount"];
     [params setValue:type forKey:@"pay_type"];
-    [params setValue:@"289450956686441058" forKey:@"authno"];
+    [params setValue:authno forKey:@"authno"];
     [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
     [params setValue:@"SK" forKey:@"payment_method"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
