@@ -292,7 +292,7 @@
 #pragma mark - 接口请求
 - (void)test{
     
-    [QPHttpManager getQRcodeString:@"10" PayTye:@"2" Completion:^(id responseData) {
+    [QPHttpManager getQRcodeString:@"10" PayTye:@"1" Completion:^(id responseData) {
         
     } failure:^(NSError *error) {
         
