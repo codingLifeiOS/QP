@@ -89,26 +89,17 @@
                 failure:(QPRequestFailureHandler)failhandler{
     
     QPUserModel *userModel = [QPHttpManager getUserModel];
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:amount forKey:@"amount"];
     [params setValue:type forKey:@"payType"];
     [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
     [params setValue:@"QRCODE" forKey:@"payment_method"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
-//    [params setValue:@"4A8A00C5E40D6C8B5C34D9600F7535A9" forKey:@"signature"];
-
 //     本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
-        NSString *str1 = @"key=";
-        NSString *str2 = userModel.signatureKey;
-        NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
-        NSString *signbefore = [NSString stringFromDic:params andBaseString:str];
-        NSLog(@"签名加密前%@",signbefore);
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
         NSString *sign = [NSString MD5:signbefore];
-        NSLog(@"签名加密后%@",sign);
-        [params setValue:sign forKey:@"signature"];
-
+       [params setValue:sign forKey:@"signature"];
     }
     
     [QPHttpRequest POSTWithData:QP_Create_Order params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
@@ -127,7 +118,6 @@
                 failure:(QPRequestFailureHandler)failhandler{
     
     QPUserModel *userModel = [QPHttpManager getUserModel];
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:amount forKey:@"amount"];
     [params setValue:type forKey:@"payType"];
@@ -135,19 +125,11 @@
     [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
     [params setValue:@"SK" forKey:@"payment_method"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
-    //    [params setValue:@"4A8A00C5E40D6C8B5C34D9600F7535A9" forKey:@"signature"];
-    
     //     本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
-        NSString *str1 = @"key=";
-        NSString *str2 = userModel.signatureKey;
-        NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
-        NSString *signbefore = [NSString stringFromDic:params andBaseString:str];
-        NSLog(@"签名加密前%@",signbefore);
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
         NSString *sign = [NSString MD5:signbefore];
-        NSLog(@"签名加密后%@",sign);
-        [params setValue:sign forKey:@"signature"];
-        
+       [params setValue:sign forKey:@"signature"];
     }
     
     [QPHttpRequest POSTWithData:QP_Create_Order_ReverseScan params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
@@ -171,15 +153,11 @@
     [params setValue:orderSn forKey:@"order_sn"];
     [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
-
-    // 本处对所有非空参数进行Md5 加密
+    //     本处对所有非空参数进行Md5 加密
     if (userModel.signatureKey) {
-        NSString *str1 = @"key=";
-        NSString *str2 = userModel.signatureKey;
-        NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
-        NSString *signbefore = [NSString stringFromDic:params andBaseString:str];
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
         NSString *sign = [NSString MD5:signbefore];
-        [params setObject:sign forKey:@"signature"];
+        [params setValue:sign forKey:@"signature"];
     }
     
     [QPHttpRequest POSTWithData:QP_Qrder_Query params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
@@ -210,8 +188,8 @@
 + (void)getSettlementRecordsCompletion:(QPRequestSuccessHandler)handler
                      failure:(QPRequestFailureHandler)failhandler{
     
-    NSDate *  senddate=[NSDate date];
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    NSDate *  senddate = [NSDate date];
+    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"yyyy-MM-dd"];
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     
@@ -236,8 +214,8 @@
 + (void)getOrderRecordsCompletion:(QPRequestSuccessHandler)handler
                      failure:(QPRequestFailureHandler)failhandler{
     
-    NSDate *  senddate=[NSDate date];
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    NSDate *  senddate =[NSDate date];
+    NSDateFormatter  *dateformatter = [[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"yyyy-MM-dd"];
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
@@ -261,7 +239,6 @@
     NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return merInfolist[0];
-    
 }
 
 @end
