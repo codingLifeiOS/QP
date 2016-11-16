@@ -11,11 +11,9 @@
 #import "QPTransactionDetailsViewController.h"
 #import "QPHttpManager.h"
 #import "QPViewWaterModel.h"
-
 static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 
 @interface QPViewWaterViewController ()<UITableViewDelegate,UITableViewDataSource>
-
 @property(nonatomic,strong) UITableView *homeTableView;
 @property(nonatomic,strong) UILabel *dateLab;
 @property(nonatomic,strong) UILabel *numberLab;
@@ -32,6 +30,11 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [self configureTableView];
     [self getOrderRecordsNetworkRequest];
     self.viewaterArry = [[NSMutableArray alloc]init];
+    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(datechoicebtnclick)];
+}
+
+-(void)datechoicebtnclick{
+    
 }
 #pragma mark - configureSubViews
 -(void)configureTableView

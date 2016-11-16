@@ -10,11 +10,11 @@
 #import "QPQRView.h"
 #import "ZBarSDK.h"
 #import "QPHttpManager.h"
+#import "QRCodeGenerator.h"
 @interface QPScanCodePayViewController ()<ZBarReaderViewDelegate>
 {
     ZBarReaderView *_readview;          // 扫描二维码ZBarReaderView
     QPQRView *_qrRectView;             // 自定义的扫描视图
-    
     UIView *backView ;
     UIImageView *codeImage;// 生成的二维码
 }
@@ -91,15 +91,24 @@
     amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
     amoutLable.textColor = [UIColor orangeColor];
     amoutLable.textAlignment = NSTextAlignmentCenter;
-    amoutLable.frame = CGRectMake(0, 220+40+20, SCREEN_WIDTH, 20);
+    amoutLable.frame = CGRectMake(0, _readview.y+270, SCREEN_WIDTH, 30);
+    amoutLable.font = [UIFont systemFontOfSize:20];
     [_readview addSubview:amoutLable];
     
-    UIButton * changeBtn = [[UIButton alloc]init];
-    changeBtn.frame = CGRectMake(0, amoutLable.bottom+40, SCREEN_WIDTH, 30);
-    [changeBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
-    changeBtn.backgroundColor = [UIColor blueColor];
-    [_readview addSubview:changeBtn];
-    [changeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *paytapeLable = [[UILabel alloc]init];
+    paytapeLable.text =  @"请扫描消费者的付款码完成收款";
+    paytapeLable.textColor = [UIColor whiteColor];
+    paytapeLable.textAlignment = NSTextAlignmentCenter;
+    paytapeLable.font = [UIFont systemFontOfSize:16];
+    paytapeLable.frame = CGRectMake(0, amoutLable.bottom, SCREEN_WIDTH, 30);
+    [_readview addSubview:paytapeLable];
+    
+    UIButton * changecodeBtn = [[UIButton alloc]init];
+    changecodeBtn.frame = CGRectMake(40, paytapeLable.bottom+10, SCREEN_WIDTH-80, 40);
+    [changecodeBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
+    changecodeBtn.backgroundColor = [UIColor blueColor];
+    [_readview addSubview:changecodeBtn];
+    [changecodeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
  }
 
 - (void)configureCodeView{
@@ -107,24 +116,36 @@
     backView = [[UIView alloc]initWithFrame:self.view.bounds];
     [self.view addSubview:backView];
     
+    CGFloat width = 220;
+    CGFloat height = 220;
     codeImage = [[UIImageView alloc]init];
-    codeImage.frame = CGRectMake(100, 40, 220, 220);
-    codeImage.backgroundColor = [UIColor orangeColor];
+    codeImage.frame = CGRectMake((SCREEN_WIDTH-220)/2, 40, width, height);
+//    codeImage.backgroundColor = [UIColor orangeColor];
     [backView addSubview:codeImage];
     
     UILabel *amoutLable = [[UILabel alloc]init];
     amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
     amoutLable.textColor = [UIColor orangeColor];
     amoutLable.textAlignment = NSTextAlignmentCenter;
-    amoutLable.frame = CGRectMake(0, 220+40+20, SCREEN_WIDTH, 20);
+    amoutLable.font = [UIFont systemFontOfSize:20];
+    amoutLable.frame = CGRectMake(0, codeImage.bottom+10, SCREEN_WIDTH, 30);
     [backView addSubview:amoutLable];
     
-    UIButton * changeBtn1 = [[UIButton alloc]init];
-    changeBtn1.frame = CGRectMake(0, amoutLable.bottom+40, SCREEN_WIDTH, 30);
-    [changeBtn1 setTitle:@"切换支付方式" forState:UIControlStateNormal];
-    changeBtn1.backgroundColor = [UIColor orangeColor];
-    [backView addSubview:changeBtn1];
-    [changeBtn1 addTarget:self action:@selector(changePayType1) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *promptLable = [[UILabel alloc]init];
+    promptLable.text =  @"请使用微信扫一扫付款";
+    promptLable.textColor = [UIColor blackColor];
+    promptLable.textAlignment = NSTextAlignmentCenter;
+    promptLable.font = [UIFont systemFontOfSize:16];
+    promptLable.frame = CGRectMake(0, amoutLable.bottom, SCREEN_WIDTH, 30);
+    [backView addSubview:promptLable];
+
+    UIButton * changeZBarBtn = [[UIButton alloc]init];
+    changeZBarBtn.frame = CGRectMake(40, promptLable.bottom+10, SCREEN_WIDTH-80, 40);
+    [changeZBarBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
+    changeZBarBtn.backgroundColor = [UIColor orangeColor];
+    [backView addSubview:changeZBarBtn];
+    [changeZBarBtn addTarget:self action:@selector(changePayType1) forControlEvents:UIControlEventTouchUpInside];
     backView.hidden = YES;
 
 }
@@ -220,14 +241,10 @@
 - (void)getQRCodetoPay{
     
     [QPHttpManager getQRcodeString:self.payModel.amount PayTye:self.payModel.payType Completion:^(id responseData) {
-//        codeImage.image = [QRCodeGeneratorqr ImageForString:@"" imageSize:imgView.bounds.size.width];
-//      codeImage.image
+        codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:codeImage.bounds.size.width];
     } failure:^(NSError *error) {
         
     }];
-    
-
-    
 }
 
 @end
