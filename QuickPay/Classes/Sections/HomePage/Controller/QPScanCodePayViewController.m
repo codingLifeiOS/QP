@@ -30,13 +30,13 @@
     [self createBackBarItem];
     [self configuredZBarReader];
     [self configureCodeView];
+    [self getQRCodetoPay];
+
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    // 开始扫描
-    [self setZBarReaderViewStart];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -145,7 +145,7 @@
     [changeZBarBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
     changeZBarBtn.backgroundColor = [UIColor orangeColor];
     [backView addSubview:changeZBarBtn];
-    [changeZBarBtn addTarget:self action:@selector(changePayType1) forControlEvents:UIControlEventTouchUpInside];
+    [changeZBarBtn addTarget:self action:@selector(changeToScanPay) forControlEvents:UIControlEventTouchUpInside];
     backView.hidden = YES;
 
 }
@@ -203,27 +203,36 @@
     
     [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"扫描结果：11111%@",url]];
     NSLog(@"扫描成功！%@", url);
-    [self scansuccessToPayWithAuthno:url];
-     if (![url containsString:@"meetingserver/scanning"]) {
-         [[QPHUDManager sharedInstance] showTextOnly:@"不是微信支付的二维码"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self setZBarReaderViewStart];
-        });
-        return;
+    // 18 位订单号
+    NSString *regex = @"^[0-9]{18}$";
+    // 创建谓词对象并设定条件的表达式
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    // 判断的字符串
+     // 对字符串进行判断
+    if ([predicate evaluateWithObject:url]) {
+        [self scansuccessToPayWithAuthno:url];
+
+    } else {
+        [[QPHUDManager sharedInstance] showTextOnly:@"不是支付的二维码"];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self setZBarReaderViewStart];
+//        });
     }
-    // 扫描正常处理
 }
 
+// 切换到生成二维码支付
 - (void)changePayType{
 
     _readview.hidden = YES ;
     backView.hidden = NO;
-    [self getQRCodetoPay];
 }
 
-- (void)changePayType1{
+//  切换到扫码刷卡支付
+- (void)changeToScanPay{
 
     _readview.hidden = NO;
+    // 开始扫描
+    [self setZBarReaderViewStart];
     backView.hidden = YES;
 }
 // 刷卡支付
@@ -241,7 +250,12 @@
 - (void)getQRCodetoPay{
     
     [QPHttpManager getQRcodeString:self.payModel.amount PayTye:self.payModel.payType Completion:^(id responseData) {
+        if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
+            [[QPHUDManager sharedInstance]showTextOnly:@"加载中"];
         codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:codeImage.bounds.size.width];
+            [[QPHUDManager sharedInstance]hiddenHUD];
+        }
+    
     } failure:^(NSError *error) {
         
     }];
