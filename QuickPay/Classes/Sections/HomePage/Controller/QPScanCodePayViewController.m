@@ -26,12 +26,16 @@
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addTitleToNavBar:@"扫一扫"];
+    if ([self.payModel.payType isEqualToString:@"2"]) {
+        [self addTitleToNavBar:@"微信收款"];
+    } else {
+        [self addTitleToNavBar:@"支付宝收款"];
+    }
     [self createBackBarItem];
     [self configuredZBarReader];
     [self configureCodeView];
-    [self getQRCodetoPay];
-
+//    [self getQRCodetoPay];
+    [self setZBarReaderViewStart];
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
@@ -91,7 +95,7 @@
     amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
     amoutLable.textColor = [UIColor orangeColor];
     amoutLable.textAlignment = NSTextAlignmentCenter;
-    amoutLable.frame = CGRectMake(0, _readview.y+270, SCREEN_WIDTH, 30);
+    amoutLable.frame = CGRectMake(0, _readview.y+280, SCREEN_WIDTH, 30);
     amoutLable.font = [UIFont systemFontOfSize:20];
     [_readview addSubview:amoutLable];
     
@@ -100,13 +104,16 @@
     paytapeLable.textColor = [UIColor whiteColor];
     paytapeLable.textAlignment = NSTextAlignmentCenter;
     paytapeLable.font = [UIFont systemFontOfSize:16];
-    paytapeLable.frame = CGRectMake(0, amoutLable.bottom, SCREEN_WIDTH, 30);
+    paytapeLable.frame = CGRectMake(0, amoutLable.bottom+5, SCREEN_WIDTH, 30);
     [_readview addSubview:paytapeLable];
     
     UIButton * changecodeBtn = [[UIButton alloc]init];
-    changecodeBtn.frame = CGRectMake(40, paytapeLable.bottom+10, SCREEN_WIDTH-80, 40);
+    changecodeBtn.frame = CGRectMake(40, paytapeLable.bottom+15, SCREEN_WIDTH-80, 40);
     [changecodeBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
-    changecodeBtn.backgroundColor = [UIColor blueColor];
+    changecodeBtn.backgroundColor = [UIColor clearColor];
+    changecodeBtn.layer.borderWidth = 2.0f;
+    changecodeBtn.layer.cornerRadius = 8.0f;
+    changecodeBtn.layer.borderColor = [[UIColor whiteColor]CGColor];
     [_readview addSubview:changecodeBtn];
     [changecodeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
  }
@@ -133,17 +140,24 @@
     
     
     UILabel *promptLable = [[UILabel alloc]init];
-    promptLable.text =  @"请使用微信扫一扫付款";
+    if ([self.payModel.payType isEqualToString:@"2"]) {
+        promptLable.text =  @"请使用微信扫一扫完成付款";
+    } else {
+        promptLable.text =  @"请使用支付宝扫一扫完成付款";
+    }
     promptLable.textColor = [UIColor blackColor];
     promptLable.textAlignment = NSTextAlignmentCenter;
     promptLable.font = [UIFont systemFontOfSize:16];
-    promptLable.frame = CGRectMake(0, amoutLable.bottom, SCREEN_WIDTH, 30);
+    promptLable.frame = CGRectMake(0, amoutLable.bottom+5, SCREEN_WIDTH, 30);
     [backView addSubview:promptLable];
 
     UIButton * changeZBarBtn = [[UIButton alloc]init];
-    changeZBarBtn.frame = CGRectMake(40, promptLable.bottom+10, SCREEN_WIDTH-80, 40);
+    changeZBarBtn.frame = CGRectMake(40, promptLable.bottom+15, SCREEN_WIDTH-80, 40);
     [changeZBarBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
     changeZBarBtn.backgroundColor = [UIColor orangeColor];
+    changeZBarBtn.layer.borderWidth = 2.0f;
+    changeZBarBtn.layer.cornerRadius = 8.0f;
+    changeZBarBtn.layer.borderColor = [[UIColor orangeColor]CGColor];
     [backView addSubview:changeZBarBtn];
     [changeZBarBtn addTarget:self action:@selector(changeToScanPay) forControlEvents:UIControlEventTouchUpInside];
     backView.hidden = YES;
@@ -225,6 +239,7 @@
 
     _readview.hidden = YES ;
     backView.hidden = NO;
+    [self getQRCodetoPay];
 }
 
 //  切换到扫码刷卡支付

@@ -11,9 +11,13 @@
 #import "QPTransactionDetailsViewController.h"
 #import "QPHttpManager.h"
 #import "QPViewWaterModel.h"
+#import "QPDaterView.h"
 static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 
-@interface QPViewWaterViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface QPViewWaterViewController ()<UITableViewDelegate,UITableViewDataSource,QPDaterViewDelegate>
+{
+    QPDaterView*dater;
+}
 @property(nonatomic,strong) UITableView *homeTableView;
 @property(nonatomic,strong) UILabel *dateLab;
 @property(nonatomic,strong) UILabel *numberLab;
@@ -30,12 +34,24 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [self configureTableView];
     [self getOrderRecordsNetworkRequest];
     self.viewaterArry = [[NSMutableArray alloc]init];
-    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(datechoicebtnclick)];
+    [self createRightBarItemByImageName:@"liushui_shaixuan" target:self action:@selector(datechoicebtnclick)];
 }
 
 -(void)datechoicebtnclick{
+    dater=[[QPDaterView alloc]initWithFrame:CGRectZero];
+    dater.delegate=self;
+    [dater showInView:self.view animated:YES];
+}
+- (void)daterViewDidClicked:(QPDaterView *)daterView{
+    NSLog(@"dateString=%@ timeString=%@",dater.dateString,dater.timeString);
+}
+- (void)daterViewDidCancel:(QPDaterView *)daterView{
     
 }
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    dater.hidden = YES;
+}
+
 #pragma mark - configureSubViews
 -(void)configureTableView
 {

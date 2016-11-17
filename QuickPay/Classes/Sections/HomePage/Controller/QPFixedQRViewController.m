@@ -54,7 +54,7 @@
     }else{
         msg = @"保存图片成功" ;
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片结果提示"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示"
                                                     message:msg
                                                    delegate:self
                                           cancelButtonTitle:@"确定"

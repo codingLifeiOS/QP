@@ -41,4 +41,22 @@
 // 3.0. 支付结果查询接口
 #define QP_Qrder_Query QP_HOST@"apis/order_query"
 
+// 3.1. 获取首页轮播图片
+#define QP_GetAdImages QP_HOST@"apis/getAdimages"
+
+// 3.2. 获取滚动消息
+#define QP_GetNews QP_HOST@"apis/getNews"
+
+// 3.3. 获取协议接口
+#define QP_GetAgreement QP_HOST@"apis/getAgreement"
+
+// 3.4. 获取商户LOGO
+#define QP_GetLogo QP_HOST@"apis/getLogo"
+
+// 3.5. 图片上传
+#define QP_Upload_Logo QP_HOST@"upload/logo"
+
+// 3.6. 修改商户LOGO接口
+#define QP_Update_Mer_Logo QP_HOST@"apis/update_mer_logo"
+
 #endif /* InterfaceConfig_h */

@@ -117,7 +117,7 @@
     
     self.timeLab.text = model.create_date;
     self.moneyLab.text = [NSString stringWithFormat:@"¥ %@",model.total_amount];
-    if ([model.pay_type isEqualToString:@"2"]) {
+    if ([model.pay_type isEqualToString:@"1"]) {
         _typeLab.text = @"支付宝收款";
         _typeimage.image = [UIImage imageNamed:@"jiesuan_zhifubao"];
     } else {

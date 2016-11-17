@@ -16,6 +16,7 @@
 #import "QPHttpManager.h"
 #import "QPFixedQRViewController.h"
 #import "QPPayModel.h"
+#import "QPQrderQueryViewController.h"
 
 @interface QPHomePageViewController ()<UIAlertViewDelegate,BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
 {
@@ -248,8 +249,11 @@
         case 210:
             [self shareButtonClick];
             break;
-        case 211:
+        case 211:{
+            QPQrderQueryViewController *QPViewWaterVC1 = [[QPQrderQueryViewController alloc]init];
+            [self.navigationController pushViewController:QPViewWaterVC1 animated:YES];
             [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
+        }
             break;
             
         default:
