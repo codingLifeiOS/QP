@@ -111,5 +111,41 @@
                      failure:(QPRequestFailureHandler)failhandler;
 
 
+/**
+ *  获取首页轮播图片
+ *
+ *  @param handler 完成后的回调
+ */
 
++ (void)getAdImagesCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler;
+
+
+/**
+ *  获取滚动消息
+ *
+ *  @param handler 完成后的回调
+ */
+
++ (void)getNewsCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler;
+
+/**
+ *  获取协议接口
+ *
+ *  @param handler 完成后的回调
+ */
+
++ (void)getAgreementCompletion:(QPRequestSuccessHandler)handler
+                  failure:(QPRequestFailureHandler)failhandler;
+
+
+/**
+ *  获取商户LOGO
+ *
+ *  @param handler 完成后的回调
+ */
+
++ (void)getLogo:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler;
 @end

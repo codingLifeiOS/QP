@@ -39,14 +39,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     [self loadDataSource];
     [self configureTableView];
     //    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(setbtnclick)];
-    [self test];
-}
-- (void)test{
-    
-    [QPHttpManager getMerinfoCompletion:^(id responseData) {
-        
-    } failure:^(NSError *error) {
-    }];
+    [self getLogo];
 }
 #pragma mark - configureSubViews
 -(void)configureTableView
@@ -346,6 +339,15 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return merInfolist[0];
-    
 }
+
+- (void)getLogo{
+    
+    [QPHttpManager getLogo:^(id responseData) {
+        
+    }failure:^(NSError *error) {
+        
+    }];
+}
+
 @end

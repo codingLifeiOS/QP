@@ -27,6 +27,7 @@
     CLShareManager *shareManager;
     
 }
+@property (nonatomic, strong) NSMutableArray *imageNameArr;
 
 @end
 
@@ -39,9 +40,8 @@
     
     self.view.backgroundColor = UIColorFromHex(0xeeeeee);
     [self configureSubViews];
-    
+    [self getAdImages];
 }
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
@@ -96,9 +96,9 @@
 }
 -(void)configureScrollView
 {
-    NSMutableArray *imageNameArr = [NSMutableArray arrayWithArray:@[@"pic_1.png",@"pic_2.png",@"pic_3.png"]];
+//    NSMutableArray *imageNameArr = [NSMutableArray arrayWithArray:@[@"pic_1.png",@"pic_2.png",@"pic_3.png"]];
     NSMutableArray *titleNameArr = [NSMutableArray arrayWithArray:@[@"",@"",@""]];
-    adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:132 offsetY:0];
+    adView = [[BMAdScrollView alloc] initWithNameArr:_imageNameArr titleArr:titleNameArr height:132 offsetY:0];
     adView.tag = 10010;
     adView.delegate = self;
     adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 132);
@@ -302,6 +302,25 @@
         self.tabBarController.tabBar.hidden = NO;
     }
 }
+- (void)getAdImages{
+    WEAKSELF();
+    [QPHttpManager getAdImagesCompletion:^(id responseData) {
+        
+        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+            STRONGSELF();
+            for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
+                NSMutableArray *dataArr = [NSMutableArray array];
+                [dataArr addObject:[dic valueForKey:@"value"]];
+                strongSelf.imageNameArr =  [dataArr mutableCopy];
 
+            }
+        } else {
+            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+        }
+
+    }failure:^(NSError *error) {
+       
+    }];
+}
 
 @end

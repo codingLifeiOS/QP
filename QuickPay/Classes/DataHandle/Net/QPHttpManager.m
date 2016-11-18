@@ -234,6 +234,71 @@
     }];
 }
 
++ (void)getAdImagesCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler{
+    
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          };
+    [QPHttpRequest POSTWithData:QP_GetAdImages params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+        
+    }];
+}
+
++ (void)getNewsCompletion:(QPRequestSuccessHandler)handler
+                     failure:(QPRequestFailureHandler)failhandler{
+    
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          };
+    [QPHttpRequest POSTWithData:QP_GetNews params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+        
+    }];
+}
+
++ (void)getAgreementCompletion:(QPRequestSuccessHandler)handler
+                  failure:(QPRequestFailureHandler)failhandler{
+    
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          };
+    [QPHttpRequest POSTWithData:QP_GetAgreement params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        handler ? handler(error) : nil;
+        
+    }];
+}
+
++ (void)getLogo:(QPRequestSuccessHandler)handler
+                failure:(QPRequestFailureHandler)failhandler;
+{
+    NSString * url = [NSString stringWithFormat:@"%@/%@",QP_GetLogo,[QPUtils getMer_code]];
+    [QPHttpRequest POSTWithData:url params:nil body:nil success:^(NSDictionary *success) {
+        handler ? handler(success) : nil;
+
+    } failure:^(NSError *error) {
+
+        handler ? handler(error) : nil;
+
+    }];
+}
+
 + (QPUserModel*)getUserModel{
     
     NSString *path = [QPFileLocationManager getUserDirectory];
@@ -241,5 +306,6 @@
     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return merInfolist[0];
 }
+
 
 @end

@@ -8,6 +8,8 @@
 
 #import "QPAgreementAndTermsViewController.h"
 #import "QPAgreementTermsTableViewCell.h"
+#import "QPHttpManager.h"
+
 static NSString *const cellIdentifier = @"QPAgreementTermsTableViewCell";
 @interface QPAgreementAndTermsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *homeTableView;
@@ -24,6 +26,7 @@ static NSString *const cellIdentifier = @"QPAgreementTermsTableViewCell";
     [self createBackBarItem];
     self.view.backgroundColor = UIColorFromHex(0xf8f8f8);
     [self configureTableView];
+    [self getAgreement];
 }
 
 #pragma mark - configureSubViews
@@ -69,5 +72,12 @@ static NSString *const cellIdentifier = @"QPAgreementTermsTableViewCell";
     return 15.0;
 }
 
-
+- (void)getAgreement{
+    
+    [QPHttpManager getAgreementCompletion:^(id responseData) {
+        
+    }failure:^(NSError *error) {
+        
+    }];
+}
 @end

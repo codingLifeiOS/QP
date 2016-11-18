@@ -8,6 +8,8 @@
 
 #import "QPNewsViewController.h"
 #import "NewsTableViewCell.h"
+#import "QPHttpManager.h"
+
 static NSString *const cellIdentifier = @"NewsTableViewCell";
 
 @interface QPNewsViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -21,6 +23,7 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureTableView];
+    [self getNews];
 }
 
 #pragma mark - configureSubViews
@@ -70,6 +73,14 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
     timeLabel.text = @"10月20日";
     timeLabel.textAlignment = NSTextAlignmentCenter;
     return timeLabel;
+}
+- (void)getNews{
+    
+    [QPHttpManager getNewsCompletion:^(id responseData) {
+        
+    }failure:^(NSError *error) {
+        
+    }];
 }
 
 @end

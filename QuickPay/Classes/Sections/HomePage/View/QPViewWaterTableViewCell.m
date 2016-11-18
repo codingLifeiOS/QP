@@ -114,8 +114,11 @@
 }
 
 - (void)updatecellWithModel:(QPViewWaterModel *)model{
-    
-    self.timeLab.text = model.create_date;
+    NSString *str;
+    if (model.create_date.length >= 8) {
+        str = [model.create_date substringFromIndex:model.create_date.length-8];
+    }
+    self.timeLab.text = str;
     self.moneyLab.text = [NSString stringWithFormat:@"¥ %@",model.total_amount];
     if ([model.pay_type isEqualToString:@"1"]) {
         _typeLab.text = @"支付宝收款";

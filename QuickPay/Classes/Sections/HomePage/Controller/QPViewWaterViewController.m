@@ -76,12 +76,12 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 //        return  1;
 //    }
 //
-    return 1;
+    return self.viewaterArry.count;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return self.viewaterArry.count;
+    return 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
