@@ -16,7 +16,7 @@
     ZBarReaderView *_readview;          // 扫描二维码ZBarReaderView
     QPQRView *_qrRectView;             // 自定义的扫描视图
     UIView *backView ;
-    UIImageView *codeImage;// 生成的二维码
+    UIImageView *codeImage;           // 生成的二维码
 }
 
 @end
@@ -34,7 +34,6 @@
     [self createBackBarItem];
     [self configuredZBarReader];
     [self configureCodeView];
-//    [self getQRCodetoPay];
     [self setZBarReaderViewStart];
     self.view.backgroundColor = [UIColor whiteColor];
 }
@@ -127,7 +126,6 @@
     CGFloat height = 220;
     codeImage = [[UIImageView alloc]init];
     codeImage.frame = CGRectMake((SCREEN_WIDTH-220)/2, 40, width, height);
-//    codeImage.backgroundColor = [UIColor orangeColor];
     [backView addSubview:codeImage];
     
     UILabel *amoutLable = [[UILabel alloc]init];
@@ -215,9 +213,8 @@
          return;
     }
     
-    [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"扫描结果：11111%@",url]];
     NSLog(@"扫描成功！%@", url);
-    // 18 位订单号
+    // 18位订单号
     NSString *regex = @"^[0-9]{18}$";
     // 创建谓词对象并设定条件的表达式
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -225,12 +222,8 @@
      // 对字符串进行判断
     if ([predicate evaluateWithObject:url]) {
         [self scansuccessToPayWithAuthno:url];
-
     } else {
         [[QPHUDManager sharedInstance] showTextOnly:@"不是支付的二维码"];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [self setZBarReaderViewStart];
-//        });
     }
 }
 
@@ -238,8 +231,11 @@
 - (void)changePayType{
 
     _readview.hidden = YES ;
+    [self setZBarReaderViewStop];
     backView.hidden = NO;
-    [self getQRCodetoPay];
+    if (!codeImage.image) {
+        [self getQRCodetoPay];
+    }
 }
 
 //  切换到扫码刷卡支付
@@ -258,20 +254,24 @@
   } failure:^(NSError *error) {
       
   }];
-
 }
 
 // 生成二维码支付
 - (void)getQRCodetoPay{
     
-    [QPHttpManager getQRcodeString:self.payModel.amount PayTye:self.payModel.payType Completion:^(id responseData) {
-        if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
-            [[QPHUDManager sharedInstance]showTextOnly:@"加载中"];
-        codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:codeImage.bounds.size.width];
-            [[QPHUDManager sharedInstance]hiddenHUD];
+    [[QPHUDManager sharedInstance]showProgressWithText:@"正在努力生成二维码"];
+     [QPHttpManager getQRcodeString:self.payModel.amount PayTye:self.payModel.payType Completion:^(id responseData) {
+        [[QPHUDManager sharedInstance]hiddenHUD];
+         if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220];
+            });
+        } else {
+            [[QPHUDManager sharedInstance]showTextOnly:@"生成商户二维码失败"];
         }
-    
     } failure:^(NSError *error) {
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
         
     }];
 }

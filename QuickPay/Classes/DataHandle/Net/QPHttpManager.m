@@ -90,7 +90,7 @@
     
     QPUserModel *userModel = [QPHttpManager getUserModel];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:amount forKey:@"amount"];
+    [params setValue:[NSString stringWithFormat:@"%0.f",[amount floatValue]*100] forKey:@"amount"];
     [params setValue:type forKey:@"pay_type"];
     [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
     [params setValue:@"QRCODE" forKey:@"payment_method"];
@@ -120,7 +120,7 @@
     
     QPUserModel *userModel = [QPHttpManager getUserModel];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:amount forKey:@"amount"];
+    [params setValue:[NSString stringWithFormat:@"%0.f",[amount floatValue]*100] forKey:@"amount"];
     [params setValue:type forKey:@"pay_type"];
     [params setValue:authno forKey:@"authno"];
     [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];

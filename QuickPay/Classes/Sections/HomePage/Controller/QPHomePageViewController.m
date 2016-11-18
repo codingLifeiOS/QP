@@ -17,6 +17,7 @@
 #import "QPFixedQRViewController.h"
 #import "QPPayModel.h"
 #import "QPQrderQueryViewController.h"
+#import "QRCodeGenerator.h"
 
 @interface QPHomePageViewController ()<UIAlertViewDelegate,BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
 {
@@ -38,7 +39,7 @@
     
     self.view.backgroundColor = UIColorFromHex(0xeeeeee);
     [self configureSubViews];
-    [self test];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -181,13 +182,11 @@
     
     QPPayModel *payModel;
     if (type == AlipayType) {
-        [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"支付宝付款%@元",amount]];
         payModel = [[QPPayModel alloc]init];
         payModel.payType = @"1";
         payModel.amount = amount;
        
     } else {
-        [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"微信付款%@元",amount]];
         payModel = [[QPPayModel alloc]init];
         payModel.payType = @"2";
         payModel.amount = amount;
@@ -302,31 +301,6 @@
         contentView.frame = CGRectMake(contentView.bounds.origin.x, contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height - self.tabBarController.tabBar.frame.size.height);
         self.tabBarController.tabBar.hidden = NO;
     }
-}
-#pragma mark - 接口请求
-- (void)test{
-    
-//    [QPHttpManager getQRcodeString:@"10" PayTye:@"1" Completion:^(id responseData) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    }];
-    
-
-//
-//    [QPHttpManager orderquery:@"H5x6111310532091" Completion:^(id responseData) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    } ];
-
-    
-//    [QPHttpManager getOrderRecordsCompletion:^(id responseData) {
-//        
-//    } failure:^(NSError *error) {
-//        
-//    } ];
-
 }
 
 
