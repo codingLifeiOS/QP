@@ -304,8 +304,9 @@
 }
 - (void)getAdImages{
     WEAKSELF();
+    [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
     [QPHttpManager getAdImagesCompletion:^(id responseData) {
-        
+        [[QPHUDManager sharedInstance]hiddenHUD];
         if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
             STRONGSELF();
             for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
@@ -319,7 +320,8 @@
         }
 
     }failure:^(NSError *error) {
-       
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
     }];
 }
 

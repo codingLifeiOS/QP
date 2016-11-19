@@ -254,7 +254,7 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
         if (jsonstr.length > 0) {
             NSLog(@"请求成功%@  \n结束报文",dic);
              success(dic);
-        }else{
+        } else {
             failure(connectionError);
         }
     }];

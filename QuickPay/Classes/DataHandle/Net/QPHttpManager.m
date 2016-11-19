@@ -25,7 +25,7 @@
         handler ? handler(success) : nil;
         
     } failure:^(NSError *error) {
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 }
@@ -42,7 +42,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 }
@@ -62,7 +62,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 
@@ -77,7 +77,7 @@
 //        
 //    } failure:^(NSError *error) {
 //        
-//        handler ? handler(error) : nil;
+//        failhandler ? failhandler(error) : nil;
 //        
 //    }];
 //}
@@ -108,7 +108,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
     }];
 }
 
@@ -139,7 +139,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
     }];
 }
 
@@ -166,7 +166,7 @@
         handler ? handler(success) : nil;
         
     } failure:^(NSError *error) {
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
     }];
 }
 
@@ -181,7 +181,7 @@
 
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 }
@@ -206,7 +206,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 }
@@ -229,7 +229,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 }
@@ -246,7 +246,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 }
@@ -263,7 +263,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 }
@@ -280,7 +280,7 @@
         
     } failure:^(NSError *error) {
         
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
         
     }];
 }
@@ -294,7 +294,7 @@
 
     } failure:^(NSError *error) {
 
-        handler ? handler(error) : nil;
+        failhandler ? failhandler(error) : nil;
 
     }];
 }
