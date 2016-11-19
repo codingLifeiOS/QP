@@ -11,6 +11,8 @@
 #import "ZBarSDK.h"
 #import "QPHttpManager.h"
 #import "QRCodeGenerator.h"
+#import "QPQrderQueryViewController.h"
+#import "AppDelegate.h"
 @interface QPScanCodePayViewController ()<ZBarReaderViewDelegate>
 {
     ZBarReaderView *_readview;          // 扫描二维码ZBarReaderView
@@ -18,6 +20,7 @@
     UIView *backView ;
     UIImageView *codeImage;           // 生成的二维码
 }
+@property(nonatomic,strong)NSMutableDictionary *Dict;
 
 @end
 
@@ -264,6 +267,8 @@
         [[QPHUDManager sharedInstance]hiddenHUD];
          if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
+//                NSDictionary *resultDict = [NSString jsonStringToDictionary:responseData];
+//                self.Dict = resultDict[@"order_sn"];
                  codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220];
             });
         } else {
@@ -272,8 +277,19 @@
     } failure:^(NSError *error) {
         [[QPHUDManager sharedInstance]hiddenHUD];
         [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
-        
     }];
 }
 
+//- (void)orderquery
+//{
+//    [QPHttpManager orderquery:self.Dict[@"order_sn"] Completion:^(id responseData) {
+//        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+////            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+////            
+////            QPQrderQueryViewController *orderVC = [QPQrderQueryViewController new];
+////            delegate.window.rootViewController = orderVC;
+//        }
+//        }failure:^(NSError *error) {
+//  }];
+//}
 @end
