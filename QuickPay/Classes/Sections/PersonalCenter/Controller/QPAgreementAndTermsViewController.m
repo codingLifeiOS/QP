@@ -9,7 +9,12 @@
 #import "QPAgreementAndTermsViewController.h"
 #import "QPAgreementTermsTableViewCell.h"
 #import "QPHttpManager.h"
-
+#import "QPRegistrationAgreementViewController.h"
+#import "QPServiceagreementViewController.h"
+#import "QPWeChatPaySolutionsViewController.h"
+#import "QPAliPaySolutionsViewController.h"
+#import "QPJingdongPaySolutionsViewController.h"
+#import "QPQSPaySolutionsViewController.h"
 static NSString *const cellIdentifier = @"QPAgreementTermsTableViewCell";
 @interface QPAgreementAndTermsViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *homeTableView;
@@ -61,7 +66,48 @@ static NSString *const cellIdentifier = @"QPAgreementTermsTableViewCell";
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    switch (indexPath.row) {
+        case 0:
+        {
+            QPRegistrationAgreementViewController *QPreagVC = [[QPRegistrationAgreementViewController alloc]init];
+            [self.navigationController pushViewController:QPreagVC animated:YES];
+        }
+            break;
+        case 1:
+        {
+            QPServiceagreementViewController *QPseagVC = [[QPServiceagreementViewController alloc]init];
+            [self.navigationController pushViewController:QPseagVC animated:YES];
+        }
+            break;
+        case 2:
+        {
+            QPWeChatPaySolutionsViewController *QPchsoVC = [[QPWeChatPaySolutionsViewController alloc]init];
+            [self.navigationController pushViewController:QPchsoVC animated:YES];
+        }
+            break;
+        case 3:
+        {
+            QPAliPaySolutionsViewController *QPalisoVC = [[QPAliPaySolutionsViewController alloc]init];
+            [self.navigationController pushViewController:QPalisoVC animated:YES];
+        }
+            break;
+        case 4:
+        {
+            QPJingdongPaySolutionsViewController *QPjdsoVC = [[QPJingdongPaySolutionsViewController alloc]init];
+            [self.navigationController pushViewController:QPjdsoVC animated:YES];
+        }
+            break;
+        case 5:
+        {
+            QPQSPaySolutionsViewController *QPqssoVC = [[QPQSPaySolutionsViewController alloc]init];
+            [self.navigationController pushViewController:QPqssoVC animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
@@ -73,11 +119,20 @@ static NSString *const cellIdentifier = @"QPAgreementTermsTableViewCell";
 }
 
 - (void)getAgreement{
-    
+     WEAKSELF();
     [QPHttpManager getAgreementCompletion:^(id responseData) {
-        
+        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+            STRONGSELF();
+            for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
+            }
+        } else {
+            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+        }
+
     }failure:^(NSError *error) {
-        
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+
     }];
 }
 @end

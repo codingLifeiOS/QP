@@ -325,6 +325,12 @@
 		1CEC79E71DC1819D00968E35 /* wb_xj_txldr_fanhui_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CEC79E31DC1819D00968E35 /* wb_xj_txldr_fanhui_selected@3x.png */; };
 		1CEC79E81DC1819D00968E35 /* wb_xj_txldr_fanhui@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CEC79E41DC1819D00968E35 /* wb_xj_txldr_fanhui@2x.png */; };
 		1CEC79E91DC1819D00968E35 /* wb_xj_txldr_fanhui@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CEC79E51DC1819D00968E35 /* wb_xj_txldr_fanhui@3x.png */; };
+		1CEF01A51DDFFA7A00AF6A6B /* QPRegistrationAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF01A41DDFFA7A00AF6A6B /* QPRegistrationAgreementViewController.m */; };
+		1CEF01A81DDFFACB00AF6A6B /* QPServiceagreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF01A71DDFFACB00AF6A6B /* QPServiceagreementViewController.m */; };
+		1CEF01AB1DDFFB3500AF6A6B /* QPWeChatPaySolutionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF01AA1DDFFB3500AF6A6B /* QPWeChatPaySolutionsViewController.m */; };
+		1CEF01AE1DDFFB6800AF6A6B /* QPAliPaySolutionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF01AD1DDFFB6800AF6A6B /* QPAliPaySolutionsViewController.m */; };
+		1CEF01B41DDFFBD000AF6A6B /* QPQSPaySolutionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF01B31DDFFBD000AF6A6B /* QPQSPaySolutionsViewController.m */; };
+		1CEF01B71DE01C2700AF6A6B /* QPJingdongPaySolutionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEF01B61DE01C2700AF6A6B /* QPJingdongPaySolutionsViewController.m */; };
 		1CF302131DBF617A00935113 /* QPMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF302121DBF617A00935113 /* QPMemberViewController.m */; };
 		1CF302161DBF61A900935113 /* QPFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF302151DBF61A900935113 /* QPFindViewController.m */; };
 		1CF302191DBF61BB00935113 /* QPNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CF302181DBF61BB00935113 /* QPNewsViewController.m */; };
@@ -816,6 +822,18 @@
 		1CEC79E31DC1819D00968E35 /* wb_xj_txldr_fanhui_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wb_xj_txldr_fanhui_selected@3x.png"; sourceTree = "<group>"; };
 		1CEC79E41DC1819D00968E35 /* wb_xj_txldr_fanhui@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wb_xj_txldr_fanhui@2x.png"; sourceTree = "<group>"; };
 		1CEC79E51DC1819D00968E35 /* wb_xj_txldr_fanhui@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wb_xj_txldr_fanhui@3x.png"; sourceTree = "<group>"; };
+		1CEF01A31DDFFA7A00AF6A6B /* QPRegistrationAgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPRegistrationAgreementViewController.h; sourceTree = "<group>"; };
+		1CEF01A41DDFFA7A00AF6A6B /* QPRegistrationAgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPRegistrationAgreementViewController.m; sourceTree = "<group>"; };
+		1CEF01A61DDFFACB00AF6A6B /* QPServiceagreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPServiceagreementViewController.h; sourceTree = "<group>"; };
+		1CEF01A71DDFFACB00AF6A6B /* QPServiceagreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPServiceagreementViewController.m; sourceTree = "<group>"; };
+		1CEF01A91DDFFB3500AF6A6B /* QPWeChatPaySolutionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPWeChatPaySolutionsViewController.h; sourceTree = "<group>"; };
+		1CEF01AA1DDFFB3500AF6A6B /* QPWeChatPaySolutionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPWeChatPaySolutionsViewController.m; sourceTree = "<group>"; };
+		1CEF01AC1DDFFB6800AF6A6B /* QPAliPaySolutionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPAliPaySolutionsViewController.h; sourceTree = "<group>"; };
+		1CEF01AD1DDFFB6800AF6A6B /* QPAliPaySolutionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPAliPaySolutionsViewController.m; sourceTree = "<group>"; };
+		1CEF01B21DDFFBD000AF6A6B /* QPQSPaySolutionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPQSPaySolutionsViewController.h; sourceTree = "<group>"; };
+		1CEF01B31DDFFBD000AF6A6B /* QPQSPaySolutionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPQSPaySolutionsViewController.m; sourceTree = "<group>"; };
+		1CEF01B51DE01C2700AF6A6B /* QPJingdongPaySolutionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPJingdongPaySolutionsViewController.h; sourceTree = "<group>"; };
+		1CEF01B61DE01C2700AF6A6B /* QPJingdongPaySolutionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPJingdongPaySolutionsViewController.m; sourceTree = "<group>"; };
 		1CF302111DBF617A00935113 /* QPMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPMemberViewController.h; sourceTree = "<group>"; };
 		1CF302121DBF617A00935113 /* QPMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPMemberViewController.m; sourceTree = "<group>"; };
 		1CF302141DBF61A900935113 /* QPFindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPFindViewController.h; sourceTree = "<group>"; };
@@ -1456,6 +1474,18 @@
 				1CE605EF1DD5B842005A8648 /* QPStoreContractInformationViewController.m */,
 				1C1085531DD6AC2C00262B46 /* QPAgreementAndTermsViewController.h */,
 				1C1085541DD6AC2C00262B46 /* QPAgreementAndTermsViewController.m */,
+				1CEF01A31DDFFA7A00AF6A6B /* QPRegistrationAgreementViewController.h */,
+				1CEF01A41DDFFA7A00AF6A6B /* QPRegistrationAgreementViewController.m */,
+				1CEF01A61DDFFACB00AF6A6B /* QPServiceagreementViewController.h */,
+				1CEF01A71DDFFACB00AF6A6B /* QPServiceagreementViewController.m */,
+				1CEF01A91DDFFB3500AF6A6B /* QPWeChatPaySolutionsViewController.h */,
+				1CEF01AA1DDFFB3500AF6A6B /* QPWeChatPaySolutionsViewController.m */,
+				1CEF01AC1DDFFB6800AF6A6B /* QPAliPaySolutionsViewController.h */,
+				1CEF01AD1DDFFB6800AF6A6B /* QPAliPaySolutionsViewController.m */,
+				1CEF01B51DE01C2700AF6A6B /* QPJingdongPaySolutionsViewController.h */,
+				1CEF01B61DE01C2700AF6A6B /* QPJingdongPaySolutionsViewController.m */,
+				1CEF01B21DDFFBD000AF6A6B /* QPQSPaySolutionsViewController.h */,
+				1CEF01B31DDFFBD000AF6A6B /* QPQSPaySolutionsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2339,6 +2369,7 @@
 				19A63F8A1DBDF86B008797EB /* LGLAlertView.m in Sources */,
 				1C34846F1DD94B9E00720119 /* QPViewWaterModel.m in Sources */,
 				1C49B2AA1DBA1D4F00CF3DE1 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				1CEF01B71DE01C2700AF6A6B /* QPJingdongPaySolutionsViewController.m in Sources */,
 				1C49B2951DBA1D4F00CF3DE1 /* UIViewController+BarItem.m in Sources */,
 				1C49B2881DBA1D4F00CF3DE1 /* UILabel+Extension.m in Sources */,
 				1CBD95551DBFA24F0040950A /* QPLoginView.m in Sources */,
@@ -2373,10 +2404,13 @@
 				1CCB8F351DC2F4980036584E /* QPViewWaterTableViewCell.m in Sources */,
 				1C49B28C1DBA1D4F00CF3DE1 /* UIBezierPath+Symbol.m in Sources */,
 				1C49B2C41DBA1D4F00CF3DE1 /* MJRefreshHeaderView.m in Sources */,
+				1CEF01A51DDFFA7A00AF6A6B /* QPRegistrationAgreementViewController.m in Sources */,
 				1C49B2C21DBA1D4F00CF3DE1 /* MJRefreshConst.m in Sources */,
 				1C49B2C11DBA1D4F00CF3DE1 /* MJRefreshBaseView.m in Sources */,
 				1CF302161DBF61A900935113 /* QPFindViewController.m in Sources */,
+				1CEF01A81DDFFACB00AF6A6B /* QPServiceagreementViewController.m in Sources */,
 				1CE606061DD5C225005A8648 /* QPAgreementTermsTableViewCell.m in Sources */,
+				1CEF01AB1DDFFB3500AF6A6B /* QPWeChatPaySolutionsViewController.m in Sources */,
 				1C1FAA671DCC5CFC00B54DBB /* QPRequestSerVice.m in Sources */,
 				1C91C3271DCC2C4200DC5BB9 /* QPBusinessCooperationTableViewCell.m in Sources */,
 				1C49B2B61DBA1D4F00CF3DE1 /* MASCompositeConstraint.m in Sources */,
@@ -2421,6 +2455,7 @@
 				1C49B2B91DBA1D4F00CF3DE1 /* MASLayoutConstraint.m in Sources */,
 				1C1FAA611DCC57F400B54DBB /* QPHttpRequest.m in Sources */,
 				1CE605AC1DD5730B005A8648 /* QPSetUpableViewCell.m in Sources */,
+				1CEF01AE1DDFFB6800AF6A6B /* QPAliPaySolutionsViewController.m in Sources */,
 				1C49B29C1DBA1D4F00CF3DE1 /* QPAlertView.m in Sources */,
 				1C49B2891DBA1D4F00CF3DE1 /* UITextField+Extension.m in Sources */,
 				1C66A1B71DDC26E400E0F5D9 /* qrencode.c in Sources */,
@@ -2441,6 +2476,7 @@
 				1C49B29E1DBA1D4F00CF3DE1 /* AFHTTPRequestOperation.m in Sources */,
 				1CCB8F3F1DC32EC30036584E /* QPTransactionDetailsView.m in Sources */,
 				1C49B2971DBA1D4F00CF3DE1 /* QPHUDManager.m in Sources */,
+				1CEF01B41DDFFBD000AF6A6B /* QPQSPaySolutionsViewController.m in Sources */,
 				195D44C81DC9806700EA3CAD /* CLShareManager.m in Sources */,
 				1CCB8F3C1DC32B2E0036584E /* QPTransactionDetailsViewController.m in Sources */,
 				1C49B2991DBA1D4F00CF3DE1 /* pinyin.c in Sources */,

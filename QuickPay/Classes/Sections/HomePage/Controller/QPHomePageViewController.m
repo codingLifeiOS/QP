@@ -310,9 +310,9 @@
         if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
             STRONGSELF();
             for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
-                NSMutableArray *dataArr = [NSMutableArray array];
-                [dataArr addObject:[dic valueForKey:@"value"]];
-                strongSelf.imageNameArr =  [dataArr mutableCopy];
+//                NSMutableArray *dataArr = [NSMutableArray array];
+                [strongSelf.imageNameArr addObject:[dic valueForKey:@"value"]];
+//                strongSelf.imageNameArr =  [dataArr mutableCopy];
 
             }
         } else {
