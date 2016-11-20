@@ -13,9 +13,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"guanyuwom_bj"]];
-        imageView.image=[UIImage imageNamed:@"guanyuwom_bj"];
-        [self setBackgroundView:imageView];
+        self.backgroundColor = [UIColor whiteColor];
+        
     }
     return self;
 }

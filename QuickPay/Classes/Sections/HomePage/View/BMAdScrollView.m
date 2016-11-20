@@ -56,7 +56,7 @@
         //给定网络图片路径
         UIImageView *imageView = [[UIImageView alloc] init];
         imageView.frame = CGRectMake(0, 0, WIDTH, imageH);
-        [imageView setImage:[UIImage imageNamed:imageName]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:imageName] placeholderImage:[UIImage imageNamed:@"pic_1.png"]];
         [imageBtn addSubview:imageView];
         //设置点击方法
         [imageBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];

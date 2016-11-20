@@ -8,7 +8,7 @@
 
 #import "QPRegistrationAgreementViewController.h"
 
-@interface QPRegistrationAgreementViewController ()
+@interface QPRegistrationAgreementViewController ()<UIWebViewDelegate>
 
 @end
 
@@ -16,8 +16,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addTitleToNavBar:@"惠客盟商户注册协议"];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self addTitleToNavBar:[self.serviceAgreementDict objectForKey:@"name"]];
     [self createBackBarItem];
+    [self configureWebView];
+    
+}
+
+#pragma mark - configureSubViews
+-(void)configureWebView
+{
+    UIWebView * webView = [[UIWebView alloc]initWithFrame:self.view.frame];
+    [webView setScalesPageToFit:YES];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.serviceAgreementDict objectForKey:@"value"]]]];
+    [self.view addSubview:webView];
+}
+
+
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    
+    [[QPHUDManager sharedInstance]showProgressWithText:@"正在加载网页"];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [[QPHUDManager sharedInstance]hiddenHUD];
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [[QPHUDManager sharedInstance]hiddenHUD];
+    [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
 }
 
 

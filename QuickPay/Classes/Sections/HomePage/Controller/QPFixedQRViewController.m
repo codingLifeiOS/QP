@@ -8,7 +8,7 @@
 
 #import "QPFixedQRViewController.h"
 
-@interface QPFixedQRViewController ()
+@interface QPFixedQRViewController ()<UIWebViewDelegate>
 
 @end
 
@@ -61,4 +61,19 @@
                                           otherButtonTitles:nil];
     [alert show];
 }
+
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+    
+    [[QPHUDManager sharedInstance]showProgressWithText:@"正在加载网页"];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [[QPHUDManager sharedInstance]hiddenHUD];
+    
+    
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [[QPHUDManager sharedInstance]hiddenHUD];
+    [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+}
+
 @end

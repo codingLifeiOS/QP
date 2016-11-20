@@ -247,16 +247,17 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
     //    设置请求头
     //    [self setNetHeaderBy:request];
     [request setHTTPBody:data];
-    // 2. 发送异步请求，上传文件
+    // 2. 发送异步请求
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSString *jsonstr = [[NSMutableString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSDictionary * dic = [NSString jsonStringToDictionary:jsonstr];
+         dispatch_async(dispatch_get_main_queue(), ^{
         if (jsonstr.length > 0) {
             NSLog(@"请求成功%@  \n结束报文",dic);
              success(dic);
         } else {
             failure(connectionError);
-        }
+        }});
     }];
 }
 

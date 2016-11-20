@@ -9,8 +9,6 @@
 #import "QPUserCenterViewController.h"
 #import "QPUserCenterViewCell.h"
 #import "QPUserOneTableViewCell.h"
-#import "XDGroupItem.h"
-#import "XDSettingItem.h"
 #import "LGLAlertView.h"
 #import "QPBusinessCooperationViewController.h"
 #import "QPAboutUsViewController.h"
@@ -22,12 +20,21 @@
 #import "QPUserModel.h"
 #import "QPFileLocationManager.h"
 #import "QPHttpManager.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
+
 
 static NSString *const cellIdentifier = @"QPUserCenterViewCell";
 static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 @interface QPUserCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property (nonatomic,strong) NSMutableArray * groups;
+{
+     QPUserModel *userModel;
+     UIImage *iconImage;//拍照或者从相册选照片
+}
 @property (nonatomic,strong) UITableView *homeTableView;
+@property (nonatomic,strong) NSArray *myTittleArry;
+@property (nonatomic,strong) NSArray *myImageArry;
 
 @end
 
@@ -36,10 +43,13 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadDataSource];
     [self configureTableView];
+    
+     self.myTittleArry = @[@[@"我的银行卡",@"店铺签的结算"],@[@"商务合作",@"客服中心"],@[@"关于我们",@"设    置"]];
+     self.myImageArry =@[@[@"Credit-Card",@"Paper-Dollars-1"],@[@"Users-2",@"kefu"],@[@"Info",@"shezhi"]];
+    
+    userModel = [QPUserCenterViewController getUserModel];
     //    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(setbtnclick)];
-    [self getLogo];
 }
 #pragma mark - configureSubViews
 -(void)configureTableView
@@ -48,7 +58,6 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     self.homeTableView.dataSource = self;
     self.homeTableView.backgroundColor = UIColorFromHex(0xf8f8f8);
     self.homeTableView.delegate = self;
-    //    [self.homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.homeTableView.showsVerticalScrollIndicator = NO;
     [self.homeTableView registerClass:[QPUserCenterViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.homeTableView registerClass:[QPUserOneTableViewCell class] forCellReuseIdentifier:cellIdentifier1];
@@ -58,12 +67,15 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.groups.count;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    XDGroupItem *group = self.groups[section];
-    return group.items.count;
+    if (section == 0 ) {
+        return 1;
+    } else {
+        return 2;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -78,28 +90,19 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
         QPUserCenterViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        XDGroupItem *group = self.groups[indexPath.section];
-        XDSettingItem *item = group.items[indexPath.row];
-        cell.textLabel.text = item.title;
-        UILabel *QRcode =[[UILabel new]init];
-        QRcode.font = [UIFont systemFontOfSize:12];
-        QRcode.frame = CGRectMake(100, 60, 150, 20);
-        QPUserModel *userModel = [QPUserCenterViewController getUserModel];
-        QRcode.text = userModel.arena_phone;
-        [cell.contentView addSubview:QRcode];
-        cell.imageView.image = [UIImage imageNamed:item.image];
+        cell.textLabel.text = userModel.arena_name;
+        cell.phoneLab.text = userModel.arena_phone;
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",QP_GetLogo,[QPUtils getMer_code]]] placeholderImage:[UIImage imageNamed:@"geren_touxiang"]];
         return cell;
     } else {
         QPUserOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        XDGroupItem *group = self.groups[indexPath.section];
-        XDSettingItem *item = group.items[indexPath.row];
-        cell.textLabel.text = item.title;
+        cell.textLabel.text = self.myTittleArry[indexPath.section-1][indexPath.row];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
         cell.imageView.layer.cornerRadius = 8;
         cell.imageView.layer.masksToBounds = YES;
-        cell.imageView.image = [UIImage imageNamed:item.image];
+        cell.imageView.image = [UIImage imageNamed:self.myImageArry[indexPath.section-1][indexPath.row]];
         return cell;
     }
 }
@@ -108,7 +111,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 {
     if (section == 3) {
         return 70;
-    }else {
+    } else {
         return 9.0;
     }
 }
@@ -143,10 +146,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     switch (indexPath.section) {
         case 0:
             if (indexPath.row == 0) {
-                UIActionSheet *action = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"相册", nil];
-                [action showInView:self.view];
-                
-                NSLog(@"个人信息");
+               [self changeIconClick];
             }
             break;
         case 1:
@@ -167,7 +167,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
                 NSLog(@"商务合作");
             } else if (indexPath.row == 1){
                 UIAlertView *phoneAlert = [[UIAlertView alloc]initWithTitle:@"15701189832" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
-                phoneAlert.tag = 80;
+                phoneAlert.tag = 81;
                 [phoneAlert show];
                 NSLog(@"客户中心");
             }
@@ -192,162 +192,197 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            UIImagePickerController *camera = [[UIImagePickerController alloc]init];
-            
-            //调用相机
-            camera.sourceType = UIImagePickerControllerSourceTypeCamera;
-            camera.allowsEditing = YES;
-            //            camera.delegate = self;
-            [self presentViewController:camera animated:YES completion:nil];
-        }
-    }else if (buttonIndex == 1){
-        UIImagePickerController *photoLibrary = [[UIImagePickerController alloc]init];
-        //设置图片来源于相册
-        photoLibrary.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        photoLibrary.allowsEditing = YES;
-        //        photoLibrary.delegate = self;
-        [self presentViewController:photoLibrary animated:YES completion:nil];
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == 80) {
+        [self showImagePicker:buttonIndex];
     }
 }
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+
+-(void)showImagePicker:(NSInteger)type
 {
-    //判断选中的媒体是否为图片
+    NSDictionary *appInfo = [[NSBundle mainBundle] infoDictionary];
+    NSString *appName = [appInfo objectForKey:@"CFBundleDisplayName"];
     
-    UIImage *imageNew = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    //设置image的尺寸
-    CGSize imagesize = imageNew.size;
-    imagesize.height = 200;
-    imagesize.width = 200;
-    //对图片大小进行压缩--
-    imageNew = [self imageWithImage:imageNew scaledToSize:imagesize];
-    
-    //        NSData *imageData = UIImageJPEGRepresentation(info[UIImagePickerControllerEditedImage], 0.00001);
-    //        NSData *imageData = UIImageJPEGRepresentation(imageNew, 0.00001);
-    //        NSData *imageData = UIImagePNGRepresentation(imageNew);
-    //        NSString *photoData = [imageData base64EncodedStringWithOptions:0];
-    
-    //        NSData *data = [[NSData alloc]initWithBase64EncodedString:photoData options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    //        UIImage *ima = [[UIImage alloc]initWithData:data];
-    //#warning test
-    //        self.userPhoto(ima);
-    
-    //        NSLog(@"%@", _head_thumb);
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    if (type == 1) {
+        ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+        if (author == ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusNotDetermined){
+            //无权限
+            [[QPHUDManager sharedInstance] showTextOnly:@"相册未授权" onView:self.view];
+        }else if (author == ALAuthorizationStatusAuthorized) {
+            //默认只采用照片库
+            imagePicker.delegate = self;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePicker animated:YES completion:NULL];
+        }else if (author == ALAuthorizationStatusNotDetermined) {
+            
+            ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+            [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupLibrary usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+                
+                if (*stop) {
+                    //点击“好”回调方法:
+                    NSLog(@"好");
+                    return;
+                }
+                *stop = TRUE;
+                
+                UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+                imagePicker.delegate = self;
+                imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                [self presentViewController:imagePicker animated:YES completion:NULL];
+                
+            } failureBlock:^(NSError *error) {
+                
+                //点击“不允许”回调方法:
+                NSLog(@"不允许");
+                [self dismissViewControllerAnimated:YES completion:nil];
+                
+            }];
+        }
+        
+    } else if (type == 0){
+        
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        
+        if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera] || authStatus == AVAuthorizationStatusRestricted || authStatus ==AVAuthorizationStatusDenied) {
+            [self showAlertWithMessage:[NSString stringWithFormat:@"请在iPhone的“设置-隐私-照片”选项中，允许%@访问你的照片。", appName]];
+        }else if (AVAuthorizationStatusNotDetermined == authStatus) {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(granted){
+                        [self imagePickerController];
+                    } else {
+                        [self showAlertWithMessage:[NSString stringWithFormat:@"请在iPhone的“设置-隐私-相机”选项中，允许%@访问你的相机。", appName]];
+                    }
+                });
+            }];
+            
+        }else {
+            [self imagePickerController];
+        }
+    }
 }
-//对图片尺寸进行压缩--
--(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+
+- (void)showAlertWithMessage:(NSString *)message {
+   QPAlertView *alert = [[QPAlertView alloc]initWithTitle:@"相机不可用，或未授权" message:message delegate:nil cancelButtonTitle:@"好" otherButtonTitle:nil];
+    [alert show];
+}
+
+- (UIImagePickerController *)imagePickerController {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.allowsEditing = YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    return imagePicker;
+}
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    // Create a graphics image context
-    UIGraphicsBeginImageContext(newSize);
+    viewController.navigationItem.titleView.tintColor=[UIColor whiteColor];
+    viewController.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
+    viewController.navigationController.navigationBar.barTintColor= [UIColor mis_backgroundColor];
+    [viewController.navigationItem setHidesBackButton:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [viewController.navigationItem setHidesBackButton:YES];
     
-    // Tell the old image to draw in this new context, with the desired
-    // new size
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *headImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    headImage = [UIImage fixOrientation:headImage];
+    iconImage = headImage;
     
-    // Get the new image from the context
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // End the context
-    UIGraphicsEndImageContext();
-    
-    // Return the new image.
-    return newImage;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    QPUserCenterViewCell *cell = [self.homeTableView cellForRowAtIndexPath:indexPath];
+    cell.imageView.image = headImage;
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self UpdateUserInforHeadImage];
+}
+
+//取消照相机的回调
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+}
+//保存照片成功后的回调
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
+  contextInfo:(void *)contextInfo{
+    NSLog(@"saved..");
 }
 
 #pragma mark -UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 80){
+    if (alertView.tag == 81){
         if (buttonIndex == 1) {
             if(![[UIApplication sharedApplication]openURL:[NSURL URLWithString:QP_TEL]] ){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"设备不支持" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil] ;
-                [alert show] ;
+                [[QPHUDManager sharedInstance]showTextOnly:@"设备不支持"];
             }
         }
     }
 }
 
 - (void)exitRegister {
-    [LGLAlertView showAlertViewWith:self title:@"温馨提示" message:@"确定退出" CallBackBlock:^(NSInteger btnIndex) {
-        if (btnIndex == 0) {
-            
-        } else {
+    [LGLAlertView showAlertViewWith:self title:@"温馨提示" message:@"退出登录" CallBackBlock:^(NSInteger btnIndex) {
+        if (btnIndex == 1) {
             AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
             
             QPLoginViewController *loginVC = [QPLoginViewController new];
             delegate.window.rootViewController = loginVC;
+        } else {
+            
         }
     } cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil,nil];
 }
 
--(NSMutableArray *)groups {
-    if (!_groups) {
-        _groups = [[NSMutableArray alloc]init];
-    }
-    return _groups;
+//上传头像
+-(void)UpdateUserInforHeadImage
+{
+    NSData *data = UIImageJPEGRepresentation(iconImage, 0.3);
+    [QPHttpManager uploadImage:data Completion:^(id responseData) {
+        
+    } failure:^(NSError *error) {
+        
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+    }];
+    
+    [self changeLogo];
+     
 }
 
--(void)loadDataSource {
+- (void)changeLogo{
     
-    [self setGroupsOne];
-    [self setGroupsTwo];
-    [self setGroupsThree];
-    [self setGroupsFour];
+  [QPHttpManager changeLogoWithUrl:@"http://mobile.rrgpay.com/apis/getLogo/WA16082322231" Completion:^(id responseData) {
+      [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+//      if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+//          
+//      }
+//      
+  } failure:^(NSError *error) {
+
+      [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+      
+  }];
+
 }
 
-- (void)setGroupsOne {
-    
-    XDGroupItem *group = [[XDGroupItem alloc]init];
-    QPUserModel *userModel = [QPUserCenterViewController getUserModel];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:userModel.arena_name :@"geren_touxiang"];
-    group.items = @[item];
-    [self.groups addObject:group];
+-(void)changeIconClick
+{
+    UIActionSheet *sheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"拍照" otherButtonTitles:@"从相册选择", nil];
+    sheet.tag = 80;
+    [sheet showInView:self.view];
 }
-- (void)setGroupsTwo {
-    
-    XDGroupItem *group = [[XDGroupItem alloc]init];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:@"我的银行卡" :@"Credit-Card"];
-    //    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"更换银行卡" :@"pir_3"];
-    XDSettingItem *itemTwo = [XDSettingItem itemWithtitle:@"店铺签的结算" :@"Paper-Dollars-1"];
-    group.items = @[item,itemTwo];
-    [self.groups addObject:group];
-}
-- (void)setGroupsThree {
-    
-    XDGroupItem *group = [[XDGroupItem alloc]init];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:@"商务合作" :@"Users-2"];
-    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"客服中心" :@"kefu"];
-    group.items = @[item,itemOne];
-    [self.groups addObject:group];
-}
-- (void)setGroupsFour {
-    
-    XDGroupItem *group = [[XDGroupItem alloc]init];
-    XDSettingItem *item = [XDSettingItem itemWithtitle:@"关于我们" :@"Info"];
-    XDSettingItem *itemOne = [XDSettingItem itemWithtitle:@"设    置" :@"shezhi"];
-    group.items = @[item,itemOne];
-    [self.groups addObject:group];
-}
-
 + (QPUserModel*)getUserModel{
     
     NSString *path = [QPFileLocationManager getUserDirectory];
     NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return merInfolist[0];
-}
-
-- (void)getLogo{
-    
-    [QPHttpManager getLogo:^(id responseData) {
-        
-    }failure:^(NSError *error) {
-        
-    }];
 }
 
 @end

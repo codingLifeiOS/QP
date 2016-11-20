@@ -13,31 +13,28 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         
-        UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"guanyuwom_bj"]];
-        imageView.image=[UIImage imageNamed:@"guanyuwom_bj"];
-        [self setBackgroundView:imageView];
+        self.phoneLab =[[UILabel alloc]init];
+        self.phoneLab.font = [UIFont systemFontOfSize:12];
+        self.phoneLab.frame = CGRectMake(100, 60, 150, 20);
+        [self.contentView addSubview:self.phoneLab];
     }
+    
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-}
 //重写cell image内容
 - (void)layoutSubviews {
+    
     [super layoutSubviews];
+    
     self.imageView.bounds = CGRectMake(0,0,60,60);
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.layer.cornerRadius = 30;
     self.imageView.layer.masksToBounds = YES;
-    CGRect tmpFrame = self.textLabel.frame;
-    tmpFrame.origin = CGPointMake(100, -10);
-    self.textLabel.frame = tmpFrame;
-    self.textLabel.font = [UIFont systemFontOfSize:12];
-    tmpFrame = self.detailTextLabel.frame;
-    tmpFrame.origin.x = 46;
+    
+    self.textLabel.frame = CGRectMake(100, 25, 200, 20);
 }
 
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface QPUserCenterViewCell : UITableViewCell
-
+@property (nonatomic,strong)UILabel *phoneLab;
 @end

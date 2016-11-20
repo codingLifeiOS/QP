@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface QPRegistrationAgreementViewController : UIViewController
-
+@property (nonatomic ,strong)NSDictionary *serviceAgreementDict;
 @end

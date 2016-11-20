@@ -141,11 +141,27 @@
 
 
 /**
- *  获取商户LOGO
+ *  上传图片
  *
  *  @param handler 完成后的回调
  */
 
-+ (void)getLogo:(QPRequestSuccessHandler)handler
-                     failure:(QPRequestFailureHandler)failhandler;
++ (void)uploadImage:(NSData*)imagedata
+         Completion:(QPRequestSuccessHandler)handler
+            failure:(QPRequestFailureHandler)failhandler;
+
+
+/**
+*  支付结果查询接口
+*  @param imageUrl 图片地址
+*
+*  @param handler 完成后的回调
+*/
+
++ (void)changeLogoWithUrl:(NSString *)imageUrl
+        Completion:(QPRequestSuccessHandler)handler
+           failure:(QPRequestFailureHandler)failhandler;
+
+
+
 @end

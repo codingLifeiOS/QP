@@ -285,18 +285,43 @@
     }];
 }
 
-+ (void)getLogo:(QPRequestSuccessHandler)handler
-                failure:(QPRequestFailureHandler)failhandler;
-{
-    NSString * url = [NSString stringWithFormat:@"%@/%@",QP_GetLogo,[QPUtils getMer_code]];
-    [QPHttpRequest POSTWithData:url params:nil body:nil success:^(NSDictionary *success) {
++ (void)uploadImage:(NSData*)imagedata
+         Completion:(QPRequestSuccessHandler)handler
+            failure:(QPRequestFailureHandler)failhandler{
+
+    
+    NSDictionary *dic = @{@"name":imagedata,
+                          };
+    [QPHttpRequest POSTWithData:QP_Upload_Logo params:nil body:imagedata success:^(NSDictionary *success) {
+        
         handler ? handler(success) : nil;
-
+        
     } failure:^(NSError *error) {
-
+        
         failhandler ? failhandler(error) : nil;
-
+        
     }];
+}
+
++ (void)changeLogoWithUrl:(NSString *)imageUrl
+               Completion:(QPRequestSuccessHandler)handler
+                  failure:(QPRequestFailureHandler)failhandler{
+
+
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"new_logo":imageUrl,
+                          @"token":[QPUtils getToken]
+                          };
+    [QPHttpRequest POSTWithData:QP_Update_Mer_Logo params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding]success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        failhandler ? failhandler(error) : nil;
+        
+    }];
+
 }
 
 + (QPUserModel*)getUserModel{

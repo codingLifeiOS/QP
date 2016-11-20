@@ -1,25 +1,25 @@
 //
-//  QPAboutUsViewController.m
+//  QPNewsDetailsViewController.m
 //  QuickPay
 //
-//  Created by Nie on 2016/11/5.
+//  Created by Nie on 2016/11/20.
 //  Copyright © 2016年 Nie. All rights reserved.
 //
 
-#import "QPAboutUsViewController.h"
+#import "QPNewsDetailsViewController.h"
 
-@interface QPAboutUsViewController ()<UIWebViewDelegate>
+@interface QPNewsDetailsViewController ()<UIWebViewDelegate>
 
 @end
 
-@implementation QPAboutUsViewController
+@implementation QPNewsDetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addTitleToNavBar:@"关于我们"];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self addTitleToNavBar:@"消息详情"];
     [self createBackBarItem];
     [self configureWebView];
-
 }
 
 #pragma mark - configureSubViews
@@ -27,20 +27,17 @@
 {
     UIWebView * webView = [[UIWebView alloc]initWithFrame:self.view.frame];
     [webView setScalesPageToFit:YES];
-    NSString * url = [NSString stringWithFormat:@"%@/%@",QP_GetFixedQR,[QPUtils getMer_code]];
-    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.newsDetailsDict objectForKey:@"value"]]]];
     [self.view addSubview:webView];
 }
 
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-
+    
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在加载网页"];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [[QPHUDManager sharedInstance]hiddenHUD];
-
-
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [[QPHUDManager sharedInstance]hiddenHUD];

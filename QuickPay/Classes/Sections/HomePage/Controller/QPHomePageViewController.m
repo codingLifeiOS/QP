@@ -27,7 +27,7 @@
     CLShareManager *shareManager;
     
 }
-@property (nonatomic, strong) NSMutableArray *imageNameArr;
+@property (nonatomic, strong) NSMutableArray *imageADArray;
 
 @end
 
@@ -41,6 +41,8 @@
     self.view.backgroundColor = UIColorFromHex(0xeeeeee);
     [self configureSubViews];
     [self getAdImages];
+    
+    _imageADArray = [[NSMutableArray alloc]init];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -60,7 +62,6 @@
 - (void)configureSubViews
 {
     [self configureNavigaBar];
-    [self configureScrollView];
     [self configureMenuView];
     [self configureBottomView];
 }
@@ -94,11 +95,20 @@
         make.right.equalTo(self.view).offset(-15);
     }];
 }
--(void)configureScrollView
+-(void)configureScrollViewWithArray:(NSMutableArray*)array
 {
+    
 //    NSMutableArray *imageNameArr = [NSMutableArray arrayWithArray:@[@"pic_1.png",@"pic_2.png",@"pic_3.png"]];
-    NSMutableArray *titleNameArr = [NSMutableArray arrayWithArray:@[@"",@"",@""]];
-    adView = [[BMAdScrollView alloc] initWithNameArr:_imageNameArr titleArr:titleNameArr height:132 offsetY:0];
+//    NSMutableArray *titleNameArr = [NSMutableArray arrayWithArray:@[@"",@"",@""]];
+    
+    NSMutableArray * imageNameArr = [[NSMutableArray alloc]init];
+    NSMutableArray * titleNameArr = [[NSMutableArray alloc]init];
+    for (NSDictionary *dic in array) {
+        [imageNameArr addObject: [dic objectForKey:@"value"]];
+        [titleNameArr addObject: [dic objectForKey:@"key"]];
+    }
+
+    adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:132 offsetY:0];
     adView.tag = 10010;
     adView.delegate = self;
     adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 132);
@@ -108,7 +118,7 @@
 
 - (void)configureMenuView{
     
-    menuBgView = [[UIView alloc] initWithFrame:CGRectMake(0,adView.bottom+10, SCREEN_WIDTH, 432/2)];
+    menuBgView = [[UIView alloc] initWithFrame:CGRectMake(0,72+132+10, SCREEN_WIDTH, 432/2)];
     menuBgView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:menuBgView];
     
@@ -309,12 +319,11 @@
         [[QPHUDManager sharedInstance]hiddenHUD];
         if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
             STRONGSELF();
-            for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
-//                NSMutableArray *dataArr = [NSMutableArray array];
-                [strongSelf.imageNameArr addObject:[dic valueForKey:@"value"]];
-//                strongSelf.imageNameArr =  [dataArr mutableCopy];
+            dispatch_async(dispatch_get_main_queue(), ^{
 
-            }
+            strongSelf.imageADArray = [responseData objectForKey:@"list"];
+            [strongSelf configureScrollViewWithArray:_imageADArray];
+            });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
         }

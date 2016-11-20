@@ -20,7 +20,7 @@
     UIView *backView ;
     UIImageView *codeImage;           // 生成的二维码
 }
-@property(nonatomic,strong)NSMutableDictionary *Dict;
+@property(nonatomic,copy)NSString *orderId;//订单号
 
 @end
 
@@ -251,11 +251,25 @@
 }
 // 刷卡支付
 - (void)scansuccessToPayWithAuthno:(NSString*)authno{
-  
+    [[QPHUDManager sharedInstance]showProgressWithText:@"正在支付"];
   [QPHttpManager creditCardPaymentByScanString:self.payModel.amount PayTye:self.payModel.payType Authno:authno Completion:^(id responseData) {
-      
+      [[QPHUDManager sharedInstance]hiddenHUD];
+//      if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
+//          dispatch_async(dispatch_get_main_queue(), ^{
+//              self.orderId = [responseData objectForKey:@"order_sn"];
+//              codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220]
+//              ;
+//              [self orderqueryWithOrderId:self.orderId];
+//          });
+//      } else {
+//          [[QPHUDManager sharedInstance]showTextOnly:@"支付失败"];
+//      }
+//
   } failure:^(NSError *error) {
       
+      [[QPHUDManager sharedInstance]hiddenHUD];
+      [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+
   }];
 }
 
@@ -267,9 +281,10 @@
         [[QPHUDManager sharedInstance]hiddenHUD];
          if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-//                NSDictionary *resultDict = [NSString jsonStringToDictionary:responseData];
-//                self.Dict = resultDict[@"order_sn"];
-                 codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220];
+                self.orderId = [responseData objectForKey:@"order_sn"];
+                codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220]
+                ;
+                [self orderqueryWithOrderId:self.orderId];
             });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:@"生成商户二维码失败"];
@@ -280,16 +295,16 @@
     }];
 }
 
-//- (void)orderquery
-//{
-//    [QPHttpManager orderquery:self.Dict[@"order_sn"] Completion:^(id responseData) {
-//        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
-////            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-////            
-////            QPQrderQueryViewController *orderVC = [QPQrderQueryViewController new];
-////            delegate.window.rootViewController = orderVC;
-//        }
-//        }failure:^(NSError *error) {
-//  }];
-//}
+- (void)orderqueryWithOrderId:(NSString*)orderId
+{
+    [QPHttpManager orderquery:orderId Completion:^(id responseData) {
+        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+//            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//            
+//            QPQrderQueryViewController *orderVC = [QPQrderQueryViewController new];
+//            delegate.window.rootViewController = orderVC;
+        }
+        }failure:^(NSError *error) {
+  }];
+}
 @end
