@@ -12,7 +12,7 @@
 #import "QPHttpManager.h"
 #import "QRCodeGenerator.h"
 #import "QPQrderQueryViewController.h"
-#import "AppDelegate.h"
+#import "NavigationController.h"
 @interface QPScanCodePayViewController ()<ZBarReaderViewDelegate>
 {
     ZBarReaderView *_readview;          // 扫描二维码ZBarReaderView
@@ -271,17 +271,15 @@
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在支付"];
     [QPHttpManager creditCardPaymentByScanString:self.payModel.amount PayTye:self.payModel.payType Authno:authno Completion:^(id responseData) {
       [[QPHUDManager sharedInstance]hiddenHUD];
-//      if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
-//          dispatch_async(dispatch_get_main_queue(), ^{
-//              self.orderId = [responseData objectForKey:@"order_sn"];
-//              codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220]
-//              ;
-//              [self orderqueryWithOrderId:self.orderId];
-//          });
-//      } else {
-//          [[QPHUDManager sharedInstance]showTextOnly:@"支付失败"];
-//      }
-//
+      if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
+          dispatch_async(dispatch_get_main_queue(), ^{
+            self.orderId = [responseData objectForKey:@"order_sn"];
+            [self orderqueryWithOrderId:self.orderId];
+          });
+      } else {
+          [[QPHUDManager sharedInstance]showTextOnly:@"支付失败"];
+      }
+
   } failure:^(NSError *error) {
       
       [[QPHUDManager sharedInstance]hiddenHUD];
@@ -337,8 +335,9 @@
 {
     [QPHttpManager orderquery:orderId Completion:^(id responseData) {
         if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
-            QPQrderQueryViewController *orderVC = [[QPQrderQueryViewController alloc]init];
-            [self.navigationController pushViewController:orderVC animated:YES];
+            QPQrderQueryViewController *QPayResult = [[QPQrderQueryViewController alloc]init];
+            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:QPayResult];
+            [self presentViewController:nav animated:YES completion:nil];
         }
         }failure:^(NSError *error) {
   }];

@@ -16,12 +16,10 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 
 @interface QPViewWaterViewController ()<UITableViewDelegate,UITableViewDataSource,QPDaterViewDelegate>
 {
-    QPDaterView*dater;
+    QPDaterView *datePicker;
+    NSString * timestr;
 }
 @property(nonatomic,strong) UITableView *homeTableView;
-@property(nonatomic,strong) UILabel *dateLab;
-@property(nonatomic,strong) UILabel *numberLab;
-@property(nonatomic,strong) UILabel *settlementmoneyLab;
 @property(nonatomic,strong) NSMutableArray *viewaterArry;
 @end
 
@@ -32,38 +30,39 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [self addTitleToNavBar:@"查看流水"];
     [self createBackBarItem];
     [self configureTableView];
-    [self getOrderRecordsNetworkRequest];
+    
+    NSDate *  date = [NSDate date];
+    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+   [dateformatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *nowTime = [dateformatter stringFromDate:date];
+    timestr =  nowTime;
+    
+    [self getOrderRecordsNetworkRequestWithBeginTime:nowTime EndTime:nowTime];
     self.viewaterArry = [[NSMutableArray alloc]init];
-    [self createRightBarItemByImageName:@"liushui_shaixuan" target:self action:@selector(datechoicebtnclick)];
+    [self createRightBarItemByImageName:@"liushui_shaixuan" target:self action:@selector(dateChoiceClick)];
 }
 
--(void)datechoicebtnclick{
-    dater=[[QPDaterView alloc]initWithFrame:CGRectZero];
-    dater.delegate=self;
-    [dater showInView:self.view animated:YES];
-    self.navigationController.navigationBarHidden = YES;
+-(void)dateChoiceClick{
+    
+    if (!datePicker) {
+        datePicker = [[QPDaterView alloc]initWithFrame:CGRectZero];
+        datePicker.delegate = self;
+        [datePicker showInView:self.view animated:YES];
+    }
 }
 - (void)daterViewDidClicked:(QPDaterView *)daterView{
-    NSLog(@"dateString=%@ timeString=%@",dater.dateString,dater.timeString);
-    self.navigationController.navigationBarHidden = NO;
+    
+    NSLog(@"dateString = %@ timeString = %@",datePicker.dateString,datePicker.timeString);
+    
+    timestr  = datePicker.dateString;
+    [self getOrderRecordsNetworkRequestWithBeginTime:datePicker.dateString EndTime:datePicker.dateString];
+    datePicker = nil;
 }
 - (void)daterViewDidCancel:(QPDaterView *)daterView{
-    self.navigationController.navigationBarHidden = NO;
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    dater.hidden = YES;
-    self.navigationController.navigationBarHidden = NO;
+    datePicker.hidden = YES;
 }
-
-//- (void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES animated:animated];
-//}
-//
-//- (void) viewWillDisappear:(BOOL)animated{
-//    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO animated:animated];
-//}
 
 #pragma mark - configureSubViews
 -(void)configureTableView
@@ -79,16 +78,11 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     [self.homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if (section==3) {
-//        return 3;
-//    } else {
-//        return  1;
-//    }
-//
+    
     return self.viewaterArry.count;
 }
 
@@ -118,45 +112,70 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 1.0;
+    return CGFLOAT_MIN;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (self.viewaterArry.count == 0) {
+        return CGFLOAT_MIN;
+    }
     return 50.0;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-    view.backgroundColor = [UIColor whiteColor];
     
-    UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
-    view1.backgroundColor = UIColorFromHex(0xf8f8f8);
-    [view addSubview:view1];
-    
-    _dateLab = [[UILabel alloc]initWithFrame:CGRectMake(10, view1.bottom, 120, 30)];
-    _dateLab.text = @"2016-10-27 周三";
-    _dateLab.font = [UIFont systemFontOfSize:12];
-    _dateLab.textColor = UIColorFromHex(0x606268);
-    [view addSubview:_dateLab];
-    
-    _numberLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-130, _dateLab.y, 50, 30)];
-    _numberLab.text = @"共1笔";
-    _numberLab.font = [UIFont systemFontOfSize:16];
-    _numberLab.textColor = UIColorFromHex(0xff9b20);
-    _numberLab.textAlignment = NSTextAlignmentRight;
-    [view addSubview:_numberLab];
-    
-    _settlementmoneyLab = [[UILabel alloc]initWithFrame:CGRectMake(_numberLab.right+10, _dateLab.y, 100, _dateLab.height)];
-    _settlementmoneyLab.text = @"¥ 100";
-    _settlementmoneyLab.textAlignment = NSTextAlignmentLeft;
-    _settlementmoneyLab.font = [UIFont systemFontOfSize:16];
-    _settlementmoneyLab.textColor = UIColorFromHex(0xff9b20);
-    [view addSubview:_settlementmoneyLab];
+    UIView *view;
+    if (self.viewaterArry.count > 0) {
+        
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        view.backgroundColor = [UIColor whiteColor];
+        
+        UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+        view1.backgroundColor = UIColorFromHex(0xf8f8f8);
+        [view addSubview:view1];
+        
+        UILabel *dateLab = [[UILabel alloc]initWithFrame:CGRectMake(10, view1.bottom, 120, 30)];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd";
+        formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+        NSDate *date = [formatter dateFromString:timestr];
+        
+        dateLab.text = [NSString stringWithFormat:@"%@  %@",timestr,[date getWeekday]];
+        dateLab.font = [UIFont systemFontOfSize:12];
+        dateLab.textColor = UIColorFromHex(0x606268);
+        [view addSubview:dateLab];
+        
+        UILabel * moneyLab = [[UILabel alloc]initWithFrame:CGRectMake( SCREEN_WIDTH-140, dateLab.y, 120, dateLab.height)];
+        
+        NSInteger total_amount = 0 ;
+        for (QPViewWaterModel *model in self.viewaterArry) {
+            total_amount = total_amount+[model.total_amount integerValue];
+        }
+        moneyLab.text = [NSString stringWithFormat:@"¥%.2f",total_amount /100.00 ];
+        moneyLab.textAlignment = NSTextAlignmentRight;
+        moneyLab.font = [UIFont systemFontOfSize:16];
+        moneyLab.textColor = UIColorFromHex(0xff9b20);
+        [view addSubview:moneyLab];
+        
+        UILabel *numberLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-150, dateLab.y, 50, 30)];
+        numberLab.text = [NSString stringWithFormat:@"共%ld笔",self.viewaterArry.count];
+        numberLab.font = [UIFont systemFontOfSize:16];
+        numberLab.textColor = UIColorFromHex(0xff9b20);
+        numberLab.textAlignment = NSTextAlignmentRight;
+        [view addSubview:numberLab];
+        
+    } else {
+        view = [[UIView alloc]init];
+    }
     
     return view;
 }
-- (void)getOrderRecordsNetworkRequest{
+- (void)getOrderRecordsNetworkRequestWithBeginTime:(NSString*)beginTime EndTime:(NSString*)endTime{
+    
+    [self.viewaterArry removeAllObjects];
+    
     WEAKSELF();
     [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
-    [QPHttpManager getOrderRecordsCompletion:^(id responseData) {
+    [QPHttpManager getOrderRecordsBegin:beginTime End:endTime Completion:^(id responseData) {
         [[QPHUDManager sharedInstance]hiddenHUD];
         if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
             STRONGSELF();
@@ -164,19 +183,20 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
                 QPViewWaterModel *model = [[QPViewWaterModel alloc]initWithDictionary:dic];
                 [strongSelf.viewaterArry addObject:model];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
                 [self.homeTableView reloadData];
-            });
+            if (self.viewaterArry.count == 0) {
+                 [[QPHUDManager sharedInstance]showTextOnly:@"没有数据"];
+            }
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
         }
+        
     } failure:^(NSError *error) {
         
         [[QPHUDManager sharedInstance]hiddenHUD];
         [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
-        
     }];
-
+    
 }
 
 @end

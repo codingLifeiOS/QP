@@ -18,6 +18,7 @@
 #import "QPPayModel.h"
 #import "QPQrderQueryViewController.h"
 #import "QRCodeGenerator.h"
+#import "NavigationController.h"
 
 @interface QPHomePageViewController ()<UIAlertViewDelegate,BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
 {
@@ -259,9 +260,10 @@
             [self shareButtonClick];
             break;
         case 211:{
-            QPQrderQueryViewController *QPViewWaterVC1 = [[QPQrderQueryViewController alloc]init];
-            [self.navigationController pushViewController:QPViewWaterVC1 animated:YES];
-            [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
+            QPQrderQueryViewController *QPayResult = [[QPQrderQueryViewController alloc]init];
+            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:QPayResult];
+            [self presentViewController:nav animated:YES completion:nil];
+               [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
         }
             break;
             

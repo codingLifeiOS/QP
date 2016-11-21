@@ -103,12 +103,15 @@
 
 /**
  *  获取交易流水信息接口
- *
+ *  @param  beginTime 开始时间
+    @param  endTime  结束时间
  *  @param handler 完成后的回调
  */
 
-+ (void)getOrderRecordsCompletion:(QPRequestSuccessHandler)handler
-                     failure:(QPRequestFailureHandler)failhandler;
++ (void)getOrderRecordsBegin:(NSString*)beginTime
+                         End:(NSString*)endTime
+             Completion:(QPRequestSuccessHandler)handler
+                failure:(QPRequestFailureHandler)failhandler;
 
 
 /**

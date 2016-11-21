@@ -16,10 +16,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self addTitleToNavBar:@"顺便付"];
     [self configureView];
-    self.navigationController.navigationBarHidden = YES;
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self createBackBarItem];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 -(void)configureView
@@ -93,14 +103,18 @@
     footBtn.frame=CGRectMake(12, SCREEN_HEIGHT-55, SCREEN_WIDTH-24, 50);
     [footBtn setTitle:@"返回收款页" forState:UIControlStateNormal];
     footBtn.backgroundColor = [UIColor orangeColor];
-    [footBtn  addTarget:self action:@selector(pushkeyboardView) forControlEvents:UIControlEventTouchUpInside];
+    [footBtn  addTarget:self action:@selector(commonPushBack) forControlEvents:UIControlEventTouchUpInside];
     footBtn.layer.borderWidth=2.0f;
     footBtn.layer.cornerRadius = 8.0f;
     footBtn.layer.borderColor=[[UIColor orangeColor]CGColor];
     [self.view addSubview:footBtn];
 }
-- (void)pushkeyboardView
-{
+- (void)commonPushBack{
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

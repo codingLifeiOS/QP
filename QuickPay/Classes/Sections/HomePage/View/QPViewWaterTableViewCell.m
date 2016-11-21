@@ -15,26 +15,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        //        _dateLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 120, 30)];
-        //        _dateLab.text = @"2016-10-27 周三";
-        //        _dateLab.font = [UIFont systemFontOfSize:12];
-        //        _dateLab.textColor = UIColorFromHex(0x606268);
-        //        [self.contentView addSubview:_dateLab];
-        //
-        //        _numberLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-130, _dateLab.y, 50, 30)];
-        //        _numberLab.text = @"共1笔";
-        //        _numberLab.font = [UIFont systemFontOfSize:16];
-        //        _numberLab.textColor = UIColorFromHex(0xff9b20);
-        //        _numberLab.textAlignment = NSTextAlignmentRight;
-        //        [self.contentView addSubview:_numberLab];
-        //
-        //        _settlementmoneyLab = [[UILabel alloc]initWithFrame:CGRectMake(_numberLab.right+10, _dateLab.y, 100, _dateLab.height)];
-        //        _settlementmoneyLab.text = @"¥ 100";
-        //        _settlementmoneyLab.textAlignment = NSTextAlignmentLeft;
-        //        _settlementmoneyLab.font = [UIFont systemFontOfSize:16];
-        //        _settlementmoneyLab.textColor = UIColorFromHex(0xff9b20);
-        //        [self.contentView addSubview:_settlementmoneyLab];
-        //
         UIView *line = [[UIView alloc]init];
         line.backgroundColor = UIColorFromHex(0xdcdcdc);
         [self.contentView  addSubview:line];
@@ -114,12 +94,12 @@
 }
 
 - (void)updatecellWithModel:(QPViewWaterModel *)model{
-    NSString *str;
+    NSString *timestr;
     if (model.create_date.length >= 8) {
-        str = [model.create_date substringFromIndex:model.create_date.length-8];
+        timestr = [model.create_date substringFromIndex:model.create_date.length-8];
     }
-    self.timeLab.text = str;
-    self.moneyLab.text = [NSString stringWithFormat:@"¥ %@",model.total_amount];
+    self.timeLab.text = timestr;
+    self.moneyLab.text = [NSString stringWithFormat:@"¥ %.2f",[model.total_amount integerValue]/100.00];
     if ([model.pay_type isEqualToString:@"1"]) {
         _typeLab.text = @"支付宝收款";
         _typeimage.image = [UIImage imageNamed:@"jiesuan_zhifubao"];

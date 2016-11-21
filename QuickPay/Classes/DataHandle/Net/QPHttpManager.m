@@ -212,17 +212,15 @@
 }
 
 
-+ (void)getOrderRecordsCompletion:(QPRequestSuccessHandler)handler
++ (void)getOrderRecordsBegin:(NSString*)beginTime
+                         End:(NSString*)endTime
+                  Completion:(QPRequestSuccessHandler)handler
                      failure:(QPRequestFailureHandler)failhandler{
     
-    NSDate *  senddate =[NSDate date];
-    NSDateFormatter  *dateformatter = [[NSDateFormatter alloc] init];
-    [dateformatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *  locationString=[dateformatter stringFromDate:senddate];
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
-                          @"start_date":locationString,
-                          @"end_date":locationString,
+                          @"start_date":beginTime,
+                          @"end_date":endTime,
                           };
     [QPHttpRequest POSTWithData:QP_GetOrder_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
         handler ? handler(success) : nil;
