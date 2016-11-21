@@ -78,16 +78,16 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
     return CGFLOAT_MIN;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 24.0;
+    return 15.0;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UILabel *timeLabel = [[UILabel alloc]initWithFrame:(CGRectMake(0, 0, SCREEN_WIDTH, 20))];
+    UILabel *timeLabel = [[UILabel alloc]initWithFrame:(CGRectMake(0, 0, SCREEN_WIDTH, 10))];
     timeLabel.backgroundColor = [UIColor clearColor];
-    timeLabel.font = [UIFont systemFontOfSize:12];
-    timeLabel.textColor = RGBACOLOR(138, 140, 146, 1);
-    timeLabel.text = @"10月20日";
-    timeLabel.textAlignment = NSTextAlignmentCenter;
+//    timeLabel.font = [UIFont systemFontOfSize:12];
+//    timeLabel.textColor = RGBACOLOR(138, 140, 146, 1);
+//    timeLabel.text = @"10月20日";
+//    timeLabel.textAlignment = NSTextAlignmentCenter;
     return timeLabel;
 }
 - (void)getNews{

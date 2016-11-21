@@ -289,9 +289,13 @@
          Completion:(QPRequestSuccessHandler)handler
             failure:(QPRequestFailureHandler)failhandler{
 
-    
-    NSDictionary *dic = @{@"name":imagedata,
-                          };
+//    [manager POST:[NSString stringWithFormat:@"%@/projectLog/create",HOST_URL] parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        for (int i = 0; i < imagedata; i++) {
+//            [formData appendPartWithFileData:UIImageJPEGRepresentation(imagedata,0.8) name:@"images[]" fileName:@"something.jpg" mimeType:@"image/jpeg"];
+//        }
+//    
+//    NSDictionary *dic = @{@"name":imagedata,
+//                          };
     [QPHttpRequest POSTWithData:QP_Upload_Logo params:nil body:imagedata success:^(NSDictionary *success) {
         
         handler ? handler(success) : nil;

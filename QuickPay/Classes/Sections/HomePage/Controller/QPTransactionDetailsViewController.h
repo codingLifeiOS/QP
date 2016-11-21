@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface QPTransactionDetailsViewController : UIViewController
+@property (nonatomic,strong)UIImageView *typeimage;
+@property (nonatomic,strong)UILabel *typeLab;
+@property (nonatomic,strong)UILabel *netreceiptsLab;
+@property (nonatomic,strong)UILabel *receivableLab;
+@property (nonatomic,strong)UILabel *tradingstatusLab;
+@property (nonatomic,strong)UILabel *tradingtimeLab;
+@property (nonatomic,strong)UILabel *tradingnumberLab;
+@property (nonatomic ,strong)NSDictionary *transacDetailsDict;
 
 @end

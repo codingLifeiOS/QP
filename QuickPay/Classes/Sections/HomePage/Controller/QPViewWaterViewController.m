@@ -41,16 +41,29 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     dater=[[QPDaterView alloc]initWithFrame:CGRectZero];
     dater.delegate=self;
     [dater showInView:self.view animated:YES];
+    self.navigationController.navigationBarHidden = YES;
 }
 - (void)daterViewDidClicked:(QPDaterView *)daterView{
     NSLog(@"dateString=%@ timeString=%@",dater.dateString,dater.timeString);
+    self.navigationController.navigationBarHidden = NO;
 }
 - (void)daterViewDidCancel:(QPDaterView *)daterView{
-    
+    self.navigationController.navigationBarHidden = NO;
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     dater.hidden = YES;
+    self.navigationController.navigationBarHidden = NO;
 }
+
+//- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:animated];
+//}
+//
+//- (void) viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:animated];
+//    [self.navigationController setNavigationBarHidden:NO animated:animated];
+//}
 
 #pragma mark - configureSubViews
 -(void)configureTableView

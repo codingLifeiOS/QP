@@ -17,6 +17,7 @@
 @property (nonatomic,strong)UILabel *timeLab;
 @property (nonatomic,strong)UILabel *moneyLab;
 @property (nonatomic,strong)UIImageView *typeimage;
+
 - (void)updatecellWithModel:(QPViewWaterModel *)model;
 
 @end

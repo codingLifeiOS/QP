@@ -67,7 +67,7 @@
     beijingimage.image = [UIImage imageNamed:@"zhezhao"];
     [self addSubview:beijingimage];
     
-    daterContentView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-264, SCREEN_WIDTH, 200)];
+    daterContentView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-200, SCREEN_WIDTH, 200)];
     daterContentView.backgroundColor=[UIColor whiteColor];
     [self addSubview:daterContentView];
     daterContentView.layer.masksToBounds = YES;

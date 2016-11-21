@@ -44,7 +44,7 @@
         NSLog(@"服务器的错误原因:%@",str);
         
         failureHandler ? failureHandler(error) : nil;
-    }];
+    }]; 
 }
 + (void)POST:(NSString *)url
        param:(id)param

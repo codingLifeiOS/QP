@@ -62,7 +62,7 @@
         _moneyLab.text = @"¥ 100";
         _moneyLab.textColor = [UIColor blackColor];
         _moneyLab.textAlignment = NSTextAlignmentRight;
-        _moneyLab.font = [UIFont systemFontOfSize:16];
+        _moneyLab.font = [UIFont systemFontOfSize:18];
         [self.contentView addSubview:_moneyLab];
         
         UIView *line1 = [[UIView alloc]init];
@@ -97,14 +97,14 @@
         }];
         
         [self.moneyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.typeLab);
+            make.top.equalTo(@20);
             make.right.equalTo(@(-10));
             make.width.equalTo(self.typeLab);
             make.height.lessThanOrEqualTo(self.typeLab);
         }];
         
         [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.timeLab.mas_bottom_mas).with.offset(10);
+            make.top.equalTo(self.timeLab.mas_bottom_mas).with.offset(10.5);
             make.left.equalTo(@0);
             make.width.equalTo(self.contentView);
             make.height.equalTo(@0.5);

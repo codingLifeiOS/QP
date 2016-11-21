@@ -16,15 +16,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addTitleToNavBar:@"顺便付"];
+//    [self addTitleToNavBar:@"顺便付"];
     [self configureView];
+    self.navigationController.navigationBarHidden = YES;
+
 }
 
 -(void)configureView
 {
     self.view.backgroundColor = UIColorFromHex(0xefefef);
     
-    UIImageView *rebeijingimage = [[UIImageView alloc]initWithFrame:CGRectMake(12, 25, SCREEN_WIDTH-24, 50)];
+    UIImageView *navbarbeijingimage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+    navbarbeijingimage.image = [UIImage imageNamed:@"jiner_bg"];
+    [self.view addSubview:navbarbeijingimage];
+    
+    UILabel *navlab = [[UILabel alloc]init];
+    navlab.textAlignment = NSTextAlignmentCenter;
+    navlab.text = @"顺便付";
+    navlab.font = [UIFont systemFontOfSize:16];
+    [navbarbeijingimage addSubview:navlab];
+    [navlab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@200);
+        make.centerX.equalTo(self.view.mas_centerX_mas);
+        make.height.equalTo(@25);
+        make.top.equalTo(@27);
+    }];
+
+    UIImageView *rebeijingimage = [[UIImageView alloc]initWithFrame:CGRectMake(12, navbarbeijingimage.bottom+20, SCREEN_WIDTH-24, 50)];
     rebeijingimage.image = [UIImage imageNamed:@"jiner_bg"];
     [self.view addSubview:rebeijingimage];
     
@@ -72,7 +90,7 @@
     [patypeimage addSubview:paytypeLab];
     
     UIButton *footBtn =[UIButton buttonWithType:UIButtonTypeCustom];
-    footBtn.frame=CGRectMake(12, SCREEN_HEIGHT-124, SCREEN_WIDTH-24, 50);
+    footBtn.frame=CGRectMake(12, SCREEN_HEIGHT-55, SCREEN_WIDTH-24, 50);
     [footBtn setTitle:@"返回收款页" forState:UIControlStateNormal];
     footBtn.backgroundColor = [UIColor orangeColor];
     [footBtn  addTarget:self action:@selector(pushkeyboardView) forControlEvents:UIControlEventTouchUpInside];
@@ -84,4 +102,5 @@
 - (void)pushkeyboardView
 {
 }
+
 @end

@@ -19,6 +19,8 @@
     QPQRView *_qrRectView;             // 自定义的扫描视图
     UIView *backView ;
     UIImageView *codeImage;           // 生成的二维码
+    UIImageView *useguideimage;
+    UIImageView *codeuseguideimage;
 }
 @property(nonatomic,copy)NSString *orderId;//订单号
 
@@ -118,6 +120,14 @@
     changecodeBtn.layer.borderColor = [[UIColor whiteColor]CGColor];
     [_readview addSubview:changecodeBtn];
     [changecodeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton * UseguideBtn = [[UIButton alloc]init];
+    UseguideBtn.frame = CGRectMake(40, changecodeBtn.bottom+10, SCREEN_WIDTH-80, 40);
+    [UseguideBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
+    UseguideBtn.backgroundColor = [UIColor clearColor];
+    [_readview addSubview:UseguideBtn];
+    [UseguideBtn addTarget:self action:@selector(useguide) forControlEvents:UIControlEventTouchUpInside];
+
  }
 
 - (void)configureCodeView{
@@ -161,8 +171,15 @@
     changeZBarBtn.layer.borderColor = [[UIColor orangeColor]CGColor];
     [backView addSubview:changeZBarBtn];
     [changeZBarBtn addTarget:self action:@selector(changeToScanPay) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton * codeuseguideBtn = [[UIButton alloc]init];
+    codeuseguideBtn.frame = CGRectMake(40, changeZBarBtn.bottom+10, SCREEN_WIDTH-80, 40);
+    [codeuseguideBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
+    [codeuseguideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [backView addSubview:codeuseguideBtn];
+    [codeuseguideBtn addTarget:self action:@selector(codeuseguide) forControlEvents:UIControlEventTouchUpInside];
     backView.hidden = YES;
-
+    
 }
 
 #pragma mark - ZBarReaderViewDelegate
@@ -252,7 +269,7 @@
 // 刷卡支付
 - (void)scansuccessToPayWithAuthno:(NSString*)authno{
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在支付"];
-  [QPHttpManager creditCardPaymentByScanString:self.payModel.amount PayTye:self.payModel.payType Authno:authno Completion:^(id responseData) {
+    [QPHttpManager creditCardPaymentByScanString:self.payModel.amount PayTye:self.payModel.payType Authno:authno Completion:^(id responseData) {
       [[QPHUDManager sharedInstance]hiddenHUD];
 //      if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
 //          dispatch_async(dispatch_get_main_queue(), ^{
@@ -295,14 +312,33 @@
     }];
 }
 
+-(void)useguide
+{
+    self.navigationController.navigationBarHidden = YES;
+    useguideimage = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    useguideimage.image = [UIImage imageNamed:@"zhinan_saoke"];
+    [self.view addSubview:useguideimage];
+}
+-(void)codeuseguide
+{
+    self.navigationController.navigationBarHidden = YES;
+    codeuseguideimage = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    codeuseguideimage.image = [UIImage imageNamed:@"kehusaoma_shuoming"];
+    [self.view addSubview:codeuseguideimage];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    useguideimage.hidden = YES;
+    codeuseguideimage.hidden =YES;
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)orderqueryWithOrderId:(NSString*)orderId
 {
     [QPHttpManager orderquery:orderId Completion:^(id responseData) {
         if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
-//            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//            
-//            QPQrderQueryViewController *orderVC = [QPQrderQueryViewController new];
-//            delegate.window.rootViewController = orderVC;
+            QPQrderQueryViewController *orderVC = [[QPQrderQueryViewController alloc]init];
+            [self.navigationController pushViewController:orderVC animated:YES];
         }
         }failure:^(NSError *error) {
   }];

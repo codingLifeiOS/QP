@@ -261,6 +261,10 @@
 		1C9923E01DDD957F003E840B /* jiner_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C9923D81DDD957F003E840B /* jiner_bg@3x.png */; };
 		1C9923E11DDD957F003E840B /* shibai_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C9923D91DDD957F003E840B /* shibai_bg@2x.png */; };
 		1C9923E21DDD957F003E840B /* shibai_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C9923DA1DDD957F003E840B /* shibai_bg@3x.png */; };
+		1CA2C8F91DE2E0F5007591BD /* zhinan_saoke@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA2C8F71DE2E0F5007591BD /* zhinan_saoke@2x.png */; };
+		1CA2C8FA1DE2E0F5007591BD /* zhinan_saoke@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA2C8F81DE2E0F5007591BD /* zhinan_saoke@3x.png */; };
+		1CA2C8FD1DE2E108007591BD /* kehusaoma_shuoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA2C8FB1DE2E108007591BD /* kehusaoma_shuoming@2x.png */; };
+		1CA2C8FE1DE2E108007591BD /* kehusaoma_shuoming@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA2C8FC1DE2E108007591BD /* kehusaoma_shuoming@3x.png */; };
 		1CA728E71DCDA78F00BDFA65 /* QPAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA728E61DCDA78F00BDFA65 /* QPAboutUsViewController.m */; };
 		1CA728F01DCDCB0100BDFA65 /* yinhangka_beijing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA728E81DCDCB0100BDFA65 /* yinhangka_beijing@2x.png */; };
 		1CA728F11DCDCB0100BDFA65 /* yinhangka_beijing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA728E91DCDCB0100BDFA65 /* yinhangka_beijing@3x.png */; };
@@ -735,6 +739,10 @@
 		1C9923D81DDD957F003E840B /* jiner_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiner_bg@3x.png"; sourceTree = "<group>"; };
 		1C9923D91DDD957F003E840B /* shibai_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shibai_bg@2x.png"; sourceTree = "<group>"; };
 		1C9923DA1DDD957F003E840B /* shibai_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shibai_bg@3x.png"; sourceTree = "<group>"; };
+		1CA2C8F71DE2E0F5007591BD /* zhinan_saoke@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhinan_saoke@2x.png"; sourceTree = "<group>"; };
+		1CA2C8F81DE2E0F5007591BD /* zhinan_saoke@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhinan_saoke@3x.png"; sourceTree = "<group>"; };
+		1CA2C8FB1DE2E108007591BD /* kehusaoma_shuoming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kehusaoma_shuoming@2x.png"; sourceTree = "<group>"; };
+		1CA2C8FC1DE2E108007591BD /* kehusaoma_shuoming@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kehusaoma_shuoming@3x.png"; sourceTree = "<group>"; };
 		1CA728E51DCDA78F00BDFA65 /* QPAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPAboutUsViewController.h; sourceTree = "<group>"; };
 		1CA728E61DCDA78F00BDFA65 /* QPAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPAboutUsViewController.m; sourceTree = "<group>"; };
 		1CA728E81DCDCB0100BDFA65 /* yinhangka_beijing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yinhangka_beijing@2x.png"; sourceTree = "<group>"; };
@@ -1824,6 +1832,10 @@
 		1CF301DC1DBF5E1B00935113 /* homepage */ = {
 			isa = PBXGroup;
 			children = (
+				1CA2C8FB1DE2E108007591BD /* kehusaoma_shuoming@2x.png */,
+				1CA2C8FC1DE2E108007591BD /* kehusaoma_shuoming@3x.png */,
+				1CA2C8F71DE2E0F5007591BD /* zhinan_saoke@2x.png */,
+				1CA2C8F81DE2E0F5007591BD /* zhinan_saoke@3x.png */,
 				1C9923D31DDD957F003E840B /* chenggong_bg@2x.png */,
 				1C9923D41DDD957F003E840B /* chenggong_bg@3x.png */,
 				1C9923D51DDD957F003E840B /* fanhui_bg@2x.png */,
@@ -2079,6 +2091,7 @@
 				1CE605BA1DD58CCD005A8648 /* Credit-Card@3x.png in Resources */,
 				1C4517111DB90AE900659B4E /* LaunchScreen.storyboard in Resources */,
 				1CE605BC1DD58CCD005A8648 /* geren_Right-Arrow@3x.png in Resources */,
+				1CA2C8FE1DE2E108007591BD /* kehusaoma_shuoming@3x.png in Resources */,
 				1CE605C81DD58DF9005A8648 /* Users-2@3x.png in Resources */,
 				1C91C3671DCC3C5200DC5BB9 /* nav_1@3x.png in Resources */,
 				1CE606011DD5BCC1005A8648 /* jiesuan_weixin@3x.png in Resources */,
@@ -2156,6 +2169,7 @@
 				1C91C33B1DCC3B3B00DC5BB9 /* logo@3x.png in Resources */,
 				1C1F318C1DC8378B00BC4A27 /* shoukuan_jianpan@3x.png in Resources */,
 				1C91C3761DCC3C5200DC5BB9 /* pic_3@2x.png in Resources */,
+				1CA2C8FA1DE2E0F5007591BD /* zhinan_saoke@3x.png in Resources */,
 				1C91C41D1DCC4F7A00DC5BB9 /* shangwu_pic6@3x.png in Resources */,
 				1CA728F01DCDCB0100BDFA65 /* yinhangka_beijing@2x.png in Resources */,
 				1C91C36F1DCC3C5200DC5BB9 /* nav_5@3x.png in Resources */,
@@ -2179,6 +2193,7 @@
 				1CE605C11DD58CCD005A8648 /* Paper-Dollars-1@2x.png in Resources */,
 				1C91C3401DCC3B3B00DC5BB9 /* shouye_nor@2x.png in Resources */,
 				1C1F31D11DC8379F00BC4A27 /* saoma2_sao@2x.png in Resources */,
+				1CA2C8F91DE2E0F5007591BD /* zhinan_saoke@2x.png in Resources */,
 				1C9923E11DDD957F003E840B /* shibai_bg@2x.png in Resources */,
 				1C91C3691DCC3C5200DC5BB9 /* nav_2@3x.png in Resources */,
 				1C97AA8D1DBF54010028AE55 /* user.png in Resources */,
@@ -2196,6 +2211,7 @@
 				197AFBBA1DC1996E002DD1BD /* gerenzhongxin_bj.png in Resources */,
 				1C1F31CC1DC8379F00BC4A27 /* saoma2_Help@3x.png in Resources */,
 				1C91C3361DCC3B3B00DC5BB9 /* geren_nor@2x.png in Resources */,
+				1CA2C8FD1DE2E108007591BD /* kehusaoma_shuoming@2x.png in Resources */,
 				1C1F31CE1DC8379F00BC4A27 /* saoma2_qiehuan_nor@2x.png in Resources */,
 				1C9923DE1DDD957F003E840B /* fanhui_bg@3x.png in Resources */,
 				1C1F31A91DC8379600BC4A27 /* saoma_bj@3x.png in Resources */,
@@ -2633,6 +2649,7 @@
 				PROVISIONING_PROFILE = "d37d1455-5c2c-4331-8576-faddf8e06c96";
 				PROVISIONING_PROFILE_SPECIFIER = QuickPay;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2712,6 +2729,7 @@
 				PROVISIONING_PROFILE = "d37d1455-5c2c-4331-8576-faddf8e06c96";
 				PROVISIONING_PROFILE_SPECIFIER = QuickPay;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
