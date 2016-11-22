@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QPViewWaterModel.h"
 @interface QPTransactionDetailsViewController : UIViewController
 @property (nonatomic,strong)UIImageView *typeimage;
 @property (nonatomic,strong)UILabel *typeLab;
@@ -16,6 +16,6 @@
 @property (nonatomic,strong)UILabel *tradingstatusLab;
 @property (nonatomic,strong)UILabel *tradingtimeLab;
 @property (nonatomic,strong)UILabel *tradingnumberLab;
-@property (nonatomic ,strong)NSDictionary *transacDetailsDict;
+@property (nonatomic,strong)QPViewWaterModel *tranDetailsModel;
 
 @end

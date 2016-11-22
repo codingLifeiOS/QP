@@ -274,7 +274,10 @@
       if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
           dispatch_async(dispatch_get_main_queue(), ^{
             self.orderId = [responseData objectForKey:@"order_sn"];
-            [self orderqueryWithOrderId:self.orderId];
+              QPQrderQueryViewController *QPayResult = [[QPQrderQueryViewController alloc]init];
+              NavigationController *nav = [[NavigationController alloc] initWithRootViewController:QPayResult];
+              [self presentViewController:nav animated:YES completion:nil];
+              [self orderqueryWithOrderId:self.orderId];
           });
       } else {
           [[QPHUDManager sharedInstance]showTextOnly:@"支付失败"];

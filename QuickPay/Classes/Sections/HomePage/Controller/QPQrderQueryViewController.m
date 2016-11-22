@@ -64,7 +64,7 @@
     
     
     UILabel *AmoremoneyLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-136, AmoreLab.y, 100, AmoreLab.height)];
-    AmoremoneyLab.text = @"¥ 1000";
+    AmoremoneyLab.text = self.payModel.amount;
     AmoremoneyLab.textColor = UIColorFromHex(0x53c327);
     AmoremoneyLab.textAlignment = NSTextAlignmentRight;
     AmoremoneyLab.font = [UIFont systemFontOfSize:16];
@@ -82,7 +82,7 @@
     
     
     UILabel *painamountmoneyLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-134, AmoreLab.y, 100, AmoreLab.height)];
-    painamountmoneyLab.text = @"¥ 1000";
+    painamountmoneyLab.text = self.payModel.amount;
     painamountmoneyLab.textColor = UIColorFromHex(0x53c327);
     painamountmoneyLab.textAlignment = NSTextAlignmentRight;
     painamountmoneyLab.font = [UIFont systemFontOfSize:16];
@@ -100,7 +100,7 @@
     [patypeimage addSubview:paytypeLab];
     
     UIButton *footBtn =[UIButton buttonWithType:UIButtonTypeCustom];
-    footBtn.frame=CGRectMake(12, SCREEN_HEIGHT-55, SCREEN_WIDTH-24, 50);
+    footBtn.frame=CGRectMake(12, SCREEN_HEIGHT-60, SCREEN_WIDTH-24, 50);
     [footBtn setTitle:@"返回收款页" forState:UIControlStateNormal];
     footBtn.backgroundColor = [UIColor orangeColor];
     [footBtn  addTarget:self action:@selector(commonPushBack) forControlEvents:UIControlEventTouchUpInside];

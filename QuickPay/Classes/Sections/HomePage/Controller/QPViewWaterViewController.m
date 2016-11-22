@@ -103,6 +103,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     QPTransactionDetailsViewController *transacdetail = [[QPTransactionDetailsViewController alloc]init];
+    transacdetail.tranDetailsModel = self.viewaterArry[indexPath.row];
     [self.navigationController pushViewController:transacdetail animated:YES];
 }
 
@@ -144,19 +145,19 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
         dateLab.textColor = UIColorFromHex(0x606268);
         [view addSubview:dateLab];
         
-        UILabel * moneyLab = [[UILabel alloc]initWithFrame:CGRectMake( SCREEN_WIDTH-140, dateLab.y, 120, dateLab.height)];
+        UILabel * moneyLab = [[UILabel alloc]initWithFrame:CGRectMake( SCREEN_WIDTH-130, dateLab.y, 120, dateLab.height)];
         
         NSInteger total_amount = 0 ;
         for (QPViewWaterModel *model in self.viewaterArry) {
             total_amount = total_amount+[model.total_amount integerValue];
         }
-        moneyLab.text = [NSString stringWithFormat:@"¥%.2f",total_amount /100.00 ];
+        moneyLab.text = [NSString stringWithFormat:@"共¥%.2f",total_amount /100.00 ];
         moneyLab.textAlignment = NSTextAlignmentRight;
         moneyLab.font = [UIFont systemFontOfSize:16];
         moneyLab.textColor = UIColorFromHex(0xff9b20);
         [view addSubview:moneyLab];
         
-        UILabel *numberLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-150, dateLab.y, 50, 30)];
+        UILabel *numberLab = [[UILabel alloc]initWithFrame:CGRectMake(moneyLab.left-25, dateLab.y, 50, 30)];
         numberLab.text = [NSString stringWithFormat:@"共%ld笔",self.viewaterArry.count];
         numberLab.font = [UIFont systemFontOfSize:16];
         numberLab.textColor = UIColorFromHex(0xff9b20);

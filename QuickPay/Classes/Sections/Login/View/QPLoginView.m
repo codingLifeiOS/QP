@@ -45,11 +45,11 @@
     [self addSubview:logoImage];
     
     accountImage=[[UIImageView alloc] init];
-    accountImage.size = CGSizeMake(25, 25);
+    accountImage.size = CGSizeMake(20, 20);
     accountImage.image = [UIImage imageNamed:@"user.png"];
     
     self.loginIdTextField = [[UITextField alloc] init];
-    self.loginIdTextField.frame = CGRectMake(70,260, SCREEN_WIDTH-140, 25);
+    self.loginIdTextField.frame = CGRectMake(80,260, SCREEN_WIDTH-160, 25);
     self.loginIdTextField.font = font;
     self.loginIdTextField.keyboardType = UIKeyboardTypeNumberPad;
     self.loginIdTextField.placeholder = @"请输入手机号";
@@ -68,11 +68,11 @@
     [self addSubview:inputImage];
     
     pwdImage = [[UIImageView alloc] init];
-    pwdImage.size = CGSizeMake(25, 25);
+    pwdImage.size = CGSizeMake(20, 20);
     pwdImage.image = [UIImage imageNamed:@"lock.png"];
     
     self.passwordTextField = [[UITextField alloc] init];
-    self.passwordTextField.frame=CGRectMake(70,self.loginIdTextField.bottom+30, SCREEN_WIDTH-140,30);
+    self.passwordTextField.frame=CGRectMake(80,self.loginIdTextField.bottom+30, SCREEN_WIDTH-160,30);
     self.passwordTextField.font = font;
     self.passwordTextField.placeholder = @"请输入密码";
     self.passwordTextField.backgroundColor = color;

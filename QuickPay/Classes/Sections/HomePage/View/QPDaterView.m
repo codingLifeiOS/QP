@@ -73,35 +73,43 @@
     daterContentView.layer.masksToBounds = YES;
     daterContentView.layer.cornerRadius = 8;
     
-    daterLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, daterContentView.w, 30)];
-    daterLab.text = @"选择日期";
-    daterLab.backgroundColor = [UIColor redColor];
-    daterLab.font = [UIFont systemFontOfSize:14];
-    daterLab.textColor = [UIColor blackColor];
-    daterLab.textAlignment = 1;
-    [daterContentView addSubview:daterLab];
-    
-    picker = [[UIPickerView alloc]initWithFrame:CGRectMake(0, daterLab.h, SCREEN_WIDTH, 130)];
-    picker.dataSource = self;
-    picker.delegate = self;
-    [daterContentView addSubview:picker];
+//    daterLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, daterContentView.w, 30)];
+//    daterLab.text = @"选择日期";
+//    daterLab.backgroundColor = [UIColor redColor];
+//    daterLab.font = [UIFont systemFontOfSize:14];
+//    daterLab.textColor = [UIColor blackColor];
+//    daterLab.textAlignment = 1;
+//    [daterContentView addSubview:daterLab];
     
     cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cancelBtn.frame = CGRectMake(0, picker.h+picker.y, daterContentView.w/2.0, 40);
+    cancelBtn.frame = CGRectMake(0, 0, daterContentView.w/2.0, 40);
     [cancelBtn setTitle:@"取 消" forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    cancelBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    cancelBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [daterContentView addSubview:cancelBtn];
-    cancelBtn.backgroundColor = [UIColor redColor];
+    cancelBtn.backgroundColor = UIColorFromHex(0xf8f8f8);
     
     sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sureBtn.frame = CGRectMake(daterContentView.w/2.0, cancelBtn.y, daterContentView.w/2.0, cancelBtn.h);
     [sureBtn setTitle:@"确 定" forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(sureAction:) forControlEvents:UIControlEventTouchUpInside];
+    [sureBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    sureBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    sureBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
     [daterContentView addSubview:sureBtn];
-    sureBtn.backgroundColor = [UIColor redColor];
+    sureBtn.backgroundColor = UIColorFromHex(0xf8f8f8);
+    
     UIView *verLine = [[UIView alloc]initWithFrame:CGRectMake(cancelBtn.w, cancelBtn.y, 1, cancelBtn.h)];
     verLine.backgroundColor = [UIColor whiteColor];
     [daterContentView addSubview:verLine];
+
+    picker = [[UIPickerView alloc]initWithFrame:CGRectMake(0, cancelBtn.h, SCREEN_WIDTH, 160)];
+    picker.dataSource = self;
+    picker.delegate = self;
+    [daterContentView addSubview:picker];
+    
 }
 - (instancetype)initWithFrame:(CGRect)frame{
     self=[super initWithFrame:frame];

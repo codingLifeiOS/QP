@@ -20,7 +20,7 @@
 #import "QRCodeGenerator.h"
 #import "NavigationController.h"
 
-@interface QPHomePageViewController ()<UIAlertViewDelegate,BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
+@interface QPHomePageViewController ()<BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
 {
     UIView *menuBgView;
     BMAdScrollView *adView;
@@ -84,17 +84,6 @@
         make.top.equalTo(@27);
     }];
     
-    UIButton *callBtn = [[UIButton alloc]init];
-    [callBtn setImage:[UIImage imageNamed:@"tell"] forState:UIControlStateNormal];
-    [callBtn addTarget:self action:@selector(callTelephone) forControlEvents:UIControlEventTouchUpInside];
-    [Naview addSubview:callBtn];
-    
-    [callBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(38/2));
-        make.height.equalTo(@(38/2));
-        make.top.equalTo(@30);
-        make.right.equalTo(self.view).offset(-15);
-    }];
 }
 -(void)configureScrollViewWithArray:(NSMutableArray*)array
 {
@@ -205,19 +194,6 @@
     }
     [self showQPScanCodePayViewWithPayModel:payModel];
 }
-#pragma mark -UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 80){
-        if (buttonIndex == 1) {
-            if(![[UIApplication sharedApplication]openURL:[NSURL URLWithString:QP_TEL]] ){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"设备不支持" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil] ;
-                [alert show] ;
-            }
-        }
-    }
-}
-
 #pragma mark - 跳转到扫一扫界面
 - (void)showQPScanCodePayViewWithPayModel:(QPPayModel*)model
 {
@@ -277,13 +253,6 @@
     [shareManager setShareVC:self content:@"测试分享" image:[UIImage imageNamed:@"saoma2_erweima"] url:@"https://github.com/ClaudeLi/CLShare.git"];
     [shareManager show];
     
-}
-
-- (void)callTelephone
-{
-    UIAlertView *phoneAlert = [[UIAlertView alloc]initWithTitle:@"15701189832" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
-    phoneAlert.tag = 80;
-    [phoneAlert show];
 }
 
 - (void)hideTabBar {

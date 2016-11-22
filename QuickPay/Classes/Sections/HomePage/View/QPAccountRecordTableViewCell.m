@@ -59,7 +59,7 @@
         str = [model.create_date substringToIndex:10];
     }
     self.dateLab.text = str;
-    self.moneyLab.text = [NSString stringWithFormat:@"¥ %@",model.total_amount];
+    self.moneyLab.text = [NSString stringWithFormat:@"¥ %.2f",[model.total_amount integerValue]/100.00];
     
     switch ([model.balance_status integerValue]) {
         case 1:
