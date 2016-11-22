@@ -16,7 +16,6 @@
 #import "QPHttpManager.h"
 #import "QPFixedQRViewController.h"
 #import "QPPayModel.h"
-#import "QPQrderQueryViewController.h"
 #import "QRCodeGenerator.h"
 #import "NavigationController.h"
 
@@ -44,6 +43,13 @@
     [self getAdImages];
     
     _imageADArray = [[NSMutableArray alloc]init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetDigitalKeyboard:) name:@"resetDigitalKeyboard" object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -236,10 +242,7 @@
             [self shareButtonClick];
             break;
         case 211:{
-            QPQrderQueryViewController *QPayResult = [[QPQrderQueryViewController alloc]init];
-            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:QPayResult];
-            [self presentViewController:nav animated:YES completion:nil];
-               [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
+            [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
         }
             break;
             
@@ -254,6 +257,13 @@
     [shareManager show];
     
 }
+
+#pragma mark - 通知事件处理-支付结果界面返回 键盘重设为0 不可点击
+- (void)resetDigitalKeyboard:(NSNotification *)notification {
+    
+    [keyboardView setAmountLable];
+    [keyboardView setAliPayBtnAndWeixinPayBtn];
+ }
 
 - (void)hideTabBar {
     if (self.tabBarController.tabBar.hidden == YES) {

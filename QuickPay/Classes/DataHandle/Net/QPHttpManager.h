@@ -149,10 +149,9 @@
  *  @param handler 完成后的回调
  */
 
-+ (void)uploadImage:(NSData*)imagedata
++ (void)uploadImage:(UIImage*)image
          Completion:(QPRequestSuccessHandler)handler
             failure:(QPRequestFailureHandler)failhandler;
-
 
 /**
 *  支付结果查询接口

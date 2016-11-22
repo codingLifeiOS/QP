@@ -283,24 +283,17 @@
     }];
 }
 
-+ (void)uploadImage:(NSData*)imagedata
++ (void)uploadImage:(UIImage*)image
          Completion:(QPRequestSuccessHandler)handler
             failure:(QPRequestFailureHandler)failhandler{
-
-//    [manager POST:[NSString stringWithFormat:@"%@/projectLog/create",HOST_URL] parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//        for (int i = 0; i < imagedata; i++) {
-//            [formData appendPartWithFileData:UIImageJPEGRepresentation(imagedata,0.8) name:@"images[]" fileName:@"something.jpg" mimeType:@"image/jpeg"];
-//        }
-//    
-//    NSDictionary *dic = @{@"name":imagedata,
-//                          };
-    [QPHttpRequest POSTWithData:QP_Upload_Logo params:nil body:imagedata success:^(NSDictionary *success) {
+    
+    [QPHttpRequest UploadImageWithUrl:QP_Upload_Logo params:nil imageParams:image success:^(NSDictionary *success) {
         
         handler ? handler(success) : nil;
         
     } failure:^(NSError *error) {
         
-        failhandler ? failhandler(error) : nil;
+         failhandler ? failhandler(error) : nil;
         
     }];
 }

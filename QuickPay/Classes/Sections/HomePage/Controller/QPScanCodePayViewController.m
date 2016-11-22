@@ -19,8 +19,7 @@
     QPQRView *_qrRectView;             // 自定义的扫描视图
     UIView *backView ;
     UIImageView *codeImage;           // 生成的二维码
-    UIImageView *useguideimage;
-    UIImageView *codeuseguideimage;
+    UIImageView *instructionImage;
 }
 @property(nonatomic,copy)NSString *orderId;//订单号
 
@@ -121,14 +120,14 @@
     [_readview addSubview:changecodeBtn];
     [changecodeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton * UseguideBtn = [[UIButton alloc]init];
-    UseguideBtn.frame = CGRectMake(40, changecodeBtn.bottom+10, SCREEN_WIDTH-80, 40);
-    [UseguideBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
-    UseguideBtn.backgroundColor = [UIColor clearColor];
-    [_readview addSubview:UseguideBtn];
-    [UseguideBtn addTarget:self action:@selector(useguide) forControlEvents:UIControlEventTouchUpInside];
-
- }
+    UIButton * instructionsImageBtn = [[UIButton alloc]init];
+    instructionsImageBtn.frame = CGRectMake(40, changecodeBtn.bottom+10, SCREEN_WIDTH-80, 40);
+    [instructionsImageBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
+    instructionsImageBtn.backgroundColor = [UIColor clearColor];
+    [_readview addSubview:instructionsImageBtn];
+    [instructionsImageBtn addTarget:self action:@selector(showInstructionImage) forControlEvents:UIControlEventTouchUpInside];
+    
+}
 
 - (void)configureCodeView{
     
@@ -161,7 +160,7 @@
     promptLable.font = [UIFont systemFontOfSize:16];
     promptLable.frame = CGRectMake(0, amoutLable.bottom+5, SCREEN_WIDTH, 30);
     [backView addSubview:promptLable];
-
+    
     UIButton * changeZBarBtn = [[UIButton alloc]init];
     changeZBarBtn.frame = CGRectMake(40, promptLable.bottom+15, SCREEN_WIDTH-80, 40);
     [changeZBarBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
@@ -172,12 +171,12 @@
     [backView addSubview:changeZBarBtn];
     [changeZBarBtn addTarget:self action:@selector(changeToScanPay) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton * codeuseguideBtn = [[UIButton alloc]init];
-    codeuseguideBtn.frame = CGRectMake(40, changeZBarBtn.bottom+10, SCREEN_WIDTH-80, 40);
-    [codeuseguideBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
-    [codeuseguideBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [backView addSubview:codeuseguideBtn];
-    [codeuseguideBtn addTarget:self action:@selector(codeuseguide) forControlEvents:UIControlEventTouchUpInside];
+    UIButton * codeinstructionsImageBtn = [[UIButton alloc]init];
+    codeinstructionsImageBtn.frame = CGRectMake(40, changeZBarBtn.bottom+10, SCREEN_WIDTH-80, 40);
+    [codeinstructionsImageBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
+    [codeinstructionsImageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [backView addSubview:codeinstructionsImageBtn];
+    [codeinstructionsImageBtn addTarget:self action:@selector(showInstructionImage) forControlEvents:UIControlEventTouchUpInside];
     backView.hidden = YES;
     
 }
@@ -221,16 +220,16 @@
         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"扫描失败" message:nil preferredStyle:UIAlertControllerStyleAlert];
         WEAKSELF();
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定"
-               style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-                    // 重新扫描
-                    [weakSelf setZBarReaderViewStart];
-           }];
+                                                         style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                                                             // 重新扫描
+                                                             [weakSelf setZBarReaderViewStart];
+                                                         }];
         
         [alertVC addAction:action];
         [self presentViewController:alertVC animated:YES completion:^{
             
         }];
-         return;
+        return;
     }
     
     NSLog(@"扫描成功！%@", url);
@@ -239,7 +238,7 @@
     // 创建谓词对象并设定条件的表达式
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     // 判断的字符串
-     // 对字符串进行判断
+    // 对字符串进行判断
     if ([predicate evaluateWithObject:url]) {
         [self scansuccessToPayWithAuthno:url];
     } else {
@@ -249,7 +248,7 @@
 
 // 切换到生成二维码支付
 - (void)changePayType{
-
+    
     _readview.hidden = YES ;
     [self setZBarReaderViewStop];
     backView.hidden = NO;
@@ -260,49 +259,65 @@
 
 //  切换到扫码刷卡支付
 - (void)changeToScanPay{
-
+    
     _readview.hidden = NO;
     // 开始扫描
     [self setZBarReaderViewStart];
     backView.hidden = YES;
 }
+
+-(void)showInstructionImage
+{
+    self.navigationController.navigationBarHidden = YES;
+    instructionImage = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    instructionImage.image = backView.hidden ? [UIImage imageNamed:@"zhinan_saoke"]: [UIImage imageNamed:@"kehusaoma_shuoming"];
+    [self.view addSubview:instructionImage];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    instructionImage.hidden = YES;
+    self.navigationController.navigationBarHidden = NO;
+}
+
 // 刷卡支付
 - (void)scansuccessToPayWithAuthno:(NSString*)authno{
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在支付"];
     [QPHttpManager creditCardPaymentByScanString:self.payModel.amount PayTye:self.payModel.payType Authno:authno Completion:^(id responseData) {
-      [[QPHUDManager sharedInstance]hiddenHUD];
-      if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
-          dispatch_async(dispatch_get_main_queue(), ^{
-            self.orderId = [responseData objectForKey:@"order_sn"];
-              QPQrderQueryViewController *QPayResult = [[QPQrderQueryViewController alloc]init];
-              NavigationController *nav = [[NavigationController alloc] initWithRootViewController:QPayResult];
-              [self presentViewController:nav animated:YES completion:nil];
-              [self orderqueryWithOrderId:self.orderId];
-          });
-      } else {
-          [[QPHUDManager sharedInstance]showTextOnly:@"支付失败"];
-      }
-
-  } failure:^(NSError *error) {
-      
-      [[QPHUDManager sharedInstance]hiddenHUD];
-      [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
-
-  }];
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.orderId = [responseData objectForKey:@"order_sn"];
+                QPQrderQueryViewController *payResultVC = [[QPQrderQueryViewController alloc]init];
+//                NavigationController *nav = [[NavigationController alloc] initWithRootViewController:payResultVC ];
+                payResultVC.payModel = self.payModel;
+                payResultVC.payModel.orderId = self.orderId;
+                [self.navigationController pushViewController:payResultVC animated:YES];
+//                [self presentViewController:nav animated:YES completion:nil];
+            });
+        } else {
+            [[QPHUDManager sharedInstance]showTextOnly:@"支付失败"];
+        }
+        
+    } failure:^(NSError *error) {
+        
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        
+    }];
 }
 
 // 生成二维码支付
 - (void)getQRCodetoPay{
     
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在努力生成二维码"];
-     [QPHttpManager getQRcodeString:self.payModel.amount PayTye:self.payModel.payType Completion:^(id responseData) {
+    [QPHttpManager getQRcodeString:self.payModel.amount PayTye:self.payModel.payType Completion:^(id responseData) {
         [[QPHUDManager sharedInstance]hiddenHUD];
-         if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
+        if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.orderId = [responseData objectForKey:@"order_sn"];
                 codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220]
                 ;
-                [self orderqueryWithOrderId:self.orderId];
             });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:@"生成商户二维码失败"];
@@ -313,36 +328,5 @@
     }];
 }
 
--(void)useguide
-{
-    self.navigationController.navigationBarHidden = YES;
-    useguideimage = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    useguideimage.image = [UIImage imageNamed:@"zhinan_saoke"];
-    [self.view addSubview:useguideimage];
-}
--(void)codeuseguide
-{
-    self.navigationController.navigationBarHidden = YES;
-    codeuseguideimage = [[UIImageView alloc]initWithFrame:self.view.bounds];
-    codeuseguideimage.image = [UIImage imageNamed:@"kehusaoma_shuoming"];
-    [self.view addSubview:codeuseguideimage];
-}
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    useguideimage.hidden = YES;
-    codeuseguideimage.hidden =YES;
-    self.navigationController.navigationBarHidden = NO;
-}
-
-- (void)orderqueryWithOrderId:(NSString*)orderId
-{
-    [QPHttpManager orderquery:orderId Completion:^(id responseData) {
-        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
-            QPQrderQueryViewController *QPayResult = [[QPQrderQueryViewController alloc]init];
-            NavigationController *nav = [[NavigationController alloc] initWithRootViewController:QPayResult];
-            [self presentViewController:nav animated:YES completion:nil];
-        }
-        }failure:^(NSError *error) {
-  }];
-}
 @end

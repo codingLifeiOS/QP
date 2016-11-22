@@ -270,4 +270,26 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
 //    [mgr setValue:@"base64" forHTTPHeaderField:@"Pic-Encoding"];
 }
 
+
++ (void)UploadImageWithUrl:(NSString *)URLString
+                    params:(NSMutableDictionary *)parameters
+               imageParams:(UIImage*)image
+                   success:(void (^)(NSDictionary *)) success
+                   failure:(void (^)( NSError*))failure{
+    
+       [[QPHttpRequest sharedInstance].sessionManager POST:URLString parameters: parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.3) name:@"file" fileName:@"name" mimeType:@"image/jpeg"];
+
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+//        NSString *jsonstr = [[NSMutableString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSDictionary * dic = [NSString jsonStringToDictionary:responseObject];
+        NSLog(@"请求成功%@  \n结束报文",responseObject);
+        success(responseObject);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+         failure(error);
+    }];
+}
 @end

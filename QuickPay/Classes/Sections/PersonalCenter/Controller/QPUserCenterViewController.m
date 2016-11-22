@@ -343,32 +343,36 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 //上传头像
 -(void)UpdateUserInforHeadImage
 {
-    NSData *data = UIImageJPEGRepresentation(iconImage, 0.3);
-    [QPHttpManager uploadImage:data Completion:^(id responseData) {
+   
+    [[QPHUDManager sharedInstance]showProgressWithText:@"正在上传头像"];
+    [QPHttpManager uploadImage:iconImage Completion:^(id responseData) {
+        
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        
+        [self changeLogoWithPath:[responseData objectForKey:@"path"]];
         
     } failure:^(NSError *error) {
+        
+        [[QPHUDManager sharedInstance]hiddenHUD];
         
         [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
     }];
     
-    [self changeLogo];
+
      
 }
 
-- (void)changeLogo{
+- (void)changeLogoWithPath:(NSString*)path{
     
-  [QPHttpManager changeLogoWithUrl:@"http://mobile.rrgpay.com/apis/getLogo/WA16082322231" Completion:^(id responseData) {
-      [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
-//      if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
-//          
-//      }
-//      
-  } failure:^(NSError *error) {
-
-      [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
-      
-  }];
-
+    if ([NSString isNotBlank:path]) {
+//       @"http://mobile.rrgpay.com/apis/getLogo/WA16082322231"
+        [QPHttpManager changeLogoWithUrl:[NSString stringWithFormat:@"%@%@",@"http://mobile.rrgpay.com/apis/getLogo/",path] Completion:^(id responseData) {
+            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+        } failure:^(NSError *error) {
+            
+            [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        }];
+    }
 }
 
 -(void)changeIconClick

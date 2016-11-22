@@ -7,9 +7,9 @@
 //
 
 #import "QPQrderQueryViewController.h"
-
+#import "QPHttpManager.h"
 @interface QPQrderQueryViewController ()
-
+@property (nonatomic,strong) UILabel *payTypeLab;
 @end
 
 @implementation QPQrderQueryViewController
@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureView];
+    [self orderqueryWithOrderId:self.payModel.orderId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -36,15 +37,15 @@
 {
     self.view.backgroundColor = UIColorFromHex(0xefefef);
     
-    UIImageView *navbarbeijingimage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
-    navbarbeijingimage.image = [UIImage imageNamed:@"jiner_bg"];
-    [self.view addSubview:navbarbeijingimage];
+    UIImageView *navbarBackImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+    navbarBackImage.image = [UIImage imageNamed:@"jiner_bg"];
+    [self.view addSubview:navbarBackImage];
     
     UILabel *navlab = [[UILabel alloc]init];
     navlab.textAlignment = NSTextAlignmentCenter;
-    navlab.text = @"顺便付";
+    navlab.text = @"交易详情";
     navlab.font = [UIFont systemFontOfSize:16];
-    [navbarbeijingimage addSubview:navlab];
+    [navbarBackImage addSubview:navlab];
     [navlab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@200);
         make.centerX.equalTo(self.view.mas_centerX_mas);
@@ -52,15 +53,15 @@
         make.top.equalTo(@27);
     }];
 
-    UIImageView *rebeijingimage = [[UIImageView alloc]initWithFrame:CGRectMake(12, navbarbeijingimage.bottom+20, SCREEN_WIDTH-24, 50)];
-    rebeijingimage.image = [UIImage imageNamed:@"jiner_bg"];
-    [self.view addSubview:rebeijingimage];
+    UIImageView *rebeBackImage = [[UIImageView alloc]initWithFrame:CGRectMake(12, navbarBackImage.bottom+20, SCREEN_WIDTH-24, 50)];
+    rebeBackImage.image = [UIImage imageNamed:@"jiner_bg"];
+    [self.view addSubview:rebeBackImage];
     
     UILabel *AmoreLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 120, 30)];
     AmoreLab.text = @"应收金额";
     AmoreLab.font = [UIFont systemFontOfSize:16];
     AmoreLab.textColor = [UIColor blackColor];
-    [rebeijingimage addSubview:AmoreLab];
+    [rebeBackImage addSubview:AmoreLab];
     
     
     UILabel *AmoremoneyLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-136, AmoreLab.y, 100, AmoreLab.height)];
@@ -68,17 +69,17 @@
     AmoremoneyLab.textColor = UIColorFromHex(0x53c327);
     AmoremoneyLab.textAlignment = NSTextAlignmentRight;
     AmoremoneyLab.font = [UIFont systemFontOfSize:16];
-    [rebeijingimage addSubview:AmoremoneyLab];
+    [rebeBackImage addSubview:AmoremoneyLab];
     
-    UIImageView *pamountbeijingimage = [[UIImageView alloc]initWithFrame:CGRectMake(rebeijingimage.x, rebeijingimage.bottom+1, rebeijingimage.width, rebeijingimage.height)];
-    pamountbeijingimage.image = [UIImage imageNamed:@"jiner_bg"];
-    [self.view addSubview:pamountbeijingimage];
+    UIImageView *pamountBackImage = [[UIImageView alloc]initWithFrame:CGRectMake(rebeBackImage.x, rebeBackImage.bottom+1, rebeBackImage.width, rebeBackImage.height)];
+    pamountBackImage.image = [UIImage imageNamed:@"jiner_bg"];
+    [self.view addSubview:pamountBackImage];
     
     UILabel *painamountLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 120, 30)];
     painamountLab.text = @"实收金额";
     painamountLab.font = [UIFont systemFontOfSize:16];
     painamountLab.textColor = [UIColor blackColor];
-    [pamountbeijingimage addSubview:painamountLab];
+    [pamountBackImage addSubview:painamountLab];
     
     
     UILabel *painamountmoneyLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-134, AmoreLab.y, 100, AmoreLab.height)];
@@ -86,18 +87,16 @@
     painamountmoneyLab.textColor = UIColorFromHex(0x53c327);
     painamountmoneyLab.textAlignment = NSTextAlignmentRight;
     painamountmoneyLab.font = [UIFont systemFontOfSize:16];
-    [pamountbeijingimage addSubview:painamountmoneyLab];
+    [pamountBackImage addSubview:painamountmoneyLab];
     
-    UIImageView *patypeimage = [[UIImageView alloc]initWithFrame:CGRectMake(12, pamountbeijingimage.bottom+10, SCREEN_WIDTH-24, 50)];
-    patypeimage.image = [UIImage imageNamed:@"chenggong_bg"];
-    [self.view addSubview:patypeimage];
-    
-    UILabel *paytypeLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, patypeimage.width, 50)];
-    paytypeLab.text = @"收款成功";
-    paytypeLab.textColor = [UIColor whiteColor];
-    paytypeLab.textAlignment = NSTextAlignmentCenter;
-    paytypeLab.font = [UIFont systemFontOfSize:20];
-    [patypeimage addSubview:paytypeLab];
+    self.payTypeLab = [[UILabel alloc]initWithFrame:CGRectMake(12, pamountBackImage.bottom+10, SCREEN_WIDTH-24, 50)];
+    self.payTypeLab.text = @"";
+    self.payTypeLab.textColor = [UIColor whiteColor];
+    self.payTypeLab.layer.cornerRadius = 8;
+    self.payTypeLab.layer.masksToBounds = YES;
+    self.payTypeLab.textAlignment = NSTextAlignmentCenter;
+    self.payTypeLab.font = [UIFont systemFontOfSize:20];
+    [self.view addSubview:self.payTypeLab];
     
     UIButton *footBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     footBtn.frame=CGRectMake(12, SCREEN_HEIGHT-60, SCREEN_WIDTH-24, 50);
@@ -110,11 +109,31 @@
     [self.view addSubview:footBtn];
 }
 - (void)commonPushBack{
+
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-//    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"resetDigitalKeyboard" object:nil];
 }
 
+
+- (void)orderqueryWithOrderId:(NSString*)orderId
+{
+    [QPHttpManager orderquery:orderId Completion:^(id responseData) {
+        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+            self.payTypeLab.text = @"支付成功";
+            self.payTypeLab.backgroundColor = [UIColor greenColor];
+        } else {
+            self.payTypeLab.text = @"支付失败";
+            self.payTypeLab.backgroundColor = [UIColor redColor];
+        }
+    }failure:^(NSError *error) {
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        
+        
+    }];
+}
 @end

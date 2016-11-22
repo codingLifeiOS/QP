@@ -11,4 +11,5 @@
 @interface QPPayModel : NSObject
 @property (nonatomic,copy)NSString *amount;
 @property (nonatomic,copy)NSString *payType;
+@property (nonatomic,copy)NSString *orderId;//订单号
 @end

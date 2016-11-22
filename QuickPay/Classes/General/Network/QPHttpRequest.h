@@ -142,5 +142,10 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                   success:(void (^)(NSDictionary *))success
                   failure:(void (^)(NSError *))failure;
 
-
+// AFN 表单上传图片
++ (void)UploadImageWithUrl:(NSString *)URLString
+                    params:(NSMutableDictionary *)parameters
+               imageParams:(UIImage*)image
+                   success:(void (^)(NSDictionary *)) success
+                    failure:(void (^)( NSError*))failure;
 @end

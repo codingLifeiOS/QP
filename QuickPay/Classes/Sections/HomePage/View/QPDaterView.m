@@ -63,9 +63,9 @@
 }
 - (void)initViews{
     self.frame = [UIScreen mainScreen].bounds;
-    UIImageView *beijingimage = [[UIImageView alloc]initWithFrame:self.bounds];
-    beijingimage.image = [UIImage imageNamed:@"zhezhao"];
-    [self addSubview:beijingimage];
+    UIImageView *backImage = [[UIImageView alloc]initWithFrame:self.bounds];
+    backImage.image = [UIImage imageNamed:@"zhezhao"];
+    [self addSubview:backImage];
     
     daterContentView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-264, SCREEN_WIDTH, 200)];
     daterContentView.backgroundColor=[UIColor whiteColor];

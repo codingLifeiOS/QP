@@ -19,4 +19,7 @@ typedef enum : NSUInteger {
 @interface QPDigitalKeyboardView : UIView
 @property (nonatomic , weak) id <QPDigitalKeyboardViewDelegate>delegate;
 
+- (void)setAliPayBtnAndWeixinPayBtn;
+- (void)setAmountLable;
+
 @end

@@ -9,6 +9,7 @@
 #import "QPDigitalKeyboardView.h"
 
 @interface QPDigitalKeyboardView()
+
 @property (nonatomic,strong)UILabel *amountLable;
 @property (nonatomic,strong)UIButton *aliPayBtn;
 @property (nonatomic,strong)UIButton *weixinPayBtn;
@@ -170,7 +171,7 @@
 - (void)changAmoutLabAndPayBtnStatus{
     if (self.amountStr.length) {
         self.amountLable.text = [NSString stringWithFormat:@"¥ %@",self.amountStr];
-        if ([self.amountStr floatValue] >0) {
+        if ([self.amountStr floatValue] > 0.01) {
             [self changeAliPayBtnAndWeixinPayBtn];
         } else {
             [self setAliPayBtnAndWeixinPayBtn];
@@ -231,4 +232,8 @@
     }
 }
 
+- (void)setAmountLable {
+    self.amountStr = [NSMutableString stringWithFormat:@""];
+    self.amountLable.text = @"输入收款金额";
+}
 @end
