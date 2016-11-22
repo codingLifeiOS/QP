@@ -15,7 +15,7 @@ static NSString *const cellIdentifier = @"QPSetUpableViewCell";
 
 @interface QPSetUpViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *homeTableView;
-@property(nonatomic,strong)NSArray *setuplabArry;
+//@property(nonatomic,strong)NSArray *setuplabArry;
 
 @end
 
@@ -41,11 +41,11 @@ static NSString *const cellIdentifier = @"QPSetUpableViewCell";
     self.homeTableView.showsVerticalScrollIndicator = NO;
     [ self.homeTableView registerClass:[QPSetUpableViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:self.homeTableView];
-    self.setuplabArry = @[@"修改密码",@"常见问题"];
+//    self.setuplabArry = @[@"修改密码",@"常见问题"];
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 1;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -56,19 +56,13 @@ static NSString *const cellIdentifier = @"QPSetUpableViewCell";
 {
     QPSetUpableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     cell.contentView.backgroundColor = [UIColor whiteColor];
-    cell.modifypasswordLab.text = self.setuplabArry[indexPath.row];
+//    cell.modifypasswordLab.text = self.setuplabArry[indexPath.row];
     return cell;
 }
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
         QPModifyPasswordViewController *QPmodpsasswordVC = [[QPModifyPasswordViewController alloc]init];
         [self.navigationController pushViewController:QPmodpsasswordVC animated:YES];
-        NSLog(@"修改密码");
-    } else if (indexPath.row == 1) {
-        NSLog(@"常见问题");
-    }
-    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -80,8 +80,8 @@
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(116/2));
         make.centerX.equalTo(self.view.mas_centerX_mas);
-        make.height.equalTo(@25);
-        make.top.equalTo(@27);
+        make.height.equalTo(@35);
+        make.top.equalTo(@24);
     }];
     
 }

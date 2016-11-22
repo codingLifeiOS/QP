@@ -46,7 +46,7 @@ static NSString *const cellIdentifier = @"QPBusinessCooperationTableViewCell";
     [self.homeTableView setBackgroundView:imgView];
     
     self.busslabArry = @[@"商家入驻",@"配送服务加盟",@"城市代理申请",@"媒体公关合作",@"品牌广告合作",@"开放平台合作"];
-    self.infolabArry = @[@"111",@"222",@"333",@"444",@"555",@"666"];
+    self.infolabArry = @[@"610310365@qq.com",@"610310365@qq.com",@"610310365@qq.com",@"610310365@qq.com",@"610310365@qq.com",@"610310365@qq.com"];
     self.bussimageArry = @[@"shangwu_pic1",@"shangwu_pic2",@"shangwu_pic3",@"shangwu_pic4",@"shangwu_pic5",@"shangwu_pic6"];
 }
 

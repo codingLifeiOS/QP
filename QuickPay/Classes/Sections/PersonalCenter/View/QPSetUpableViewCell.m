@@ -19,6 +19,7 @@
         _modifypasswordLab.textColor = [UIColor blackColor];
         _modifypasswordLab.textAlignment = NSTextAlignmentLeft;
         _modifypasswordLab.font = [UIFont systemFontOfSize:16];
+        _modifypasswordLab.text = @"修改密码";
         [self.contentView addSubview:_modifypasswordLab];
         
         UIImageView *rightimage = [[UIImageView alloc]init];
