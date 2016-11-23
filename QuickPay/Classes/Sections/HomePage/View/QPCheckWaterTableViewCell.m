@@ -1,14 +1,14 @@
 //
-//  QPViewWaterTableViewCell.m
+//  QPCheckWaterTableViewCell.m
 //  QuickPay
 //
-//  Created by Nie on 2016/10/28.
+//  Created by Nie on 2016/11/23.
 //  Copyright © 2016年 Nie. All rights reserved.
 //
 
-#import "QPViewWaterTableViewCell.h"
+#import "QPCheckWaterTableViewCell.h"
 
-@implementation QPViewWaterTableViewCell
+@implementation QPCheckWaterTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -93,7 +93,7 @@
     return self;
 }
 
-- (void)updatecellWithModel:(QPViewWaterModel *)model{
+- (void)updatecellWithModel:(QPCheckWaterModel *)model{
     NSString *timestr;
     if (model.create_date.length >= 8) {
         timestr = [model.create_date substringFromIndex:model.create_date.length-8];
@@ -108,4 +108,5 @@
         _typeimage.image = [UIImage imageNamed:@"jiesuan_weixin"];
     }
 }
+
 @end

@@ -21,16 +21,16 @@
         _leftView.layer.cornerRadius = 20;
         [self.contentView addSubview:self.leftView];
         
-        _NewsNameLabel = [[UILabel alloc]initWithFrame:(CGRectMake(60, 10, SCREEN_WIDTH -80, 40))];
+        _NewsNameLabel = [[UILabel alloc]initWithFrame:(CGRectMake(60, 10, SCREEN_WIDTH -80, 30))];
         _NewsNameLabel.text = @"楚霸王都跪下来求饶了，京戏能不亡吗,娘，冷，水都冻冰了！";
         _NewsNameLabel.textAlignment = UITextLayoutDirectionLeft;
         
-        _NewsNameLabel.font = [UIFont systemFontOfSize:13];
+        _NewsNameLabel.font = [UIFont systemFontOfSize:16];
         _NewsNameLabel.numberOfLines = 2;
         _NewsNameLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_NewsNameLabel];
         
-        _InfoLabel = [[UILabel alloc]initWithFrame:(CGRectMake(60, self.NewsNameLabel.bottom , SCREEN_WIDTH -80, 20))];
+        _InfoLabel = [[UILabel alloc]initWithFrame:(CGRectMake(60, self.NewsNameLabel.bottom , SCREEN_WIDTH -80, 30))];
         _InfoLabel.text = @"#蝶衣，你可真是不疯魔不成活呀!";
         _InfoLabel.textAlignment = UITextLayoutDirectionLeft;
         _InfoLabel.font = [UIFont systemFontOfSize:14];

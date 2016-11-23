@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QPUserModel.h"
 
 @interface QPUserCenterViewCell : UITableViewCell
 @property (nonatomic,strong)UILabel *phoneLab;
+@property (nonatomic,strong)UILabel *nameLab;
+@property (nonatomic,strong)UIImageView *headimage;
 @end

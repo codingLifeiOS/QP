@@ -127,6 +127,10 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [homeTableView reloadData];
+            if (self.accountRecordArry.count == 0) {
+                    [[QPHUDManager sharedInstance]showTextOnly:@"没有数据"];
+                }
+
             });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];

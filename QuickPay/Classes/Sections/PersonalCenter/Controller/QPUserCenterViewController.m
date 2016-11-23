@@ -90,9 +90,9 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
         QPUserCenterViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = userModel.arena_name;
+        cell.nameLab.text = userModel.arena_name;
         cell.phoneLab.text = userModel.arena_phone;
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",QP_GetLogo,[QPUtils getMer_code]]] placeholderImage:[UIImage imageNamed:@"geren_touxiang"]];
+        [cell.headimage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",QP_GetLogo,[QPUtils getMer_code]]] placeholderImage:[UIImage imageNamed:@"geren_touxiang"]];
         return cell;
     } else {
         QPUserOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
@@ -207,8 +207,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     if (type == 1) {
         ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
-        if (author == ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusNotDetermined){
-            //无权限
+        if (author == ALAuthorizationStatusRestricted || author == AVAuthorizationStatusDenied){
             [[QPHUDManager sharedInstance] showTextOnly:@"相册未授权" onView:self.view];
         }else if (author == ALAuthorizationStatusAuthorized) {
             //默认只采用照片库
@@ -300,7 +299,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     QPUserCenterViewCell *cell = [self.homeTableView cellForRowAtIndexPath:indexPath];
-    cell.imageView.image = headImage;
+    cell.headimage.image = headImage;
     [self dismissViewControllerAnimated:YES completion:nil];
     [self UpdateUserInforHeadImage];
 }
@@ -365,8 +364,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 - (void)changeLogoWithPath:(NSString*)path{
     
     if ([NSString isNotBlank:path]) {
-//       @"http://mobile.rrgpay.com/apis/getLogo/WA16082322231"
-        [QPHttpManager changeLogoWithUrl:[NSString stringWithFormat:@"%@%@",@"http://mobile.rrgpay.com/apis/getLogo/",path] Completion:^(id responseData) {
+        [QPHttpManager changeLogoWithUrl:path Completion:^(id responseData) {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
         } failure:^(NSError *error) {
             

@@ -1,8 +1,8 @@
 //
-//  QPAccountRecordModel.h
+//  QPCheckWaterModel.h
 //  QuickPay
 //
-//  Created by Nie on 16/9/22.
+//  Created by Nie on 2016/11/23.
 //  Copyright © 2016年 Nie. All rights reserved.
 //
 
@@ -21,10 +21,9 @@
 #define MODEL_KEY_ACCOUNT_NAME  @"account_name"
 #define MODEL_KEY_ACCOUNTNO  @"accountno"
 #define MODEL_KEY_PAY_TYPE  @"pay_type"
+@interface QPCheckWaterModel : NSObject
 
-@interface QPViewWaterModel : NSObject
-
-@property(nonatomic, copy)NSString *viewWaterid;
+@property(nonatomic, copy)NSString *checkWaterid;
 @property(nonatomic, copy)NSString *arena_code;
 @property(nonatomic, copy)NSString *create_date;
 @property(nonatomic, copy)NSString *modify_date;

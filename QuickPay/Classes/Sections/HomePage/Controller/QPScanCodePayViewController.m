@@ -18,8 +18,14 @@
     ZBarReaderView *_readview;          // 扫描二维码ZBarReaderView
     QPQRView *_qrRectView;             // 自定义的扫描视图
     UIView *backView ;
-    UIImageView *codeImage;           // 生成的二维码
+    UIImageView *codeImage;            // 生成的二维码
+    UIImageView *logoImage;
     UIImageView *instructionImage;
+    
+    UIButton * changecodeBtn;
+    UIButton * instructionsImageBtn;
+    UIButton * changeZBarBtn;
+    UIButton * codeinstructionsImageBtn;
 }
 @property(nonatomic,copy)NSString *orderId;//订单号
 
@@ -110,7 +116,7 @@
     paytapeLable.frame = CGRectMake(0, amoutLable.bottom+5, SCREEN_WIDTH, 30);
     [_readview addSubview:paytapeLable];
     
-    UIButton * changecodeBtn = [[UIButton alloc]init];
+    changecodeBtn = [[UIButton alloc]init];
     changecodeBtn.frame = CGRectMake(40, paytapeLable.bottom+15, SCREEN_WIDTH-80, 40);
     [changecodeBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
     changecodeBtn.backgroundColor = [UIColor clearColor];
@@ -120,7 +126,7 @@
     [_readview addSubview:changecodeBtn];
     [changecodeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton * instructionsImageBtn = [[UIButton alloc]init];
+    instructionsImageBtn = [[UIButton alloc]init];
     instructionsImageBtn.frame = CGRectMake(40, changecodeBtn.bottom+10, SCREEN_WIDTH-80, 40);
     [instructionsImageBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
     instructionsImageBtn.backgroundColor = [UIColor clearColor];
@@ -139,6 +145,10 @@
     codeImage = [[UIImageView alloc]init];
     codeImage.frame = CGRectMake((SCREEN_WIDTH-220)/2, 40, width, height);
     [backView addSubview:codeImage];
+    
+    logoImage = [[UIImageView alloc]init];
+    logoImage.frame = CGRectMake((codeImage.width/2)-20, (codeImage.height/2)-20, 40, 40);
+    [codeImage addSubview:logoImage];
     
     UILabel *amoutLable = [[UILabel alloc]init];
     amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
@@ -161,7 +171,7 @@
     promptLable.frame = CGRectMake(0, amoutLable.bottom+5, SCREEN_WIDTH, 30);
     [backView addSubview:promptLable];
     
-    UIButton * changeZBarBtn = [[UIButton alloc]init];
+    changeZBarBtn = [[UIButton alloc]init];
     changeZBarBtn.frame = CGRectMake(40, promptLable.bottom+15, SCREEN_WIDTH-80, 40);
     [changeZBarBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
     changeZBarBtn.backgroundColor = [UIColor orangeColor];
@@ -171,7 +181,7 @@
     [backView addSubview:changeZBarBtn];
     [changeZBarBtn addTarget:self action:@selector(changeToScanPay) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton * codeinstructionsImageBtn = [[UIButton alloc]init];
+    codeinstructionsImageBtn = [[UIButton alloc]init];
     codeinstructionsImageBtn.frame = CGRectMake(40, changeZBarBtn.bottom+10, SCREEN_WIDTH-80, 40);
     [codeinstructionsImageBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
     [codeinstructionsImageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -269,14 +279,28 @@
 -(void)showInstructionImage
 {
     self.navigationController.navigationBarHidden = YES;
+    [changecodeBtn setUserInteractionEnabled:NO];
+    [instructionsImageBtn setUserInteractionEnabled:NO];
+    [changeZBarBtn setUserInteractionEnabled:NO];
+    [codeinstructionsImageBtn setUserInteractionEnabled:NO];
+    
     instructionImage = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    if ([self.payModel.payType isEqualToString:@"2"]) {
     instructionImage.image = backView.hidden ? [UIImage imageNamed:@"zhinan_saoke"]: [UIImage imageNamed:@"kehusaoma_shuoming"];
+    } else {
+    instructionImage.image = backView.hidden ? [UIImage imageNamed:@"zhinan"]: [UIImage imageNamed:@"kehusaoma-2"];
+    }
     [self.view addSubview:instructionImage];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     instructionImage.hidden = YES;
     self.navigationController.navigationBarHidden = NO;
+    [changecodeBtn setUserInteractionEnabled:YES];
+    [instructionsImageBtn setUserInteractionEnabled:YES];
+    [changeZBarBtn setUserInteractionEnabled:YES];
+    [codeinstructionsImageBtn setUserInteractionEnabled:YES];
+
 }
 
 // 刷卡支付
@@ -315,9 +339,13 @@
         [[QPHUDManager sharedInstance]hiddenHUD];
         if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.orderId = [responseData objectForKey:@"order_sn"];
-                codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220]
-                ;
+            self.orderId = [responseData objectForKey:@"order_sn"];
+            codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220];
+            if ([self.payModel.payType isEqualToString:@"1"]) {
+                    logoImage.image = [UIImage imageNamed:@"zhifubao"];
+                } else {
+                    logoImage.image = [UIImage imageNamed:@"weixin"];
+                }
             });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:@"生成商户二维码失败"];

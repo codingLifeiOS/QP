@@ -7,34 +7,46 @@
 //
 
 #import "QPUserCenterViewCell.h"
-
 @implementation QPUserCenterViewCell
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
         self.backgroundColor = [UIColor whiteColor];
         
-        self.phoneLab =[[UILabel alloc]init];
+        self.nameLab = [[UILabel alloc]init];
+        self.nameLab.font = [UIFont systemFontOfSize:12];
+        self.nameLab.frame = CGRectMake(100, 15, 200, 20);
+        [self.contentView addSubview:self.nameLab];
+        
+        self.phoneLab = [[UILabel alloc]init];
         self.phoneLab.font = [UIFont systemFontOfSize:12];
-        self.phoneLab.frame = CGRectMake(100, 60, 150, 20);
+        self.phoneLab.frame = CGRectMake(100, 55, 150, 20);
         [self.contentView addSubview:self.phoneLab];
+        
+        self.headimage = [[UIImageView alloc]init];
+        self.headimage.frame = CGRectMake(20,15,60,60);
+        self.headimage.contentMode = UIViewContentModeScaleAspectFill;
+        self.headimage.layer.cornerRadius = 30;
+        self.headimage.layer.masksToBounds = YES;
+        [self.contentView addSubview:self.headimage];
     }
     
     return self;
 }
-
-//重写cell image内容
-- (void)layoutSubviews {
-    
-    [super layoutSubviews];
-    
-    self.imageView.bounds = CGRectMake(0,0,60,60);
-    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.imageView.layer.cornerRadius = 30;
-    self.imageView.layer.masksToBounds = YES;
-    
-    self.textLabel.frame = CGRectMake(100, 25, 200, 20);
-}
+////重写cell image内容
+//- (void)layoutSubviews {
+//    
+//    [super layoutSubviews];
+//    
+//    self.imageView.bounds = CGRectMake(0,0,60,60);
+//    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    self.imageView.layer.cornerRadius = 30;
+//    self.imageView.layer.masksToBounds = YES;
+//    
+//    self.textLabel.frame = CGRectMake(100, 25, 200, 20);
+//}
 
 @end

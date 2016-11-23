@@ -10,7 +10,7 @@
 #import "QPScanCodePayViewController.h"
 #import "BMAdScrollView.h"
 #import "QPAccountRecordViewController.h"
-#import "QPViewWaterViewController.h"
+#import "QPCheckWaterViewController.h"
 #import "QPDigitalKeyboardView.h"
 #import "CLShareManager.h"
 #import "QPHttpManager.h"
@@ -81,13 +81,13 @@
 
     
     UIImageView *imageView = [[UIImageView alloc]init];
-    imageView.image = [UIImage imageNamed:@"logo.png"];
+    imageView.image = [UIImage imageNamed:@"logo_title.png"];
     [Naview addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(116/2));
         make.centerX.equalTo(self.view.mas_centerX_mas);
-        make.height.equalTo(@35);
-        make.top.equalTo(@24);
+        make.height.equalTo(@25);
+        make.top.equalTo(@27);
     }];
     
 }
@@ -234,8 +234,8 @@
             break;
         case 203:
         {
-            QPViewWaterViewController *QPViewWaterVC = [[QPViewWaterViewController alloc]init];
-            [self.navigationController pushViewController:QPViewWaterVC animated:YES];
+            QPCheckWaterViewController *QPCheckWaterVC = [[QPCheckWaterViewController alloc]init];
+            [self.navigationController pushViewController:QPCheckWaterVC animated:YES];
         }
             break;
         case 210:

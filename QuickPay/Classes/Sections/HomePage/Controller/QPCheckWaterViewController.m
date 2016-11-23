@@ -1,29 +1,31 @@
 //
-//  QPViewWaterViewController.m
+//  QPCheckWaterViewController.m
 //  QuickPay
 //
-//  Created by Nie on 2016/10/28.
+//  Created by Nie on 2016/11/23.
 //  Copyright © 2016年 Nie. All rights reserved.
 //
 
-#import "QPViewWaterViewController.h"
-#import "QPViewWaterTableViewCell.h"
+#import "QPCheckWaterViewController.h"
+#import "QPCheckWaterTableViewCell.h"
 #import "QPTransactionDetailsViewController.h"
 #import "QPHttpManager.h"
-#import "QPViewWaterModel.h"
+#import "QPCheckWaterModel.h"
 #import "QPDaterView.h"
-static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
+static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
 
-@interface QPViewWaterViewController ()<UITableViewDelegate,UITableViewDataSource,QPDaterViewDelegate>
+@interface QPCheckWaterViewController ()<UITableViewDelegate,UITableViewDataSource,QPDaterViewDelegate>
 {
     QPDaterView *datePicker;
     NSString * timestr;
 }
 @property(nonatomic,strong) UITableView *homeTableView;
-@property(nonatomic,strong) NSMutableArray *viewaterArry;
+@property(nonatomic,strong) NSMutableArray *checkWaterArry;
+
+
 @end
 
-@implementation QPViewWaterViewController
+@implementation QPCheckWaterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,12 +35,12 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     
     NSDate *  date = [NSDate date];
     NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
-   [dateformatter setDateFormat:@"yyyy-MM-dd"];
+    [dateformatter setDateFormat:@"yyyy-MM-dd"];
     NSString *nowTime = [dateformatter stringFromDate:date];
     timestr =  nowTime;
     
     [self getOrderRecordsNetworkRequestWithBeginTime:nowTime EndTime:nowTime];
-    self.viewaterArry = [[NSMutableArray alloc]init];
+    self.checkWaterArry = [[NSMutableArray alloc]init];
     [self createRightBarItemByImageName:@"liushui_shaixuan" target:self action:@selector(dateChoiceClick)];
 }
 
@@ -73,7 +75,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     self.homeTableView.delegate = self;
     [self.homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.homeTableView.showsVerticalScrollIndicator = NO;
-    [ self.homeTableView registerClass:[QPViewWaterTableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    [ self.homeTableView registerClass:[QPCheckWaterTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:self.homeTableView];
     [self.homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -83,7 +85,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.viewaterArry.count;
+    return self.checkWaterArry.count;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -93,8 +95,8 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QPViewWaterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    [cell updatecellWithModel:self.viewaterArry[indexPath.row]];
+    QPCheckWaterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    [cell updatecellWithModel:self.checkWaterArry[indexPath.row]];
     cell.contentView.backgroundColor = [UIColor clearColor];
     return cell;
 }
@@ -103,7 +105,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     QPTransactionDetailsViewController *transacdetail = [[QPTransactionDetailsViewController alloc]init];
-    transacdetail.tranDetailsModel = self.viewaterArry[indexPath.row];
+    transacdetail.tranDetailsModel = self.checkWaterArry[indexPath.row];
     [self.navigationController pushViewController:transacdetail animated:YES];
 }
 
@@ -116,7 +118,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     return CGFLOAT_MIN;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.viewaterArry.count == 0) {
+    if (self.checkWaterArry.count == 0) {
         return CGFLOAT_MIN;
     }
     return 50.0;
@@ -124,7 +126,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *view;
-    if (self.viewaterArry.count > 0) {
+    if (self.checkWaterArry.count > 0) {
         
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
         view.backgroundColor = [UIColor whiteColor];
@@ -148,7 +150,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
         UILabel * moneyLab = [[UILabel alloc]initWithFrame:CGRectMake( SCREEN_WIDTH-130, dateLab.y, 120, dateLab.height)];
         
         NSInteger total_amount = 0 ;
-        for (QPViewWaterModel *model in self.viewaterArry) {
+        for (QPCheckWaterModel *model in self.checkWaterArry) {
             total_amount = total_amount+[model.total_amount integerValue];
         }
         moneyLab.text = [NSString stringWithFormat:@"共¥%.2f",total_amount /100.00 ];
@@ -157,8 +159,8 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
         moneyLab.textColor = UIColorFromHex(0xff9b20);
         [view addSubview:moneyLab];
         
-        UILabel *numberLab = [[UILabel alloc]initWithFrame:CGRectMake(moneyLab.left-25, dateLab.y, 50, 30)];
-        numberLab.text = [NSString stringWithFormat:@"共%ld笔",self.viewaterArry.count];
+        UILabel *numberLab = [[UILabel alloc]initWithFrame:CGRectMake(moneyLab.left-55, dateLab.y, 80, 30)];
+        numberLab.text = [NSString stringWithFormat:@"共%ld笔",self.checkWaterArry.count];
         numberLab.font = [UIFont systemFontOfSize:16];
         numberLab.textColor = UIColorFromHex(0xff9b20);
         numberLab.textAlignment = NSTextAlignmentRight;
@@ -172,7 +174,7 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
 }
 - (void)getOrderRecordsNetworkRequestWithBeginTime:(NSString*)beginTime EndTime:(NSString*)endTime{
     
-    [self.viewaterArry removeAllObjects];
+    [self.checkWaterArry removeAllObjects];
     
     WEAKSELF();
     [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
@@ -181,12 +183,12 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
         if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
             STRONGSELF();
             for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
-                QPViewWaterModel *model = [[QPViewWaterModel alloc]initWithDictionary:dic];
-                [strongSelf.viewaterArry addObject:model];
+                QPCheckWaterModel *model = [[QPCheckWaterModel alloc]initWithDictionary:dic];
+                [strongSelf.checkWaterArry addObject:model];
             }
-                [self.homeTableView reloadData];
-            if (self.viewaterArry.count == 0) {
-                 [[QPHUDManager sharedInstance]showTextOnly:@"没有数据"];
+            [self.homeTableView reloadData];
+            if (self.checkWaterArry.count == 0) {
+                [[QPHUDManager sharedInstance]showTextOnly:@"没有数据"];
             }
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
@@ -199,5 +201,6 @@ static NSString *const cellIdentifier = @"QPViewWaterTableViewCell";
     }];
     
 }
+
 
 @end
