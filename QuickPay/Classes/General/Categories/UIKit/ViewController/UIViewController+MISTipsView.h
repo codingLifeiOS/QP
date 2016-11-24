@@ -11,7 +11,8 @@
 
 @interface UIViewController (MISTipsView)<RequestTimeoutTipViewDelegate>
 
-- (void)showNoDataTipView:(CGRect)frame;
+- (void)showNoDataTipView:(CGRect)frame Type:(TipViewType)type;
+
 - (void)showTimeoutTipView:(CGRect)frame;
 - (void)showRequestErrorTipView:(CGRect)frame;
 

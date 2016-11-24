@@ -243,6 +243,7 @@ constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:URLString]];
+    [request setTimeoutInterval:kTimeoutInterval];
     [request setHTTPMethod:@"POST"];
     //    设置请求头
     //    [self setNetHeaderBy:request];

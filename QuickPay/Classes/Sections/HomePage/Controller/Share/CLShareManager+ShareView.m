@@ -32,7 +32,9 @@
     shareLeLabel.textAlignment = NSTextAlignmentCenter;
     [self.shareView addSubview:shareLeLabel];
     
-    CGFloat itemWidth = 75.0f;
+    CGFloat itemWidth = 75;
+    CGFloat  margin = ScreenWidth >375? (ScreenWidth-375)/4:0;
+    
     UIScrollView * shareScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(shareLeLabel.frame)+20, ScreenWidth, 80)];
     shareScrollView.contentSize = CGSizeMake(itemWidth*shareNameArray.count, 0);
     shareScrollView.showsVerticalScrollIndicator = NO;
@@ -41,7 +43,7 @@
     [self.shareView addSubview:shareScrollView];
     
     for (int i = 0; i < shareNameArray.count; i++) {
-        CLShareButton * shareBtn = [[CLShareButton alloc] initWithFrame:CGRectMake(itemWidth * i+15, 0, itemWidth, 80)];
+        CLShareButton * shareBtn = [[CLShareButton alloc] initWithFrame:CGRectMake((itemWidth+margin) * i, 0, itemWidth, 80)];
         [shareBtn setImage:[UIImage imageNamed:shareImageArray[i]] forState:UIControlStateNormal];
         [shareBtn setTitle:shareNameArray[i] forState:UIControlStateNormal];
         shareBtn.tag = i;

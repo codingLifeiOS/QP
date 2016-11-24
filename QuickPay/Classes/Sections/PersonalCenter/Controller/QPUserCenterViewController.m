@@ -92,7 +92,9 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.nameLab.text = userModel.arena_name;
         cell.phoneLab.text = userModel.arena_phone;
-        [cell.headimage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",QP_GetLogo,[QPUtils getMer_code]]] placeholderImage:[UIImage imageNamed:@"geren_touxiang"]];
+        NSString *path = [NSString stringWithFormat:@"%@/%@",QP_GetLogo,[QPUtils getMer_code]];
+        cell.headimage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:path]]];
+        
         return cell;
     } else {
         QPUserOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];

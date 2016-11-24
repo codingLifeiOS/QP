@@ -9,7 +9,6 @@
 #import "UIViewController+MISTipsView.h"
 
 static NSInteger const kTipsViewTag = 37700;
-static NSString * const kTipsViewNoDataString = @"没有数据";
 
 @implementation UIViewController (MISTipsView)
 
@@ -28,9 +27,15 @@ static NSString * const kTipsViewNoDataString = @"没有数据";
 {
     [self hiddenTipsView];
     if ([tipType isEqualToString:kTipsViewNoDataString]) {
-        [self showNoDataTipView:frame];
+        [self showNoDataTipView:frame Type:NoDataTipViewType];
         return;
     }
+    
+    if ([tipType isEqualToString:kTipsViewNoPermissionString]) {
+        [self showNoDataTipView:frame Type:NoPermissionTipViewType];
+        return;
+    }
+    
     RequestTimeoutTipView *timeoutView = [[RequestTimeoutTipView alloc] initNewStyleWithFrame:frame];
     timeoutView.tag = kTipsViewTag;
     timeoutView.delegate = self;
@@ -39,10 +44,10 @@ static NSString * const kTipsViewNoDataString = @"没有数据";
     [timeoutView updateTextLabelWithType:tipType];
 }
 
-- (void)showNoDataTipView:(CGRect)frame
+- (void)showNoDataTipView:(CGRect)frame Type:(TipViewType)type
 {
     [self hiddenTipsView];
-    QPEmptyListTipView *tips = [[QPEmptyListTipView alloc] initNewStyleWithFrame:frame];
+   QPEmptyListTipView *tips = [[QPEmptyListTipView alloc] initNewStyleWithFrame:frame Type:type];
     tips.tag = kTipsViewTag;
     [self.view addSubview:tips];
 }
@@ -97,7 +102,7 @@ static NSString * const kTipsViewNoDataString = @"没有数据";
 - (void)showNoDataTipViewFrame:(CGRect)frame andContentView:(UIView*)contentView andTag:(NSInteger)tag
 {
     [self hiddenTipsContentView:contentView andTag:tag];
-    QPEmptyListTipView *tips = [[QPEmptyListTipView alloc] initNewStyleWithFrame:frame];
+    QPEmptyListTipView *tips = [[QPEmptyListTipView alloc] initNewStyleWithFrame:frame Type:NoDataTipViewType];
     tips.tag = tag;
     [contentView addSubview:tips];
 }
@@ -124,7 +129,8 @@ static NSString * const kTipsViewNoDataString = @"没有数据";
 }
 
 - (void)startRetry {
-
+    
+    
 }
 
 @end

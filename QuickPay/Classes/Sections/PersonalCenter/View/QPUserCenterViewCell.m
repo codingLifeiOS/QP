@@ -31,22 +31,10 @@
         self.headimage.contentMode = UIViewContentModeScaleAspectFill;
         self.headimage.layer.cornerRadius = 30;
         self.headimage.layer.masksToBounds = YES;
+        self.headimage.image = [UIImage imageNamed:@"geren_touxiang"];
         [self.contentView addSubview:self.headimage];
     }
     
     return self;
 }
-////重写cell image内容
-//- (void)layoutSubviews {
-//    
-//    [super layoutSubviews];
-//    
-//    self.imageView.bounds = CGRectMake(0,0,60,60);
-//    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    self.imageView.layer.cornerRadius = 30;
-//    self.imageView.layer.masksToBounds = YES;
-//    
-//    self.textLabel.frame = CGRectMake(100, 25, 200, 20);
-//}
-
 @end

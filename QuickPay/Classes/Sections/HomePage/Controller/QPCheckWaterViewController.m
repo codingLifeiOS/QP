@@ -12,6 +12,7 @@
 #import "QPHttpManager.h"
 #import "QPCheckWaterModel.h"
 #import "QPDaterView.h"
+#import "UIViewController+MISTipsView.h"
 static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
 
 @interface QPCheckWaterViewController ()<UITableViewDelegate,UITableViewDataSource,QPDaterViewDelegate>
@@ -39,8 +40,9 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
     NSString *nowTime = [dateformatter stringFromDate:date];
     timestr =  nowTime;
     
-    [self getOrderRecordsNetworkRequestWithBeginTime:nowTime EndTime:nowTime];
-    self.checkWaterArry = [[NSMutableArray alloc]init];
+    [self getOrderRecordsNetworkRequestWithBeginTime: timestr EndTime: timestr];
+
+     self.checkWaterArry = [[NSMutableArray alloc]init];
     [self createRightBarItemByImageName:@"liushui_shaixuan" target:self action:@selector(dateChoiceClick)];
 }
 
@@ -174,6 +176,7 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
 }
 - (void)getOrderRecordsNetworkRequestWithBeginTime:(NSString*)beginTime EndTime:(NSString*)endTime{
     
+    [self hiddenTipsView];
     [self.checkWaterArry removeAllObjects];
     
     WEAKSELF();
@@ -189,17 +192,24 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
             [self.homeTableView reloadData];
             if (self.checkWaterArry.count == 0) {
                 [[QPHUDManager sharedInstance]showTextOnly:@"没有数据"];
+                [self showTipsView:self.view.bounds type:kTipsViewNoDataString];
             }
         } else {
-            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+//            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+            [self showTipsView:self.view.bounds type:[responseData objectForKey:@"resp_msg"]];
         }
         
     } failure:^(NSError *error) {
         
         [[QPHUDManager sharedInstance]hiddenHUD];
-        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+//        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        [self showTipsView:self.view.bounds type:error.localizedDescription];
     }];
     
+}
+- (void)startRetry {
+    
+     [self getOrderRecordsNetworkRequestWithBeginTime: timestr EndTime: timestr];
 }
 
 
