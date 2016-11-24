@@ -46,7 +46,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     [self configureTableView];
     
      self.myTittleArry = @[@[@"我的银行卡",@"店铺签的结算"],@[@"商务合作",@"客服中心"],@[@"关于我们",@"设    置"]];
-     self.myImageArry =@[@[@"Credit-Card",@"Paper-Dollars-1"],@[@"Users-2",@"kefu"],@[@"Info",@"shezhi"]];
+     self.myImageArry =@[@[@"Credit-Card",@"Paper-Dollars-1"],@[@"Users-2",@"kefu"],@[@"guanyuwom",@"shezhi"]];
     
     userModel = [QPUserCenterViewController getUserModel];
     //    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(setbtnclick)];

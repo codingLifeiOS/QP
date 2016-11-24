@@ -264,7 +264,7 @@ static  NSInteger pageNumber;//页码
     [imageSV scrollRectToVisible:CGRectMake(WIDTH*(page+1),0,WIDTH,HEIGHT) animated:NO]; // 触摸pagecontroller那个点点 往后翻一页 +1
 }
 // 定时器 绑定的方法
-- (void)runTimePage
+- (void)runTimePage 
 {
     NSInteger page = pageControl.currentPage; // 获取当前的page
     page++;

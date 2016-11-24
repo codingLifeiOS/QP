@@ -12,7 +12,7 @@
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 
 #define shareNameArray @[@"微信",@"朋友圈",@"新浪微博",@"QQ",@"QQ空间"]
-#define shareImageArray @[@"share_微信",@"share_朋友圈",@"share_微博",@"share_qq",@"share_QQ空间"]
+#define shareImageArray @[@"btn_5",@"btn_4",@"btn_2",@"btn_3",@"btn_1"]
 
 @interface CLShareManager : NSObject
 

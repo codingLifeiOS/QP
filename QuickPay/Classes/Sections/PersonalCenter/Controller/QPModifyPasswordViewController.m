@@ -31,7 +31,7 @@
 {
    
     UILabel *oldlab =  [[UILabel alloc]initWithFrame:CGRectMake(30, 20, SCREEN_WIDTH-60, 30)];
-    oldlab.text = @"请输入旧密码";
+    oldlab.text = @"请输入旧密码:";
     [self.view addSubview:oldlab];
     
     self.oldpasswordTextField = [[UITextField alloc] init];
@@ -49,7 +49,7 @@
     [self.view addSubview:self.oldpasswordTextField];
     
     UILabel *onepasswordlab =  [[UILabel alloc]initWithFrame:CGRectMake(self.oldpasswordTextField.x, self.oldpasswordTextField.bottom, self.oldpasswordTextField.width, 30)];
-    onepasswordlab.text = @"请输入新密码";
+    onepasswordlab.text = @"请输入新密码:";
     [self.view addSubview:onepasswordlab];
     
     self.newpasswordTextField = [[UITextField alloc] init];
@@ -68,7 +68,7 @@
     [self.view addSubview:self.newpasswordTextField];
 
     UILabel *twopasswordlab =  [[UILabel alloc]initWithFrame:CGRectMake(self.newpasswordTextField.x, self.newpasswordTextField.bottom, self.newpasswordTextField.width, 30)];
-    twopasswordlab.text = @"确认新密码";
+    twopasswordlab.text = @"确认新密码:";
     [self.view addSubview:twopasswordlab];
     
     self.confirmpasswordTextField = [[UITextField alloc] init];

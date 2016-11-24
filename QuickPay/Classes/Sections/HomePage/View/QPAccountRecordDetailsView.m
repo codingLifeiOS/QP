@@ -67,7 +67,7 @@
     [firstview addSubview:_totaldeductionsLab];
     
     UILabel *explainlab = [[UILabel alloc]initWithFrame:CGRectMake(20, firstview.bottom, SCREEN_WIDTH-20, 60)];
-    explainlab.text = @"你的款项尚未划出，顺便付每日12：00~17：00划款请耐心等待";
+    explainlab.text = @"你的款项尚未划出，惠客盟每日12：00~17：00划款请耐心等待";
     explainlab.numberOfLines = 2;
     explainlab.textColor = [UIColor redColor];
     explainlab.textAlignment = NSTextAlignmentLeft;

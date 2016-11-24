@@ -41,7 +41,7 @@
     [self.shareView addSubview:shareScrollView];
     
     for (int i = 0; i < shareNameArray.count; i++) {
-        CLShareButton * shareBtn = [[CLShareButton alloc] initWithFrame:CGRectMake(itemWidth * i, 0, itemWidth, 80)];
+        CLShareButton * shareBtn = [[CLShareButton alloc] initWithFrame:CGRectMake(itemWidth * i+15, 0, itemWidth, 80)];
         [shareBtn setImage:[UIImage imageNamed:shareImageArray[i]] forState:UIControlStateNormal];
         [shareBtn setTitle:shareNameArray[i] forState:UIControlStateNormal];
         shareBtn.tag = i;
@@ -49,7 +49,7 @@
         [shareScrollView addSubview:shareBtn];
     }
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cancelBtn.frame = CGRectMake(10, self.shareView.frame.size.height - 50, self.shareView.frame.size.width - 20, 40);
+    cancelBtn.frame = CGRectMake(20, self.shareView.frame.size.height - 50, self.shareView.frame.size.width - 40, 40);
     cancelBtn.layer.masksToBounds = YES;
     cancelBtn.layer.cornerRadius = 6.0f;
     cancelBtn.layer.borderColor = [[UIColor grayColor] CGColor];

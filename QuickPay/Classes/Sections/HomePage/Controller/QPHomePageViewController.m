@@ -18,6 +18,7 @@
 #import "QPPayModel.h"
 #import "QRCodeGenerator.h"
 #import "NavigationController.h"
+#import "QPMoreAboutViewController.h"
 
 @interface QPHomePageViewController ()<BMAdScrollViewClickDelegate,QPDigitalKeyboardViewDelegate>
 {
@@ -242,7 +243,9 @@
             [self shareButtonClick];
             break;
         case 211:{
-            [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
+            QPMoreAboutViewController *QPMoreAboutVC = [[QPMoreAboutViewController alloc]init];
+            [self.navigationController pushViewController:QPMoreAboutVC animated:YES];
+//            [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
         }
             break;
             
