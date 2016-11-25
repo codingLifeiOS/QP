@@ -194,10 +194,19 @@
     [dateformatter setDateFormat:@"yyyy-MM-dd"];
     NSString *  locationString=[dateformatter stringFromDate:senddate];
     
-    NSLog(@"locationString:%@",locationString);
+    NSDate * date = [NSDate date];
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    //一周的秒数
+    NSTimeInterval time = 3 * 24 * 60 * 60;
+    //下周就把"-"去掉
+    NSDate *lastWeek = [date dateByAddingTimeInterval:-time];
+    NSString *startDate =  [dateFormatter stringFromDate:lastWeek];
+    
+    NSLog(@"locationString startDate:%@ %@",locationString,startDate);
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],
-                          @"start_date":locationString,
+                          @"start_date":startDate,
                           @"end_date":locationString,
                           };
     [QPHttpRequest POSTWithData:QP_GetSettlement_Records params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {

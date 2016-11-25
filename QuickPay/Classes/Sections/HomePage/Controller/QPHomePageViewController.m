@@ -104,18 +104,27 @@
         [imageNameArr addObject: [dic objectForKey:@"value"]];
         [titleNameArr addObject: [dic objectForKey:@"key"]];
     }
-
-    adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:132 offsetY:0];
     adView.tag = 10010;
     adView.delegate = self;
-    adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 132);
-    [self.view addSubview:adView];
+   if (SCREEN_WIDTH > 375){
+       adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:200 offsetY:0];
+       adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 200);
+    } else {
+       adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:132 offsetY:0];
+       adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 132);
+           }
     
+    [self.view addSubview:adView];
+
 }
 
 - (void)configureMenuView{
     
-    menuBgView = [[UIView alloc] initWithFrame:CGRectMake(0,72+132+10, SCREEN_WIDTH, 432/2)];
+    if (SCREEN_WIDTH > 375){
+        menuBgView = [[UIView alloc] initWithFrame:CGRectMake(0,72+200+10, SCREEN_WIDTH, 432/2)];
+    } else {
+        menuBgView = [[UIView alloc] initWithFrame:CGRectMake(0,72+132+10, SCREEN_WIDTH, 432/2)];
+    }
     menuBgView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:menuBgView];
     
@@ -175,7 +184,7 @@
 #pragma mark -BMAdScrollViewClickDelegate
 -(void)buttonClick:(NSInteger)vid
 {
-    [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"点击了广告图%ld",(long)vid]];
+//    [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"点击了广告图%ld",(long)vid]];
 }
 
 #pragma mark -QPDigitalKeyboardViewDelegate
@@ -256,7 +265,7 @@
 }
 
 -(void)shareButtonClick{
-    [shareManager setShareVC:self content:@"测试分享" image:[UIImage imageNamed:@"saoma2_erweima"] url:@"https://github.com/ClaudeLi/CLShare.git"];
+    [shareManager setShareVC:self content:@"零成本开通微信 支付宝支付" image:[UIImage imageNamed:@"xiaoxi_logo1"] url:@"http://www.rrgpay.com/"];
     [shareManager show];
     
 }

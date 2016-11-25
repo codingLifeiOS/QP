@@ -26,14 +26,14 @@
         _weekLab.textColor = [UIColor blackColor];
         [self.contentView addSubview:_weekLab];
         
-        _moneyLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-130, _dateLab.y, 100, _dateLab.height)];
+        _moneyLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-130, _dateLab.y, 120, _dateLab.height)];
         _moneyLab.text = @"¥ 100";
         _moneyLab.textAlignment = NSTextAlignmentRight;
         _moneyLab.font = [UIFont systemFontOfSize:16];
         _moneyLab.textColor = [UIColor blackColor];
         [self.contentView addSubview:_moneyLab];
         
-        _stateLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-130, _weekLab.y, 100, _weekLab.height)];
+        _stateLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-130, _weekLab.y, 120, _weekLab.height)];
         _stateLab.text = @"已到账";
         _stateLab.textColor = UIColorFromHex(0x53c327);
         _stateLab.textAlignment = NSTextAlignmentRight;
@@ -41,9 +41,9 @@
         [self.contentView addSubview:_stateLab];
         
         
-        UIImageView *rightview = [[UIImageView alloc]initWithFrame:CGRectMake(_moneyLab.right+10,(60-15)/2, 15, 15)];
-        rightview.image = [UIImage imageNamed:@"pir_9.png"];
-        [self.contentView addSubview:rightview];
+//        UIImageView *rightview = [[UIImageView alloc]initWithFrame:CGRectMake(_moneyLab.right+10,(60-15)/2, 15, 15)];
+//        rightview.image = [UIImage imageNamed:@"pir_9.png"];
+//        [self.contentView addSubview:rightview];
         
         UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 59.5, SCREEN_WIDTH, 0.5)];
         line.backgroundColor = UIColorFromHex(0xdcdcdc);

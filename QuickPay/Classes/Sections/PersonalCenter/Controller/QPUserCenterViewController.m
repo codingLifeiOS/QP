@@ -61,8 +61,11 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     self.homeTableView.showsVerticalScrollIndicator = NO;
     [self.homeTableView registerClass:[QPUserCenterViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.homeTableView registerClass:[QPUserOneTableViewCell class] forCellReuseIdentifier:cellIdentifier1];
-    
     [self.view addSubview:self.homeTableView];
+    [self.homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -168,7 +171,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
                 [self.navigationController pushViewController:QPbuscooVC animated:YES];
                 NSLog(@"商务合作");
             } else if (indexPath.row == 1){
-                UIAlertView *phoneAlert = [[UIAlertView alloc]initWithTitle:@"15701189832" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
+                UIAlertView *phoneAlert = [[UIAlertView alloc]initWithTitle:@"010-53385758" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
                 phoneAlert.tag = 81;
                 [phoneAlert show];
                 NSLog(@"客户中心");

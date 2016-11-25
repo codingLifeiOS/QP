@@ -11,6 +11,7 @@
 #import "QPAccountRecordDetailsViewController.h"
 #import "QPHttpManager.h"
 #import "QPAccountRecordModel.h"
+#import "UIViewController+MISTipsView.h"
 
 static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
 
@@ -49,8 +50,11 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     [homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     homeTableView.showsVerticalScrollIndicator = NO;
     [homeTableView registerClass:[QPAccountRecordTableViewCell class] forCellReuseIdentifier:cellIdentifier];
-    
     [self.view addSubview:homeTableView];
+    [homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -108,13 +112,14 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    QPAccountRecordDetailsViewController *accounredetail = [[QPAccountRecordDetailsViewController alloc]init];
-    [self.navigationController pushViewController:accounredetail animated:YES];
+//    QPAccountRecordDetailsViewController *accounredetail = [[QPAccountRecordDetailsViewController alloc]init];
+//    [self.navigationController pushViewController:accounredetail animated:YES];
 }
 
 
 - (void)getSettlementRecordsNetworkRequest{
     
+    [self hiddenTipsView];
     WEAKSELF();
     [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
     [QPHttpManager getSettlementRecordsCompletion:^(id responseData) {
@@ -129,17 +134,20 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
                 [homeTableView reloadData];
             if (self.accountRecordArry.count == 0) {
                     [[QPHUDManager sharedInstance]showTextOnly:@"没有数据"];
+                 [self showTipsView:self.view.bounds type:kTipsViewNoDataString];
                 }
 
             });
         } else {
-            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+//            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+            [self showTipsView:self.view.bounds type:[responseData objectForKey:@"resp_msg"]];
+
         }
      } failure:^(NSError *error) {
         
         [[QPHUDManager sharedInstance]hiddenHUD];
-        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
-         
+//        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+         [self showTipsView:self.view.bounds type:error.localizedDescription];
     }];
 }
 

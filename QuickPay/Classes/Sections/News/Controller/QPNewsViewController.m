@@ -40,10 +40,12 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
     [self.homeTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.homeTableView.showsVerticalScrollIndicator = NO;
     [self.homeTableView registerClass:[NewsTableViewCell class] forCellReuseIdentifier:cellIdentifier];
-    
     [self.view addSubview:self.homeTableView];
-}
+    [self.homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
 
+}
 
 #pragma mark - UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

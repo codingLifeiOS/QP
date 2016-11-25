@@ -33,7 +33,7 @@
 //               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 //                          佛祖保佑         永不宕机/永无bug
-#define QP_TEL @"tel://15701189832"
+#define QP_TEL @"tel://010-53385758"
 
 
 #define RGBACOLOR(r, g, b, a)   [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]

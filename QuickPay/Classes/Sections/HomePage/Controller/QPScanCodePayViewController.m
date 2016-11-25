@@ -117,19 +117,39 @@
     [_readview addSubview:paytapeLable];
     
     changecodeBtn = [[UIButton alloc]init];
-    changecodeBtn.frame = CGRectMake(40, paytapeLable.bottom+15, SCREEN_WIDTH-80, 40);
-    [changecodeBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
-    changecodeBtn.backgroundColor = [UIColor clearColor];
-    changecodeBtn.layer.borderWidth = 2.0f;
-    changecodeBtn.layer.cornerRadius = 8.0f;
-    changecodeBtn.layer.borderColor = [[UIColor whiteColor]CGColor];
+    if (SCREEN_WIDTH == 414) {
+        changecodeBtn.frame = CGRectMake(96.5, paytapeLable.bottom+15, SCREEN_WIDTH-193, 60);
+    }
+    if (SCREEN_WIDTH == 375) {
+    changecodeBtn.frame = CGRectMake(114, paytapeLable.bottom+15, SCREEN_WIDTH-228, 40);
+    }
+    if (SCREEN_WIDTH == 320) {
+    changecodeBtn.frame = CGRectMake(86.5, paytapeLable.bottom+15, SCREEN_WIDTH-173, 40);
+    }
+    [changecodeBtn setBackgroundImage:[UIImage imageNamed:@"saoma_qiehuan_nor"] forState:UIControlStateNormal];
+//    [changecodeBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
+//    changecodeBtn.backgroundColor = [UIColor clearColor];
+//    changecodeBtn.layer.borderWidth = 2.0f;
+//    changecodeBtn.layer.cornerRadius = 8.0f;
+//    changecodeBtn.layer.borderColor = [[UIColor whiteColor]CGColor];
     [_readview addSubview:changecodeBtn];
     [changecodeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
     
+    
     instructionsImageBtn = [[UIButton alloc]init];
-    instructionsImageBtn.frame = CGRectMake(40, changecodeBtn.bottom+10, SCREEN_WIDTH-80, 40);
-    [instructionsImageBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
-    instructionsImageBtn.backgroundColor = [UIColor clearColor];
+    if (SCREEN_WIDTH == 414) {
+        instructionsImageBtn.frame = CGRectMake(105, changecodeBtn.bottom+15, SCREEN_WIDTH-210, 30);
+    }
+    if (SCREEN_WIDTH == 375) {
+        instructionsImageBtn.frame = CGRectMake(122.5, changecodeBtn.bottom+15, SCREEN_WIDTH-245, 20);
+    }
+    if (SCREEN_WIDTH == 320){
+        instructionsImageBtn.frame = CGRectMake(95, changecodeBtn.bottom+15, SCREEN_WIDTH-190, 20);
+    }
+//    instructionsImageBtn.frame = CGRectMake(122.5, changecodeBtn.bottom+10, SCREEN_WIDTH-245, 20);
+//    [instructionsImageBtn setTitle:@"? 查看使用指南" forState:UIControlStateNormal];
+//    instructionsImageBtn.backgroundColor = [UIColor clearColor];
+    [instructionsImageBtn setBackgroundImage:[UIImage imageNamed:@"saoma_Help"] forState:UIControlStateNormal];
     [_readview addSubview:instructionsImageBtn];
     [instructionsImageBtn addTarget:self action:@selector(showInstructionImage) forControlEvents:UIControlEventTouchUpInside];
     
@@ -172,19 +192,39 @@
     [backView addSubview:promptLable];
     
     changeZBarBtn = [[UIButton alloc]init];
-    changeZBarBtn.frame = CGRectMake(40, promptLable.bottom+15, SCREEN_WIDTH-80, 40);
-    [changeZBarBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
-    changeZBarBtn.backgroundColor = [UIColor orangeColor];
-    changeZBarBtn.layer.borderWidth = 2.0f;
-    changeZBarBtn.layer.cornerRadius = 8.0f;
-    changeZBarBtn.layer.borderColor = [[UIColor orangeColor]CGColor];
+    if (SCREEN_WIDTH == 414) {
+        changeZBarBtn.frame = CGRectMake(96.5, promptLable.bottom+15, SCREEN_WIDTH-193, 60);
+    }
+    if (SCREEN_WIDTH == 375) {
+        changeZBarBtn.frame = CGRectMake(114, promptLable.bottom+15, SCREEN_WIDTH-228, 40);
+    }
+    if (SCREEN_WIDTH == 320){
+        changeZBarBtn.frame = CGRectMake(86.5, promptLable.bottom+15, SCREEN_WIDTH-173, 40);
+    }
+//    changeZBarBtn.frame = CGRectMake(40, promptLable.bottom+15, SCREEN_WIDTH-80, 40);
+    [changeZBarBtn setBackgroundImage:[UIImage imageNamed:@"saoma_qiehuan_pre"] forState:UIControlStateNormal];
+//    [changeZBarBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
+//    changeZBarBtn.backgroundColor = [UIColor orangeColor];
+//    changeZBarBtn.layer.borderWidth = 2.0f;
+//    changeZBarBtn.layer.cornerRadius = 8.0f;
+//    changeZBarBtn.layer.borderColor = [[UIColor orangeColor]CGColor];
     [backView addSubview:changeZBarBtn];
     [changeZBarBtn addTarget:self action:@selector(changeToScanPay) forControlEvents:UIControlEventTouchUpInside];
     
+    
     codeinstructionsImageBtn = [[UIButton alloc]init];
-    codeinstructionsImageBtn.frame = CGRectMake(40, changeZBarBtn.bottom+10, SCREEN_WIDTH-80, 40);
-    [codeinstructionsImageBtn setTitle:@"?查看使用指南" forState:UIControlStateNormal];
-    [codeinstructionsImageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    if (SCREEN_WIDTH == 414) {
+        codeinstructionsImageBtn.frame = CGRectMake(105, changeZBarBtn.bottom+15, SCREEN_WIDTH-210, 30);
+    }
+    if (SCREEN_WIDTH == 375) {
+        codeinstructionsImageBtn.frame = CGRectMake(122.5, changeZBarBtn.bottom+15, SCREEN_WIDTH-245, 20);
+    }
+    if (SCREEN_WIDTH == 320) {
+        codeinstructionsImageBtn.frame = CGRectMake(95, changeZBarBtn.bottom+15, SCREEN_WIDTH-190, 20);
+    }
+    [codeinstructionsImageBtn setBackgroundImage:[UIImage imageNamed:@"saoma_Help1"] forState:UIControlStateNormal];
+//    [codeinstructionsImageBtn setTitle:@"? 查看使用指南" forState:UIControlStateNormal];
+//    [codeinstructionsImageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [backView addSubview:codeinstructionsImageBtn];
     [codeinstructionsImageBtn addTarget:self action:@selector(showInstructionImage) forControlEvents:UIControlEventTouchUpInside];
     backView.hidden = YES;

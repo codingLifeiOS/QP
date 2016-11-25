@@ -83,15 +83,15 @@
         // 微信
         shareType = @[UMShareToWechatSession];
         [UMSocialData defaultData].extConfig.wechatSessionData.url = urlStr;
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = titleStr;
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = @"惠客盟—畅想无卡支付时代";
     }else if (sender.tag == 1) {
         // 朋友圈
         shareType = @[UMShareToWechatTimeline];
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = urlStr;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = titleStr;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"惠客盟—畅想无卡支付时代";
     }else if (sender.tag == 2) {
         // 新浪
-        titleStr = [NSString stringWithFormat:@"%@   猛戳->>>%@(分享来自@你随意_37610)",titleStr,urlStr];
+        titleStr = [NSString stringWithFormat:@"%@   %@    猛戳->>>%@",@"惠客盟—畅想无卡支付时代",titleStr,urlStr];
         shareType = @[UMShareToSina];
     }else{
         if ([TencentOAuth iphoneQQInstalled]) {
@@ -99,12 +99,12 @@
                 // QQ
                 shareType = @[UMShareToQQ];
                 [UMSocialData defaultData].extConfig.qqData.url = urlStr;
-                [UMSocialData defaultData].extConfig.qqData.title = titleStr;
+                [UMSocialData defaultData].extConfig.qqData.title = @"惠客盟—畅想无卡支付时代";
             }else if (sender.tag == 4) {
                 // QQ空间
                 shareType = @[UMShareToQzone];
                 [UMSocialData defaultData].extConfig.qzoneData.url = urlStr;
-                [UMSocialData defaultData].extConfig.qzoneData.title = titleStr;
+                [UMSocialData defaultData].extConfig.qzoneData.title = @"惠客盟—畅想无卡支付时代";
             }
         } else {
             NSLog(@"程序未安装,请到App Store下载");

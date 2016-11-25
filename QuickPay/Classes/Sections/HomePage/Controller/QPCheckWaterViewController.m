@@ -82,7 +82,6 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
     [self.homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
