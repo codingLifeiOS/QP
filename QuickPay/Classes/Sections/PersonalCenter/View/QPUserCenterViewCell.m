@@ -17,13 +17,13 @@
         self.backgroundColor = [UIColor whiteColor];
         
         self.nameLab = [[UILabel alloc]init];
-        self.nameLab.font = [UIFont systemFontOfSize:12];
-        self.nameLab.frame = CGRectMake(100, 15, 200, 20);
+        self.nameLab.font = [UIFont systemFontOfSize:14];
+        self.nameLab.frame = CGRectMake(100, 20, 200, 20);
         [self.contentView addSubview:self.nameLab];
         
         self.phoneLab = [[UILabel alloc]init];
-        self.phoneLab.font = [UIFont systemFontOfSize:12];
-        self.phoneLab.frame = CGRectMake(100, 55, 150, 20);
+        self.phoneLab.font = [UIFont systemFontOfSize:14];
+        self.phoneLab.frame = CGRectMake(100, 50, 200, 20);
         [self.contentView addSubview:self.phoneLab];
         
         self.headimage = [[UIImageView alloc]init];

@@ -25,8 +25,8 @@
 #define K_QQ_AppId       @"1105718763"
 #define K_QQ_AppKey      @"2jxrGBbWwD2qXExG"
 /*微信*/
-#define K_WX_AppID       @"wxb8228ce2f800a6be"
-#define K_WX_AppSecret   @"6183378bbed903be26eadd399505926b"
+#define K_WX_AppID       @"wxae55cbd39d6f6030"
+#define K_WX_AppSecret   @"5cb1b56cae6d57d3fa30b133697e49a8"
 
 #define K_Share_Url      @"http://www.umeng.com/social"
 

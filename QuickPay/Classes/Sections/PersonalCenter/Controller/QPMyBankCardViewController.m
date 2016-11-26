@@ -52,19 +52,17 @@
     }
     NSString *str2 = @"****  ****  ****  ";
     cardLab.text = [NSString stringWithFormat:@"%@%@",str2,str1];
-    cardLab.textColor = [UIColor yellowColor];
+    cardLab.textColor = UIColorFromHex(0xff6600);
     cardLab.textAlignment = NSTextAlignmentCenter;
     cardLab.font = [UIFont systemFontOfSize:16];
     [imageView addSubview:cardLab];
 }
 
 + (QPUserModel*)getUserModel{
-    
     NSString *path = [QPFileLocationManager getUserDirectory];
     NSString *filePath = [path stringByAppendingPathComponent:@"merInfo.data"];
     NSMutableArray *merInfolist = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     return merInfolist[0];
-    
 }
 
 @end

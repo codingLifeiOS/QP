@@ -7,9 +7,12 @@
 //
 
 #import "QPFixedQRViewController.h"
-
+#import "QPPrintInstructionsViewController.h"
 @interface QPFixedQRViewController ()<UIWebViewDelegate>
-
+{
+    UIImageView *codeimage;
+}
+//@property (nonatomic,strong) UIImageView *codeimage;
 @end
 
 @implementation QPFixedQRViewController
@@ -19,17 +22,21 @@
     [self addTitleToNavBar:@"店铺收款码"];
     [self createBackBarItem];
     [self configureWebView];
+    [self createRightBarItemByImageName:@"dianpu_bangzhu" target:self action:@selector(printlick)];
+    self.view.backgroundColor = [UIColor whiteColor];
     
 }
-
 #pragma mark - configureSubViews
 -(void)configureWebView
 {
-    UIWebView * webview = [[UIWebView alloc]initWithFrame:self.view.bounds];
-    [webview setScalesPageToFit:YES];
-    NSString * url = [NSString stringWithFormat:@"%@/%@",QP_GetFixedQR,[QPUtils getMer_code]];
-    [webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-    [self.view addSubview:webview];
+    codeimage = [[UIImageView alloc]initWithFrame:CGRectMake(20, 20, SCREEN_WIDTH-40, SCREEN_HEIGHT-164)];
+    NSString *path = [NSString stringWithFormat:@"%@/%@",QP_GetFixedQR,[QPUtils getMer_code]];
+    codeimage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:path]]];
+//    UIWebView * webview = [[UIWebView alloc]initWithFrame:self.view.bounds];
+//    [webview setScalesPageToFit:YES];
+//    NSString * url = [NSString stringWithFormat:@"%@/%@",QP_GetFixedQR,[QPUtils getMer_code]];
+//    [webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    [self.view addSubview:codeimage];
     
     UIButton *preservationBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     preservationBtn.frame=CGRectMake(0, SCREEN_HEIGHT-114, SCREEN_WIDTH, 50);
@@ -46,6 +53,7 @@
     UIImage *image = [UIImage imageWithData:data]; // 取得图片
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
+
 - (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
 {
     NSString *msg = nil ;
@@ -60,6 +68,13 @@
                                           cancelButtonTitle:@"确定"
                                           otherButtonTitles:nil];
     [alert show];
+}
+
+- (void)printlick
+{
+    QPPrintInstructionsViewController *QPprintQRVC = [[QPPrintInstructionsViewController alloc]init];
+    [self.navigationController pushViewController:QPprintQRVC animated:YES];
+
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{

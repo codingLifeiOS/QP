@@ -97,7 +97,6 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
         cell.phoneLab.text = userModel.arena_phone;
         NSString *path = [NSString stringWithFormat:@"%@/%@",QP_GetLogo,[QPUtils getMer_code]];
         cell.headimage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:path]]];
-        
         return cell;
     } else {
         QPUserOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];

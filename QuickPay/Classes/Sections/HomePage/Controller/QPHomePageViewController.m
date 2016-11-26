@@ -265,7 +265,7 @@
 }
 
 -(void)shareButtonClick{
-    [shareManager setShareVC:self content:@"零成本开通微信 支付宝支付" image:[UIImage imageNamed:@"xiaoxi_logo1"] url:@"http://www.rrgpay.com/"];
+    [shareManager setShareVC:self content:@"零成本开通微信 支付宝支付" image:[UIImage imageNamed:@"xiaoxi_logo"] url:@"http://www.rrgpay.com/"];
     [shareManager show];
     
 }

@@ -63,9 +63,11 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
     datePicker = nil;
 }
 - (void)daterViewDidCancel:(QPDaterView *)daterView{
+    datePicker = nil;
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     datePicker.hidden = YES;
+    datePicker = nil;
 }
 
 #pragma mark - configureSubViews

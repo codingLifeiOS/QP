@@ -28,6 +28,7 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
     [super viewDidLoad];
     [self configureTableView];
     [self getNews];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 #pragma mark - configureSubViews

@@ -29,7 +29,7 @@
 			<string>weixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wxb8228ce2f800a6be</string>
+				<string>wxae55cbd39d6f6030</string>
 			</array>
 		</dict>
 		<dict>
@@ -126,8 +126,6 @@
 	<string>访问日历</string>
 	<key>NSCameraUsageDescription</key>
 	<string>访问相机</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>访问相册</string>
 	<key>NSContactsUsageDescription</key>
 	<string>访问通讯录</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -140,7 +138,9 @@
 	<string>访问麦克风</string>
 	<key>NSMotionUsageDescription</key>
 	<string>访问运动与健康</string>
-    <key>NSRemindersUsageDescription</key>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>访问相册</string>
+	<key>NSRemindersUsageDescription</key>
 	<string>访问提醒事件</string>
 	<key>NSSiriUsageDescription</key>
 	<string>访问Siri</string>
