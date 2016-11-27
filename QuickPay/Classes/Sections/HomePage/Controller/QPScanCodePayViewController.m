@@ -29,6 +29,7 @@
 }
 @property(nonatomic,copy)NSString *orderId;//订单号
 
+
 @end
 
 @implementation QPScanCodePayViewController
@@ -166,9 +167,9 @@
     codeImage.frame = CGRectMake((SCREEN_WIDTH-220)/2, 40, width, height);
     [backView addSubview:codeImage];
     
-    logoImage = [[UIImageView alloc]init];
-    logoImage.frame = CGRectMake((codeImage.width/2)-20, (codeImage.height/2)-20, 40, 40);
-    [codeImage addSubview:logoImage];
+//    logoImage = [[UIImageView alloc]init];
+//    logoImage.frame = CGRectMake((codeImage.width/2)-20, (codeImage.height/2)-20, 40, 40);
+//    [codeImage addSubview:logoImage];
     
     UILabel *amoutLable = [[UILabel alloc]init];
     amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
@@ -351,12 +352,17 @@
         if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
+                _readview.hidden = YES ;
+                [self setZBarReaderViewStop];
+                [[QPHUDManager sharedInstance]showProgressWithText:@"正在支付"];
+                
+                [NSThread sleepForTimeInterval:3.0];
                 self.orderId = [responseData objectForKey:@"order_sn"];
                 QPQrderQueryViewController *payResultVC = [[QPQrderQueryViewController alloc]init];
-//                NavigationController *nav = [[NavigationController alloc] initWithRootViewController:payResultVC ];
                 payResultVC.payModel = self.payModel;
                 payResultVC.payModel.orderId = self.orderId;
                 [self.navigationController pushViewController:payResultVC animated:YES];
+//                NavigationController *nav = [[NavigationController alloc] initWithRootViewController:payResultVC ];
 //                [self presentViewController:nav animated:YES completion:nil];
             });
         } else {
@@ -381,11 +387,11 @@
             dispatch_async(dispatch_get_main_queue(), ^{
             self.orderId = [responseData objectForKey:@"order_sn"];
             codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220];
-            if ([self.payModel.payType isEqualToString:@"1"]) {
-                    logoImage.image = [UIImage imageNamed:@"zhifubao"];
-                } else {
-                    logoImage.image = [UIImage imageNamed:@"weixin"];
-                }
+//            if ([self.payModel.payType isEqualToString:@"1"]) {
+//                    logoImage.image = [UIImage imageNamed:@"zhifubao"];
+//                } else {
+//                    logoImage.image = [UIImage imageNamed:@"weixin"];
+//                }
             });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:@"生成商户二维码失败"];
