@@ -211,4 +211,10 @@ static NSString * const kMacAddressUserDefaultsKey = @"58keychainMacAddress";
 
 }
 
+// 获取signature_key
++ (NSString *)getSignature_key{
+    
+    return  [[NSUserDefaults standardUserDefaults] objectForKey:@"signature_key"];
+    
+}
 @end

@@ -41,6 +41,7 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:responseData[@"mer_code"] forKey:@"mer_code"];
             [[NSUserDefaults standardUserDefaults] setObject:responseData[@"token"] forKey:@"token"];
+            [[NSUserDefaults standardUserDefaults] setObject:responseData[@"signature_key"] forKey:@"signature_key"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             // 登录成功 请求商户详情保存到本地
             [self getMerInfo];

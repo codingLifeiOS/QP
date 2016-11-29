@@ -34,4 +34,7 @@
 // 获取token
 + (NSString *)getToken;
 
+// 获取signature_key
++ (NSString *)getSignature_key;
+
 @end

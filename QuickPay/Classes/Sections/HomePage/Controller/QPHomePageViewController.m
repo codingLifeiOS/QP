@@ -170,11 +170,11 @@
     CGFloat width = (SCREEN_WIDTH -22*2 -17)/2;
     CGFloat height = 156/2 *SCREEN_WIDTH /375;
     UIButton * imagBtn = [[UIButton alloc]initWithFrame:CGRectMake(22, menuBgView.bottom+8, width, height)];
-    [imagBtn setImage:[UIImage imageNamed:@"pic_2"] forState:UIControlStateNormal];
+    [imagBtn setImage:[UIImage imageNamed:@"tupian_pic1"] forState:UIControlStateNormal];
     [self.view addSubview:imagBtn];
     
     UIButton * imagBtn2 = [[UIButton alloc]initWithFrame:CGRectMake(imagBtn.right+17, menuBgView.bottom+8, width, height)];
-    [imagBtn2 setImage:[UIImage imageNamed:@"pic_3"] forState:UIControlStateNormal];
+    [imagBtn2 setImage:[UIImage imageNamed:@"tupian_pic2"] forState:UIControlStateNormal];
     [self.view addSubview:imagBtn2];
     
 }

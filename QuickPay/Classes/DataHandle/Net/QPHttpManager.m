@@ -88,7 +88,7 @@
              Completion:(QPRequestSuccessHandler)handler
                 failure:(QPRequestFailureHandler)failhandler{
     
-    QPUserModel *userModel = [QPHttpManager getUserModel];
+//    QPUserModel *userModel = [QPHttpManager getUserModel];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:[NSString stringWithFormat:@"%0.f",[amount floatValue]*100] forKey:@"amount"];
     [params setValue:type forKey:@"pay_type"];
@@ -96,8 +96,8 @@
     [params setValue:@"QRCODE" forKey:@"payment_method"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
 //     本处对所有非空参数进行Md5 加密
-    if (userModel.signatureKey) {
-        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
+    if ([QPUtils getSignature_key]) {
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:[QPUtils getSignature_key]];
         NSString *sign = [NSString MD5:signbefore];
        [params setValue:sign forKey:@"signature"];
     }
@@ -118,7 +118,7 @@
                              Completion:(QPRequestSuccessHandler)handler
                                 failure:(QPRequestFailureHandler)failhandler{
     
-    QPUserModel *userModel = [QPHttpManager getUserModel];
+//    QPUserModel *userModel = [QPHttpManager getUserModel];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:[NSString stringWithFormat:@"%0.f",[amount floatValue]*100] forKey:@"amount"];
     [params setValue:type forKey:@"pay_type"];
@@ -127,8 +127,8 @@
     [params setValue:@"SK" forKey:@"payment_method"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
     //     本处对所有非空参数进行Md5 加密
-    if (userModel.signatureKey) {
-        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
+    if ([QPUtils getSignature_key]) {
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:[QPUtils getSignature_key]];
         NSString *sign = [NSString MD5:signbefore];
        [params setValue:sign forKey:@"signature"];
     }
@@ -148,17 +148,18 @@
                failure:(QPRequestFailureHandler)failhandler{
     
     
-    QPUserModel *userModel = [QPHttpManager getUserModel];
+//    QPUserModel *userModel = [QPHttpManager getUserModel];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:orderSn forKey:@"order_sn"];
     [params setValue:[QPUtils getMer_code] forKey:@"mer_code"];
     [params setValue:[QPUtils getToken] forKey:@"token"];
     //     本处对所有非空参数进行Md5 加密
-    if (userModel.signatureKey) {
-        NSString *signbefore = [NSString stringFromDic:params andBaseString:userModel.signatureKey];
+    if ([QPUtils getSignature_key]) {
+        NSString *signbefore = [NSString stringFromDic:params andBaseString:[QPUtils getSignature_key]];
         NSString *sign = [NSString MD5:signbefore];
         [params setValue:sign forKey:@"signature"];
+        
     }
     
     [QPHttpRequest POSTWithData:QP_Qrder_Query params:nil body:[[NSString convertToJSONData:params] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {

@@ -171,7 +171,7 @@
 - (void)changAmoutLabAndPayBtnStatus{
     if (self.amountStr.length) {
         self.amountLable.text = [NSString stringWithFormat:@"¥ %@",self.amountStr];
-        if ([self.amountStr floatValue] > 0.01) {
+        if ([self.amountStr floatValue] > 0.02) {
             [self changeAliPayBtnAndWeixinPayBtn];
         } else {
             [self setAliPayBtnAndWeixinPayBtn];

@@ -133,7 +133,7 @@
     [changecodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(paytapeLable.mas_bottom_mas).with.offset(15);
         make.width.equalTo(@(294/2));
-        make.height.equalTo(@(79/2));
+        make.height.equalTo(@(80/2));
         make.centerX.equalTo(_readview.mas_centerX_mas);
         
     }];
@@ -214,7 +214,7 @@
     [changeZBarBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(promptLable.mas_bottom_mas).with.offset(15);
         make.width.equalTo(@(294/2));
-        make.height.equalTo(@(79/2));
+        make.height.equalTo(@(80/2));
         make.centerX.equalTo(backView.mas_centerX_mas);
         
     }];
@@ -374,7 +374,7 @@
                 
              });
         } else {
-            [[QPHUDManager sharedInstance]showTextOnly:@"支付失败"];
+            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
         }
         
     } failure:^(NSError *error) {
@@ -402,7 +402,7 @@
 //                }
             });
         } else {
-            [[QPHUDManager sharedInstance]showTextOnly:@"生成商户二维码失败"];
+            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
         }
     } failure:^(NSError *error) {
         [[QPHUDManager sharedInstance]hiddenHUD];

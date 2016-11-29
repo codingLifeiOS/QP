@@ -256,6 +256,10 @@
 		1C84437B1DE5303B005B0B67 /* QPCheckWaterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C84437A1DE5303B005B0B67 /* QPCheckWaterViewController.m */; };
 		1C84437E1DE5316B005B0B67 /* QPCheckWaterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C84437D1DE5316B005B0B67 /* QPCheckWaterTableViewCell.m */; };
 		1C8443811DE5331E005B0B67 /* QPCheckWaterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8443801DE5331E005B0B67 /* QPCheckWaterModel.m */; };
+		1C85BAA11DED2AE6008C0CE2 /* tupian_pic1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C85BA9D1DED2AE6008C0CE2 /* tupian_pic1@3x.png */; };
+		1C85BAA21DED2AE6008C0CE2 /* tupian_pic1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C85BA9E1DED2AE6008C0CE2 /* tupian_pic1@2x.png */; };
+		1C85BAA31DED2AE6008C0CE2 /* tupian_pic2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C85BA9F1DED2AE6008C0CE2 /* tupian_pic2@2x.png */; };
+		1C85BAA41DED2AE6008C0CE2 /* tupian_pic2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C85BAA01DED2AE6008C0CE2 /* tupian_pic2@3x.png */; };
 		1C8B81AC1DC0E910007F77E0 /* BMAdScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8B81AB1DC0E910007F77E0 /* BMAdScrollView.m */; };
 		1C8B81CB1DC0F445007F77E0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8B81CA1DC0F445007F77E0 /* AVFoundation.framework */; };
 		1C8B81CD1DC0F455007F77E0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8B81CC1DC0F455007F77E0 /* CoreMedia.framework */; };
@@ -760,6 +764,10 @@
 		1C84437D1DE5316B005B0B67 /* QPCheckWaterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPCheckWaterTableViewCell.m; sourceTree = "<group>"; };
 		1C84437F1DE5331E005B0B67 /* QPCheckWaterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPCheckWaterModel.h; sourceTree = "<group>"; };
 		1C8443801DE5331E005B0B67 /* QPCheckWaterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPCheckWaterModel.m; sourceTree = "<group>"; };
+		1C85BA9D1DED2AE6008C0CE2 /* tupian_pic1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tupian_pic1@3x.png"; sourceTree = "<group>"; };
+		1C85BA9E1DED2AE6008C0CE2 /* tupian_pic1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tupian_pic1@2x.png"; sourceTree = "<group>"; };
+		1C85BA9F1DED2AE6008C0CE2 /* tupian_pic2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tupian_pic2@2x.png"; sourceTree = "<group>"; };
+		1C85BAA01DED2AE6008C0CE2 /* tupian_pic2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tupian_pic2@3x.png"; sourceTree = "<group>"; };
 		1C8B81AA1DC0E910007F77E0 /* BMAdScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMAdScrollView.h; sourceTree = "<group>"; };
 		1C8B81AB1DC0E910007F77E0 /* BMAdScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BMAdScrollView.m; sourceTree = "<group>"; };
 		1C8B81AD1DC0F2BD007F77E0 /* QPQRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPQRView.h; sourceTree = "<group>"; };
@@ -1921,6 +1929,10 @@
 		1CF301DC1DBF5E1B00935113 /* homepage */ = {
 			isa = PBXGroup;
 			children = (
+				1C85BA9E1DED2AE6008C0CE2 /* tupian_pic1@2x.png */,
+				1C85BA9D1DED2AE6008C0CE2 /* tupian_pic1@3x.png */,
+				1C85BA9F1DED2AE6008C0CE2 /* tupian_pic2@2x.png */,
+				1C85BAA01DED2AE6008C0CE2 /* tupian_pic2@3x.png */,
 				1C25178C1DE6DF6300F16BAE /* kehusaoma_shuoming@2x.png */,
 				1C25178D1DE6DF6300F16BAE /* kehusaoma_shuoming@3x.png */,
 				1C25178E1DE6DF6300F16BAE /* kehusaoma-2@2x.png */,
@@ -2261,11 +2273,13 @@
 				1C91C3731DCC3C5200DC5BB9 /* pic_1@3x.png in Resources */,
 				1C2517971DE6DF6300F16BAE /* kehusaoma-2@3x.png in Resources */,
 				1C2517871DE6CFC100F16BAE /* btn_5@3x.png in Resources */,
+				1C85BAA31DED2AE6008C0CE2 /* tupian_pic2@2x.png in Resources */,
 				1C1F31C61DC8379F00BC4A27 /* saoma2_bj@3x.png in Resources */,
 				1C91C35F1DCC3C5200DC5BB9 /* biaoqianlanbj@3x.png in Resources */,
 				1CE605BB1DD58CCD005A8648 /* geren_Right-Arrow@2x.png in Resources */,
 				1C1F31AB1DC8379600BC4A27 /* saoma_fanhui@3x.png in Resources */,
 				1C91C3751DCC3C5200DC5BB9 /* pic_2@3x.png in Resources */,
+				1C85BAA21DED2AE6008C0CE2 /* tupian_pic1@2x.png in Resources */,
 				1C1F31AE1DC8379600BC4A27 /* saoma_kuang@2x.png in Resources */,
 				197AFBC61DC1996E002DD1BD /* touxiang_bj.png in Resources */,
 				1C5478C41DE7D84200CD1727 /* shangwu_pic3@3x.png in Resources */,
@@ -2306,6 +2320,7 @@
 				1C2517851DE6CFC100F16BAE /* btn_4@3x.png in Resources */,
 				1C8443711DE52477005B0B67 /* login_btn@2x.png in Resources */,
 				1C2517991DE6DF6300F16BAE /* zhinan_saoke@3x.png in Resources */,
+				1C85BAA11DED2AE6008C0CE2 /* tupian_pic1@3x.png in Resources */,
 				1C91C3401DCC3B3B00DC5BB9 /* shouye_nor@2x.png in Resources */,
 				1C1F31D11DC8379F00BC4A27 /* saoma2_sao@2x.png in Resources */,
 				1C25176A1DE6CCD100F16BAE /* nav_2@2x.png in Resources */,
@@ -2338,6 +2353,7 @@
 				1C5478C61DE7D84200CD1727 /* shangwu_pic5@3x.png in Resources */,
 				1C1F318D1DC8378B00BC4A27 /* shoukuan_shanchujian@2x.png in Resources */,
 				1C84436F1DE52477005B0B67 /* login_bj@2x.png in Resources */,
+				1C85BAA41DED2AE6008C0CE2 /* tupian_pic2@3x.png in Resources */,
 				1C78340B1DBF17DA0053FA87 /* barbuttonicon_set@2x.png in Resources */,
 				1C91C33F1DCC3B3B00DC5BB9 /* mail_pre@3x.png in Resources */,
 				1C2517561DE6984100F16BAE /* jiesuan_qq@3x.png in Resources */,
