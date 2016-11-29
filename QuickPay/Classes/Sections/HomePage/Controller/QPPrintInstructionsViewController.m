@@ -33,14 +33,9 @@
     
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.image = [UIImage imageNamed:@"dayinshuom"];
-    //     CGFloat imgW = imageView.image.size.width; // 图片的宽度
-    //    CGFloat imgH = imageView.image.size.height; // 图片的高度
     imageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [scrollView addSubview:imageView];
     scrollView.contentSize = imageView.size;
-    //     // 隐藏水平滚动条
-    //    scrollView.showsHorizontalScrollIndicator = NO;
-    //    scrollView.showsVerticalScrollIndicator = NO;
     // 去掉弹簧效果
     scrollView.bounces = NO;
     scrollView.contentInset = UIEdgeInsetsMake(0, 0, 60, 0);

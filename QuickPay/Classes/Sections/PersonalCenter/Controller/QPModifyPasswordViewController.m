@@ -39,7 +39,7 @@
     self.oldpasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.oldpasswordTextField.returnKeyType = UIReturnKeyDone;
     self.oldpasswordTextField.backgroundColor = [UIColor whiteColor];
-    self.oldpasswordTextField.layer.borderWidth = 2.0f;
+    self.oldpasswordTextField.layer.borderWidth = 1.0f;
     self.oldpasswordTextField.layer.cornerRadius = 8.0f;
     self.oldpasswordTextField.layer.borderColor=[[UIColor orangeColor]CGColor];
     self.oldpasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -57,7 +57,7 @@
     self.newpasswordTextField.returnKeyType = UIReturnKeyDone;
     self.newpasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.newpasswordTextField.backgroundColor = [UIColor whiteColor];
-    self.newpasswordTextField.layer.borderWidth=2.0f;
+    self.newpasswordTextField.layer.borderWidth = 1.0f;
     self.newpasswordTextField.layer.cornerRadius = 8.0f;
     self.newpasswordTextField.layer.borderColor=[[UIColor orangeColor]CGColor];
     self.newpasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -76,7 +76,7 @@
     self.confirmpasswordTextField.returnKeyType = UIReturnKeyDone;
     self.confirmpasswordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.confirmpasswordTextField.backgroundColor = [UIColor whiteColor];
-    self.confirmpasswordTextField.layer.borderWidth=2.0f;
+    self.confirmpasswordTextField.layer.borderWidth = 1.0f;
     self.confirmpasswordTextField.layer.cornerRadius = 8.0f;
     self.confirmpasswordTextField.layer.borderColor=[[UIColor orangeColor]CGColor];
     self.confirmpasswordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -123,7 +123,7 @@
             [[QPHUDManager sharedInstance]hiddenHUD];
             STRONGSELF();
              [[QPHUDManager sharedInstance]showTextOnly:responseData[@"resp_msg"]];
-            if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+            if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                 [strongSelf.navigationController popViewControllerAnimated:YES];
                 });

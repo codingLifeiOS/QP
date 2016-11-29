@@ -477,6 +477,7 @@
 		1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tell@3x.png"; sourceTree = "<group>"; };
 		1C28EC1C1DC0AE2400EB1D57 /* QPScanCodePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPScanCodePayViewController.h; sourceTree = "<group>"; };
 		1C28EC1D1DC0AE2400EB1D57 /* QPScanCodePayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPScanCodePayViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
+		1C2AF64D1DED036E00BD5301 /* QPConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QPConfig.h; sourceTree = "<group>"; };
 		1C333D181DE1DE5100BF5CF5 /* QPNewsDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPNewsDetailsViewController.h; sourceTree = "<group>"; };
 		1C333D191DE1DE5100BF5CF5 /* QPNewsDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPNewsDetailsViewController.m; sourceTree = "<group>"; };
 		1C3E88301DC1D3DC002EE960 /* QPAccountRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPAccountRecordViewController.h; sourceTree = "<group>"; };
@@ -1088,6 +1089,7 @@
 			isa = PBXGroup;
 			children = (
 				1C1FAA691DCC5F4000B54DBB /* Consts.h */,
+				1C2AF64D1DED036E00BD5301 /* QPConfig.h */,
 				1C1FAA6A1DCC5F4000B54DBB /* GlobalHeader.h */,
 				1C1FAA6B1DCC5F4000B54DBB /* InterfaceConfig.h */,
 			);
@@ -1455,8 +1457,8 @@
 				1C28EC1D1DC0AE2400EB1D57 /* QPScanCodePayViewController.m */,
 				1C3E88301DC1D3DC002EE960 /* QPAccountRecordViewController.h */,
 				1CCB8F411DC33A800036584E /* QPAccountRecordDetailsViewController.m */,
-				1C3E88311DC1D3DC002EE960 /* QPAccountRecordViewController.m */,
 				1CCB8F401DC33A800036584E /* QPAccountRecordDetailsViewController.h */,
+				1C3E88311DC1D3DC002EE960 /* QPAccountRecordViewController.m */,
 				1C8443791DE5303B005B0B67 /* QPCheckWaterViewController.h */,
 				1C84437A1DE5303B005B0B67 /* QPCheckWaterViewController.m */,
 				1CCB8F3A1DC32B2E0036584E /* QPTransactionDetailsViewController.h */,

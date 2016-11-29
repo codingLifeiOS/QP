@@ -12,7 +12,6 @@
 {
     UIImageView *codeimage;
 }
-//@property (nonatomic,strong) UIImageView *codeimage;
 @end
 
 @implementation QPFixedQRViewController
@@ -32,10 +31,6 @@
     codeimage = [[UIImageView alloc]initWithFrame:CGRectMake(20, 20, SCREEN_WIDTH-40, SCREEN_HEIGHT-164)];
     NSString *path = [NSString stringWithFormat:@"%@/%@",QP_GetFixedQR,[QPUtils getMer_code]];
     codeimage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:path]]];
-//    UIWebView * webview = [[UIWebView alloc]initWithFrame:self.view.bounds];
-//    [webview setScalesPageToFit:YES];
-//    NSString * url = [NSString stringWithFormat:@"%@/%@",QP_GetFixedQR,[QPUtils getMer_code]];
-//    [webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     [self.view addSubview:codeimage];
     
     UIButton *preservationBtn =[UIButton buttonWithType:UIButtonTypeCustom];
@@ -59,7 +54,7 @@
     NSString *msg = nil ;
     if(error != NULL){
         msg = @"保存图片失败" ;
-    }else{
+    } else {
         msg = @"保存图片成功" ;
     }
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示"

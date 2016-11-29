@@ -118,42 +118,47 @@
     [_readview addSubview:paytapeLable];
     
     changecodeBtn = [[UIButton alloc]init];
-    if (SCREEN_WIDTH == 414) {
-        changecodeBtn.frame = CGRectMake(96.5, paytapeLable.bottom+15, SCREEN_WIDTH-193, 60);
-    }
-    if (SCREEN_WIDTH == 375) {
-    changecodeBtn.frame = CGRectMake(114, paytapeLable.bottom+15, SCREEN_WIDTH-228, 40);
-    }
-    if (SCREEN_WIDTH == 320) {
-    changecodeBtn.frame = CGRectMake(86.5, paytapeLable.bottom+15, SCREEN_WIDTH-173, 40);
-    }
+//    if (SCREEN_WIDTH == 414) {
+//        changecodeBtn.frame = CGRectMake(96.5, paytapeLable.bottom+15, SCREEN_WIDTH-193, 60);
+//    }
+//    if (SCREEN_WIDTH == 375) {
+//    changecodeBtn.frame = CGRectMake(114, paytapeLable.bottom+15, SCREEN_WIDTH-228, 40);
+//    }
+//    if (SCREEN_WIDTH == 320) {
+//    changecodeBtn.frame = CGRectMake(86.5, paytapeLable.bottom+15, SCREEN_WIDTH-173, 40);
+//    }
     [changecodeBtn setBackgroundImage:[UIImage imageNamed:@"saoma_qiehuan_nor"] forState:UIControlStateNormal];
-//    [changecodeBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
-//    changecodeBtn.backgroundColor = [UIColor clearColor];
-//    changecodeBtn.layer.borderWidth = 2.0f;
-//    changecodeBtn.layer.cornerRadius = 8.0f;
-//    changecodeBtn.layer.borderColor = [[UIColor whiteColor]CGColor];
     [_readview addSubview:changecodeBtn];
     [changecodeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
-    
+    [changecodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(paytapeLable.mas_bottom_mas).with.offset(15);
+        make.width.equalTo(@(294/2));
+        make.height.equalTo(@(79/2));
+        make.centerX.equalTo(_readview.mas_centerX_mas);
+        
+    }];
     
     instructionsImageBtn = [[UIButton alloc]init];
-    if (SCREEN_WIDTH == 414) {
-        instructionsImageBtn.frame = CGRectMake(105, changecodeBtn.bottom+15, SCREEN_WIDTH-210, 30);
-    }
-    if (SCREEN_WIDTH == 375) {
-        instructionsImageBtn.frame = CGRectMake(122.5, changecodeBtn.bottom+15, SCREEN_WIDTH-245, 20);
-    }
-    if (SCREEN_WIDTH == 320){
-        instructionsImageBtn.frame = CGRectMake(95, changecodeBtn.bottom+15, SCREEN_WIDTH-190, 20);
-    }
-//    instructionsImageBtn.frame = CGRectMake(122.5, changecodeBtn.bottom+10, SCREEN_WIDTH-245, 20);
-//    [instructionsImageBtn setTitle:@"? 查看使用指南" forState:UIControlStateNormal];
-//    instructionsImageBtn.backgroundColor = [UIColor clearColor];
+//    if (SCREEN_WIDTH == 414) {
+//        instructionsImageBtn.frame = CGRectMake(105, changecodeBtn.bottom+15, SCREEN_WIDTH-210, 30);
+//    }
+//    if (SCREEN_WIDTH == 375) {
+//        instructionsImageBtn.frame = CGRectMake(122.5, changecodeBtn.bottom+15, SCREEN_WIDTH-245, 20);
+//    }
+//    if (SCREEN_WIDTH == 320){
+//        instructionsImageBtn.frame = CGRectMake(95, changecodeBtn.bottom+15, SCREEN_WIDTH-190, 20);
+//    }
+    
     [instructionsImageBtn setBackgroundImage:[UIImage imageNamed:@"saoma_Help"] forState:UIControlStateNormal];
     [_readview addSubview:instructionsImageBtn];
     [instructionsImageBtn addTarget:self action:@selector(showInstructionImage) forControlEvents:UIControlEventTouchUpInside];
-    
+    [instructionsImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(changecodeBtn.mas_bottom_mas).with.offset(15);
+        make.width.equalTo(@(260/2));
+        make.height.equalTo(@(40/2));
+        make.centerX.equalTo(_readview.mas_centerX_mas);
+        
+    }];
 }
 
 - (void)configureCodeView{
@@ -193,42 +198,51 @@
     [backView addSubview:promptLable];
     
     changeZBarBtn = [[UIButton alloc]init];
-    if (SCREEN_WIDTH == 414) {
-        changeZBarBtn.frame = CGRectMake(96.5, promptLable.bottom+15, SCREEN_WIDTH-193, 60);
-    }
-    if (SCREEN_WIDTH == 375) {
-        changeZBarBtn.frame = CGRectMake(114, promptLable.bottom+15, SCREEN_WIDTH-228, 40);
-    }
-    if (SCREEN_WIDTH == 320){
-        changeZBarBtn.frame = CGRectMake(86.5, promptLable.bottom+15, SCREEN_WIDTH-173, 40);
-    }
-//    changeZBarBtn.frame = CGRectMake(40, promptLable.bottom+15, SCREEN_WIDTH-80, 40);
+//    if (SCREEN_WIDTH == 414) {
+//        changeZBarBtn.frame = CGRectMake(96.5, promptLable.bottom+15, SCREEN_WIDTH-193, 60);
+//    }
+//    if (SCREEN_WIDTH == 375) {
+//        changeZBarBtn.frame = CGRectMake(114, promptLable.bottom+15, SCREEN_WIDTH-228, 40);
+//    }
+//    if (SCREEN_WIDTH == 320){
+//        changeZBarBtn.frame = CGRectMake(86.5, promptLable.bottom+15, SCREEN_WIDTH-173, 40);
+//    }
+//
     [changeZBarBtn setBackgroundImage:[UIImage imageNamed:@"saoma_qiehuan_pre"] forState:UIControlStateNormal];
-//    [changeZBarBtn setTitle:@"切换支付方式" forState:UIControlStateNormal];
-//    changeZBarBtn.backgroundColor = [UIColor orangeColor];
-//    changeZBarBtn.layer.borderWidth = 2.0f;
-//    changeZBarBtn.layer.cornerRadius = 8.0f;
-//    changeZBarBtn.layer.borderColor = [[UIColor orangeColor]CGColor];
-    [backView addSubview:changeZBarBtn];
     [changeZBarBtn addTarget:self action:@selector(changeToScanPay) forControlEvents:UIControlEventTouchUpInside];
-    
+    [backView addSubview:changeZBarBtn];
+    [changeZBarBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(promptLable.mas_bottom_mas).with.offset(15);
+        make.width.equalTo(@(294/2));
+        make.height.equalTo(@(79/2));
+        make.centerX.equalTo(backView.mas_centerX_mas);
+        
+    }];
     
     codeinstructionsImageBtn = [[UIButton alloc]init];
-    if (SCREEN_WIDTH == 414) {
-        codeinstructionsImageBtn.frame = CGRectMake(105, changeZBarBtn.bottom+15, SCREEN_WIDTH-210, 30);
-    }
-    if (SCREEN_WIDTH == 375) {
-        codeinstructionsImageBtn.frame = CGRectMake(122.5, changeZBarBtn.bottom+15, SCREEN_WIDTH-245, 20);
-    }
-    if (SCREEN_WIDTH == 320) {
-        codeinstructionsImageBtn.frame = CGRectMake(95, changeZBarBtn.bottom+15, SCREEN_WIDTH-190, 20);
-    }
+//    if (SCREEN_WIDTH == 414) {
+//        codeinstructionsImageBtn.frame = CGRectMake(105, changeZBarBtn.bottom+15, SCREEN_WIDTH-210, 30);
+//    }
+//    if (SCREEN_WIDTH == 375) {
+//        codeinstructionsImageBtn.frame = CGRectMake(122.5, changeZBarBtn.bottom+15, SCREEN_WIDTH-245, 20);
+//    }
+//    if (SCREEN_WIDTH == 320) {
+//        codeinstructionsImageBtn.frame = CGRectMake(95, changeZBarBtn.bottom+15, SCREEN_WIDTH-190, 20);
+//    }
     [codeinstructionsImageBtn setBackgroundImage:[UIImage imageNamed:@"saoma_Help1"] forState:UIControlStateNormal];
-//    [codeinstructionsImageBtn setTitle:@"? 查看使用指南" forState:UIControlStateNormal];
-//    [codeinstructionsImageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [backView addSubview:codeinstructionsImageBtn];
     [codeinstructionsImageBtn addTarget:self action:@selector(showInstructionImage) forControlEvents:UIControlEventTouchUpInside];
+    [codeinstructionsImageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(changeZBarBtn.mas_bottom_mas).with.offset(15);
+        make.width.equalTo(@(260/2));
+        make.height.equalTo(@(40/2));
+        make.centerX.equalTo(backView.mas_centerX_mas);
+        
+    }];
+    
     backView.hidden = YES;
+ 
+
     
 }
 
@@ -349,22 +363,16 @@
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在支付"];
     [QPHttpManager creditCardPaymentByScanString:self.payModel.amount PayTye:self.payModel.payType Authno:authno Completion:^(id responseData) {
         [[QPHUDManager sharedInstance]hiddenHUD];
-        if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 _readview.hidden = YES ;
                 [self setZBarReaderViewStop];
-                [[QPHUDManager sharedInstance]showProgressWithText:@"正在支付"];
                 
-                [NSThread sleepForTimeInterval:3.0];
                 self.orderId = [responseData objectForKey:@"order_sn"];
-                QPQrderQueryViewController *payResultVC = [[QPQrderQueryViewController alloc]init];
-                payResultVC.payModel = self.payModel;
-                payResultVC.payModel.orderId = self.orderId;
-                [self.navigationController pushViewController:payResultVC animated:YES];
-//                NavigationController *nav = [[NavigationController alloc] initWithRootViewController:payResultVC ];
-//                [self presentViewController:nav animated:YES completion:nil];
-            });
+                [self performSelector:@selector(showPayResultVC) withObject:nil afterDelay:3];
+                
+             });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:@"支付失败"];
         }
@@ -383,7 +391,7 @@
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在努力生成二维码"];
     [QPHttpManager getQRcodeString:self.payModel.amount PayTye:self.payModel.payType Completion:^(id responseData) {
         [[QPHUDManager sharedInstance]hiddenHUD];
-        if ([[responseData objectForKey:@"resp_code"]isEqualToString:@"0000"]) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             dispatch_async(dispatch_get_main_queue(), ^{
             self.orderId = [responseData objectForKey:@"order_sn"];
             codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220];
@@ -402,5 +410,15 @@
     }];
 }
 
+- (void)showPayResultVC{
 
+    QPQrderQueryViewController *payResultVC = [[QPQrderQueryViewController alloc]init];
+    payResultVC.payModel = self.payModel;
+    payResultVC.payModel.orderId = self.orderId;
+    [self.navigationController pushViewController:payResultVC animated:YES];
+//   NavigationController *nav = [[NavigationController alloc] initWithRootViewController:payResultVC ];
+//   [self presentViewController:nav animated:YES completion:nil];
+
+
+}
 @end

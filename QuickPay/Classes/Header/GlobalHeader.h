@@ -46,6 +46,7 @@ static NSString * const kBaiduMapAppKey = @"I41PhbarLGqdLf9VIYIrGISDG77L6xYf";
 #import "Consts.h"
 #import "QPStringDefines.h"
 #import "QPImageDefines.h"
+#import "QPConfig.h"
 
 // Other
 #import "QPUtils.h"

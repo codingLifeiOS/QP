@@ -184,7 +184,7 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
     [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
     [QPHttpManager getOrderRecordsBegin:beginTime End:endTime Completion:^(id responseData) {
         [[QPHUDManager sharedInstance]hiddenHUD];
-        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
             for (NSDictionary *dic in [responseData objectForKey:@"list"]) {
                 QPCheckWaterModel *model = [[QPCheckWaterModel alloc]initWithDictionary:dic];

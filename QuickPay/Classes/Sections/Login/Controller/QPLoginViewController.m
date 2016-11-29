@@ -36,7 +36,7 @@
     [[QPHUDManager sharedInstance] showProgressWithText:@"登录中"];
     [QPHttpManager loginWithUsename:usename Password:password Completion:^(id responseData) {
         [[QPHUDManager sharedInstance] hiddenHUD];
-        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             [[QPHUDManager sharedInstance] showTextOnly:responseData[@"resp_msg"]];
             
             [[NSUserDefaults standardUserDefaults] setObject:responseData[@"mer_code"] forKey:@"mer_code"];

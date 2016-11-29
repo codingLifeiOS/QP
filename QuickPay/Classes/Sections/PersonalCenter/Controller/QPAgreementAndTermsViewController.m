@@ -81,7 +81,7 @@ static NSString *const cellIdentifier = @"QPAgreementTermsTableViewCell";
 - (void)getAgreement{
      WEAKSELF();
     [QPHttpManager getAgreementCompletion:^(id responseData) {
-        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
             strongSelf.agrtermslabArry = [[NSArray alloc]init];
             strongSelf.agrtermslabArry = [responseData objectForKey:@"list"];

@@ -94,10 +94,7 @@
 }
 -(void)configureScrollViewWithArray:(NSMutableArray*)array
 {
-    
-//    NSMutableArray *imageNameArr = [NSMutableArray arrayWithArray:@[@"pic_1.png",@"pic_2.png",@"pic_3.png"]];
-//    NSMutableArray *titleNameArr = [NSMutableArray arrayWithArray:@[@"",@"",@""]];
-    
+        
     NSMutableArray * imageNameArr = [[NSMutableArray alloc]init];
     NSMutableArray * titleNameArr = [[NSMutableArray alloc]init];
     for (NSDictionary *dic in array) {
@@ -310,7 +307,7 @@
     [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
     [QPHttpManager getAdImagesCompletion:^(id responseData) {
         [[QPHUDManager sharedInstance]hiddenHUD];
-        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
             dispatch_async(dispatch_get_main_queue(), ^{
 

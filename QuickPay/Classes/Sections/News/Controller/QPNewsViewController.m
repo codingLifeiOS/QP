@@ -96,7 +96,7 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
 - (void)getNews{
     WEAKSELF();
     [QPHttpManager getNewsCompletion:^(id responseData) {
-        if ([[responseData objectForKey:@"resp_code"] isEqualToString:@"0000"]) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
             strongSelf.NewsNamelabArry = [[NSArray alloc]init];
             strongSelf.InfolabArry = [[NSArray alloc]init];
