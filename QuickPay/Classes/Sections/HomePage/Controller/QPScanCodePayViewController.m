@@ -26,6 +26,8 @@
     UIButton * instructionsImageBtn;
     UIButton * changeZBarBtn;
     UIButton * codeinstructionsImageBtn;
+    
+    NSInteger time;
 }
 @property(nonatomic,copy)NSString *orderId;//订单号
 
@@ -241,9 +243,6 @@
     }];
     
     backView.hidden = YES;
- 
-
-    
 }
 
 #pragma mark - ZBarReaderViewDelegate
@@ -369,8 +368,9 @@
                 _readview.hidden = YES ;
                 [self setZBarReaderViewStop];
                 
+                // 生成订单号 就循环请求订单状态  成功跳支付结果回调界面  用户看到的就是成功界面
                 self.orderId = [responseData objectForKey:@"order_sn"];
-                [self performSelector:@selector(showPayResultVC) withObject:nil afterDelay:3];
+                [self orderqueryWithOrderId:self.orderId];
                 
              });
         } else {
@@ -395,6 +395,10 @@
             dispatch_async(dispatch_get_main_queue(), ^{
             self.orderId = [responseData objectForKey:@"order_sn"];
             codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220];
+            
+            // 生成订单号 就循环请求订单状态  成功跳支付结果回调界面  用户看到的就是成功界面
+            [self orderqueryWithOrderId:self.orderId];
+                
 //            if ([self.payModel.payType isEqualToString:@"1"]) {
 //                    logoImage.image = [UIImage imageNamed:@"zhifubao"];
 //                } else {
@@ -418,7 +422,36 @@
     [self.navigationController pushViewController:payResultVC animated:YES];
 //   NavigationController *nav = [[NavigationController alloc] initWithRootViewController:payResultVC ];
 //   [self presentViewController:nav animated:YES completion:nil];
+}
 
+// 生成订单号 就循环请求订单状态  成功跳支付结果回调界面  用户看到的就是成功界面
+- (void)orderqueryWithOrderId:(NSString*)orderId
+{
+    [QPHttpManager orderquery:orderId Completion:^(id responseData) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
+            [[QPHUDManager sharedInstance]hiddenHUD];
+            [self showPayResultVC];
+        } else {
+            [self performSelector:@selector(circulateRequest) withObject:nil afterDelay:1];
+        }
+    }failure:^(NSError *error) {
+           [self performSelector:@selector(circulateRequest) withObject:nil afterDelay:1];
+           [[QPHUDManager sharedInstance]hiddenHUD];
+//        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        
+    }];
+}
 
+- (void)circulateRequest{
+    // 超过一分钟
+    time++;
+    if (time > 55) {
+        if (!backView.hidden) {
+            [[QPHUDManager sharedInstance]showProgressWithText:@"二维码已失效"];
+            [self getQRCodetoPay];
+        }
+    } else {
+        [self orderqueryWithOrderId:self.orderId];
+    }
 }
 @end

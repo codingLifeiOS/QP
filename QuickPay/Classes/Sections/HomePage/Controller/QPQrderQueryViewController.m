@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureView];
-    [self orderqueryWithOrderId:self.payModel.orderId];
+//    [self orderqueryWithOrderId:self.payModel.orderId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -25,7 +25,6 @@
     [super viewWillAppear:animated];
     [self createBackBarItem];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [[QPHUDManager sharedInstance]showProgressWithText:@"正在支付中"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -97,7 +96,10 @@
     self.payTypeLab.layer.masksToBounds = YES;
     self.payTypeLab.textAlignment = NSTextAlignmentCenter;
     self.payTypeLab.font = [UIFont systemFontOfSize:20];
+    self.payTypeLab.text = @"支付成功";
+    self.payTypeLab.backgroundColor = [UIColor greenColor];
     [self.view addSubview:self.payTypeLab];
+    
     
     UIButton *footBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     footBtn.frame=CGRectMake(12, SCREEN_HEIGHT-60, SCREEN_WIDTH-24, 50);
@@ -118,24 +120,27 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"resetDigitalKeyboard" object:nil];
 }
 
-
-- (void)orderqueryWithOrderId:(NSString*)orderId
-{
-    [QPHttpManager orderquery:orderId Completion:^(id responseData) {
-        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
-            [[QPHUDManager sharedInstance]hiddenHUD];
-            self.payTypeLab.text = @"支付成功";
-            self.payTypeLab.backgroundColor = [UIColor greenColor];
-        } else {
-            self.payTypeLab.text = @"支付结果回调中";
-            self.payTypeLab.backgroundColor = [UIColor redColor];
-            [self orderqueryWithOrderId:self.payModel.orderId];
-        }
-    }failure:^(NSError *error) {
-        [[QPHUDManager sharedInstance]hiddenHUD];
-        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
-        
-        
-    }];
-}
+//
+//- (void)orderqueryWithOrderId:(NSString*)orderId
+//{
+//    [QPHttpManager orderquery:orderId Completion:^(id responseData) {
+//        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
+//            [[QPHUDManager sharedInstance]hiddenHUD];
+//            self.payTypeLab.text = @"支付成功";
+//            self.payTypeLab.backgroundColor = [UIColor greenColor];
+//        } else {
+//            self.payTypeLab.text = @"支付结果回调中";
+//            self.payTypeLab.backgroundColor = [UIColor redColor];
+//            [self performSelector:@selector(circulateRequest) withObject:nil afterDelay:1];
+//        }
+//    }failure:^(NSError *error) {
+//        [[QPHUDManager sharedInstance]hiddenHUD];
+//        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+//        
+//    }];
+//}
+//
+//- (void)circulateRequest{
+//     [self orderqueryWithOrderId:self.payModel.orderId];
+//}
 @end
