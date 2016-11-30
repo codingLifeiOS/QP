@@ -103,13 +103,8 @@
     }
     adView.tag = 10010;
     adView.delegate = self;
-   if (SCREEN_WIDTH > 375){
-       adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:200 offsetY:0];
-       adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 200);
-    } else {
-       adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:132 offsetY:0];
-       adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 132);
-           }
+    adView = [[BMAdScrollView alloc] initWithNameArr:imageNameArr titleArr:titleNameArr height:132 offsetY:0];
+    adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 132);
     
     [self.view addSubview:adView];
 
@@ -117,11 +112,7 @@
 
 - (void)configureMenuView{
     
-    if (SCREEN_WIDTH > 375){
-        menuBgView = [[UIView alloc] initWithFrame:CGRectMake(0,72+200+10, SCREEN_WIDTH, 432/2)];
-    } else {
-        menuBgView = [[UIView alloc] initWithFrame:CGRectMake(0,72+132+10, SCREEN_WIDTH, 432/2)];
-    }
+    menuBgView = [[UIView alloc] initWithFrame:CGRectMake(0,72+132+10, SCREEN_WIDTH, 432/2)];
     menuBgView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:menuBgView];
     

@@ -27,7 +27,7 @@
     UIButton * changeZBarBtn;
     UIButton * codeinstructionsImageBtn;
     
-    NSInteger time;
+//    NSInteger time;
 }
 @property(nonatomic,copy)NSString *orderId;//订单号
 
@@ -367,7 +367,8 @@
                 
                 _readview.hidden = YES ;
                 [self setZBarReaderViewStop];
-                
+                [[QPHUDManager sharedInstance]showProgressWithText:@"支付结果回调中"];
+
                 // 生成订单号 就循环请求订单状态  成功跳支付结果回调界面  用户看到的就是成功界面
                 self.orderId = [responseData objectForKey:@"order_sn"];
                 [self orderqueryWithOrderId:self.orderId];
@@ -375,7 +376,7 @@
              });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
-        }
+         }
         
     } failure:^(NSError *error) {
         
@@ -444,14 +445,19 @@
 
 - (void)circulateRequest{
     // 超过一分钟
-    time++;
-    if (time > 55) {
-        if (!backView.hidden) {
-            [[QPHUDManager sharedInstance]showProgressWithText:@"二维码已失效"];
-            [self getQRCodetoPay];
-        }
-    } else {
+//    time++;
+//    if (time > 300) {
+////        if (!backView.hidden) {
+//        [[QPHUDManager sharedInstance]showProgressWithText:@"该二维码已失效"];
+//        backView.hidden = YES;
+//        [[QPHUDManager sharedInstance]hiddenHUD];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"resetDigitalKeyboard" object:nil];
+//
+////            [self getQRCodetoPay];
+////        }
+//    } else {
         [self orderqueryWithOrderId:self.orderId];
-    }
+//    }
 }
 @end
