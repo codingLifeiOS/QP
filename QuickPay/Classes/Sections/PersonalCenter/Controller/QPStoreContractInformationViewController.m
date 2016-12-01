@@ -18,10 +18,8 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 
 @interface QPStoreContractInformationViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *homeTableView;
-@property(nonatomic,strong)NSArray *typelabArry;
-@property(nonatomic,strong)NSArray *ratelabArry;
-@property(nonatomic,strong)NSArray *typeimageArry;
-@property(nonatomic,strong)NSMutableDictionary *RateDict;
+@property(nonatomic,strong)NSArray *typeArry;
+@property(nonatomic,strong)NSMutableDictionary *rateDict;
 @end
 
 @implementation QPStoreContractInformationViewController
@@ -47,9 +45,15 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     [self.homeTableView registerClass:[QPAgreementTermsTableViewCell class] forCellReuseIdentifier:cellIdentifier1];
     [self.view addSubview:self.homeTableView];
     
-    self.typelabArry = @[@"微信收款",@"支付宝收款",@"京东收款",@"QQ钱包"];
-//    self.ratelabArry = @[@"0.38%",@"0.6%",@"0.6%",@"0.4%"];
-    self.typeimageArry = @[@"jiesuan_weixin",@"jiesuan_zhifubao",@"jiesuan_jingdong",@"jiesuan_qq"];
+    
+    self.typeArry = @[@{@"image":@"jiesuan_weixin",
+                        @"tittle":@"微信收款",},
+                      @{@"image":@"jiesuan_zhifubao",
+                        @"tittle":@"支付宝收款",},
+                      @{@"image":@"jiesuan_jingdong",
+                        @"tittle":@"京东收款",},
+                      @{@"image":@"jiesuan_qq",
+                        @"tittle":@"QQ钱包",}];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -74,27 +78,15 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
             QPStoreContractInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.contentView.backgroundColor = [UIColor clearColor];
-            cell.typeLab.text = self.typelabArry[indexPath.row];
-//            cell.rateLab.text = self.ratelabArry[indexPath.row];
+            cell.typeLab.text = [self.typeArry[indexPath.row] objectForKey:@"tittle"];
             if (indexPath.row == 0) {
-                NSString *str1;
-                str1 = [NSString stringWithFormat:@"%0.2f",[self.RateDict[@"ratet1_wx"] floatValue]*100];
-                NSString *str2 = @"%";
-                cell.rateLab.text = [NSString stringWithFormat:@"%@%@",str1,str2];
-            }
-            if (indexPath.row == 1) {
-                NSString *str1;
-                str1 = [NSString stringWithFormat:@"%0.2f",[self.RateDict[@"ratet1_zfb"] floatValue]*100];
-                NSString *str2 = @"%";
-                cell.rateLab.text = [NSString stringWithFormat:@"%@%@",str1,str2];
-            }
-            if (indexPath.row == 2) {
+                cell.rateLab.text = [NSString stringWithFormat:@"%.2f%%",[self.rateDict[@"ratet1_wx"] floatValue]*100];
+            } else if (indexPath.row == 1) {
+                cell.rateLab.text = [NSString stringWithFormat:@"%.2f%%",[self.rateDict[@"ratet1_zfb"] floatValue]*100];
+            } else {
                 cell.rateLab.text = @"---";
             }
-            if (indexPath.row == 3) {
-                cell.rateLab.text = @"---";
-            }
-            cell.typeimage.image = [UIImage imageNamed:self.typeimageArry[indexPath.row]];
+            cell.typeimage.image = [UIImage imageNamed:[self.typeArry[indexPath.row] objectForKey:@"image"]];
             return cell;
         }
             break;
@@ -153,10 +145,11 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 
 - (void)getRate{
     WEAKSELF();
+    [[QPHUDManager sharedInstance]showProgressWithText:@"加载中"];
     [QPHttpManager getRateCompletion:^(id responseData) {
         if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
-            self.RateDict = responseData;
+            strongSelf.rateDict = responseData;
             [strongSelf.homeTableView reloadData];
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
