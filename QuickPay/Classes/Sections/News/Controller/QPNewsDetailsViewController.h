@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface QPNewsDetailsViewController : UIViewController
-@property (nonatomic ,strong)NSDictionary *newsDetailsDict;
+@property (nonatomic ,strong) NSDictionary *newsDetailsDict;
 
 @end

@@ -37,13 +37,13 @@
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    shareManager = [[CLShareManager alloc] init];
-    
     self.view.backgroundColor = UIColorFromHex(0xeeeeee);
+    
     [self configureSubViews];
     [self getAdImages];
     
-    _imageADArray = [[NSMutableArray alloc]init];
+    self.imageADArray = [[NSMutableArray alloc]init];
+    shareManager = [[CLShareManager alloc] init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetDigitalKeyboard:) name:@"resetDigitalKeyboard" object:nil];
 }
@@ -55,6 +55,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
     if (keyboardView) {
         [self hideTabBar];
     } else {
@@ -79,7 +80,6 @@
     UIView *Naview = [[UIView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, 64)];
     Naview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:Naview];
-
     
     UIImageView *imageView = [[UIImageView alloc]init];
     imageView.image = [UIImage imageNamed:@"logo_title.png"];
@@ -94,7 +94,6 @@
 }
 -(void)configureScrollViewWithArray:(NSMutableArray*)array
 {
-        
     NSMutableArray * imageNameArr = [[NSMutableArray alloc]init];
     NSMutableArray * titleNameArr = [[NSMutableArray alloc]init];
     for (NSDictionary *dic in array) {
@@ -107,7 +106,6 @@
     adView.frame = CGRectMake(0, 72, SCREEN_WIDTH , 132);
     
     [self.view addSubview:adView];
-
 }
 
 - (void)configureMenuView{
@@ -172,11 +170,12 @@
 #pragma mark -BMAdScrollViewClickDelegate
 -(void)buttonClick:(NSInteger)vid
 {
-//    [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"点击了广告图%ld",(long)vid]];
+    //    [[QPHUDManager sharedInstance]showTextOnly:[NSString stringWithFormat:@"点击了广告图%ld",(long)vid]];
 }
 
 #pragma mark -QPDigitalKeyboardViewDelegate
 - (void)closeBtnClickDelegate{
+    
     [keyboardView removeFromSuperview];
     keyboardView = nil;
     [self showTabBar];
@@ -189,12 +188,12 @@
         payModel = [[QPPayModel alloc]init];
         payModel.payType = @"1";
         payModel.amount = amount;
-       
+        
     } else {
         payModel = [[QPPayModel alloc]init];
         payModel.payType = @"2";
         payModel.amount = amount;
-
+        
     }
     [self showQPScanCodePayViewWithPayModel:payModel];
 }
@@ -242,7 +241,7 @@
         case 211:{
             QPMoreAboutViewController *QPMoreAboutVC = [[QPMoreAboutViewController alloc]init];
             [self.navigationController pushViewController:QPMoreAboutVC animated:YES];
-//            [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
+            //          [[QPHUDManager sharedInstance]showTextOnly:@"程序员正在拼命开发中"];
         }
             break;
             
@@ -263,7 +262,7 @@
     
     [keyboardView setAmountLable];
     [keyboardView setAliPayBtnAndWeixinPayBtn];
- }
+}
 
 - (void)hideTabBar {
     if (self.tabBarController.tabBar.hidden == YES) {
@@ -301,14 +300,13 @@
         if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
             dispatch_async(dispatch_get_main_queue(), ^{
-
-            strongSelf.imageADArray = [responseData objectForKey:@"list"];
-            [strongSelf configureScrollViewWithArray:_imageADArray];
+                
+                strongSelf.imageADArray = [responseData objectForKey:@"list"];
+                [strongSelf configureScrollViewWithArray:_imageADArray];
             });
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
         }
-
     }failure:^(NSError *error) {
         [[QPHUDManager sharedInstance]hiddenHUD];
         [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];

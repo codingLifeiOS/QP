@@ -15,11 +15,10 @@
 static NSString *const cellIdentifier = @"QPStoreContractInformationTableViewCell";
 static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 
-
 @interface QPStoreContractInformationViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UITableView *homeTableView;
-@property(nonatomic,strong)NSArray *typeArry;
-@property(nonatomic,strong)NSMutableDictionary *rateDict;
+@property(nonatomic,strong) NSArray *typeArry;
+@property(nonatomic,strong) NSMutableDictionary *rateDict;
 @end
 
 @implementation QPStoreContractInformationViewController
@@ -30,7 +29,18 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     [self createBackBarItem];
     self.view.backgroundColor = UIColorFromHex(0xf8f8f8);
     [self configureTableView];
+    
+    self.typeArry = @[@{@"image":@"jiesuan_weixin",
+                        @"tittle":@"微信收款",},
+                      @{@"image":@"jiesuan_zhifubao",
+                        @"tittle":@"支付宝收款",},
+                      @{@"image":@"jiesuan_jingdong",
+                        @"tittle":@"京东收款",},
+                      @{@"image":@"jiesuan_qq",
+                        @"tittle":@"QQ钱包",}];
+    
     [self getRate];
+    
 };
 #pragma mark - configureSubViews
 -(void)configureTableView
@@ -45,15 +55,6 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     [self.homeTableView registerClass:[QPAgreementTermsTableViewCell class] forCellReuseIdentifier:cellIdentifier1];
     [self.view addSubview:self.homeTableView];
     
-    
-    self.typeArry = @[@{@"image":@"jiesuan_weixin",
-                        @"tittle":@"微信收款",},
-                      @{@"image":@"jiesuan_zhifubao",
-                        @"tittle":@"支付宝收款",},
-                      @{@"image":@"jiesuan_jingdong",
-                        @"tittle":@"京东收款",},
-                      @{@"image":@"jiesuan_qq",
-                        @"tittle":@"QQ钱包",}];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -65,7 +66,6 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     if (section==0) {
         return 4;
     } else {
-        
         return  1;
     }
 }

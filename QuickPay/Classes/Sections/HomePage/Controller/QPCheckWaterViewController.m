@@ -30,9 +30,13 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self addTitleToNavBar:@"查看流水"];
     [self createBackBarItem];
+    [self createRightBarItemByImageName:@"liushui_shaixuan" target:self action:@selector(dateChoiceClick)];
     [self configureTableView];
+    
+    self.checkWaterArry = [[NSMutableArray alloc]init];
     
     NSDate *  date = [NSDate date];
     NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
@@ -41,9 +45,6 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
     timestr =  nowTime;
     
     [self getOrderRecordsNetworkRequestWithBeginTime: timestr EndTime: timestr];
-
-     self.checkWaterArry = [[NSMutableArray alloc]init];
-    [self createRightBarItemByImageName:@"liushui_shaixuan" target:self action:@selector(dateChoiceClick)];
 }
 
 -(void)dateChoiceClick{
@@ -172,7 +173,6 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
     } else {
         view = [[UIView alloc]init];
     }
-    
     return view;
 }
 - (void)getOrderRecordsNetworkRequestWithBeginTime:(NSString*)beginTime EndTime:(NSString*)endTime{
@@ -196,22 +196,21 @@ static NSString *const cellIdentifier = @"QPCheckWaterTableViewCell";
                 [self showTipsView:self.view.bounds type:kTipsViewNoDataString];
             }
         } else {
-//            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+            //            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
             [self showTipsView:self.view.bounds type:[responseData objectForKey:@"resp_msg"]];
         }
         
     } failure:^(NSError *error) {
         
         [[QPHUDManager sharedInstance]hiddenHUD];
-//        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        //        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
         [self showTipsView:self.view.bounds type:error.localizedDescription];
     }];
     
 }
 - (void)startRetry {
     
-     [self getOrderRecordsNetworkRequestWithBeginTime: timestr EndTime: timestr];
+    [self getOrderRecordsNetworkRequestWithBeginTime: timestr EndTime: timestr];
 }
-
 
 @end

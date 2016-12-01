@@ -16,8 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = UIColorFromHex(0xefefef);
+    
     [self configureView];
-//    [self orderqueryWithOrderId:self.payModel.orderId];
+    //    [self orderqueryWithOrderId:self.payModel.orderId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -35,7 +37,6 @@
 
 -(void)configureView
 {
-    self.view.backgroundColor = UIColorFromHex(0xefefef);
     
     UIImageView *navbarBackImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
     navbarBackImage.image = [UIImage imageNamed:@"jiner_bg"];
@@ -52,7 +53,7 @@
         make.height.equalTo(@25);
         make.top.equalTo(@27);
     }];
-
+    
     UIImageView *rebeBackImage = [[UIImageView alloc]initWithFrame:CGRectMake(12, navbarBackImage.bottom+20, SCREEN_WIDTH-24, 50)];
     rebeBackImage.image = [UIImage imageNamed:@"jiner_bg"];
     [self.view addSubview:rebeBackImage];
@@ -112,9 +113,7 @@
     [self.view addSubview:footBtn];
 }
 - (void)commonPushBack{
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        
-//    }];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"resetDigitalKeyboard" object:nil];
@@ -136,7 +135,7 @@
 //    }failure:^(NSError *error) {
 //        [[QPHUDManager sharedInstance]hiddenHUD];
 //        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
-//        
+//
 //    }];
 //}
 //

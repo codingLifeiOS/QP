@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self addTitleToNavBar:@"到账记录"];
     [self createBackBarItem];
     [self configureSubViews];

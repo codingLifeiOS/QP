@@ -24,13 +24,12 @@
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVMediaFormat.h>
 
-
 static NSString *const cellIdentifier = @"QPUserCenterViewCell";
 static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 @interface QPUserCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
-     QPUserModel *userModel;
-     UIImage *iconImage;//拍照或者从相册选照片
+    QPUserModel *userModel;
+    UIImage *iconImage;//拍照或者从相册选照片
 }
 @property (nonatomic,strong) UITableView *homeTableView;
 @property (nonatomic,strong) NSArray *myTittleArry;
@@ -45,11 +44,10 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     [super viewDidLoad];
     [self configureTableView];
     
-     self.myTittleArry = @[@[@"我的银行卡",@"店铺签的结算"],@[@"商务合作",@"客服中心"],@[@"关于我们",@"设    置"]];
-     self.myImageArry =@[@[@"Credit-Card",@"Paper-Dollars-1"],@[@"Users-2",@"kefu"],@[@"guanyuwom",@"shezhi"]];
+    self.myTittleArry = @[@[@"我的银行卡",@"店铺签的结算"],@[@"商务合作",@"客服中心"],@[@"关于我们",@"设    置"]];
+    self.myImageArry =@[@[@"Credit-Card",@"Paper-Dollars-1"],@[@"Users-2",@"kefu"],@[@"guanyuwom",@"shezhi"]];
     
     userModel = [QPUserCenterViewController getUserModel];
-    //    [self createRightBarItemByImageName:@"barbuttonicon_set" target:self action:@selector(setbtnclick)];
 }
 #pragma mark - configureSubViews
 -(void)configureTableView
@@ -65,7 +63,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     [self.homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -116,7 +114,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     if (section == 3) {
         return 70;
     } else {
-        return 9.0;
+        return 10.0;
     }
 }
 
@@ -149,42 +147,34 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
     
     switch (indexPath.section) {
         case 0:
-            if (indexPath.row == 0) {
-               [self changeIconClick];
-            }
-            break;
+            [self changeIconClick];
+             break;
         case 1:
             if (indexPath.row == 0) {
                 QPMyBankCardViewController *QPcardVC = [[QPMyBankCardViewController alloc]init];
                 [self.navigationController pushViewController:QPcardVC animated:YES];
-                NSLog(@"我的银行卡");
             } else if (indexPath.row == 1) {
                 QPStoreContractInformationViewController *QPstoreinfoVC = [[QPStoreContractInformationViewController alloc]init];
                 [self.navigationController pushViewController:QPstoreinfoVC animated:YES];
-                NSLog(@"店铺签的结算");
             }
             break;
         case 2:
             if (indexPath.row == 0) {
                 QPBusinessCooperationViewController *QPbuscooVC = [[QPBusinessCooperationViewController alloc]init];
                 [self.navigationController pushViewController:QPbuscooVC animated:YES];
-                NSLog(@"商务合作");
             } else if (indexPath.row == 1){
                 UIAlertView *phoneAlert = [[UIAlertView alloc]initWithTitle:@"010-53385758" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"呼叫", nil];
                 phoneAlert.tag = 81;
                 [phoneAlert show];
-                NSLog(@"客户中心");
             }
             break;
         case 3:
             if (indexPath.row == 0) {
                 QPAboutUsViewController *QPaboutusVC = [[QPAboutUsViewController alloc]init];
                 [self.navigationController pushViewController:QPaboutusVC animated:YES];
-                NSLog(@"关于我们");
             } else if (indexPath.row == 1) {
                 QPSetUpViewController *QPsetupVC = [[QPSetUpViewController alloc]init];
                 [self.navigationController pushViewController:QPsetupVC animated:YES];
-                NSLog(@"设置");
             }
             break;
             
@@ -268,7 +258,7 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 }
 
 - (void)showAlertWithMessage:(NSString *)message {
-   QPAlertView *alert = [[QPAlertView alloc]initWithTitle:@"相机不可用，或未授权" message:message delegate:nil cancelButtonTitle:@"好" otherButtonTitle:nil];
+    QPAlertView *alert = [[QPAlertView alloc]initWithTitle:@"相机不可用，或未授权" message:message delegate:nil cancelButtonTitle:@"好" otherButtonTitle:nil];
     [alert show];
 }
 
@@ -346,7 +336,6 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
 //上传头像
 -(void)UpdateUserInforHeadImage
 {
-   
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在上传头像"];
     [QPHttpManager uploadImage:iconImage Completion:^(id responseData) {
         
@@ -360,9 +349,6 @@ static NSString *const cellIdentifier1 = @"QPUserOneTableViewCell";
         
         [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
     }];
-    
-
-     
 }
 
 - (void)changeLogoWithPath:(NSString*)path{

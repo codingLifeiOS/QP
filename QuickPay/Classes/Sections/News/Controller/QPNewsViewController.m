@@ -10,13 +10,14 @@
 #import "NewsTableViewCell.h"
 #import "QPHttpManager.h"
 #import "QPNewsDetailsViewController.h"
+
 static NSString *const cellIdentifier = @"NewsTableViewCell";
 
 @interface QPNewsViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,strong) UITableView *homeTableView;
-@property (nonatomic,strong) NSArray *NewsNamelabArry;
-@property (nonatomic,strong) NSArray *InfolabArry;
+@property (nonatomic,strong) NSArray *newsNamelabArry;
+@property (nonatomic,strong) NSArray *infolabArry;
 
 
 @end
@@ -26,9 +27,10 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+
     [self configureTableView];
     [self getNews];
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
 }
 
 #pragma mark - configureSubViews
@@ -45,7 +47,7 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
     [self.homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -61,9 +63,9 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     cell.leftView.image = [UIImage imageNamed:@"xiaoxi_logo"];
-    cell.NewsNameLabel.text = [self.NewsNamelabArry[indexPath.section] objectForKey:@"name"];
-    cell.InfoLabel.text = [self.NewsNamelabArry[indexPath.section] objectForKey:@"key"];
-
+    cell.NewsNameLabel.text = [self.newsNamelabArry[indexPath.section] objectForKey:@"name"];
+    cell.InfoLabel.text = [self.newsNamelabArry[indexPath.section] objectForKey:@"key"];
+    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return cell;
@@ -72,7 +74,7 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     QPNewsDetailsViewController * newsDetailsVC = [[QPNewsDetailsViewController alloc]init];
-    newsDetailsVC.newsDetailsDict = self.NewsNamelabArry[indexPath.row];
+    newsDetailsVC.newsDetailsDict = self.newsNamelabArry[indexPath.row];
     [self.navigationController pushViewController:newsDetailsVC animated:YES];
     
 }
@@ -87,10 +89,6 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
     
     UILabel *timeLabel = [[UILabel alloc]initWithFrame:(CGRectMake(0, 0, SCREEN_WIDTH, 10))];
     timeLabel.backgroundColor = [UIColor clearColor];
-//    timeLabel.font = [UIFont systemFontOfSize:12];
-//    timeLabel.textColor = RGBACOLOR(138, 140, 146, 1);
-//    timeLabel.text = @"10月20日";
-//    timeLabel.textAlignment = NSTextAlignmentCenter;
     return timeLabel;
 }
 - (void)getNews{
@@ -98,9 +96,9 @@ static NSString *const cellIdentifier = @"NewsTableViewCell";
     [QPHttpManager getNewsCompletion:^(id responseData) {
         if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
-            strongSelf.NewsNamelabArry = [[NSArray alloc]init];
-            strongSelf.InfolabArry = [[NSArray alloc]init];
-            strongSelf.NewsNamelabArry = [responseData objectForKey:@"list"];
+            strongSelf.newsNamelabArry = [[NSArray alloc]init];
+            strongSelf.infolabArry = [[NSArray alloc]init];
+            strongSelf.newsNamelabArry = [responseData objectForKey:@"list"];
             [strongSelf.homeTableView reloadData];
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];

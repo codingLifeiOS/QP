@@ -364,11 +364,9 @@
         [[QPHUDManager sharedInstance]hiddenHUD];
         if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 _readview.hidden = YES ;
                 [self setZBarReaderViewStop];
                 [[QPHUDManager sharedInstance]showProgressWithText:@"支付结果回调中"];
-
                 // 生成订单号 就循环请求订单状态  成功跳支付结果回调界面  用户看到的就是成功界面
                 self.orderId = [responseData objectForKey:@"order_sn"];
                 [self orderqueryWithOrderId:self.orderId];
@@ -396,10 +394,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
             self.orderId = [responseData objectForKey:@"order_sn"];
             codeImage.image = [QRCodeGenerator qrImageForString:[responseData objectForKey:@"barCode"] imageSize:220];
-            
             // 生成订单号 就循环请求订单状态  成功跳支付结果回调界面  用户看到的就是成功界面
             [self orderqueryWithOrderId:self.orderId];
-                
 //            if ([self.payModel.payType isEqualToString:@"1"]) {
 //                    logoImage.image = [UIImage imageNamed:@"zhifubao"];
 //                } else {
@@ -421,8 +417,6 @@
     payResultVC.payModel = self.payModel;
     payResultVC.payModel.orderId = self.orderId;
     [self.navigationController pushViewController:payResultVC animated:YES];
-//   NavigationController *nav = [[NavigationController alloc] initWithRootViewController:payResultVC ];
-//   [self presentViewController:nav animated:YES completion:nil];
 }
 
 // 生成订单号 就循环请求订单状态  成功跳支付结果回调界面  用户看到的就是成功界面

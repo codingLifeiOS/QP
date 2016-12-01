@@ -18,11 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+
     [self addTitleToNavBar:@"店铺收款码"];
     [self createBackBarItem];
     [self configureWebView];
     [self createRightBarItemByImageName:@"dianpu_bangzhu" target:self action:@selector(printlick)];
-    self.view.backgroundColor = [UIColor whiteColor];
     
 }
 #pragma mark - configureSubViews

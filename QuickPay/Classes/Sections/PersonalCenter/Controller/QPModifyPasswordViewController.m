@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "QPLoginViewController.h"
 #import "QPHttpManager.h"
+
 @interface QPModifyPasswordViewController ()<UITextFieldDelegate>
 @property (strong,nonatomic) UITextField *oldpasswordTextField;
 @property (strong,nonatomic) UITextField *newpasswordTextField;
@@ -20,9 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = UIColorFromHex(0xf8f8f8);
+
     [self addTitleToNavBar:@"修改密码"];
     [self createBackBarItem];
-    self.view.backgroundColor = UIColorFromHex(0xf8f8f8);
     [self configureView];
 
 }
@@ -105,12 +107,10 @@
         [[QPHUDManager sharedInstance]showTextOnly:@"请输入新密码"];
         return;
     }
-    
     if ( self.confirmpasswordTextField.text.length == 0) {
         [[QPHUDManager sharedInstance]showTextOnly:@"请确认新密码"];
         return;
     }
-    
     if ( self.confirmpasswordTextField.text.length < 4) {
         [[QPHUDManager sharedInstance]showTextOnly:@"密码长度至少四位以上"];
         return;

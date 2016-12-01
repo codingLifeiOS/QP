@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
     [self addTitleToNavBar:@"消息详情"];
     [self createBackBarItem];
     [self configureWebView];
@@ -30,7 +31,6 @@
     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.newsDetailsDict objectForKey:@"value"]]]];
     [self.view addSubview:webView];
 }
-
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     

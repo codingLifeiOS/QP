@@ -17,8 +17,8 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
 
 @interface QPAccountRecordViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
-
-   UITableView *homeTableView;
+    
+    UITableView *homeTableView;
 }
 
 @property(nonatomic,strong) NSMutableArray *accountRecordArry;
@@ -33,9 +33,9 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     self.view.backgroundColor = [UIColor whiteColor];
     [self addTitleToNavBar:@"到账记录"];
     [self createBackBarItem];
+    [self configureTableView];
     
     self.accountRecordArry = [[NSMutableArray alloc]init];
-    [self configureTableView];
     
     [self getSettlementRecordsNetworkRequest];
     
@@ -54,7 +54,7 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     [homeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-
+    
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -67,7 +67,6 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
-    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,14 +86,14 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
     ExpArrivalLab.textColor = [UIColor blackColor];
     [view addSubview:ExpArrivalLab];
     
-    UILabel *ArrAmountLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-110, 0, 100, 30)];
-    ArrAmountLab.text = @"到账金额";
-    ArrAmountLab.textAlignment = 2;
-    ArrAmountLab.font = [UIFont systemFontOfSize:14];
-    ArrAmountLab.textColor=[UIColor blackColor];
-    [view addSubview:ArrAmountLab];
+    UILabel *arrAmountLab = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-110, 0, 100, 30)];
+    arrAmountLab.text = @"到账金额";
+    arrAmountLab.textAlignment = 2;
+    arrAmountLab.font = [UIFont systemFontOfSize:14];
+    arrAmountLab.textColor=[UIColor blackColor];
+    [view addSubview:arrAmountLab];
     
-    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, ArrAmountLab.bottom-0.5, SCREEN_WIDTH, 0.5)];
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, arrAmountLab.bottom-0.5, SCREEN_WIDTH, 0.5)];
     line.backgroundColor = UIColorFromHex(0xdcdcdc);
     [view  addSubview:line];
     return view;
@@ -112,8 +111,8 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    QPAccountRecordDetailsViewController *accounredetail = [[QPAccountRecordDetailsViewController alloc]init];
-//    [self.navigationController pushViewController:accounredetail animated:YES];
+    //    QPAccountRecordDetailsViewController *accounredetail = [[QPAccountRecordDetailsViewController alloc]init];
+    //    [self.navigationController pushViewController:accounredetail animated:YES];
 }
 
 
@@ -132,22 +131,22 @@ static NSString *const cellIdentifier = @"QPAccountRecordTableViewCell";
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [homeTableView reloadData];
-            if (self.accountRecordArry.count == 0) {
+                if (self.accountRecordArry.count == 0) {
                     [[QPHUDManager sharedInstance]showTextOnly:@"没有数据"];
-                 [self showTipsView:self.view.bounds type:kTipsViewNoDataString];
+                    [self showTipsView:self.view.bounds type:kTipsViewNoDataString];
                 }
-
+                
             });
         } else {
-//            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+            //          [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
             [self showTipsView:self.view.bounds type:[responseData objectForKey:@"resp_msg"]];
-
+            
         }
-     } failure:^(NSError *error) {
+    } failure:^(NSError *error) {
         
         [[QPHUDManager sharedInstance]hiddenHUD];
-//        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
-         [self showTipsView:self.view.bounds type:error.localizedDescription];
+        //       [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        [self showTipsView:self.view.bounds type:error.localizedDescription];
     }];
 }
 

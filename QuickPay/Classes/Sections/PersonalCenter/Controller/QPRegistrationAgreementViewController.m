@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
     [self addTitleToNavBar:[self.serviceAgreementDict objectForKey:@"name"]];
     [self createBackBarItem];
     [self configureWebView];
@@ -32,7 +33,6 @@
     [self.view addSubview:webView];
 }
 
-
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     
     [[QPHUDManager sharedInstance]showProgressWithText:@"正在加载网页"];
@@ -44,6 +44,5 @@
     [[QPHUDManager sharedInstance]hiddenHUD];
     [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
 }
-
 
 @end
