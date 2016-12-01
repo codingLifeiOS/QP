@@ -149,6 +149,7 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     [QPHttpManager getRateCompletion:^(id responseData) {
         if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
+            [[QPHUDManager sharedInstance]hiddenHUD];
             strongSelf.rateDict = responseData;
             [strongSelf.homeTableView reloadData];
         } else {
