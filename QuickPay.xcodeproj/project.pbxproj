@@ -329,8 +329,8 @@
 		1CBD95551DBFA24F0040950A /* QPLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CBD95541DBFA24F0040950A /* QPLoginView.m */; };
 		1CC00B9A1DD1B6AB004D00AA /* xiaoxi_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CC00B981DD1B6AB004D00AA /* xiaoxi_logo@2x.png */; };
 		1CC00BA01DD1B775004D00AA /* QPUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC00B9F1DD1B775004D00AA /* QPUserModel.m */; };
-		1CCB8F381DC315CF0036584E /* weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCB8F361DC315CF0036584E /* weixin@2x.png */; };
-		1CCB8F391DC315CF0036584E /* weixin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCB8F371DC315CF0036584E /* weixin@3x.png */; };
+		1CCB8F381DC315CF0036584E /* weixinicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCB8F361DC315CF0036584E /* weixinicon@2x.png */; };
+		1CCB8F391DC315CF0036584E /* weixinicon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CCB8F371DC315CF0036584E /* weixinicon@3x.png */; };
 		1CCB8F3C1DC32B2E0036584E /* QPTransactionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCB8F3B1DC32B2E0036584E /* QPTransactionDetailsViewController.m */; };
 		1CCB8F421DC33A800036584E /* QPAccountRecordDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCB8F411DC33A800036584E /* QPAccountRecordDetailsViewController.m */; };
 		1CCB8F451DC33C320036584E /* QPAccountRecordDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCB8F441DC33C320036584E /* QPAccountRecordDetailsView.m */; };
@@ -847,8 +847,8 @@
 		1CC00B981DD1B6AB004D00AA /* xiaoxi_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xiaoxi_logo@2x.png"; sourceTree = "<group>"; };
 		1CC00B9E1DD1B775004D00AA /* QPUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPUserModel.h; sourceTree = "<group>"; };
 		1CC00B9F1DD1B775004D00AA /* QPUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPUserModel.m; sourceTree = "<group>"; };
-		1CCB8F361DC315CF0036584E /* weixin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixin@2x.png"; sourceTree = "<group>"; };
-		1CCB8F371DC315CF0036584E /* weixin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixin@3x.png"; sourceTree = "<group>"; };
+		1CCB8F361DC315CF0036584E /* weixinicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixinicon@2x.png"; sourceTree = "<group>"; };
+		1CCB8F371DC315CF0036584E /* weixinicon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixinicon@3x.png"; sourceTree = "<group>"; };
 		1CCB8F3A1DC32B2E0036584E /* QPTransactionDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPTransactionDetailsViewController.h; sourceTree = "<group>"; };
 		1CCB8F3B1DC32B2E0036584E /* QPTransactionDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPTransactionDetailsViewController.m; sourceTree = "<group>"; };
 		1CCB8F401DC33A800036584E /* QPAccountRecordDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPAccountRecordDetailsViewController.h; sourceTree = "<group>"; };
@@ -1980,8 +1980,8 @@
 				1C91C35B1DCC3C5200DC5BB9 /* pic_2@3x.png */,
 				1C91C35C1DCC3C5200DC5BB9 /* pic_3@2x.png */,
 				1C91C35D1DCC3C5200DC5BB9 /* pic_3@3x.png */,
-				1CCB8F361DC315CF0036584E /* weixin@2x.png */,
-				1CCB8F371DC315CF0036584E /* weixin@3x.png */,
+				1CCB8F361DC315CF0036584E /* weixinicon@2x.png */,
+				1CCB8F371DC315CF0036584E /* weixinicon@3x.png */,
 				1C28EC0D1DC04A3100EB1D57 /* tell@2x.png */,
 				1C28EC0E1DC04A3100EB1D57 /* tell@3x.png */,
 			);
@@ -2201,7 +2201,7 @@
 				1C8443701DE52477005B0B67 /* login_bj@3x.png in Resources */,
 				1C6B96931DE9649D00BBB92F /* kefu@2x.png in Resources */,
 				1C67C5BD1DE71D17007C5A46 /* img_nodate01@3x.png in Resources */,
-				1CCB8F391DC315CF0036584E /* weixin@3x.png in Resources */,
+				1CCB8F391DC315CF0036584E /* weixinicon@3x.png in Resources */,
 				1C1F318B1DC8378B00BC4A27 /* shoukuan_jianpan@2x.png in Resources */,
 				1C1F31AF1DC8379600BC4A27 /* saoma_kuang@3x.png in Resources */,
 				1C45170E1DB90AE900659B4E /* Assets.xcassets in Resources */,
@@ -2282,7 +2282,7 @@
 				1C1F31AE1DC8379600BC4A27 /* saoma_kuang@2x.png in Resources */,
 				197AFBC61DC1996E002DD1BD /* touxiang_bj.png in Resources */,
 				1C5478C41DE7D84200CD1727 /* shangwu_pic3@3x.png in Resources */,
-				1CCB8F381DC315CF0036584E /* weixin@2x.png in Resources */,
+				1CCB8F381DC315CF0036584E /* weixinicon@2x.png in Resources */,
 				1C8443751DE52477005B0B67 /* logo@2x.png in Resources */,
 				1C5479071DE80C7F00CD1727 /* saoma_qiehuan_pre@3x.png in Resources */,
 				1C5478E91DE7FE4000CD1727 /* xiaoxi_logo1@3x.png in Resources */,

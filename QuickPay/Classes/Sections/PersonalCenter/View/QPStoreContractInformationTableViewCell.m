@@ -52,7 +52,7 @@
         
         [self.typeimage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(@10);
-            make.left.equalTo(@25);
+            make.left.equalTo(@10);
             make.size.mas_equalTo(CGSizeMake(40, 40));
         }];
         
