@@ -10,6 +10,8 @@
 #import "QPStoreContractInformationTableViewCell.h"
 #import "QPAgreementTermsTableViewCell.h"
 #import "QPAgreementAndTermsViewController.h"
+#import "QPHttpManager.h"
+
 static NSString *const cellIdentifier = @"QPStoreContractInformationTableViewCell";
 static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 
@@ -19,6 +21,7 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 @property(nonatomic,strong)NSArray *typelabArry;
 @property(nonatomic,strong)NSArray *ratelabArry;
 @property(nonatomic,strong)NSArray *typeimageArry;
+@property(nonatomic,strong)NSMutableDictionary *RateDict;
 @end
 
 @implementation QPStoreContractInformationViewController
@@ -29,7 +32,8 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     [self createBackBarItem];
     self.view.backgroundColor = UIColorFromHex(0xf8f8f8);
     [self configureTableView];
-}
+    [self getRate];
+};
 #pragma mark - configureSubViews
 -(void)configureTableView
 {
@@ -44,7 +48,7 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     [self.view addSubview:self.homeTableView];
     
     self.typelabArry = @[@"微信收款",@"支付宝收款",@"京东收款",@"QQ钱包"];
-    self.ratelabArry = @[@"0.38%",@"0.6%",@"0.6%",@"0.4%"];
+//    self.ratelabArry = @[@"0.38%",@"0.6%",@"0.6%",@"0.4%"];
     self.typeimageArry = @[@"jiesuan_weixin",@"jiesuan_zhifubao",@"jiesuan_jingdong",@"jiesuan_qq"];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -71,7 +75,25 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.contentView.backgroundColor = [UIColor clearColor];
             cell.typeLab.text = self.typelabArry[indexPath.row];
-            cell.rateLab.text = self.ratelabArry[indexPath.row];
+//            cell.rateLab.text = self.ratelabArry[indexPath.row];
+            if (indexPath.row == 0) {
+                NSString *str1;
+                str1 = [NSString stringWithFormat:@"%0.2f",[self.RateDict[@"ratet1_wx"] floatValue]*100];
+                NSString *str2 = @"%";
+                cell.rateLab.text = [NSString stringWithFormat:@"%@%@",str1,str2];
+            }
+            if (indexPath.row == 1) {
+                NSString *str1;
+                str1 = [NSString stringWithFormat:@"%0.2f",[self.RateDict[@"ratet1_zfb"] floatValue]*100];
+                NSString *str2 = @"%";
+                cell.rateLab.text = [NSString stringWithFormat:@"%@%@",str1,str2];
+            }
+            if (indexPath.row == 2) {
+                cell.rateLab.text = @"---";
+            }
+            if (indexPath.row == 3) {
+                cell.rateLab.text = @"---";
+            }
             cell.typeimage.image = [UIImage imageNamed:self.typeimageArry[indexPath.row]];
             return cell;
         }
@@ -127,7 +149,24 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
-    
+}
+
+- (void)getRate{
+    WEAKSELF();
+    [QPHttpManager getRateCompletion:^(id responseData) {
+        if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
+            STRONGSELF();
+            self.RateDict = responseData;
+            [strongSelf.homeTableView reloadData];
+        } else {
+            [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
+        }
+        
+    }failure:^(NSError *error) {
+        [[QPHUDManager sharedInstance]hiddenHUD];
+        [[QPHUDManager sharedInstance]showTextOnly:error.localizedDescription];
+        
+    }];
 }
 
 @end

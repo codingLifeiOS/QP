@@ -276,8 +276,25 @@
     }];
 }
 
-+ (void)getAgreementCompletion:(QPRequestSuccessHandler)handler
++ (void)getRateCompletion:(QPRequestSuccessHandler)handler
                   failure:(QPRequestFailureHandler)failhandler{
+    
+    NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
+                          @"token":[QPUtils getToken],
+                          };
+    [QPHttpRequest POSTWithData:QP_GetRate params:nil body:[[NSString convertToJSONData:dic] dataUsingEncoding:NSUTF8StringEncoding] success:^(NSDictionary *success) {
+        
+        handler ? handler(success) : nil;
+        
+    } failure:^(NSError *error) {
+        
+        failhandler ? failhandler(error) : nil;
+        
+    }];
+}
+
++ (void)getAgreementCompletion:(QPRequestSuccessHandler)handler
+                       failure:(QPRequestFailureHandler)failhandler{
     
     NSDictionary *dic = @{@"mer_code":[QPUtils getMer_code],
                           @"token":[QPUtils getToken],

@@ -142,6 +142,16 @@
 + (void)getAgreementCompletion:(QPRequestSuccessHandler)handler
                   failure:(QPRequestFailureHandler)failhandler;
 
+/**
+ *  获取费率接口
+ *
+ *  @param handler 完成后的回调
+ */
+
++ (void)getRateCompletion:(QPRequestSuccessHandler)handler
+                       failure:(QPRequestFailureHandler)failhandler;
+
+
 
 /**
  *  上传图片

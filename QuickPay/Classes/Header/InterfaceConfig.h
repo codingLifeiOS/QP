@@ -59,4 +59,7 @@
 // 3.6. 修改商户LOGO接口
 #define QP_Update_Mer_Logo QP_HOST@"apis/update_mer_logo"
 
+// 3.7. 获得费率接口
+#define QP_GetRate QP_HOST@"apis/getRate"
+
 #endif /* InterfaceConfig_h */
