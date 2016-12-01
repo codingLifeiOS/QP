@@ -34,8 +34,6 @@
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [[QPHUDManager sharedInstance]hiddenHUD];
-    
-    
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [[QPHUDManager sharedInstance]hiddenHUD];
