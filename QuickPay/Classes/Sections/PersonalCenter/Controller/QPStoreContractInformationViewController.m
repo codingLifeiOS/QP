@@ -21,7 +21,7 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
 @property(nonatomic,strong)NSArray *typelabArry;
 @property(nonatomic,strong)NSArray *ratelabArry;
 @property(nonatomic,strong)NSArray *typeimageArry;
-@property(nonatomic,strong)NSMutableDictionary *RateDict;
+@property(nonatomic,strong)NSMutableDictionary *rateDict;
 @end
 
 @implementation QPStoreContractInformationViewController
@@ -77,16 +77,10 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
             cell.typeLab.text = self.typelabArry[indexPath.row];
 //            cell.rateLab.text = self.ratelabArry[indexPath.row];
             if (indexPath.row == 0) {
-                NSString *str1;
-                str1 = [NSString stringWithFormat:@"%0.2f",[self.RateDict[@"ratet1_wx"] floatValue]*100];
-                NSString *str2 = @"%";
-                cell.rateLab.text = [NSString stringWithFormat:@"%@%@",str1,str2];
+                cell.rateLab.text = [NSString stringWithFormat:@"%0.2f%%",[self.rateDict[@"ratet1_wx"] floatValue]*100];
             }
             if (indexPath.row == 1) {
-                NSString *str1;
-                str1 = [NSString stringWithFormat:@"%0.2f",[self.RateDict[@"ratet1_zfb"] floatValue]*100];
-                NSString *str2 = @"%";
-                cell.rateLab.text = [NSString stringWithFormat:@"%@%@",str1,str2];
+                cell.rateLab.text = [NSString stringWithFormat:@"%0.2f%%",[self.rateDict[@"ratet1_zfb"]floatValue]*100];
             }
             if (indexPath.row == 2) {
                 cell.rateLab.text = @"---";
@@ -156,7 +150,7 @@ static NSString *const cellIdentifier1 = @"QPAgreementTermsTableViewCell";
     [QPHttpManager getRateCompletion:^(id responseData) {
         if ([[responseData objectForKey:QP_ResponseCode] isEqualToString:QP_Response_SuccsessCode]) {
             STRONGSELF();
-            self.RateDict = responseData;
+            self.rateDict = responseData;
             [strongSelf.homeTableView reloadData];
         } else {
             [[QPHUDManager sharedInstance]showTextOnly:[responseData objectForKey:@"resp_msg"]];
