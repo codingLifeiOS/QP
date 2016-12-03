@@ -69,17 +69,17 @@
         
         UIView *titleBack = [[UIView alloc]initWithFrame:titleFrame];
         titleBack.backgroundColor =[UIColor clearColor];
-        [self addSubview:titleBack];
+//        [self addSubview:titleBack];
         
         //设置标题文字
         CGRect titleRect = titleFrame;
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:titleRect];
-        titleLabel.text=titleStr;
+        titleLabel.text = titleStr;
         titleLabel.textAlignment = NSTextAlignmentLeft;
         titleLabel.font = [UIFont systemFontOfSize:12];
         titleLabel.backgroundColor =[UIColor clearColor];
         titleLabel.textColor=[UIColor blackColor];
-        [self addSubview:titleLabel];
+//        [self addSubview:titleLabel];
     }
     return self;
 }

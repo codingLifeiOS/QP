@@ -30,6 +30,8 @@
 //    NSInteger time;
 }
 @property(nonatomic,copy)NSString *orderId;//订单号
+@property (nonatomic,assign)BOOL isStop;
+
 
 
 @end
@@ -53,12 +55,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.isStop = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     // 停止扫描
     [self setZBarReaderViewStop];
+    self.isStop = NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"resetDigitalKeyboard" object:nil];
 }
 
 #pragma mark - configureSubViews
@@ -316,9 +321,10 @@
     _readview.hidden = YES ;
     [self setZBarReaderViewStop];
     backView.hidden = NO;
-    if (!codeImage.image) {
+    self.isStop = YES;
+//    if (!codeImage.image) {
         [self getQRCodetoPay];
-    }
+//    }
 }
 
 //  切换到扫码刷卡支付
@@ -327,6 +333,7 @@
     _readview.hidden = NO;
     // 开始扫描
     [self setZBarReaderViewStart];
+    self.isStop = NO;
     backView.hidden = YES;
 }
 
@@ -438,6 +445,10 @@
 }
 
 - (void)circulateRequest{
+    if (self.isStop ) {
+        [self orderqueryWithOrderId:self.orderId];
+
+    }
     // 超过一分钟
 //    time++;
 //    if (time > 300) {
@@ -451,7 +462,6 @@
 ////            [self getQRCodetoPay];
 ////        }
 //    } else {
-        [self orderqueryWithOrderId:self.orderId];
 //    }
 }
 @end

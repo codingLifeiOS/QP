@@ -92,8 +92,7 @@
     }];
     
 }
--(void)configureScrollViewWithArray:(NSMutableArray*)array
-{
+-(void)configureScrollViewWithArray:(NSMutableArray*)array{
     NSMutableArray * imageNameArr = [[NSMutableArray alloc]init];
     NSMutableArray * titleNameArr = [[NSMutableArray alloc]init];
     for (NSDictionary *dic in array) {
