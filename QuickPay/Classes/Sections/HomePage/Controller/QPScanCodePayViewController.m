@@ -30,7 +30,7 @@
 //    NSInteger time;
 }
 @property(nonatomic,copy)NSString *orderId;//订单号
-@property (nonatomic,assign)BOOL isStop;
+@property (nonatomic,assign)BOOL isCirculateRequest;//是否循环请求
 
 
 
@@ -55,14 +55,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.isStop = YES;
+    self.isCirculateRequest = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     // 停止扫描
     [self setZBarReaderViewStop];
-    self.isStop = NO;
+    self.isCirculateRequest = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"resetDigitalKeyboard" object:nil];
 }
 
@@ -109,7 +109,7 @@
     }];
     
     UILabel *amoutLable = [[UILabel alloc]init];
-    amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
+    amoutLable.text =  [NSString stringWithFormat:@"¥  %0.2f",[self.payModel.amount floatValue]];
     amoutLable.textColor = [UIColor orangeColor];
     amoutLable.textAlignment = NSTextAlignmentCenter;
     amoutLable.frame = CGRectMake(0, _readview.y+280, SCREEN_WIDTH, 30);
@@ -125,15 +125,6 @@
     [_readview addSubview:paytapeLable];
     
     changecodeBtn = [[UIButton alloc]init];
-//    if (SCREEN_WIDTH == 414) {
-//        changecodeBtn.frame = CGRectMake(96.5, paytapeLable.bottom+15, SCREEN_WIDTH-193, 60);
-//    }
-//    if (SCREEN_WIDTH == 375) {
-//    changecodeBtn.frame = CGRectMake(114, paytapeLable.bottom+15, SCREEN_WIDTH-228, 40);
-//    }
-//    if (SCREEN_WIDTH == 320) {
-//    changecodeBtn.frame = CGRectMake(86.5, paytapeLable.bottom+15, SCREEN_WIDTH-173, 40);
-//    }
     [changecodeBtn setBackgroundImage:[UIImage imageNamed:@"saoma_qiehuan_nor"] forState:UIControlStateNormal];
     [_readview addSubview:changecodeBtn];
     [changecodeBtn addTarget:self action:@selector(changePayType) forControlEvents:UIControlEventTouchUpInside];
@@ -146,16 +137,6 @@
     }];
     
     instructionsImageBtn = [[UIButton alloc]init];
-//    if (SCREEN_WIDTH == 414) {
-//        instructionsImageBtn.frame = CGRectMake(105, changecodeBtn.bottom+15, SCREEN_WIDTH-210, 30);
-//    }
-//    if (SCREEN_WIDTH == 375) {
-//        instructionsImageBtn.frame = CGRectMake(122.5, changecodeBtn.bottom+15, SCREEN_WIDTH-245, 20);
-//    }
-//    if (SCREEN_WIDTH == 320){
-//        instructionsImageBtn.frame = CGRectMake(95, changecodeBtn.bottom+15, SCREEN_WIDTH-190, 20);
-//    }
-    
     [instructionsImageBtn setBackgroundImage:[UIImage imageNamed:@"saoma_Help"] forState:UIControlStateNormal];
     [_readview addSubview:instructionsImageBtn];
     [instructionsImageBtn addTarget:self action:@selector(showInstructionImage) forControlEvents:UIControlEventTouchUpInside];
@@ -184,7 +165,7 @@
 //    [codeImage addSubview:logoImage];
     
     UILabel *amoutLable = [[UILabel alloc]init];
-    amoutLable.text =  [NSString stringWithFormat:@"¥:%@",self.payModel.amount];
+    amoutLable.text =  [NSString stringWithFormat:@"¥  %.2f",[self.payModel.amount floatValue]];
     amoutLable.textColor = [UIColor orangeColor];
     amoutLable.textAlignment = NSTextAlignmentCenter;
     amoutLable.font = [UIFont systemFontOfSize:20];
@@ -205,16 +186,6 @@
     [backView addSubview:promptLable];
     
     changeZBarBtn = [[UIButton alloc]init];
-//    if (SCREEN_WIDTH == 414) {
-//        changeZBarBtn.frame = CGRectMake(96.5, promptLable.bottom+15, SCREEN_WIDTH-193, 60);
-//    }
-//    if (SCREEN_WIDTH == 375) {
-//        changeZBarBtn.frame = CGRectMake(114, promptLable.bottom+15, SCREEN_WIDTH-228, 40);
-//    }
-//    if (SCREEN_WIDTH == 320){
-//        changeZBarBtn.frame = CGRectMake(86.5, promptLable.bottom+15, SCREEN_WIDTH-173, 40);
-//    }
-//
     [changeZBarBtn setBackgroundImage:[UIImage imageNamed:@"saoma_qiehuan_pre"] forState:UIControlStateNormal];
     [changeZBarBtn addTarget:self action:@selector(changeToScanPay) forControlEvents:UIControlEventTouchUpInside];
     [backView addSubview:changeZBarBtn];
@@ -227,15 +198,6 @@
     }];
     
     codeinstructionsImageBtn = [[UIButton alloc]init];
-//    if (SCREEN_WIDTH == 414) {
-//        codeinstructionsImageBtn.frame = CGRectMake(105, changeZBarBtn.bottom+15, SCREEN_WIDTH-210, 30);
-//    }
-//    if (SCREEN_WIDTH == 375) {
-//        codeinstructionsImageBtn.frame = CGRectMake(122.5, changeZBarBtn.bottom+15, SCREEN_WIDTH-245, 20);
-//    }
-//    if (SCREEN_WIDTH == 320) {
-//        codeinstructionsImageBtn.frame = CGRectMake(95, changeZBarBtn.bottom+15, SCREEN_WIDTH-190, 20);
-//    }
     [codeinstructionsImageBtn setBackgroundImage:[UIImage imageNamed:@"saoma_Help1"] forState:UIControlStateNormal];
     [backView addSubview:codeinstructionsImageBtn];
     [codeinstructionsImageBtn addTarget:self action:@selector(showInstructionImage) forControlEvents:UIControlEventTouchUpInside];
@@ -321,10 +283,9 @@
     _readview.hidden = YES ;
     [self setZBarReaderViewStop];
     backView.hidden = NO;
-    self.isStop = YES;
-//    if (!codeImage.image) {
+    if (!codeImage.image) {
         [self getQRCodetoPay];
-//    }
+    }
 }
 
 //  切换到扫码刷卡支付
@@ -333,7 +294,6 @@
     _readview.hidden = NO;
     // 开始扫描
     [self setZBarReaderViewStart];
-    self.isStop = NO;
     backView.hidden = YES;
 }
 
@@ -445,7 +405,7 @@
 }
 
 - (void)circulateRequest{
-    if (self.isStop ) {
+    if (self.isCirculateRequest) {
         [self orderqueryWithOrderId:self.orderId];
 
     }
