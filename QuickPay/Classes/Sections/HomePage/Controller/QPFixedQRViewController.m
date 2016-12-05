@@ -70,7 +70,6 @@
 {
     QPPrintInstructionsViewController *QPprintQRVC = [[QPPrintInstructionsViewController alloc]init];
     [self.navigationController pushViewController:QPprintQRVC animated:YES];
-
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{

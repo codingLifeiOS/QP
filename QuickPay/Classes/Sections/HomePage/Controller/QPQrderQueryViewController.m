@@ -8,6 +8,7 @@
 
 #import "QPQrderQueryViewController.h"
 #import "QPHttpManager.h"
+#import "QPVoiceBroadcast.h"
 @interface QPQrderQueryViewController ()
 @property (nonatomic,strong) UILabel *payTypeLab;
 @end
@@ -20,6 +21,10 @@
     
     [self configureView];
     //    [self orderqueryWithOrderId:self.payModel.orderId];
+    
+    NSString *voicestr = [NSString stringWithFormat:@"你有一笔新的订单共消费 %@ 元",self.payModel.amount];
+    QPVoiceBroadcast* sound = [QPVoiceBroadcast soundPlayerInstance];
+    [sound play:voicestr];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -28,7 +28,7 @@ static NSString *const cellIdentifier = @"QPBusinessCooperationTableViewCell";
     [self configureTableView];
     
     self.busslabArry = @[@"商家入驻",@"配送服务加盟",@"城市代理申请",@"媒体公关合作",@"品牌广告合作",@"开放平台合作"];
-    self.infolabArry = @[@"上百万餐饮、商超便利店、鲜花蛋糕等...",@"日均260万物流订单，商机无限",@"610310365@qq.com",@"610310365@qq.com",@"610310365@qq.com",@"610310365@qq.com"];
+    self.infolabArry = @[@"上百万餐饮、便利店、鲜花蛋糕等...",@"日均260万物流订单，商机无限",@"610310365@qq.com",@"610310365@qq.com",@"610310365@qq.com",@"610310365@qq.com"];
     self.bussimageArry = @[@"shangwu_pic1",@"shangwu_pic2",@"shangwu_pic3",@"shangwu_pic4",@"shangwu_pic5",@"shangwu_pic6"];
 
 }

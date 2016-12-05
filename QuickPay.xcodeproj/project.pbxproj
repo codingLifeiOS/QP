@@ -241,6 +241,7 @@
 		1C78340A1DBF17DA0053FA87 /* barbuttonicon_set.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C7833F51DBF17DA0053FA87 /* barbuttonicon_set.png */; };
 		1C78340B1DBF17DA0053FA87 /* barbuttonicon_set@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C7833F61DBF17DA0053FA87 /* barbuttonicon_set@2x.png */; };
 		1C78340C1DBF17DA0053FA87 /* barbuttonicon_set@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C7833F71DBF17DA0053FA87 /* barbuttonicon_set@3x.png */; };
+		1C7DAEA61DF50CA200172578 /* QPVoiceBroadcast.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C7DAEA51DF50CA200172578 /* QPVoiceBroadcast.m */; };
 		1C84436D1DE52477005B0B67 /* lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C8443611DE52477005B0B67 /* lock@2x.png */; };
 		1C84436E1DE52477005B0B67 /* lock@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C8443621DE52477005B0B67 /* lock@3x.png */; };
 		1C84436F1DE52477005B0B67 /* login_bj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C8443631DE52477005B0B67 /* login_bj@2x.png */; };
@@ -746,6 +747,8 @@
 		1C7833F51DBF17DA0053FA87 /* barbuttonicon_set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = barbuttonicon_set.png; sourceTree = "<group>"; };
 		1C7833F61DBF17DA0053FA87 /* barbuttonicon_set@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barbuttonicon_set@2x.png"; sourceTree = "<group>"; };
 		1C7833F71DBF17DA0053FA87 /* barbuttonicon_set@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barbuttonicon_set@3x.png"; sourceTree = "<group>"; };
+		1C7DAEA41DF50CA200172578 /* QPVoiceBroadcast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QPVoiceBroadcast.h; path = ../Controller/QPVoiceBroadcast.h; sourceTree = "<group>"; };
+		1C7DAEA51DF50CA200172578 /* QPVoiceBroadcast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QPVoiceBroadcast.m; path = ../Controller/QPVoiceBroadcast.m; sourceTree = "<group>"; };
 		1C8443611DE52477005B0B67 /* lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@2x.png"; sourceTree = "<group>"; };
 		1C8443621DE52477005B0B67 /* lock@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@3x.png"; sourceTree = "<group>"; };
 		1C8443631DE52477005B0B67 /* login_bj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bj@2x.png"; sourceTree = "<group>"; };
@@ -1131,20 +1134,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		1C3E88531DC1DE03002EE960 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		1C3E88541DC1DE03002EE960 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		1C3E88551DC1DE2A002EE960 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1450,8 +1439,8 @@
 				195D44B91DC9806700EA3CAD /* Share */,
 				1C49B20E1DBA1D4E00CF3DE1 /* Controller */,
 				1C8B81A91DC0E87D007F77E0 /* View */,
-				1C3E88531DC1DE03002EE960 /* ViewModel */,
-				1C3E88541DC1DE03002EE960 /* Model */,
+				1C7DAEA71DF50DF500172578 /* Model */,
+				1C7DAEA81DF50DF500172578 /* ViewModel */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -1860,6 +1849,22 @@
 				1C36F3191DEFB14F00C9F72A /* dianpu_bangzhu@3x.png */,
 			);
 			path = common;
+			sourceTree = "<group>";
+		};
+		1C7DAEA71DF50DF500172578 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1C7DAEA81DF50DF500172578 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				1C7DAEA41DF50CA200172578 /* QPVoiceBroadcast.h */,
+				1C7DAEA51DF50CA200172578 /* QPVoiceBroadcast.m */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		1C8B81A91DC0E87D007F77E0 /* View */ = {
@@ -2546,6 +2551,7 @@
 				1C8B81AC1DC0E910007F77E0 /* BMAdScrollView.m in Sources */,
 				1C49B2BB1DBA1D4F00CF3DE1 /* MASViewConstraint.m in Sources */,
 				1C49B28F1DBA1D4F00CF3DE1 /* UITableViewCell+CreatLine.m in Sources */,
+				1C7DAEA61DF50CA200172578 /* QPVoiceBroadcast.m in Sources */,
 				1C49B2BC1DBA1D4F00CF3DE1 /* NSArray+MASAdditions.m in Sources */,
 				1C49B2BA1DBA1D4F00CF3DE1 /* MASViewAttribute.m in Sources */,
 				1C5EF57E1DD898D0003BD331 /* QPAccountRecordModel.m in Sources */,
