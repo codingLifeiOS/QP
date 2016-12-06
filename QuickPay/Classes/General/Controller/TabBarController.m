@@ -11,7 +11,7 @@
 
 static NSString * const HomePageVC = @"QPHomePageViewController";
 static NSString * const NewsVC = @"QPNewsViewController";
-//static NSString * const FindVC = @"QPFindViewController";
+static NSString * const FindVC = @"QPFindViewController";
 static NSString * const ProfileVC = @"QPUserCenterViewController";
 //static NSString * const MemberVC = @"QPMemberViewController";
 
@@ -72,7 +72,7 @@ static NSString * const TabbarItemBadgeValue = @"TabbarItemBadgeValue";
 
 - (NSArray *)vcsOrder {
     
-    return @[HomePageVC, NewsVC,ProfileVC];
+    return @[HomePageVC,FindVC,NewsVC,ProfileVC];
 }
 
 - (NSDictionary *)vcsInfoDict {
@@ -89,12 +89,12 @@ static NSString * const TabbarItemBadgeValue = @"TabbarItemBadgeValue";
 //                     TabbarSelectedImage: @"huiyuan_pre",
 //                     TabbarItemBadgeValue: @(0)
 //                     },
-//             FindVC : @{
-//                     TabbarTitle        : @"发现",
-//                     TabbarImage        : @"faxian_nor",
-//                     TabbarSelectedImage: @"faxian_pre",
-//                     TabbarItemBadgeValue: @(0)
-//                     },
+             FindVC : @{
+                     TabbarTitle        : @"便民",
+                     TabbarImage        : @"shouye_nor",
+                     TabbarSelectedImage: @"shouye_pre",
+                     TabbarItemBadgeValue: @(0)
+                     },
              NewsVC : @{
                      TabbarTitle        : @"消息",
                      TabbarImage        : @"mail_nor",
