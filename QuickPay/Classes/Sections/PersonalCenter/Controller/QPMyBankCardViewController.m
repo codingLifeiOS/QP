@@ -32,7 +32,7 @@
     imageView.image = [UIImage imageNamed:@"yinhangka_pic1"];
     [self.view addSubview:imageView];
     
-    UILabel *bankLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH-20, 30)];
+    UILabel *bankLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, imageView.width-20, 30)];
     bankLab.text = userModel.bank_name;
     bankLab.font = [UIFont systemFontOfSize:18];
     bankLab.textColor = [UIColor whiteColor];

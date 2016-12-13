@@ -9,7 +9,7 @@
 #ifndef InterfaceConfig_h
 #define InterfaceConfig_h
 // 接口服务器
-#define QP_HOST @"http://mobile.rrgpay.com/"
+#define QP_HOST @"http://wxs.rrgpay.com/"
 
 // 2.1. 登录接口
 #define QP_Login QP_HOST@"apis/login"
